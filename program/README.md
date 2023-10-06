@@ -8,33 +8,33 @@ This folder contains the precompiled program and dll files as a single zip file 
 Once downloaded it is important that the AgileStructure.zip and BamReaderdll.dll are located in the same folder. 
 <hr />
 
-First click on the program file (AgileStructure.zip in the table above) which will take you to a new page, on the upper righthand corner click on the icon of a tray with an arrow pointing to it. This will then start the download which will ultimately get you to the first warning (Figure 2).
+First click on the program file (AgileStructure.zip in the table above) which will take you to a new page, on the upper righthand corner click on the icon of a tray with an arrow pointing to it. This will then start the download which will ultimately prompt you to either save it or open the zip file (Figure 2).
 
 ![figure 1](images/figure1.jpg)
 
 Figure 1
 
-Move the mouse to the right of the message and three dots will appear next to a bin icon (Figure 2B), click on the dots.
+Click on the "Save a"s button (Figure 2)
 
-![figure 2](images/fig2.png)
+![figure 2](images/figure2.jpg)
 
 Figure 2
 
-Next select 'Keep' (Figure 3)
+Once downloaded go to the zip file and extract it, saving the files to the desired location (Figure 3)
 
-![figure 3](images/fig3.png)
+![figure 3](images/figure3.jpg)
 
 Figure 3
 
-On the next warning, click on the 'Show more' label (Figure 4)
+When you double click on the AgileStructure.exe file you'll get a warning message and click on the 'Run  anyway' option(Figure 4)
 
-![figure 4](images/fig4.png)
+![figure 4](images/figure4.jpg)
 
 Figure 4
 
-And finally, select the 'Keep anyway' option (Figure 5) and the download will start.
+And finally, click on the 'Run  anyway' option and the program should start (Figure 5).
 
-![figure 5](images/fig5.png)
+![figure 5](images/figure5.jpg)
 
 Figure 5
 
