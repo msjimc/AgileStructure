@@ -26,7 +26,7 @@ Once downloaded go to the zip file and extract it, saving the files to the desir
 
 Figure 3
 
-When you double click on the AgileStructure.exe file you'll get a warning message and click on the 'Run  anyway' option(Figure 4)
+When you double click on the AgileStructure.exe file you'll get a warning message, click on the 'Run  anyway' option(Figure 4)
 
 ![figure 4](images/figure4.jpg)
 
