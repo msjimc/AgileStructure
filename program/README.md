@@ -10,7 +10,7 @@ Once downloaded it is important that the AgileStructure.zip and BamReaderdll.dll
 
 First click on the program file (AgileStructure.zip in the table above) which will take you to a new page, on the upper righthand corner click on the icon of a tray with an arrow pointing to it. This will then start the download which will ultimately get you to the first warning (Figure 2).
 
-![figure 1](images/fig1.png)
+![figure 1](images/figure1.jpg)
 
 Figure 1
 
