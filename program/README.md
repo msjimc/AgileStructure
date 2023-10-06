@@ -1,4 +1,4 @@
-# AgileStructure
+# Download
 This folder contains the precompiled program and dll files as a single zip file which you can download. extract and then run. However, due to the current security measures in windows, you will have to ignore several warning designed to stop people downloading possibly dangerous programs. 
 
 <hr />
