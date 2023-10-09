@@ -1,6 +1,6 @@
 # AgileStructure  
 
-## The detection of structural rearrangements in long read data.
+> The detection of structural rearrangements in long read data.
 
 #### Contents
 - [Introduction](#Introduction)
