@@ -1,7 +1,5 @@
 # AgileStructure
 
-> The detection of structural rearrangements in long read data.
-
 #### Contents
 - [Introduction](#Introduction)
 - [Guide](guide)
@@ -16,8 +14,8 @@ Once generated, the data is typically aligned to the appropriate genome using a 
 
 ## Guide
 
-The AgileStructure guide is [here:](guide)
+The AgileStructure guide is [here:](guide/README.md)
 
 ## Download
 
-The compiled can be downloaded from [here:](program)
+The compiled can be downloaded from [here:](program/README.md)
