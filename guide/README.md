@@ -16,3 +16,6 @@ AgileStructure is able to analyse both annotations, but the first method is the 
 ### Optional data
 
 To aid the analysis, it is possible to view the putative break points with reference to the  location of repeat and genes sequences. This data can be obtain from the USCS genome browser as described [here](downloadingOptionalFiles.md).
+
+## Importing alignment data
+
