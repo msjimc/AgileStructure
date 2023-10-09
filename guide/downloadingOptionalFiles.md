@@ -17,10 +17,10 @@ Figure 3 Downloading repeat coordinates.
 
 In both cases the genome option is selected to obtain data from the entire genome and whose format is set using the "selected fields from primary and related tables" and "tsv (tab-separated) text file" options. Finally, to aid downloading the data is compressed using the "gzip compressed" option. Pressing the "get output" directs the user to a 2nd page with which to selected what data fields are required (Figures 4 and 5).
 
-![Figure 4](fig2_genes.png)
+![Figure 4](fig3_genes.png)
 
 Figure 4: Selecting the options for gene coordinates file
 
-![Figure 5](fig2_repeats.png)
+![Figure 5](fig3_repeats.png)
 
 Figure 5 Selecting the options for repeat coordinates file
