@@ -5,7 +5,7 @@ It is possible to view the location of genes and repeats with reference to the a
 
 Figure 1
 
-The web page contains of a number of options used to select the genome to which the long read data was aligned, the type of data you want and its format. Figure 2a shows the options used to select the genomic coordinates for the genes in NCBI refseq data set for the human hg38 reference sequence. Similarlay, Figure 2b conatians the setting for downlaoding the locations of the repeat sequences. The options for both datasets are very similary differing only type of gate to be selected via the "group" and "track" options and the name of the file.
+The web page contains of a number of options used to select the genome to which the long read data was aligned, the type of data you want and its format. Figure 2a shows the options used to select the genomic coordinates for the genes in NCBI refseq data set for the human hg38 reference sequence. Similarlay, Figure 2b contians the settings for downloading the locations of the repeat sequences. The options for both datasets are very similary differing only by type of data to selected via the "group" and "track" options and the name of the file.
 
 ![Figure 2a](fig2_genes.png)
 
@@ -16,7 +16,7 @@ Figure 2a Downloading gene coordinates
 Figure 2b Downloading repeat coordinates.
 
 
-In both cases the genome option is selected to obtain data from the entire genome and whose format is set using the "selected fields from primary and related tables" and "tsv (tab-separated) text file" options. Finally, to aid downloading the data is compressed using the "gzip compressed" option. Pressing the "get output" directs the user to a 2nd page with which to selected what data fields are required (Figures 3a and 3b). Once the requjired fields have been set, pressing the "get output" button will start the download.
+In both cases the genome option is selected to obtain data from the entire genome and whose format is set using the "selected fields from primary and related tables" and "tsv (tab-separated) text file" options. Finally, to aid downloading the data is compressed using the "gzip compressed" option. Pressing the "get output" directs the user to a 2nd page with which to selected what data fields are required (Figures 3a and 3b). Once the required fields have been set, pressing the "get output" button will start the download.
 
 ![Figure 3a](fig3_genes.png)
 
