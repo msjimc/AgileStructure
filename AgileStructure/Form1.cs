@@ -387,6 +387,8 @@ namespace AgileStructure
             string title = Text;
             try
             {
+                bool justChimeric = onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Checked;
+
                 //chr7:146,833,830-146,845,586 or 146919450
                 if (selectEnd > 0 && selectStart > 0 && cboRef.SelectedIndex > 0)
                 {
@@ -461,12 +463,15 @@ namespace AgileStructure
                                             AlignedRead ar = new AlignedRead(r, AR.Count + 1);
                                             if (ar.IsGood == true && ar.IsSupplementaryAlignment == false && ar.IsSecondaryAlignment == false)
                                             {
-                                                if (AR.ContainsKey(ar.getKey) == false)
+                                                if ((justChimeric == true && ar.getSecondaryAlignmentTag != "") || justChimeric == false)
                                                 {
-                                                    AR.Add(ar.getKey, ar);
-                                                    if (lastReadPosition < ar.getPosition)
-                                                    { lastReadPosition = ar.getPosition; }
-                                                    ar = null;
+                                                    if (AR.ContainsKey(ar.getKey) == false)
+                                                    {
+                                                        AR.Add(ar.getKey, ar);
+                                                        if (lastReadPosition < ar.getPosition)
+                                                        { lastReadPosition = ar.getPosition; }
+                                                        ar = null;
+                                                    }
                                                 }
                                             }
                                         }
@@ -2970,6 +2975,17 @@ namespace AgileStructure
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void openBAMFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            button2.PerformClick();
+        }
+
+        private void onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Checked = !onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Checked;
+            btnGetReads.PerformClick();
         }
     }
 }
