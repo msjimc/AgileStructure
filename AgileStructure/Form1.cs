@@ -2780,7 +2780,12 @@ namespace AgileStructure
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            if (cboSecondaries.Items.Count < 2) { return; }
+            if (cboSecondaries.Items.Count < 2)
+            {
+                repopulateSecondaryList();
+                btnFilter.PerformClick();
+                return;
+            }
 
             FilterHits fh = new FilterHits(referenceSequenceNames, 2);
             if (fh.ShowDialog() == DialogResult.OK)
@@ -2794,7 +2799,7 @@ namespace AgileStructure
                     List<string> bins = new List<string>();
                     foreach (string k in secondaryAlignments.Keys)
                     {
-                        if (k.Contains(chromosome) == true && secondaryAlignments[k] >= count)
+                        if ((k.Contains(chromosome) == true || chromosome.StartsWith("Select")) && secondaryAlignments[k] >= count)
                         {
                             if (secondaryAlignments[k] > 1)
                             { bins.Add(k + " Kb (" + secondaryAlignments[k].ToString() + ")"); }
@@ -2813,6 +2818,36 @@ namespace AgileStructure
                     cboSecondaries.Items.Add("Select a region");
                     cboSecondaries.SelectedIndex = 0;
                 }
+            }
+            else
+            {
+                repopulateSecondaryList();
+            }
+        }
+
+        private void repopulateSecondaryList()
+        {
+            if (secondaryAlignments != null && secondaryAlignments.Count > 0)
+            {
+
+                List<string> bins = new List<string>();
+                foreach (string k in secondaryAlignments.Keys)
+                {
+                    if (secondaryAlignments[k] > 1)
+                    { bins.Add(k + " Kb (" + secondaryAlignments[k].ToString() + ")"); }
+                }
+
+                bins.Sort();
+                cboSecondaries.Items.Clear();
+                cboSecondaries.Items.Add("Select a region");
+                cboSecondaries.Items.AddRange(bins.ToArray());
+                cboSecondaries.SelectedIndex = 0;
+            }
+            else
+            {
+                cboSecondaries.Items.Clear();
+                cboSecondaries.Items.Add("Select a region");
+                cboSecondaries.SelectedIndex = 0;
             }
         }
 

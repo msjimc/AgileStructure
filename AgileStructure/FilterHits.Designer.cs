@@ -43,17 +43,14 @@ namespace AgileStructure
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.nudHit);
             this.groupBox1.Controls.Add(this.cboRef);
-            this.groupBox1.Controls.Add(this.btnFilter);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(472, 109);
+            this.groupBox1.Size = new System.Drawing.Size(472, 79);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
@@ -107,23 +104,23 @@ namespace AgileStructure
             // 
             // btnFilter
             // 
-            this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFilter.Location = new System.Drawing.Point(391, 72);
+            this.btnFilter.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnFilter.Location = new System.Drawing.Point(328, 97);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(75, 23);
             this.btnFilter.TabIndex = 0;
-            this.btnFilter.Text = "Filter";
+            this.btnFilter.Text = "Accept";
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // btnQuit
             // 
-            this.btnQuit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnQuit.Location = new System.Drawing.Point(21, 127);
+            this.btnQuit.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnQuit.Location = new System.Drawing.Point(409, 97);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(75, 23);
             this.btnQuit.TabIndex = 1;
-            this.btnQuit.Text = "Close";
+            this.btnQuit.Text = "Cancel";
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
@@ -131,9 +128,10 @@ namespace AgileStructure
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(496, 158);
+            this.ClientSize = new System.Drawing.Size(496, 126);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.btnFilter);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FilterHits";
