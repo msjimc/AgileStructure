@@ -29,6 +29,7 @@ namespace AgileStructure
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Info));
             this.txtDisplay = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
@@ -49,6 +50,7 @@ namespace AgileStructure
             this.ClientSize = new System.Drawing.Size(374, 373);
             this.Controls.Add(this.txtDisplay);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Info";
             this.Text = "Read data";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Info_FormClosing);
