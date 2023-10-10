@@ -1,5 +1,5 @@
 # Download
-This folder contains the precompiled program and dll files as a single zip file which you can download, extract and then run. However, due to the current security measures in windows, you will have to ignore several warning designed to stop people downloading possibly dangerous programs. 
+This folder contains the precompiled program and dll files as both individual files and a zip file. Due to heightened security by some organisation's IT departments it may not be possible to run a program extracted from a zip file. Consequently, you may have to try downloading the program both ways until one way works. 
 
 <hr />
 
@@ -8,7 +8,9 @@ This folder contains the precompiled program and dll files as a single zip file 
 Once downloaded it is important that the AgileStructure.exe and BamReaderdll.dll are located in the same folder. 
 <hr />
 
-First click on the program file (AgileStructure.zip in the table above) which will take you to a new page, on the upper righthand corner click on the icon of a tray with an arrow pointing to it. This will then start the download which will ultimately prompt you to either save it or open the zip file (Figure 2).
+## Downloading the zip file
+
+First click on the program file (AgileStructure.zip in the table above) which will take you to a new page, on the upper righthand corner click on the icon of a tray with an arrow pointing to it (Figure 1). This will then start the download which will ultimately prompt you to either save it or open the zip file (Figure 2).
 
 ![figure 1](images/figure1.jpg)
 
@@ -38,3 +40,36 @@ And finally, click on the 'Run  anyway' option and the program should start (Fig
 
 Figure 5
 
+## Downloading the individual files
+
+First click on the program file (AgileStructure.exe in the table above) which will take you to a new page, on the upper righthand corner click on the icon of a tray with an arrow pointing to it (Figure 6). This will then start the download which will ultimately get you to the first warning (Figure 2).
+
+![figure 6](images/figure6.jpg)
+
+Figure 6
+
+Move the mouse to the right of the message and three dots will appear next to a bin icon (Figure 7), click on the dots.
+
+![figure 7](images/figure7.jpg)
+
+Figure 7
+
+Next select 'Keep' (Figure 8)
+
+![figure 8](images/figure8.jpg)
+
+Figure 8
+
+On the next warning, click on the 'Show more' label (Figure 9)
+
+![figure 9](images/figure9.jpg)
+
+Figure 9
+
+And finally, select the 'Keep anyway' option (Figure 10) and the download will start.
+
+![figure 5](images/figure10.jpg)
+
+Figure 5
+
+Repeat the process for the BamReaderdll.dll file.
