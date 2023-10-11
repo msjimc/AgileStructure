@@ -1147,7 +1147,7 @@ namespace AgileStructure
                 foreach (string k in secondaryAlignments.Keys)
                 {
                     if (secondaryAlignments[k] > 1)
-                    { bins.Add(k + " Kb (" + secondaryAlignments[k].ToString() + ")"); }
+                    { bins.Add(k + " bp (" + secondaryAlignments[k].ToString() + ")"); }
                 }
                 bins.Sort();
                 cboSecondaries.Items.Clear();
@@ -2780,12 +2780,8 @@ namespace AgileStructure
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            if (cboSecondaries.Items.Count < 2)
-            {
-                repopulateSecondaryList();
-                btnFilter.PerformClick();
-                return;
-            }
+
+            repopulateSecondaryList();             
 
             FilterHits fh = new FilterHits(referenceSequenceNames, 2);
             if (fh.ShowDialog() == DialogResult.OK)
@@ -2802,7 +2798,7 @@ namespace AgileStructure
                         if ((k.Contains(chromosome) == true || chromosome.StartsWith("Select")) && secondaryAlignments[k] >= count)
                         {
                             if (secondaryAlignments[k] > 1)
-                            { bins.Add(k + " Kb (" + secondaryAlignments[k].ToString() + ")"); }
+                            { bins.Add(k + " bp (" + secondaryAlignments[k].ToString() + ")"); }
                         }
                     }
 
@@ -2818,11 +2814,7 @@ namespace AgileStructure
                     cboSecondaries.Items.Add("Select a region");
                     cboSecondaries.SelectedIndex = 0;
                 }
-            }
-            else
-            {
-                repopulateSecondaryList();
-            }
+            }            
         }
 
         private void repopulateSecondaryList()
@@ -2834,7 +2826,7 @@ namespace AgileStructure
                 foreach (string k in secondaryAlignments.Keys)
                 {
                     if (secondaryAlignments[k] > 1)
-                    { bins.Add(k + " Kb (" + secondaryAlignments[k].ToString() + ")"); }
+                    { bins.Add(k + " bp (" + secondaryAlignments[k].ToString() + ")"); }
                 }
 
                 bins.Sort();
@@ -2944,16 +2936,14 @@ namespace AgileStructure
                 {
                     startPoint.Sort();
                     endPoint.Sort();
-                    if (startPoint.Count % 2 == 0)
-                    {
-                        int middle = startPoint.Count / 2;
-                        int mediumStart = (startPoint[middle - 1] + startPoint[middle]) / 2;
-                        int mediumEnd = (endPoint[middle - 1] + endPoint[middle]) / 2;
 
-                        sb.Append("\nMedian brake points\t" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + (mediumStart + 1).ToString("N0") + "ins" + (mediumStart - mediumEnd).ToString("N0") + "bp\n");
-                        if (MessageBox.Show(sb.ToString(), "Insertion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        { SaveToFile(sb.ToString()); }
-                    }
+                    int middle = startPoint.Count / 2;
+                    int mediumStart = (startPoint[middle - 1] + startPoint[middle]) / 2;
+                    int mediumEnd = (endPoint[middle - 1] + endPoint[middle]) / 2;
+
+                    sb.Append("\nMedian brake points\t" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + (mediumStart + 1).ToString("N0") + "ins" + (mediumStart - mediumEnd).ToString("N0") + "bp\n");
+                    if (MessageBox.Show(sb.ToString(), "Insertion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    { SaveToFile(sb.ToString()); }
                 }
             }
         }
@@ -2992,17 +2982,14 @@ namespace AgileStructure
                 {
                     startPoint.Sort();
                     endPoint.Sort();
-                    if (startPoint.Count % 2 == 0)
-                    {
-                        int middle = startPoint.Count / 2;
-                        int mediumStart = (startPoint[middle - 1] + startPoint[middle]) / 2;
-                        int mediumEnd = (endPoint[middle - 1] + endPoint[middle]) / 2;
 
-                        sb.Append("\nMedian brakepoints\t" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + mediumEnd.ToString("N0") + "del\n");
-                        if (MessageBox.Show(sb.ToString(), "Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        { SaveToFile(sb.ToString()); }
-                    }
+                    int middle = startPoint.Count / 2;
+                    int mediumStart = (startPoint[middle - 1] + startPoint[middle]) / 2;
+                    int mediumEnd = (endPoint[middle - 1] + endPoint[middle]) / 2;
 
+                    sb.Append("\nMedian brakepoints\t" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + mediumEnd.ToString("N0") + "del\n\nDo you want to save the data?" );
+                    if (MessageBox.Show(sb.ToString(), "Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    { SaveToFile(sb.ToString()); }
                 }
             }
         }

@@ -14,7 +14,7 @@ while have a index file named:
 
 ### Preferred long read sequence aligners
 
-Long reads that span a break point will appear to consist of two regions of homology, mapping to different locations in the genome. How these chimeric alignments are reported are aligner specific. Some aligners such as minimap2 ([github](https://github.com/lh3/minimap2), [paper](https://academic.oup.com/bioinformatics/article/34/18/3094/4994778)), treat the two regions as different alignments, but will report the secondary alignment as a CIGAR string in the alignments tag section, while those like lra ([github](https://github.com/ChaissonLab/LRA), [paper](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009078)), may report a single alignment with an insertion or deletion reported in the alignments CIGAR string.  
+Long reads that span a break point will appear to consist of two regions of homology, mapping to different locations in the genome. How these chimeric alignments are reported are aligner specific. Some aligners such as minimap2 ([github](https://github.com/lh3/minimap2), [paper](https://academic.oup.com/bioinformatics/article/34/18/3094/4994778)), treat the two regions as different alignments, but will report the secondary alignment as a condensed CIGAR string in the alignments tag section, while those like lra ([github](https://github.com/ChaissonLab/LRA), [paper](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009078)), report the read as two separate alignments, but not directly reference the other alignment position and CIGAR string. However, for shorter indels both aligns will report them in the CIGAr string (see section @@@)    
 AgileStructure is able to analyse both annotations, but the first method is the most flexible and will allow more complex break points to be processed than those that hard clip the sequence and don't include the location of secondary alignment. Consequently, it is recommended to align data using an aligner like minimap2. 
 
 ### Optional data
@@ -50,28 +50,128 @@ Select the likely chromosome (reference sequence) from the dropdown list boz and
 Figure 3
 
 The position of reads mapping to the region are shown as green (aligned to the forward strand) and red (aligned to the reverse strand) rectangles scaled to the length of the read. Soft clipped sequences are identified as pale green or red extensions to the darker green/red rectangles. The size of the pale rectangles is proportionate to their length and their location only indicates whether they are on the 5' or 3' of the aligned sequence.  
-AgileStructure does not have an upper limit on the size of the region or number of reads it will process and will attempt to read the requested data until the computer runs out of memory. WHile there is no upper limit, you should try to limit the amount of data reads as reading the underlying bam file can be a slow process due to its size.
+It is important to note that in the default view reads are drawn as a solid box spanning the length of the alignment, if a read as a large deletion this will not be shown, however they can be visualised by selecting the ```Analsis``` > ```Look for indels within a read``` option (see section @@@@@@@@@).  
+AgileStructure does not have an upper limit on the size of the region or number of reads it will process and will attempt to read the requested data until the computer runs out of memory. While there is no upper limit, you should try to limit the amount of data reads as reading the underlying bam file can be a slow process due to its size.
 
-### Looking for putative break points in the selected region.
+### Hiding reads without a soft clipped segment
 
-It may be possible to simply identify the the break point  at this point, especially for large homozygous deletions, but in many situation particularly for heterozygous break points they may not standout. Consequently, AgileStructure scans the reads, looking for 250 bp regions in which multiple read alignments prematurely terminate and the remaining soft clipped sequence all maps to the same location. These regions are then recorded and entered in to the lower drop down list box (Figure 4).
+When adding reads to the image, they are stacked so as little space as possible is used, however for alignments with a high read depth, the stacks may be to too tall to fit in the image. Since, only reads that have a soft clipped region are important in break point detection it is possible to hide those with out an unaligned area by selecting the ```Analysis``` > ```Only show reads with secondary alignments ``` option (Figure 4).
 
 ![Figure 4](images/figure4.jpg)
 
 Figure 4
 
-For extended regions and/or alignments with a high read depth, this list may contain a large number of entries. To filter them press the ```Filter``` button to the left of the lower drop down list box. This will open the ```Filter possible break points``` form (Figure 5 a nd b). The upper drop down list box allow the break point to be filtered by the chromosome that the soft clip regions are mapped too (Figure 5a), while the lower number select box will filter the results by the number of reads linked to each putative break point. 
+The filtered image will contain fewer reads, making those at the break point more apparent.
 
-![Figure 5a](images/figure5a.jpg)
+![Figure 5](images/figure5.jpg)
 
-Figure 5a
+Figure 5
 
-![Figure 5b](images/figure5b.jpg)
+### Looking for putative break points in the selected region.
 
-Figure 5b
-
-Pressing the ```Filter``` button will repopulate the drop down list box (Figure 6).
+It may be possible to simply identify the the break point  at this point, especially for large homozygous deletions, but in many situation particularly for heterozygous break points they may not standout. Consequently, AgileStructure scans the reads, looking for 250 bp regions in which multiple read alignments prematurely terminate and the remaining soft clipped sequence all maps to the same location. These regions are then recorded and entered in to the lower drop down list box (Figure 6).
 
 ![Figure 6](images/figure6.jpg)
 
 Figure 6
+
+For extended regions and/or alignments with a high read depth, this list may contain a large number of entries. To filter them press the ```Filter``` button to the left of the lower drop down list box. This will open the ```Filter possible break points``` form (Figure 7a and 7b). The upper drop down list box allows the break points to be filtered by the chromosome that the soft clip regions are mapped too (Figure 7a), while the lower number select box will filter the results by the number of reads linked to each putative break point. 
+
+![Figure 7a](images/figure7a.jpg)
+
+Figure 7a
+
+![Figure 7b](images/figure7b.jpg)
+
+Figure 7b
+
+Pressing the ```Accept``` button will remove all break points that do not match the criteria (Figure 8), while pressing the ```Cancel``` will remove all filtering.
+
+![Figure 8](images/figure8.jpg)
+
+Figure 8
+
+Selecting a break point from this list will cause the reads with soft clipped sequences mapped to the break points flanking regions to be displayed in the lower panel (Figure 9). As before, reads are drawn in green or red for those mapping to the forward or reverse strands, with aligned sequences darker than the unaligned soft clipped sequences. It is important to note that only reads that are present in the upper image shown in the lower image and that sequences that were aligned to the reference sequence in the upper image will be unaligned, soft clipped sequences in the lower image. 
+
+![Figure 9](images/figure9.jpg)
+
+Figure 9
+
+### Viewing read alignment information
+
+Selecting the ```Data``` > ```View read data``` will cause a resizable window to appear that consist solely of a text area. If the mouse cursor is held over a read, its underlying data will be written to the text area. For a sequence to be selected, the cursor has to hover over the read for a little while. This makes it possible to select a read and then quickly move the cursor to the new window and copy the data to paste in a document etc.
+
+
+![Figure 10a](images/figure10a.jpg)
+
+Figure 10a
+
+![Figure 10b](images/figure10b.jpg)
+
+Figure 10b
+
+Since the read, quality score string and CIGAR string can be several thousand characters lond, the text area doesn't word wrap text and so if you want to read the end of a CIGAR string you must use the horizontal scroll bar.   
+As well as the sequence and quality string, this information contains the primary and secondary alignments' location etc as well all the tag added by the aligner.
+
+### Selecting reads linked to a break point
+
+When the upper image contains a large number of reads it may not be possible identify the reads associated with the selected break point, however clicking on a read in either image will cause it to be selected and drawn with a blue boarder. By clicking on all the reads linked to a break point in the lower image will help to identify the break point in the upper image (Figure 11) 
+
+![Figure 11](images/figure11.jpg)
+
+Figure 11
+
+If you click on a selected read it will be deselected, while selecting the ```Data``` > ```Clear selected reads``` option will deselect all selected reads (Figure 12). Finally, iIf read data is imported from the bam file (the ```Get reads``` is pressed) the selection will be cleared.
+
+![Figure 12](images/figure12.jpg)
+
+Figure 12
+
+### Saving alignment information for selected reads
+
+Rather than manually saving the data for a series of read alignments, its possible to save all the data to a text file using the ```Data``` > ```Save selected reads``` (Figure 13).
+
+![Figure 13](images/figure13.jpg)
+
+Figure 13
+
+### Annotating break points using soft clipped data
+
+Once the reads spanning a break point have been selected, is is possible to get AgileStructure to attempt to annotate the mutation. To see what type of mutation the break point represents select ```Variant determination``` > ```Use soft clip data``` > ```Variant type``` (Figure 14a). AgileStructure will scan the reads primary and secondary alignment data and the orientation of the soft clipped data with respect to the aligned sequences to determine what type of mutation it is. This is reported in a message box with the possible answers of "Deletion", "Insertion", "Inversion", "Duplication" or "Translocation" as well as messages indicating an error processing the data or user data selection issues (Figure 14b). 
+
+![Figure 14a](images/figure14a.jpg)
+
+Figure 14a
+
+![Figure 14ba](images/figure14b.jpg)
+
+Figure 14b
+
+Once the variant type is determined it is then possible to get AgileStructure to annotate it by selecting the appropriate option (Figure 15a and 15b)
+
+#### Translocation
+
+![Figure 15a](images/figure15a.jpg)
+
+Figure 15a
+
+![Figure 15ba](images/figure15b.jpg)
+
+Figure 15b
+
+The message box reporting the mutation will also allow you to save the the mutation's annotation as well as the underlying sequence data to a text file by pressing the ```Yes``` button (an example is [here](images/breakPointData.txt)).
+
+The break point is annotated with reference to the reads selected in this case those whose primary alignment is on chromosome 4. However, the alignment will also contaion reads whose primary alignment is on the other side of the break point and whose soft clipped sequences mapped to the currently selected reference. To view these reads select the ```Variant determination``` > ```Switch region``` option , select the putative break point and reads as before (Figure 16a) and press the ```Variant determination``` > ```Use soft clip data``` > ```Translocation```. If the annotation is correct, both annotations should match with a small difference in the base pair position (Figure 16b).
+
+![Figure 16a](images/figure16a.jpg)
+
+Figure 16a
+
+![Figure 15b](images/figure16b.jpg)
+
+Figure 16b
+
+#### Deletion 
+#### Insertion
+#### Inversion
+#### Duplication
