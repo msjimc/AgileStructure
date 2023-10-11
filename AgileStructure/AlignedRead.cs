@@ -167,7 +167,11 @@ namespace AgileStructure
                             case fragmentType.Insert:
                                 r.Width=1;
                                 if (order == 2)
-                                { g.FillRectangle(aligned, r); }
+                                {
+                                    g.FillRectangle(aligned, r);
+                                    if (f.length > 10)
+                                    { g.DrawLine(Pens.Black, r.X, r.Top - 2, r.X, r.Bottom - 2); }
+                                }
                                 break;
                         }
                         if (f.state != fragmentType.Insert)

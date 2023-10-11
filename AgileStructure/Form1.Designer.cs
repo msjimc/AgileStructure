@@ -90,6 +90,7 @@ namespace AgileStructure
             this.secondaryAlignmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnQuit = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gbpP1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.p1)).BeginInit();
@@ -125,7 +126,7 @@ namespace AgileStructure
             this.txtEnd.Location = new System.Drawing.Point(962, 21);
             this.txtEnd.Name = "txtEnd";
             this.txtEnd.Size = new System.Drawing.Size(114, 20);
-            this.txtEnd.TabIndex = 6;
+            this.txtEnd.TabIndex = 4;
             this.txtEnd.TextChanged += new System.EventHandler(this.txtEnd_TextChanged);
             this.txtEnd.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNumber_KeyDown);
             this.txtEnd.Leave += new System.EventHandler(this.txtEnd_Leave);
@@ -137,7 +138,7 @@ namespace AgileStructure
             this.txtStart.Location = new System.Drawing.Point(842, 21);
             this.txtStart.Name = "txtStart";
             this.txtStart.Size = new System.Drawing.Size(114, 20);
-            this.txtStart.TabIndex = 5;
+            this.txtStart.TabIndex = 3;
             this.txtStart.TextChanged += new System.EventHandler(this.txtStart_TextChanged);
             this.txtStart.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNumber_KeyDown);
             this.txtStart.Leave += new System.EventHandler(this.txtStart_Leave);
@@ -152,7 +153,7 @@ namespace AgileStructure
             this.cboRef.Location = new System.Drawing.Point(87, 21);
             this.cboRef.Name = "cboRef";
             this.cboRef.Size = new System.Drawing.Size(749, 21);
-            this.cboRef.TabIndex = 4;
+            this.cboRef.TabIndex = 2;
             this.cboRef.SelectedIndexChanged += new System.EventHandler(this.cboRef_SelectedIndexChanged);
             // 
             // btnGetReads
@@ -161,7 +162,7 @@ namespace AgileStructure
             this.btnGetReads.Location = new System.Drawing.Point(1082, 19);
             this.btnGetReads.Name = "btnGetReads";
             this.btnGetReads.Size = new System.Drawing.Size(75, 23);
-            this.btnGetReads.TabIndex = 3;
+            this.btnGetReads.TabIndex = 5;
             this.btnGetReads.Text = "Get reads";
             this.btnGetReads.UseVisualStyleBackColor = true;
             this.btnGetReads.Click += new System.EventHandler(this.button4_Click);
@@ -184,8 +185,8 @@ namespace AgileStructure
             this.gbpP1.Controls.Add(this.p1);
             this.gbpP1.Location = new System.Drawing.Point(0, 65);
             this.gbpP1.Name = "gbpP1";
-            this.gbpP1.Size = new System.Drawing.Size(1166, 221);
-            this.gbpP1.TabIndex = 1;
+            this.gbpP1.Size = new System.Drawing.Size(1166, 218);
+            this.gbpP1.TabIndex = 6;
             this.gbpP1.TabStop = false;
             // 
             // p1
@@ -193,7 +194,7 @@ namespace AgileStructure
             this.p1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.p1.Location = new System.Drawing.Point(3, 16);
             this.p1.Name = "p1";
-            this.p1.Size = new System.Drawing.Size(1160, 202);
+            this.p1.Size = new System.Drawing.Size(1160, 199);
             this.p1.TabIndex = 0;
             this.p1.TabStop = false;
             this.p1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.p1_MouseClick);
@@ -210,7 +211,7 @@ namespace AgileStructure
             this.gbpP2.Controls.Add(this.p2);
             this.gbpP2.Location = new System.Drawing.Point(0, 65);
             this.gbpP2.Name = "gbpP2";
-            this.gbpP2.Size = new System.Drawing.Size(1169, 216);
+            this.gbpP2.Size = new System.Drawing.Size(1169, 213);
             this.gbpP2.TabIndex = 2;
             this.gbpP2.TabStop = false;
             // 
@@ -219,7 +220,7 @@ namespace AgileStructure
             this.p2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.p2.Location = new System.Drawing.Point(3, 16);
             this.p2.Name = "p2";
-            this.p2.Size = new System.Drawing.Size(1163, 197);
+            this.p2.Size = new System.Drawing.Size(1163, 194);
             this.p2.TabIndex = 0;
             this.p2.TabStop = false;
             this.p2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.p2_MouseClick);
@@ -249,7 +250,7 @@ namespace AgileStructure
             this.btnFilter.Location = new System.Drawing.Point(9, 19);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(75, 23);
-            this.btnFilter.TabIndex = 9;
+            this.btnFilter.TabIndex = 8;
             this.btnFilter.Text = "Filter";
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
@@ -260,7 +261,7 @@ namespace AgileStructure
             this.txtsEnd.Location = new System.Drawing.Point(965, 21);
             this.txtsEnd.Name = "txtsEnd";
             this.txtsEnd.Size = new System.Drawing.Size(114, 20);
-            this.txtsEnd.TabIndex = 8;
+            this.txtsEnd.TabIndex = 11;
             this.txtsEnd.TextChanged += new System.EventHandler(this.txtsEnd_TextChanged);
             this.txtsEnd.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNumber_KeyDown);
             this.txtsEnd.Leave += new System.EventHandler(this.txtsEnd_Leave);
@@ -272,7 +273,7 @@ namespace AgileStructure
             this.txtsStart.Location = new System.Drawing.Point(845, 21);
             this.txtsStart.Name = "txtsStart";
             this.txtsStart.Size = new System.Drawing.Size(114, 20);
-            this.txtsStart.TabIndex = 7;
+            this.txtsStart.TabIndex = 10;
             this.txtsStart.TextChanged += new System.EventHandler(this.txtsStart_TextChanged);
             this.txtsStart.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNumber_KeyDown);
             this.txtsStart.Leave += new System.EventHandler(this.txtsStart_Leave);
@@ -287,7 +288,7 @@ namespace AgileStructure
             this.cboSecondaries.Location = new System.Drawing.Point(87, 21);
             this.cboSecondaries.Name = "cboSecondaries";
             this.cboSecondaries.Size = new System.Drawing.Size(752, 21);
-            this.cboSecondaries.TabIndex = 4;
+            this.cboSecondaries.TabIndex = 9;
             this.cboSecondaries.SelectedIndexChanged += new System.EventHandler(this.cboSecondaries_SelectedIndexChanged);
             // 
             // btnSecondaryView
@@ -296,7 +297,7 @@ namespace AgileStructure
             this.btnSecondaryView.Location = new System.Drawing.Point(1085, 19);
             this.btnSecondaryView.Name = "btnSecondaryView";
             this.btnSecondaryView.Size = new System.Drawing.Size(75, 23);
-            this.btnSecondaryView.TabIndex = 3;
+            this.btnSecondaryView.TabIndex = 12;
             this.btnSecondaryView.Text = "Select";
             this.btnSecondaryView.UseVisualStyleBackColor = true;
             this.btnSecondaryView.Click += new System.EventHandler(this.btnSecondaryView_Click);
@@ -319,9 +320,9 @@ namespace AgileStructure
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox4);
             this.splitContainer1.Panel2.Controls.Add(this.gbpP2);
-            this.splitContainer1.Size = new System.Drawing.Size(1169, 580);
-            this.splitContainer1.SplitterDistance = 289;
-            this.splitContainer1.TabIndex = 4;
+            this.splitContainer1.Size = new System.Drawing.Size(1169, 574);
+            this.splitContainer1.SplitterDistance = 286;
+            this.splitContainer1.TabIndex = 7;
             // 
             // timer1
             // 
@@ -583,14 +584,14 @@ namespace AgileStructure
             // insertationToolStripMenuItem
             // 
             this.insertationToolStripMenuItem.Name = "insertationToolStripMenuItem";
-            this.insertationToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
-            this.insertationToolStripMenuItem.Text = "Insertation";
+            this.insertationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.insertationToolStripMenuItem.Text = "Insertion";
             this.insertationToolStripMenuItem.Click += new System.EventHandler(this.insertationToolStripMenuItem_Click);
             // 
             // deletionToolStripMenuItem
             // 
             this.deletionToolStripMenuItem.Name = "deletionToolStripMenuItem";
-            this.deletionToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.deletionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deletionToolStripMenuItem.Text = "Deletion";
             this.deletionToolStripMenuItem.Click += new System.EventHandler(this.deletionToolStripMenuItem_Click);
             // 
@@ -632,11 +633,22 @@ namespace AgileStructure
             this.timer2.Interval = 250;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // btnQuit
+            // 
+            this.btnQuit.Location = new System.Drawing.Point(1106, 610);
+            this.btnQuit.Name = "btnQuit";
+            this.btnQuit.Size = new System.Drawing.Size(75, 23);
+            this.btnQuit.TabIndex = 8;
+            this.btnQuit.Text = "Quit";
+            this.btnQuit.UseVisualStyleBackColor = true;
+            this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1193, 633);
+            this.ClientSize = new System.Drawing.Size(1193, 645);
+            this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -724,6 +736,7 @@ namespace AgileStructure
         private System.Windows.Forms.ToolStripMenuItem openBAMFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem9;
         private System.Windows.Forms.ToolStripMenuItem onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem;
+        private System.Windows.Forms.Button btnQuit;
     }
 }
 

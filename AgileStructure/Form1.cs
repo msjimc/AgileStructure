@@ -2913,7 +2913,7 @@ namespace AgileStructure
                         {
                             if (frag.state == AlignedRead.fragmentType.Insert)
                             {
-                                if (frag.length > 100)
+                                if (frag.length > 10)
                                 {
                                     if (start == 0) { start = place - ar.getEndPosition; }
                                     startPoint.Add(place);
@@ -2932,7 +2932,7 @@ namespace AgileStructure
                         }
                     }
                 }
-                if (startPoint.Count > 0 && endPoint.Count > 0)
+                if (startPoint.Count > 1 && endPoint.Count > 1)
                 {
                     startPoint.Sort();
                     endPoint.Sort();
@@ -2941,7 +2941,7 @@ namespace AgileStructure
                     int mediumStart = (startPoint[middle - 1] + startPoint[middle]) / 2;
                     int mediumEnd = (endPoint[middle - 1] + endPoint[middle]) / 2;
 
-                    sb.Append("\nMedian brake points\t" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + (mediumStart + 1).ToString("N0") + "ins" + (mediumStart - mediumEnd).ToString("N0") + "bp\n");
+                    sb.Append("\nMedian brake points\t" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + (mediumStart + 1).ToString("N0") + "ins" + (mediumStart - mediumEnd).ToString("N0") + "bp\n\nDo you want to save the inserts annotation?");
                     if (MessageBox.Show(sb.ToString(), "Insertion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     { SaveToFile(sb.ToString()); }
                 }
@@ -2966,7 +2966,7 @@ namespace AgileStructure
                         {
                             if (frag.state == AlignedRead.fragmentType.Deletion)
                             {
-                                if (frag.length > 100)
+                                if (frag.length > 10)
                                 {
                                     startPoint.Add(place);
                                     endPoint.Add(place + frag.length);
@@ -3008,6 +3008,11 @@ namespace AgileStructure
         {
             onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Checked = !onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Checked;
             btnGetReads.PerformClick();
+        }
+
+        private void btnQuit_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
