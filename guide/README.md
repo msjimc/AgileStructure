@@ -314,3 +314,29 @@ The repeats are drawn as black rectangles filled in pale blue (forward strand) o
 ![Figure K](images/figureK.jpg)
 
 Figure K
+
+## Miscellaneous functions
+
+### Cursor location
+
+The ```Annotation``` > ```Show position of cursor``` option displays the genomic co-ordinates of cursor's position (Figure Mb). It should be remembered that this in too accurate as a region 1 Mb wide may drawn on an image 860 pixels wide will have 1,162.8 bps mapped to each pixel.
+
+![Figure Ma](images/figureMa.jpg)
+
+Figure Ma
+
+![Figure Mb](images/figureMb.jpg)
+
+Figure Mb
+
+### Aligner string
+
+Typically, the aligner used to map the reads on the reference genome will include the command line arguments used in the alignment. This can be viewed by selecting the ```Data``` > ```Aligner string``` (Figure Na and Nb). This can prove useful when you need to be certain which reference genome was used in the alignment.
+
+![Figure Na](images/figureNa.jpg)
+
+Figure Na
+
+![Figure Nb](images/figureNb.jpg)
+
+Figure Nb
