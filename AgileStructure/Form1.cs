@@ -86,7 +86,7 @@ namespace AgileStructure
         bool drawGenes = true;
         RepeatData rd = null;
         string repeatFileName = "";
-        bool drawRepeats = true;
+        //bool drawRepeats = true;
 
         Info id = null;
 
@@ -198,6 +198,9 @@ namespace AgileStructure
 
             history = new List<string>();
             historySecondary = new List<StringInt>();
+
+            makeBlankImage();
+            makeBlankSecondaryBase();
 
         }
 
@@ -403,9 +406,6 @@ namespace AgileStructure
 
                     AR = new Dictionary<string, AlignedRead>(2000);
                     makeBaseImage();
-                    DrawGenes(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
-
-                    DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
 
                     int index = cboRef.SelectedIndex - 1;
                     ulong regionStart = (ulong)selectStart;
@@ -491,6 +491,10 @@ namespace AgileStructure
                     setSecondaryAlignmentBins();
                     AddSecondaryAlignmentsBlocks();
                     makeBlankSecondaryBase();
+                    DrawGenes(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
+                    //DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
+
+                    p1.Image = bmp;
                 }
             }
             finally
@@ -590,7 +594,7 @@ namespace AgileStructure
             {
                 makeBaseImage();
                 DrawGenes(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
-                DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
+                //DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
                 resetReadsDrawnStatus();
             }
             drawAlignments(AR);
@@ -623,7 +627,7 @@ namespace AgileStructure
 
             p1.Image = bmp;
 
-            if ((drawGenes == true && gd != null) || (drawRepeats == true && rd != null))
+            if ((drawGenes == true && gd != null) || (rd != null))
             { setRowMatrix(true); }
             else
             { setRowMatrix(false); }
@@ -638,7 +642,7 @@ namespace AgileStructure
             g.Clear(Color.White);
             g.DrawLine(Pens.Black, 10, 10, bmp.Width - 10, 10);
             p1.Image = bmp;
-            if ((drawGenes == true && gd != null) || (drawRepeats == true && rd != null))
+            if ((drawGenes == true && gd != null) || (rd != null))
             { setRowMatrix(true); }
             else
             { setRowMatrix(false); }
@@ -667,7 +671,7 @@ namespace AgileStructure
 
             p2.Image = bmp_soft;
 
-            if ((drawGenes == true && gd != null) || (drawRepeats == true && rd != null))
+            if ((drawGenes == true && gd != null) || (rd != null))
             { setSecondaryRowMatrix(true); }
             else
             { setSecondaryRowMatrix(false); }
@@ -683,7 +687,7 @@ namespace AgileStructure
             g_soft.Clear(Color.White);
             g_soft.DrawLine(Pens.Black, 10, 10, bmp.Width - 10, 10);
             p2.Image = bmp_soft;
-            if ((drawGenes == true && gd != null) || (drawRepeats == true && rd != null))
+            if ((drawGenes == true && gd != null) || (rd != null))
             { setSecondaryRowMatrix(true); }
             else
             { setSecondaryRowMatrix(false); }
@@ -735,11 +739,13 @@ namespace AgileStructure
                     ChromosomalPoint right = new ChromosomalPoint(chromosomeName, endPoint + 50000);
                     Point geneRange = gd.getIndexsRangeOffGenesInARegion(left, right);
 
+                   g.FillRectangle(Brushes.White, 0, bmpHeigth - 22, bmp.Width, 22);
+
                     for (int index = geneRange.X; index <= geneRange.Y; index++)
                     {
                         int height = bmpHeigth - 14;
                         if ((index & 1) == 1) { height -= 8; }
-                        if (gd.Genes[index].getChromosome.ToLower() == cboRef.Text)
+                        if (gd.Genes[index].getChromosome.ToLower() == chromosomeName)
                         { gd.Genes[index].DrawGene(g, 10, height, 5, xScale, startPoint); }
                     }
                     g.FillRectangle(Brushes.White, 0, 0, 10, bmpHeigth);
@@ -753,21 +759,22 @@ namespace AgileStructure
         {
             try
             {
-                if (drawRepeats == true && rd != null)
+                if (rd != null)
                 {
                     double xScale = (p1.Width - 20) / (double)(endPoint - startPoint);
                     int height = bmpHeigth - 6;
+
+                    g.FillRectangle(Brushes.White, 0, bmpHeigth - 8, bmp.Width, 10);
+
                     for (int index = 0; index < rd.Repeats.Length; index++)
                     {
                         if (rd.Repeats[index].GetLocation.GetRegionEnd > startPoint || rd.Repeats[index].GetLocation.GetRegionStart < endPoint)
                         {
-                            if (rd.Repeats[index].getChromosome.ToLower() == cboRef.Text)
+                            if (rd.Repeats[index].getChromosome.ToLower() == chromosomeName)
                             { rd.Repeats[index].DrawRepeat(g, 10, height, 5, xScale, startPoint); }
                         }
                     }
-                    g.FillRectangle(Brushes.White, 0, 0, 10, bmpHeigth);
-                    g.FillRectangle(Brushes.White, bmp.Width - 10, 0, 10, bmpHeigth);
-                }
+                 }
             }
             catch (Exception ex) { }
         }
@@ -1184,7 +1191,7 @@ namespace AgileStructure
 
                 drawPrimaryAlignments(true);
                 DrawGenes(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
-                DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
+                //DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
                 drawSecondaryAlignments();
 
                 if (selectedIndex.Count > 0)
@@ -1193,15 +1200,15 @@ namespace AgileStructure
                 { saveSelectedReadsToolStripMenuItem.Enabled = false; }
 
             }
-            else if ((drawGenes == true && gd != null) || (drawRepeats == true && rd != null))
+            else if ((drawGenes == true && gd != null) || (rd != null))
             {
                 if (cursorInP1.Y < p1.Height - 8 && gd != null)
                 {
-                    gbpP1.Text = getGeneName(cursorInP1, selectStart, selectEnd, p1.Width, p1.Height);
+                    gbpP1.Text = getGeneName(cursorInP1, selectStart, selectEnd, p1.Width, p1.Height, true);
                 }
                 else if (cursorInP1.Y > p1.Height - 8 && rd != null)
                 {
-                    gbpP1.Text = getRepeatName(cursorInP1, selectSecondaryStart, selectSecondaryEnd, p1.Width, p1.Height);
+                    gbpP1.Text = getRepeatName(cursorInP1, selectStart, selectEnd, p1.Width, p1.Height, true);
                 }
             }
         }
@@ -1254,12 +1261,14 @@ namespace AgileStructure
         private void p1_MouseUp(object sender, MouseEventArgs e)
         {
             if (p1RegionSelect == true)
-            {
+            {  
                 double xScale = (p1.Width - 20) / (double)(selectEnd - selectStart);
                 int placeNow = (int)((e.X - 10) / xScale) + selectStart;
                 int placeThen = (int)((mouseDown1 - 10) / xScale) + selectStart;
                 if (Math.Abs(placeNow - placeThen) > 100)
                 {
+                    rd = null;
+
                     if (placeNow > placeThen)
                     {
                         txtStart.Text = placeThen.ToString("N0");
@@ -1271,6 +1280,7 @@ namespace AgileStructure
                         txtStart.Text = placeNow.ToString("N0");
                     }
                     btnGetReads.PerformClick();
+                  
                 }
                 else
                 { p1.Image = bmp; }
@@ -1350,18 +1360,18 @@ namespace AgileStructure
         private void drawSecondaryAlignments()
         {
             makeSecondaryBase();
-            if (((drawGenes == true && gd != null) || (drawRepeats == true && rd != null)) && cboSecondaries.Items.Count > 0 && cboSecondaries.SelectedIndex > 0)
-            {
-                string chromosomeName = cboSecondaries.Text.Substring(0, cboSecondaries.Text.IndexOf(" ")).Trim();
-                if (drawGenes == true && gd != null)
-                { DrawGenes(g_soft, bmp_soft.Height, chromosomeName, selectSecondaryStart, selectSecondaryEnd); }
-                if (drawRepeats == true && rd != null)
-                { DrawRepeats(g_soft, bmp_soft.Height, chromosomeName, selectSecondaryStart, selectSecondaryEnd); }
-            }
             if (cboSecondaries.SelectedIndex == 0)
             { makeBlankSecondaryBase(); }
             else
             { drawSecondaryAlignments(AR); }
+
+            if (((drawGenes == true && gd != null)) && cboSecondaries.Items.Count > 0 && cboSecondaries.SelectedIndex > 0)
+            {
+                string chromosomeName = cboSecondaries.Text.Substring(0, cboSecondaries.Text.IndexOf(" ")).Trim();
+                if (drawGenes == true && gd != null)
+                { DrawGenes(g_soft, bmp_soft.Height, chromosomeName, selectSecondaryStart, selectSecondaryEnd); }
+             }
+            
         }
 
         private void p2_MouseClick(object sender, MouseEventArgs e)
@@ -1372,7 +1382,7 @@ namespace AgileStructure
                 saveSelectedReadsToolStripMenuItem.Enabled = false;
                 drawPrimaryAlignments(true);
                 DrawGenes(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
-                DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
+                //DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
                 drawSecondaryAlignments();
                 return;
             }
@@ -1394,7 +1404,7 @@ namespace AgileStructure
 
                 drawPrimaryAlignments(true);
                 DrawGenes(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
-                DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
+                //DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
                 drawSecondaryAlignments();
 
                 if (selectedIndex.Count > 0)
@@ -1403,15 +1413,15 @@ namespace AgileStructure
                 { saveSelectedReadsToolStripMenuItem.Enabled = false; }
 
             }
-            else if ((drawGenes == true && gd != null) || (drawRepeats == true && rd != null))
+            else if ((drawGenes == true && gd != null) || (rd != null))
             {
                 if (cursorInP2.Y < p2.Height - 8 && gd != null)
                 {
-                    gbpP2.Text = getGeneName(cursorInP2, selectSecondaryStart, selectSecondaryEnd, p2.Width, p2.Height);
+                    gbpP2.Text = getGeneName(cursorInP2, selectSecondaryStart, selectSecondaryEnd, p2.Width, p2.Height, false);
                 }
                 else if (cursorInP2.Y > p2.Height - 8 && rd != null)
                 {
-                    gbpP2.Text = getRepeatName(cursorInP2, selectSecondaryStart, selectSecondaryEnd, p2.Width, p2.Height);
+                    gbpP2.Text = getRepeatName(cursorInP2, selectSecondaryStart, selectSecondaryEnd, p2.Width, p2.Height, false);
                 }
             }
         }
@@ -1434,12 +1444,14 @@ namespace AgileStructure
         private void p2_MouseUp(object sender, MouseEventArgs e)
         {
             if (p2RegionSelect == true)
-            {
+            {              
                 double xScale = (p1.Width - 20) / (double)(selectSecondaryEnd - selectSecondaryStart);
                 int placeNow = (int)((e.X - 10) / xScale) + selectSecondaryStart;
                 int placeThen = (int)((mouseDown2 - 10) / xScale) + selectSecondaryStart;
                 if (Math.Abs(placeNow - placeThen) > 100)
                 {
+                    rd = null;
+
                     if (placeNow > placeThen)
                     {
                         txtsStart.Text = placeThen.ToString("N0");
@@ -1458,11 +1470,15 @@ namespace AgileStructure
             p2RegionSelect = false;
         }
 
-        private string getGeneName(Point cursor, int StartPoint, int EndPoint, int width, int height)
+        private string getGeneName(Point cursor, int StartPoint, int EndPoint, int width, int height, bool InP1)
         {
             double xScale = (width - 20) / (double)(EndPoint - StartPoint);
             int place = (int)((cursor.X - 10) / xScale);
-            string chromosomeName = cboRef.Text;
+            string chromosomeName;
+            if (InP1 == true)
+            { chromosomeName = cboRef.Text; }
+            else
+            { chromosomeName = cboSecondaries.Text.Substring(0, cboSecondaries.Text.IndexOf(" ")).Trim(); }
             ChromosomalPoint here = new ChromosomalPoint(chromosomeName, StartPoint + place);
 
             int index = Array.BinarySearch(gd.Genes, here, new GeneBinarySearcherPoint());
@@ -1489,11 +1505,15 @@ namespace AgileStructure
             return "";
         }
 
-        private string getRepeatName(Point cursor, int StartPoint, int EndPoint, int width, int height)
+        private string getRepeatName(Point cursor, int StartPoint, int EndPoint, int width, int height, bool InP1)
         {
             double xScale = (width - 20) / (double)(EndPoint - StartPoint);
             int place = (int)((cursor.X - 10) / xScale);
-            string chromosomeName = cboSecondaries.Text.Substring(0, cboSecondaries.Text.IndexOf(" ")).Trim();
+            string chromosomeName;
+            if (InP1 == true)
+            { chromosomeName = cboRef.Text.Trim(); }
+            else
+            { chromosomeName = cboSecondaries.Text.Substring(0, cboSecondaries.Text.IndexOf(" ")).Trim(); }
             ChromosomalPoint here = new ChromosomalPoint(chromosomeName, StartPoint + place);
 
             int index = Array.BinarySearch(rd.Repeats, here, new RepeatBinarySearchPoint());
@@ -1585,14 +1605,21 @@ namespace AgileStructure
             { resizing = false; }
             else
             {
+                if (cboSecondaries.Items.Count == 0) { return; }
                 timer1.Enabled = false;
                 int index = cboSecondaries.SelectedIndex;
                 int startPoint = (int)selectSecondaryStart;
                 int endPoint = (int)selectSecondaryEnd;
                 drawPrimaryAlignments(true);
                 DrawGenes(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
-                DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
+                DrawRepeats(g, bmp.Height, cboRef.Text.Trim(), selectStart, selectEnd);
                 drawSecondaryAlignments();
+                string chromosomeName = cboSecondaries.Text.Substring(0, cboSecondaries.Text.IndexOf(" ")).Trim();
+                if (rd != null)
+                {
+                    DrawRepeats(g_soft, bmp_soft.Height, chromosomeName, selectSecondaryStart, selectSecondaryEnd);
+                    p2.Image = bmp_soft;
+                }
                 try
                 {
                     cboSecondaries.SelectedIndex = index;
@@ -1695,6 +1722,7 @@ namespace AgileStructure
 
         private void txtsEnd_TextChanged(object sender, EventArgs e)
         {
+            rd = null;
             try
             {
                 string value = txtsEnd.Text.Trim().Replace(",", "");
@@ -1724,7 +1752,7 @@ namespace AgileStructure
 
         private void txtsStart_TextChanged(object sender, EventArgs e)
         {
-
+            rd = null;
             try
             {
                 string value = txtsStart.Text.Trim().Replace(",", "");
@@ -1774,7 +1802,7 @@ namespace AgileStructure
 
         private void gTFAnnotationFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string AnnotationFile = FileString.OpenAs("Select a gene annoation file from the genome browser", "*.txt|*.txt");
+            string AnnotationFile = FileString.OpenAs("Select a gene annotation file from the genome browser", "*.txt|*.txt");
             if (System.IO.File.Exists(AnnotationFile) == false) { return; }
 
             gd = new GeneData(AnnotationFile);
@@ -1785,7 +1813,7 @@ namespace AgileStructure
             {
                 drawPrimaryAlignments(true);
                 DrawGenes(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
-                DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
+                //DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
                 drawSecondaryAlignments();
 
             }
@@ -1823,18 +1851,26 @@ namespace AgileStructure
 
         private void showRepeatsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            showRepeatsToolStripMenuItem.Checked = !showRepeatsToolStripMenuItem.Checked;
-
             if (cboRef.SelectedIndex > 0)
             {
-                if (showRepeatsToolStripMenuItem.Checked == true)
-                { getRepeats(); }
-                else
-                { rd = null; }
-                drawPrimaryAlignments(true);
-                DrawGenes(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
-                DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
-                drawSecondaryAlignments();
+                string name = Text;
+                try
+                {
+                    Text = "Reading file";
+                    Application.DoEvents();
+                    getRepeats();
+
+                    DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
+                    p1.Image = bmp;
+                    string chromosomeName = cboSecondaries.Text.Substring(0, cboSecondaries.Text.IndexOf(" ")).Trim();
+                    if (rd != null)
+                    {
+                        DrawRepeats(g_soft, bmp_soft.Height, chromosomeName, selectSecondaryStart, selectSecondaryEnd);
+                        p2.Image = bmp_soft;
+                    }
+                }
+                finally
+                { Text = name; }
             }
         }
 
@@ -1984,7 +2020,7 @@ namespace AgileStructure
             selectedIndex = new List<int>();
             drawPrimaryAlignments(true);
             DrawGenes(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
-            DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
+            //DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
             drawSecondaryAlignments();
         }
 

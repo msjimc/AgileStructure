@@ -178,14 +178,14 @@ Figure 16b
 
 ### Identifying Indels using the primary alignments CIGAR string  
 
-AgileStructure was primarily designed to identify chromosomal break points by looking for sets reads whose alignment is broken up such that part of the read aligns at one specific location and the the other is located some distance away or on a different chromosome. However, it is also able to identify insertion and deletions that do cause the alignment to be fragmented, but whose presence is noted in the CIGAR string.  
-Selecting the ```Analysis``` > ```Look for indels within a read``` option (Figure A) cause the reads to be redrawn with deletions shown as a horizontal black line linking to blocks os aligned sequences while an insertion is shown as a vertical line projecting above and below the aligned sequence. Since ONT data contains numerous short indels, only insertions longer than 10 are shown/processed.
+AgileStructure was primarily designed to identify chromosomal break points by looking for sets reads whose alignment is broken in two, such that part of the read aligns at one location and the the other fragment is located some distance away or on a different chromosome. However, it is also able to identify insertion and deletions that do not cause the alignment to be fragmented, but whose presence is noted in the CIGAR string.  
+Selecting the ```Analysis``` > ```Look for indels within a read``` option (Figure A) causes the reads to be redrawn with deletions shown as a horizontal black line linking to blocks of aligned sequences while an insertion is shown as a vertical line projecting above and below the aligned sequence. Since ONT data contains numerous short indels, only insertions longer than 10 bp are shown/processed.
 
 ![Figure A](images/figureA.jpg)
 
 Figure A
 
-When redrawn using the the CIGAR string to identify insertions and deletions there presence becomes apparent. For example in Figure B the large deletion spanning 1,495,000 bp to 1,534,000 bp and the insert at 1,586,000 bp (above the cursor) are easily identified.
+When redrawn using the the CIGAR string to identify insertions and deletions their presence becomes apparent. For example in Figure B the large deletion spanning 1,495,000 bp to 1,534,000 bp and the insert at 1,586,000 bp (above the cursor) are easily identified.
 
 ![Figure B](images/figureB.jpg)
 
@@ -193,11 +193,11 @@ Figure B
 
 #### Important note
 
-Since ONT data is very noisy the exact point of the break point may appear to vary by a few base pase between the reads, plus artefactual indels may also be present in the reads, consequently AgileStructure scans the beginning and ends of the indels, sorts them by position and then reports the median values in the reported variant. Using the median value rather than the average reduces the chance an artifactual indel unduly influences the annotation, but it is important that the individual indels are checked to make sure a 2nd indel is not disrupting the analysis.
+Since ONT data is very noisy the exact point of the break point may appear to vary by a number of base pairs between different reads, while artefactual indels may also be present in the reads. Consequently AgileStructure scans the beginning and ends of the indels, sorts them by position and then reports the median values in the reported variant. Using the median value rather than the average reduces the chance an artifactual indel unduly influences the annotation, but it is important that the individual indels are checked to make sure a 2nd indel is not somehow disrupting the annotation.
 
 #### Identifying insertions using the primary alignments CIGAR string
 
-To annotate an insert, select the reads containing variant of interest and select ```Variant determination``` > ```Use primary alignment's CIGAR string``` > ```Insertion``` (Figure Ca). This will cause a message box to appear, listing insertions over 10 bps and the read's name in the selected reads and the annotation of the variant.   
+To annotate an insert, select the reads the containing variant of interest and select ```Variant determination``` > ```Use primary alignment's CIGAR string``` > ```Insertion``` (Figure Ca). This will display a message box, listing any insertions over 10 bps followed by the read's name and the annotation of the variant.   
 
 ![Figure Ca](images/figureCa.jpg)
 
@@ -209,7 +209,7 @@ Figure Cb
 
 ### Identifying deletions using the primary alignments CIGAR string  
 
-To annotate a deletion, select the reads containing variant of interest and select ```Variant determination``` > ```Use primary alignment's CIGAR string``` > ```Deletion``` (Figure Da). This will cause a message box to appear, listing the deletions over 10 bps in the selected reads and the annotation of the variant.   
+To annotate a deletion, select the reads containing variant of interest and select ```Variant determination``` > ```Use primary alignment's CIGAR string``` > ```Deletion``` (Figure Da). This will open a message box, listing the deletions over 10 bps followed by the reads and finally the annotation of the variant.   
 
 ![Figure Da](images/figureDa.jpg)
 
@@ -223,11 +223,11 @@ Figure Db
 
 #### Changing the regions by typing in the co-ordinates
 
-As mentions above the AgileStructure displays the primary and secondary alignments in two panels, above each are to text area where the start and end points of the displayed data can be changed. Since the primary read data is retrieved from the bam file, changes to the primary alignment image are only made when the ```Get reads``` button is pressed. However, changes to the co-ordinates of secondary alignment image are displayed instantly.  
+As previously mentioned, AgileStructure displays the primary and secondary alignments in two panels, above each are to text area where the start and end points of the displayed data can be changed. Since the primary read data is retrieved from the bam file which can be slow, changes to the primary alignment image are only made when the ```Get reads``` button is pressed. However, changes to the co-ordinates of secondary alignment image are displayed instantly.  
 
 #### Changing the regions by selecting a region with the mouse
 
-The mouse can be used select a sub-region of the current display in either image by moving the cursor to the desired start of the new region, and the move the mouse to the end point while holding the right mouse button down (Figure Ea). When the mouse button is released the display is redrawn (Figure Eb). [In figure Eb an insert can be seen in four reads, while its position appears variable, all the reads had a 134 to 135 bp insertion suggesting its position is inaccurately placed possibly due to sequencing in the flanking sequences (Figure Ec).]
+The mouse can be used to select a sub-region of the current display in either image by moving the cursor to the desired start point and then moving the mouse to the end point while holding the right mouse button down (Figure Ea). When the mouse button is released the display is redrawn (Figure Eb). [In figure Eb an insert can be seen in four reads, while its position appears variable, all the reads had a 134 to 135 bp insertion suggesting its position is inaccurately placed possibly due to sequencing errors in the flanking sequences (Figure Ec).]
 
 ![Figure Ea](images/figureEa.jpg)
 
@@ -248,3 +248,69 @@ As each change in the either primary and secondary display co-ordinates is made,
 ![Figure F](images/figureF.jpg)
 
 Figure F
+
+### Selecting an area that contains a specific gene
+
+The @Displaying gene positions@ section explains how to import gene locations, once this has been done it is then possible to navigate to a region that contains a specific gene by selecting the ```Annotation``` > ```Gene coordinates``` option (Figure la). 
+
+![Figure La](images/figureLa.jpg)
+
+Figure La
+
+This will open the ```Gene co-ordinates``` which consists of two text areas, type the gene symbol for the gene you which to view in the upper text area (Figure Lb).  
+
+![Figure Lb](images/figureLb.jpg)
+
+Figure Lb
+
+
+Press the ```Find``` button and if the gene is present in the gene co-ordinate data, it's co-ordinates will be displayed in the lower text area (Figure Lc).
+
+![Figure Lc](images/figureLc.jpg)
+
+Figure Lc
+
+
+Pressing ```Accept``` will reset the the co-ordinates in AgileStructure, pressing the ```Get reads``` button will then update the Primary alignment window (Figure Ld). 
+
+![Figure Ld](images/figureLd.jpg)
+
+Figure Ld
+
+## Viewing data with reference to genomic features
+
+It is possible to view the read data with reference to the genes and repeats around the break point. The chromosomal locations of the genes and repeats can be downloaded from the UCSC Genome Browser as described [here](downloadingOptionalFiles.md). 
+
+### Displaying gene positions
+
+Gene co-ordinate data can be imported by selecting the ```Annotation``` > ```Gene annotation file``` option (Figure G).
+
+![Figure G](images/figureG.jpg)
+
+Figure G
+
+Genes are displayed as black rectangles with their exons drawn as either green (gene on forward strand) or yellow (gene on reverse strand) at the bottom of the displays. 
+
+![Figure H](images/figureH.jpg)
+
+Figure H
+
+Clicking on a gene will cause is name to be displayed to the top left of the appropriate display, for instance in Figure I the genes near the break point (Primary alignment display: LOC105378240 and secondary alignment display: PLXNB2) have been selected.
+
+![Figure I](images/figureI.jpg)
+
+Figure I
+
+### Displaying repeats positions
+
+Repeat co-ordinates are imported by selecting the ```Annotation``` > ```Select repeat annotation file``` option (Figure J). Unlike the gene positions, repeats are only drawn when the ```Annotation``` > ```Show repeats``` option is selected (Figure J). This is due to the large number of repeats requiring an excessive amount of memory to store and then slow to draw across large regions. Consequently, AgileStructure will only retain the repeat file's filename and reads the file each time it is required to draw them.  
+
+![Figure J](images/figureJ.jpg)
+
+Figure J
+
+The repeats are drawn as black rectangles filled in pale blue (forward strand) or pale yellow (reverse strand) across a single row at the very bottom of the displays. As with the genes, clicking on a repeat will cause it's name, class and family to be displayed at the top left of the display. For example in Figure K, the repeats close to the break point (Primary alignment: AluSz, SINE, Alu and (CCCACC)n, Simple repeat, Secondary alignment Simple repeat) have been selected.
+
+![Figure K](images/figureK.jpg)
+
+Figure K

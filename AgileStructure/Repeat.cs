@@ -28,8 +28,8 @@ namespace AgileStructure
             Pen pen = new Pen(Color.Black);
             SolidBrush brush = null;
             if (forwardStrand == true)
-            { brush = new SolidBrush(Color.Green); }
-            else { brush= new SolidBrush(Color.Orange); }
+            { brush = new SolidBrush(Color.LightSkyBlue); }
+            else { brush= new SolidBrush(Color.PaleGoldenrod); }
 
             double length = location.GetLength * XScale;
             location.DrawRegionFill(g, Xoffset, Yoffset, XScale, FeatureHeight, regionStart, brush);

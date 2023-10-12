@@ -398,7 +398,7 @@ namespace AgileStructure
             // gTFAnnotationFileToolStripMenuItem
             // 
             this.gTFAnnotationFileToolStripMenuItem.Name = "gTFAnnotationFileToolStripMenuItem";
-            this.gTFAnnotationFileToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.gTFAnnotationFileToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.gTFAnnotationFileToolStripMenuItem.Text = "Gene annotation file";
             this.gTFAnnotationFileToolStripMenuItem.Click += new System.EventHandler(this.gTFAnnotationFileToolStripMenuItem_Click);
             // 
@@ -406,39 +406,39 @@ namespace AgileStructure
             // 
             this.geneCoordinatesToolStripMenuItem.Enabled = false;
             this.geneCoordinatesToolStripMenuItem.Name = "geneCoordinatesToolStripMenuItem";
-            this.geneCoordinatesToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.geneCoordinatesToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.geneCoordinatesToolStripMenuItem.Text = "Gene coordinates";
             this.geneCoordinatesToolStripMenuItem.Click += new System.EventHandler(this.geneCoordinatesToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(196, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(218, 6);
             // 
             // repeatAnnotationFileToolStripMenuItem
             // 
             this.repeatAnnotationFileToolStripMenuItem.Name = "repeatAnnotationFileToolStripMenuItem";
-            this.repeatAnnotationFileToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.repeatAnnotationFileToolStripMenuItem.Text = "Repeat annotation file";
+            this.repeatAnnotationFileToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.repeatAnnotationFileToolStripMenuItem.Text = "Select repeat annotation file";
             this.repeatAnnotationFileToolStripMenuItem.Click += new System.EventHandler(this.repeatAnnotationFileToolStripMenuItem_Click);
             // 
             // showRepeatsToolStripMenuItem
             // 
             this.showRepeatsToolStripMenuItem.Enabled = false;
             this.showRepeatsToolStripMenuItem.Name = "showRepeatsToolStripMenuItem";
-            this.showRepeatsToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.showRepeatsToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.showRepeatsToolStripMenuItem.Text = "Show repeats";
             this.showRepeatsToolStripMenuItem.Click += new System.EventHandler(this.showRepeatsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(196, 6);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(218, 6);
             // 
             // showPositionOfCursorToolStripMenuItem
             // 
             this.showPositionOfCursorToolStripMenuItem.Name = "showPositionOfCursorToolStripMenuItem";
-            this.showPositionOfCursorToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.showPositionOfCursorToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.showPositionOfCursorToolStripMenuItem.Text = "Show position of cursor";
             this.showPositionOfCursorToolStripMenuItem.Click += new System.EventHandler(this.showPositionOfCursorToolStripMenuItem_Click);
             // 
@@ -584,14 +584,14 @@ namespace AgileStructure
             // insertationToolStripMenuItem
             // 
             this.insertationToolStripMenuItem.Name = "insertationToolStripMenuItem";
-            this.insertationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.insertationToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.insertationToolStripMenuItem.Text = "Insertion";
             this.insertationToolStripMenuItem.Click += new System.EventHandler(this.insertationToolStripMenuItem_Click);
             // 
             // deletionToolStripMenuItem
             // 
             this.deletionToolStripMenuItem.Name = "deletionToolStripMenuItem";
-            this.deletionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deletionToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.deletionToolStripMenuItem.Text = "Deletion";
             this.deletionToolStripMenuItem.Click += new System.EventHandler(this.deletionToolStripMenuItem_Click);
             // 

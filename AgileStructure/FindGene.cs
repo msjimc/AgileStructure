@@ -39,7 +39,7 @@ namespace AgileStructure
 
         private void FindGene_Load(object sender, EventArgs e)
         {
-
+            Text = "Gene co-ordinates";
         }
 
         private void btnQuit_Click(object sender, EventArgs e)
