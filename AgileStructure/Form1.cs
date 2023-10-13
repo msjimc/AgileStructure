@@ -1677,8 +1677,17 @@ namespace AgileStructure
         private void txtNumber_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control == true)
-            {               
+            {
+                string control ="";
+                if ((TextBox)sender == txtStart || (TextBox)sender == txtEnd)
+                { control = "primary"; }
+                else if ((TextBox)sender == txtsStart || (TextBox)sender == txtsEnd)
+                { control = "secondary"; }
                 e.SuppressKeyPress = false;
+                if (e.KeyCode == Keys.Left)
+                { navigate(control, true); }
+                else if (e.KeyCode == Keys.Right)
+                { navigate(control, false); }
             }
             else
             {
@@ -1691,7 +1700,7 @@ namespace AgileStructure
                     { e.SuppressKeyPress = false; }
                     else { e.SuppressKeyPress = true; }
 
-                    
+
                 }
             }
         }
@@ -1828,14 +1837,68 @@ namespace AgileStructure
         {
             if (control == "primary")
             {
+                int length = selectEnd - selectStart;
                 if (left == true)
-                { 
-                
+                {
+                    selectEnd = selectStart;
+                    selectStart -= length;
+
+                    if (selectStart < 1)
+                    {
+                        selectStart = 1;
+                        selectEnd = length;
+                    }
+
+                    txtStart.Text = selectStart.ToString("N0");
+                    txtEnd.Text = selectEnd.ToString("N0");
+                }
+                else
+                {
+                    selectStart = selectEnd;
+                    selectEnd += length;
+
+                    if (selectEnd > selectedRefLength)
+                    {
+                        selectEnd = selectedRefLength;
+                        selectStart = selectEnd - length;
+                    }
+
+                    txtStart.Text = selectStart.ToString("N0");
+                    txtEnd.Text = selectEnd.ToString("N0");
                 }
             }
-           else if(control == "secondary")
-            { }
-           
+            else if (control == "secondary")
+            {
+                int length = selectSecondaryEnd - selectSecondaryStart;
+                if (left == true)
+                {
+                    selectSecondaryEnd = selectSecondaryStart;
+                    selectSecondaryStart -= length;
+
+                    if (selectSecondaryStart < 1)
+                    {
+                        selectSecondaryStart = 1;
+                        selectSecondaryEnd = length;
+                    }
+
+                    txtsStart.Text = selectSecondaryStart.ToString("N0");
+                    txtsEnd.Text = selectSecondaryEnd.ToString("N0");
+                }
+                else
+                {
+                    selectSecondaryStart = selectSecondaryEnd;
+                    selectSecondaryEnd += length;
+
+                    if (selectSecondaryEnd > selectedRefLength)
+                    {
+                        selectSecondaryEnd = selectedRefLength;
+                        selectSecondaryStart = selectSecondaryEnd - length;
+                    }
+
+                    txtsStart.Text = selectSecondaryStart.ToString("N0");
+                    txtsEnd.Text = selectSecondaryEnd.ToString("N0");
+                }
+            }           
         }
 
         private void gTFAnnotationFileToolStripMenuItem_Click(object sender, EventArgs e)

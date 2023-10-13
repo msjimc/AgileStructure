@@ -226,6 +226,10 @@ Figure Db
 
 As previously mentioned, AgileStructure displays the primary and secondary alignments in two panels, above each are to text area where the start and end points of the displayed data can be changed. Since the primary read data is retrieved from the bam file which can be slow, changes to the primary alignment image are only made when the ```Get reads``` button is pressed. However, changes to the co-ordinates of secondary alignment image are displayed instantly.  
 
+#### Moving the region to the left and right arrow keys
+
+Rather than typing in new locations in to the text areas, its possible to move the region to the left or right by clicking on one of the text areas so that the text area becomes active (you could change the value by typing) and then pressing the CRTL + 'left arrow' or CRTL + 'right arrow' keys. 
+
 #### Changing the regions by selecting a region with the mouse
 
 The mouse can be used to select a sub-region of the current display in either image by moving the cursor to the desired start point and then moving the mouse to the end point while holding the right mouse button down (Figure Ea). When the mouse button is released the display is redrawn (Figure Eb). [In figure Eb an insert can be seen in four reads, while its position appears variable, all the reads had a 134 to 135 bp insertion suggesting its position is inaccurately placed possibly due to sequencing errors in the flanking sequences (Figure Ec).]
