@@ -369,6 +369,7 @@ namespace AgileStructure
             // 
             // onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem
             // 
+            this.onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Name = "onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem";
             this.onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
             this.onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Text = "Only show reads with secondary alignments";
@@ -376,6 +377,7 @@ namespace AgileStructure
             // 
             // lookForIndelsWithinAReadToolStripMenuItem
             // 
+            this.lookForIndelsWithinAReadToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.lookForIndelsWithinAReadToolStripMenuItem.Name = "lookForIndelsWithinAReadToolStripMenuItem";
             this.lookForIndelsWithinAReadToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
             this.lookForIndelsWithinAReadToolStripMenuItem.Text = "Look for indels within a read";
@@ -437,6 +439,7 @@ namespace AgileStructure
             // 
             // showPositionOfCursorToolStripMenuItem
             // 
+            this.showPositionOfCursorToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.showPositionOfCursorToolStripMenuItem.Name = "showPositionOfCursorToolStripMenuItem";
             this.showPositionOfCursorToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.showPositionOfCursorToolStripMenuItem.Text = "Show position of cursor";
@@ -458,39 +461,39 @@ namespace AgileStructure
             // viewReadDataToolStripMenuItem
             // 
             this.viewReadDataToolStripMenuItem.Name = "viewReadDataToolStripMenuItem";
-            this.viewReadDataToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.viewReadDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.viewReadDataToolStripMenuItem.Text = "View read data";
             this.viewReadDataToolStripMenuItem.Click += new System.EventHandler(this.viewReadDataToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(175, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
             // 
             // saveSelectedReadsToolStripMenuItem
             // 
             this.saveSelectedReadsToolStripMenuItem.Enabled = false;
             this.saveSelectedReadsToolStripMenuItem.Name = "saveSelectedReadsToolStripMenuItem";
-            this.saveSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.saveSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveSelectedReadsToolStripMenuItem.Text = "Save selected reads";
             this.saveSelectedReadsToolStripMenuItem.Click += new System.EventHandler(this.saveSelectedReadsToolStripMenuItem_Click);
             // 
             // clearSelectedReadsToolStripMenuItem
             // 
             this.clearSelectedReadsToolStripMenuItem.Name = "clearSelectedReadsToolStripMenuItem";
-            this.clearSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.clearSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.clearSelectedReadsToolStripMenuItem.Text = "Clear selected reads";
             this.clearSelectedReadsToolStripMenuItem.Click += new System.EventHandler(this.clearSelectedReadsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(175, 6);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(177, 6);
             // 
             // alignerStringToolStripMenuItem
             // 
             this.alignerStringToolStripMenuItem.Name = "alignerStringToolStripMenuItem";
-            this.alignerStringToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.alignerStringToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.alignerStringToolStripMenuItem.Text = "Aligner string";
             this.alignerStringToolStripMenuItem.Click += new System.EventHandler(this.alignerStringToolStripMenuItem_Click);
             // 
