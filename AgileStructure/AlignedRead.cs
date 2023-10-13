@@ -44,7 +44,7 @@ namespace AgileStructure
         private bool isSecondaryAlignment;
         private bool isSupplementaryAlignment;
         private bool drawn = false;
-
+        private bool largeIndel = false;
 
         public AlignedRead(string line, int Index)
         {
@@ -64,7 +64,7 @@ namespace AgileStructure
                 isSecondaryAlignment = (256 & flag) == 256;
                 isSupplementaryAlignment = (2048 & flag) == 2048;
                 forward = !((16 & flag) == 16);
-                alignedLength = getAlignedLengthANdMakeBlock(CIGAR);
+                alignedLength = getAlignedLengthAndMakeBlock(CIGAR);
                 makeBlocksSimplified();
                 tags = new Dictionary<string, string>();
                 if (items.Length > 11)
@@ -150,10 +150,7 @@ namespace AgileStructure
                                 if (order == 0)
                                 {
                                     if (r.Left > 2)
-                                    {
-                                        g.DrawLine(Pens.Black, r.Right, r.Y + (r.Height/2), r.Left, r.Top + (r.Height/2));
-                                        //g.DrawRectangle(Pens.Black, r.X, r.Y, r.Width, r.Height);
-                                    }
+                                    { g.DrawLine(Pens.Black, r.Right, r.Y + (r.Height/2), r.Left, r.Top + (r.Height/2)); }
                                 }
                                 break;
                             case fragmentType.Unaligned:
@@ -170,7 +167,7 @@ namespace AgileStructure
                                 {
                                     g.FillRectangle(aligned, r);
                                     if (f.length > 10)
-                                    { g.DrawLine(Pens.Black, r.X, r.Top - 2, r.X, r.Bottom - 2); }
+                                    { g.DrawLine(Pens.Black, (int)r.X,(int)( r.Top - 2), (int)r.X, (int)(r.Bottom - 2)); }
                                 }
                                 break;
                         }
@@ -270,8 +267,8 @@ namespace AgileStructure
            
         }
 
-        private int getAlignedLengthANdMakeBlock(string CIGAR)
-        {
+        private int getAlignedLengthAndMakeBlock(string CIGAR)
+        {           
            blocks = new List<fragment>();
             int sum = 0;
             string number = "";
@@ -280,21 +277,27 @@ namespace AgileStructure
                 switch (CIGAR[index])
                 {
                     case 'H':
-                        number="";
+                        number = "";
                         break;
                     case 'S':
                         blocks.Add(new fragment(Convert.ToInt32(number), fragmentType.Unaligned));
-                        number="";
+                        number = "";
                         break;
                     case 'I':
-                        blocks.Add(new fragment(Convert.ToInt32(number), fragmentType.Insert));                        
-                        number="";
+                        int lengthI = Convert.ToInt32(number);
+                        blocks.Add(new fragment(lengthI, fragmentType.Insert));
+                        if (lengthI > 25)
+                        { largeIndel = true; }
+                        number = "";
                         break;
                     case 'D':
                     case 'N':
                     case 'P':
-                        blocks.Add(new fragment(Convert.ToInt32(number), fragmentType.Deletion));
+                        int lengthD = Convert.ToInt32(number);
+                        blocks.Add(new fragment(lengthD, fragmentType.Deletion));
                         sum += Convert.ToInt32(number);
+                        if (lengthD > 25)
+                        { largeIndel = true; }
                         number="";
                         break;
                     case 'M':
@@ -440,6 +443,7 @@ namespace AgileStructure
         public string getSequence
         { get { return sequence; } }
 
-
+        public bool hasLargeIndel
+        { get { return largeIndel; } }
     }
 }

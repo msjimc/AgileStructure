@@ -91,6 +91,8 @@ namespace AgileStructure
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnQuit = new System.Windows.Forms.Button();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
+            this.onlyShowReadsWithALargeIndelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.gbpP1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.p1)).BeginInit();
@@ -350,6 +352,8 @@ namespace AgileStructure
             this.openBAMFileToolStripMenuItem,
             this.toolStripMenuItem9,
             this.onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem,
+            this.onlyShowReadsWithALargeIndelToolStripMenuItem,
+            this.toolStripMenuItem7,
             this.lookForIndelsWithinAReadToolStripMenuItem});
             this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
             this.fileToolStripMenuItem1.Size = new System.Drawing.Size(62, 22);
@@ -587,14 +591,14 @@ namespace AgileStructure
             // insertationToolStripMenuItem
             // 
             this.insertationToolStripMenuItem.Name = "insertationToolStripMenuItem";
-            this.insertationToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.insertationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.insertationToolStripMenuItem.Text = "Insertion";
             this.insertationToolStripMenuItem.Click += new System.EventHandler(this.insertationToolStripMenuItem_Click);
             // 
             // deletionToolStripMenuItem
             // 
             this.deletionToolStripMenuItem.Name = "deletionToolStripMenuItem";
-            this.deletionToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.deletionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deletionToolStripMenuItem.Text = "Deletion";
             this.deletionToolStripMenuItem.Click += new System.EventHandler(this.deletionToolStripMenuItem_Click);
             // 
@@ -638,6 +642,7 @@ namespace AgileStructure
             // 
             // btnQuit
             // 
+            this.btnQuit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnQuit.Location = new System.Drawing.Point(1106, 610);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(75, 23);
@@ -645,6 +650,19 @@ namespace AgileStructure
             this.btnQuit.Text = "Quit";
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(303, 6);
+            // 
+            // onlyShowReadsWithALargeIndelToolStripMenuItem
+            // 
+            this.onlyShowReadsWithALargeIndelToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.onlyShowReadsWithALargeIndelToolStripMenuItem.Name = "onlyShowReadsWithALargeIndelToolStripMenuItem";
+            this.onlyShowReadsWithALargeIndelToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
+            this.onlyShowReadsWithALargeIndelToolStripMenuItem.Text = "Only show reads with a large indel";
+            this.onlyShowReadsWithALargeIndelToolStripMenuItem.Click += new System.EventHandler(this.onlyShowReadsWithALargeIndelToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -740,6 +758,8 @@ namespace AgileStructure
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem9;
         private System.Windows.Forms.ToolStripMenuItem onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem;
         private System.Windows.Forms.Button btnQuit;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
+        private System.Windows.Forms.ToolStripMenuItem onlyShowReadsWithALargeIndelToolStripMenuItem;
     }
 }
 

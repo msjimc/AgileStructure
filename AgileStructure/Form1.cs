@@ -391,7 +391,7 @@ namespace AgileStructure
             try
             {
                 bool justChimeric = onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Checked;
-
+                bool justLargeIndels = onlyShowReadsWithALargeIndelToolStripMenuItem.Checked;
                 //chr7:146,833,830-146,845,586 or 146919450
                 if (selectEnd > 0 && selectStart > 0 && cboRef.SelectedIndex > 0)
                 {
@@ -463,15 +463,27 @@ namespace AgileStructure
                                             AlignedRead ar = new AlignedRead(r, AR.Count + 1);
                                             if (ar.IsGood == true && ar.IsSupplementaryAlignment == false && ar.IsSecondaryAlignment == false)
                                             {
-                                                if ((justChimeric == true && ar.getSecondaryAlignmentTag != "") || justChimeric == false)
+
+
+                                                if ((justChimeric == true && ar.getSecondaryAlignmentTag != "") || (justLargeIndels == true && ar.hasLargeIndel == true))
                                                 {
-                                                    if (AR.ContainsKey(ar.getKey) == false)
-                                                    {
-                                                        AR.Add(ar.getKey, ar);
-                                                        if (lastReadPosition < ar.getPosition)
-                                                        { lastReadPosition = ar.getPosition; }
-                                                        ar = null;
-                                                    }
+                                                    AddRead(ar, lastReadPosition);
+                                                    ar = null;
+                                                }
+                                                else if (justChimeric == true && ar.getSecondaryAlignmentTag != "")
+                                                {
+                                                    AddRead(ar, lastReadPosition);
+                                                    ar = null;
+                                                }
+                                                else if (justLargeIndels == true && ar.hasLargeIndel == true)
+                                                {
+                                                    AddRead(ar, lastReadPosition);
+                                                    ar = null;
+                                                }
+                                                else if (justLargeIndels == false && justChimeric == false)
+                                                {
+                                                    AddRead(ar, lastReadPosition);
+                                                    ar = null;
                                                 }
                                             }
                                         }
@@ -499,6 +511,16 @@ namespace AgileStructure
             }
             finally
             { Text = title; }
+        }
+
+        private void AddRead(AlignedRead ar, int lastReadPosition)
+        {
+            if (AR.ContainsKey(ar.getKey) == false)
+            {
+                AR.Add(ar.getKey, ar);
+                if (lastReadPosition < ar.getPosition)
+                { lastReadPosition = ar.getPosition; }                
+            }
         }
 
         private void AddHistory()
@@ -1655,7 +1677,7 @@ namespace AgileStructure
         private void txtNumber_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control == true)
-            {
+            {               
                 e.SuppressKeyPress = false;
             }
             else
@@ -1668,6 +1690,8 @@ namespace AgileStructure
                     else if (e.KeyValue == 37 || e.KeyValue == 39 || e.KeyValue == 9)
                     { e.SuppressKeyPress = false; }
                     else { e.SuppressKeyPress = true; }
+
+                    
                 }
             }
         }
@@ -1798,6 +1822,20 @@ namespace AgileStructure
         private void txtsEnd_Leave(object sender, EventArgs e)
         {
             txtsEnd.Text = selectSecondaryEnd.ToString("N0");
+        }
+
+        private void navigate(string control, bool left)
+        {
+            if (control == "primary")
+            {
+                if (left == true)
+                { 
+                
+                }
+            }
+           else if(control == "secondary")
+            { }
+           
         }
 
         private void gTFAnnotationFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2922,8 +2960,7 @@ namespace AgileStructure
 
         private void lookForIndelsWithinAReadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool b = lookForIndelsWithinAReadToolStripMenuItem.Checked;
-            lookForIndelsWithinAReadToolStripMenuItem.Checked = !b;
+            lookForIndelsWithinAReadToolStripMenuItem.Checked = !lookForIndelsWithinAReadToolStripMenuItem.Checked;
             simplified = !lookForIndelsWithinAReadToolStripMenuItem.Checked;
             btnGetReads.PerformClick();
         }
@@ -2935,8 +2972,7 @@ namespace AgileStructure
                 List<int> startPoint = new List<int>();
                 List<int> endPoint = new List<int>();
                 List<string> inserts = new List<string>();
-                StringBuilder sb = new StringBuilder();
-                StringBuilder sbAll = new StringBuilder();
+                
                 foreach (int index in selectedIndex)
                 {
                     if (DrawnARKeys.ContainsKey(index) == true)
@@ -2949,27 +2985,30 @@ namespace AgileStructure
                         {
                             if (frag.state == AlignedRead.fragmentType.Insert)
                             {
-                                if (frag.length > 10)
+                                if (place >= selectStart && place <= selectEnd)
                                 {
-                                    if (start == 0) { start = place - ar.getEndPosition; }
-                                    startPoint.Add(place);
-                                    endPoint.Add(place + frag.length);
-                                    sb.Append(cboRef.Text + ":" + place.ToString("N0") + "-" + (place + 1).ToString("N0") + "ins" + frag.length.ToString("N0") + "bp\t" + ar.getName + "\n");
-                                    sbAll.Append(cboRef.Text + ":" + place.ToString("N0") + "-" + (place + 1).ToString("N0") + "ins" + frag.length.ToString("N0") + "bp\t" + ar.getName + "\n");
+                                    if (frag.length > 10)
+                                    {
+                                        if (start == 0) { start = place - ar.getEndPosition; }
+                                        startPoint.Add(place);
+                                        endPoint.Add(place + frag.length);
+                                        inserts.Add(cboRef.Text + ":" + place.ToString("N0") + "-" + (place + 1).ToString("N0") + "ins" + frag.length.ToString("N0") + "bp\t" + ar.getName);
+                                    }
                                 }
                             }
                             if (frag.state != AlignedRead.fragmentType.Insert)
                             { place += frag.length; }
                         }
-                        if (start > 0)
-                        {
-                            string insert = ar.getSequence.Substring(start, endPoint[endPoint.Count - 1]);
-                            sbAll.Append(insert + "\n");
-                        }
                     }
                 }
                 if (startPoint.Count > 1 && endPoint.Count > 1)
-                {
+                {                                     
+                    inserts.Sort(new insertSorter());
+                    StringBuilder sb = new StringBuilder();
+
+                    foreach (string s in inserts)
+                    { sb.Append(s.Split('\t')[0] + "\n"); }
+
                     startPoint.Sort();
                     endPoint.Sort();
 
@@ -2977,9 +3016,20 @@ namespace AgileStructure
                     int mediumStart = (startPoint[middle - 1] + startPoint[middle]) / 2;
                     int mediumEnd = (endPoint[middle - 1] + endPoint[middle]) / 2;
 
-                    sb.Append("\nMedian brake points\t" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + (mediumStart + 1).ToString("N0") + "ins" + (mediumStart - mediumEnd).ToString("N0") + "bp\n\nDo you want to save the inserts annotation?");
-                    if (MessageBox.Show(sb.ToString(), "Insertion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    { SaveToFile(sb.ToString()); }
+                    sb.Append("\nMedian values\n" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + (mediumStart + 1).ToString("N0") + "ins" + (mediumStart - mediumEnd).ToString("N0") + "bp\n\nDo you want to save the inserts annotation?");
+                    if (MessageBox.Show(sb.ToString(), "Inserts", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        sb = new StringBuilder();
+                        foreach (string s in inserts)
+                        { sb.Append(s + "\n"); }
+                        sb.Append("\nMedian values\n" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + (mediumStart + 1).ToString("N0") + "ins" + (mediumStart - mediumEnd).ToString("N0"));
+                        SaveToFile(sb.ToString()); 
+                    }
+                }
+                else if (inserts.Count ==1)
+                {
+                    if (MessageBox.Show("Only one insert\n" + inserts[0] + "\n\nDo you want to save the inserts annotation ? ", "Insertions", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    { SaveToFile(inserts[0]); }
                 }
             }
         }
@@ -2988,9 +3038,11 @@ namespace AgileStructure
         {
             if (selectedIndex.Count > 0)
             {
+                
                 List<int> startPoint = new List<int>();
                 List<int> endPoint = new List<int>();
-                StringBuilder sb = new StringBuilder();
+                List<string> deletions = new List<string>();
+                
                 foreach (int index in selectedIndex)
                 {
                     if (DrawnARKeys.ContainsKey(index) == true)
@@ -3002,11 +3054,14 @@ namespace AgileStructure
                         {
                             if (frag.state == AlignedRead.fragmentType.Deletion)
                             {
-                                if (frag.length > 10)
+                                if (place >= selectStart && place <= selectEnd)
                                 {
-                                    startPoint.Add(place);
-                                    endPoint.Add(place + frag.length);
-                                    sb.Append(cboRef.Text + ":" + place.ToString("N0") + "-" + (place + frag.length).ToString("N0") + "del\t" + ar.getName + "\n");
+                                    if (frag.length > 10)
+                                    {
+                                        startPoint.Add(place);
+                                        endPoint.Add(place + frag.length);
+                                        deletions.Add(cboRef.Text + ":" + place.ToString("N0") + "-" + (place + frag.length).ToString("N0") + "del\t" + ar.getName);
+                                    }
                                 }
                             }
                             if (frag.state != AlignedRead.fragmentType.Insert)
@@ -3016,6 +3071,12 @@ namespace AgileStructure
                 }
                 if (startPoint.Count > 0 && endPoint.Count > 0)
                 {
+                    deletions.Sort(new deletionSorter());
+                    StringBuilder sb = new StringBuilder();
+
+                    foreach (string s in deletions)
+                    { sb.Append(s.Split('\t')[0] + "\n"); }
+                                                           
                     startPoint.Sort();
                     endPoint.Sort();
 
@@ -3023,16 +3084,28 @@ namespace AgileStructure
                     int mediumStart = (startPoint[middle - 1] + startPoint[middle]) / 2;
                     int mediumEnd = (endPoint[middle - 1] + endPoint[middle]) / 2;
 
-                    sb.Append("\nMedian brakepoints\t" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + mediumEnd.ToString("N0") + "del\n\nDo you want to save the data?" );
+                    sb.Append("\nMedian breakpoints\n" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + mediumEnd.ToString("N0") + "del\n\nDo you want to save the data?" );
                     if (MessageBox.Show(sb.ToString(), "Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    { SaveToFile(sb.ToString()); }
+                    {
+                        foreach (string s in deletions)
+                        { sb.Append(s + "\n"); }
+                        sb.Append("\nMedian breakpoints\n" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + mediumEnd.ToString("N0") + "del");
+                        SaveToFile(sb.ToString());
+                    
+                    }
+                }
+                else if (deletions.Count == 1)
+                {
+                    if (MessageBox.Show("Only one insert\n" + deletions[0] + "\n\nDo you want to save the inserts annotation ? ", "Insertions", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    { SaveToFile(deletions[0]); }
                 }
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            if (System.IO.File.Exists("bamreaderdll.dll") == false)
+            { MessageBox.Show("Could not find the require dll file!\nHave you put the bamreaderdll.dll file in the same folder as the AgileStructure.exe?","Error no dll file",MessageBoxButtons.OK,MessageBoxIcon.Error); }
         }
 
         private void openBAMFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3049,6 +3122,14 @@ namespace AgileStructure
         private void btnQuit_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void onlyShowReadsWithALargeIndelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            onlyShowReadsWithALargeIndelToolStripMenuItem.Checked = !onlyShowReadsWithALargeIndelToolStripMenuItem.Checked;
+            if (lookForIndelsWithinAReadToolStripMenuItem.Checked == false)
+            { lookForIndelsWithinAReadToolStripMenuItem.PerformClick(); }
+            else {btnGetReads.PerformClick(); }                        
         }
     }
 }
