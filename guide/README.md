@@ -4,17 +4,18 @@
 
 ### Prior knowledge of the likely location of the break point
 
-AgileStructure is designed to identify break points with user input rather than scan the whole file for possible break points, consequently its expected that you have some prior knowledge as to where the break point is such has a cytogenetics and/or karyotyping report, a list of known disease genes or a single pathogenic variant in a patient with a recessive disease for whom a second pathogenic variant can not be found. 
+AgileStructure is designed to identify break points with user assistance rather than scan the whole file for possible break points, consequently its expected that the user will have some prior knowledge as to where the break point is such has a cytogenetics and/or karyotyping report, a list of known disease genes for the patients condition or a single pathogenic variant in a patient with a recessive disease for whom a second pathogenic variant can not be found. 
 
 ### Aligned data format
-AgileStructure is designed to visualise aligned long read data formatted as `*.bam` files with their related index file. To aid the importing of data, it is expected that the index file will have the same name as the bam file with the `*.bam.bai` extension appended to the bam files name, for instance the bam file:  
+AgileStructure is designed to visualise aligned long read data formatted as indexed ```*.bam``` files. It is expected that the index file will have the same name as the bam file with the `*.bam.bai` extension appended to the bam files name, for instance the bam file:  
 ```CNTNAP2.srt.mm2.bam```  
 while have a index file named:  
-```CNTNAP2.srt.mm2.bam.bai```  
+```CNTNAP2.srt.mm2.bam.bai```    
+which will be in the same directory as the bam file.
 
 ### Preferred long read sequence aligners
 
-Long reads that span a break point will appear to consist of two regions of homology, mapping to different locations in the genome. How these chimeric alignments are reported are aligner specific. Some aligners such as minimap2 ([github](https://github.com/lh3/minimap2), [paper](https://academic.oup.com/bioinformatics/article/34/18/3094/4994778)), treat the two regions as different alignments, but will report the secondary alignment as a condensed CIGAR string in the alignments tag section, while those like lra ([github](https://github.com/ChaissonLab/LRA), [paper](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009078)), report the read as two separate alignments, but not directly reference the other alignment position and CIGAR string. However, for shorter indels both aligns will report them in the CIGAr string (see section @@@)    
+Long reads that span a break point will appear to consist of two regions of homology, mapping to different locations in the genome. How these chimeric alignments are reported are aligner specific. Some aligners such as minimap2 ([github](https://github.com/lh3/minimap2), [paper](https://academic.oup.com/bioinformatics/article/34/18/3094/4994778)), treat the two regions as different alignments, but will report the secondary alignment as a condensed CIGAR string in the primary alignments tag section, while others, report the read as two separate alignments, but not directly reference the other alignment's position and CIGAR string. However, for shorter indels both aligns will report them in the CIGAR string [see section](#identifying-indels-using-the-primary-alignments-cigar-string). 
 AgileStructure is able to analyse both annotations, but the first method is the most flexible and will allow more complex break points to be processed than those that hard clip the sequence and don't include the location of secondary alignment. Consequently, it is recommended to align data using an aligner like minimap2. 
 
 ### Optional data
