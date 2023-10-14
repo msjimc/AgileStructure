@@ -429,7 +429,7 @@ namespace AgileStructure
                     StringBuilder fn = new StringBuilder(100);
                     fn.Append(fileName + "\0");
 
-                    while (indexRef < IPs.Length && lastReadPosition < (int)regionEnd && lastRefIndex == IPs[indexRef].NameIndex)
+                    while (indexRef < IPs.Length && lastReadPosition <= (int)regionEnd && lastRefIndex == IPs[indexRef].NameIndex)
                     {
 
                         if (indexRef > IPs.GetUpperBound(0)) { break; }
@@ -442,7 +442,7 @@ namespace AgileStructure
                         }
                         else { endRegion = selectEnd; }
 
-                        lastReadPosition = IPs[indexRef].getBPStart + 16384;
+                        lastReadPosition = IPs[indexRef].getBPStart;// + 16384;
 
                         if (skipThisBlock == false)
                         {
@@ -1907,7 +1907,7 @@ namespace AgileStructure
             if (System.IO.File.Exists(AnnotationFile) == false) { return; }
 
             gd = new GeneData(AnnotationFile);
-            if (gd != null)
+            if (gd != null && gd.Genes != null)
             { geneCoordinatesToolStripMenuItem.Enabled = true; }
 
             if (cboRef.SelectedIndex > 0)
