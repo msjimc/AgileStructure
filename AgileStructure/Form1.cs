@@ -408,7 +408,8 @@ namespace AgileStructure
                     makeBaseImage();
 
                     int index = cboRef.SelectedIndex - 1;
-                    ulong regionStart = (ulong)selectStart;
+                    ulong regionStart = (ulong)selectStart - 16384;
+                    if (regionStart < 0) { regionStart = 0; }
                     ulong regionEnd = (ulong)selectEnd;
 
                     APoint aP = new APoint();
@@ -1688,6 +1689,12 @@ namespace AgileStructure
                 { navigate(control, true); }
                 else if (e.KeyCode == Keys.Right)
                 { navigate(control, false); }
+                else if (e.KeyCode == Keys.Oemplus)
+                { expand(control, true); }
+                else if (e.KeyCode == Keys.OemMinus)
+                { expand(control, false); }
+
+
             }
             else
             {
@@ -1900,6 +1907,64 @@ namespace AgileStructure
                 }
             }           
         }
+
+        private void expand(string control, bool bigger)
+        {
+            if (control == "primary")
+            {
+                int length = selectEnd - selectStart;
+                if (bigger == true)
+                {
+
+                    selectEnd += length / 2;
+                    selectStart -= length / 2;
+
+                    if (selectStart < 1)
+                    { selectStart = 1; }
+
+                    if (selectEnd > selectedRefLength)
+                    { selectEnd = selectedRefLength; }
+
+                    txtStart.Text = selectStart.ToString("N0");
+                    txtEnd.Text = selectEnd.ToString("N0");
+                }
+                else if (length > 200)
+                {
+                    selectStart += length/4;
+                    selectEnd -= length / 4;                    
+
+                    txtStart.Text = selectStart.ToString("N0");
+                    txtEnd.Text = selectEnd.ToString("N0");
+                }
+            }
+            else if (control == "secondary")
+            {
+                int length = selectSecondaryEnd - selectSecondaryStart;
+                if (bigger == true)
+                {
+                    selectSecondaryEnd += length/2;
+                    selectSecondaryStart -= length/2;
+
+                    if (selectSecondaryStart < 1)
+                    { selectSecondaryStart = 1; }
+
+                    if (selectEnd > selectedSecondaryRefLength)
+                    { selectEnd = selectedSecondaryRefLength; }
+
+                    txtsStart.Text = selectSecondaryStart.ToString("N0");
+                    txtsEnd.Text = selectSecondaryEnd.ToString("N0");
+                }
+                else if (length > 200)
+                {
+                    selectSecondaryStart += length/4;
+                    selectSecondaryEnd -= length /4;                 
+
+                    txtsStart.Text = selectSecondaryStart.ToString("N0");
+                    txtsEnd.Text = selectSecondaryEnd.ToString("N0");
+                }
+            }
+        }
+
 
         private void gTFAnnotationFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
