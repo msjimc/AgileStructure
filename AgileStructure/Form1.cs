@@ -191,11 +191,14 @@ namespace AgileStructure
             if (System.IO.File.Exists(file) == false) { return; }
 
             Text = "Genomic rearrangements: " + file.Substring(file.LastIndexOf("\\") + 1);
-
-            fileName = file;
-            getBamHeader(file);
-            processBAIFile(file + ".bai");
-
+            try
+            {
+                fileName = file;
+                getBamHeader(file);
+                processBAIFile(file + ".bai");
+            }
+            catch (Exception ex) 
+            { MessageBox.Show(ex.Message, "Error"); }
             history = new List<string>();
             historySecondary = new List<StringInt>();
 
@@ -1689,9 +1692,9 @@ namespace AgileStructure
                 { navigate(control, true); }
                 else if (e.KeyCode == Keys.Right)
                 { navigate(control, false); }
-                else if (e.KeyCode == Keys.Oemplus)
+                else if (e.KeyCode == Keys.Up)
                 { expand(control, true); }
-                else if (e.KeyCode == Keys.OemMinus)
+                else if (e.KeyCode == Keys.Down)
                 { expand(control, false); }
 
 
@@ -1845,6 +1848,7 @@ namespace AgileStructure
             if (control == "primary")
             {
                 int length = selectEnd - selectStart;
+                if (selectStart == 1) { length++; }
                 if (left == true)
                 {
                     selectEnd = selectStart;
@@ -1877,6 +1881,7 @@ namespace AgileStructure
             else if (control == "secondary")
             {
                 int length = selectSecondaryEnd - selectSecondaryStart;
+                if (selectSecondaryStart == 1) { length++; }
                 if (left == true)
                 {
                     selectSecondaryEnd = selectSecondaryStart;
@@ -1913,6 +1918,8 @@ namespace AgileStructure
             if (control == "primary")
             {
                 int length = selectEnd - selectStart;
+                if (selectStart == 1) { length++; }
+
                 if (bigger == true)
                 {
 
@@ -1939,7 +1946,9 @@ namespace AgileStructure
             }
             else if (control == "secondary")
             {
-                int length = selectSecondaryEnd - selectSecondaryStart;
+                int length = selectSecondaryEnd + 1 - selectSecondaryStart;
+                if (selectSecondaryStart == 1) { length++; }
+
                 if (bigger == true)
                 {
                     selectSecondaryEnd += length/2;
@@ -2063,7 +2072,6 @@ namespace AgileStructure
         int p1p2 = -1;
         private void timer2_Tick(object sender, EventArgs e)
         {
-
             if (DrawnARKeys == null || AR == null) { return; }
             if (DrawnARKeys.Count == 0 || AR.Count == 0) { return; }
 
@@ -2342,6 +2350,52 @@ namespace AgileStructure
             { MessageBox.Show("Could not identify the variant using the selected reads", "Error"); }
         }
 
+        private bool couldItBeAnInsert()
+        {
+            try
+            {
+                if (selectedIndex.Count > 0 && cboSecondaries.SelectedIndex > 0)
+                {
+                    string otherChromosome = cboSecondaries.Text.Substring(0, cboSecondaries.Text.IndexOf(" "));
+                    BreakPointData[] bestPlaces = new BreakPointData[2];
+                    int breakPoint1 = 0;
+                    int breakPoint2 = 0;
+                    int breakPoint3 = 0;
+                    BreakPointData[] bestPlaces3rd;
+
+                    if (otherChromosome != cboRef.Text)
+                    {
+                        return false;
+                        //bestPlaces = getBreakPointsOnSetChromosome(otherChromosome, false);
+                        //breakPoint1 = bestPlaces[0].getAveragePlace;
+                        //breakPoint2 = bestPlaces[1].getAveragePlace;
+
+                        //bestPlaces3rd = getBreakPointsOnSetChromosome(cboRef.Text, false);
+                        //breakPoint3 = bestPlaces3rd[0].getAveragePlace;
+                    }
+                    else
+                    {
+                        bestPlaces = getBreakPointsOnSetChromosome(otherChromosome, true);
+                        breakPoint1 = bestPlaces[1].getAveragePlace;
+                        breakPoint2 = bestPlaces[2].getAveragePlace;
+                        breakPoint3 = bestPlaces[0].getAveragePlace;
+                        bestPlaces3rd = new BreakPointData[1] { bestPlaces[0] };
+                    }
+                    //1= end
+                    //2=end
+                    //3 = start
+                    if (bestPlaces[1] == null || breakPoint1 == breakPoint2 || breakPoint1 == breakPoint3 || breakPoint2==breakPoint3)
+                    { return false; }
+                    else
+                    { return true; }
+                }
+                else
+                { return false; }
+            }
+            catch (Exception ex)
+            { return false; }
+        }
+
         private BreakPointData[] selectForInversion(BreakPointData[] SameChr, BreakPointData[] DifferenceChr)
         {
             BreakPointData[] bestPlaces = new BreakPointData[3];
@@ -2372,7 +2426,10 @@ namespace AgileStructure
                     mutation = "The rearrangement appears to be an inversion.\n";
                     break;
                 case (MutationType.Translocation):
-                    mutation = "The rearrangement appears to be an translocation.\n";
+                    mutation = "The rearrangement appears to be a translocation.\n";
+                    break;
+                case MutationType.Insertion:
+                    mutation = "The rearrangement appears to be an insertion.\n";
                     break;
                 case (MutationType.NoSet):
                     mutation = "It was not possible to determine the type of rearrangement.\n";
@@ -2791,7 +2848,7 @@ namespace AgileStructure
                             foreach (int p in chrPlaces)
                             {
                                 if (p >= regionStart && p <= regionStart + 200)
-                                    near2.Add(p);
+                                { near2.Add(p); }
                             }
                             bestRegions[1] = new BreakPointData(regionStart, near2.ToArray<int>(), chr);
 
@@ -2945,6 +3002,13 @@ namespace AgileStructure
 
                     string mutation = "";
                     MutationType answer = testMutationType(bestPlaces);
+
+                    if (answer == MutationType.Deletion)
+                    {
+                        if (couldItBeAnInsert() == true)
+                        { answer = MutationType.Insertion; }
+                    }
+
                     mutation = setMutationPrefix(answer);
                     MessageBox.Show(mutation, "Rearrangement type", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

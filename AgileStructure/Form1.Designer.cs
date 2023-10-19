@@ -54,6 +54,8 @@ namespace AgileStructure
             this.openBAMFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
             this.onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.onlyShowReadsWithALargeIndelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
             this.lookForIndelsWithinAReadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gTFAnnotationFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,8 +93,6 @@ namespace AgileStructure
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnQuit = new System.Windows.Forms.Button();
-            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
-            this.onlyShowReadsWithALargeIndelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.gbpP1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.p1)).BeginInit();
@@ -379,6 +379,19 @@ namespace AgileStructure
             this.onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Text = "Only show reads with secondary alignments";
             this.onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Click += new System.EventHandler(this.onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem_Click);
             // 
+            // onlyShowReadsWithALargeIndelToolStripMenuItem
+            // 
+            this.onlyShowReadsWithALargeIndelToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.onlyShowReadsWithALargeIndelToolStripMenuItem.Name = "onlyShowReadsWithALargeIndelToolStripMenuItem";
+            this.onlyShowReadsWithALargeIndelToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
+            this.onlyShowReadsWithALargeIndelToolStripMenuItem.Text = "Only show reads with a large indel";
+            this.onlyShowReadsWithALargeIndelToolStripMenuItem.Click += new System.EventHandler(this.onlyShowReadsWithALargeIndelToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(303, 6);
+            // 
             // lookForIndelsWithinAReadToolStripMenuItem
             // 
             this.lookForIndelsWithinAReadToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -465,39 +478,39 @@ namespace AgileStructure
             // viewReadDataToolStripMenuItem
             // 
             this.viewReadDataToolStripMenuItem.Name = "viewReadDataToolStripMenuItem";
-            this.viewReadDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewReadDataToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.viewReadDataToolStripMenuItem.Text = "View read data";
             this.viewReadDataToolStripMenuItem.Click += new System.EventHandler(this.viewReadDataToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(175, 6);
             // 
             // saveSelectedReadsToolStripMenuItem
             // 
             this.saveSelectedReadsToolStripMenuItem.Enabled = false;
             this.saveSelectedReadsToolStripMenuItem.Name = "saveSelectedReadsToolStripMenuItem";
-            this.saveSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.saveSelectedReadsToolStripMenuItem.Text = "Save selected reads";
             this.saveSelectedReadsToolStripMenuItem.Click += new System.EventHandler(this.saveSelectedReadsToolStripMenuItem_Click);
             // 
             // clearSelectedReadsToolStripMenuItem
             // 
             this.clearSelectedReadsToolStripMenuItem.Name = "clearSelectedReadsToolStripMenuItem";
-            this.clearSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clearSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.clearSelectedReadsToolStripMenuItem.Text = "Clear selected reads";
             this.clearSelectedReadsToolStripMenuItem.Click += new System.EventHandler(this.clearSelectedReadsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(175, 6);
             // 
             // alignerStringToolStripMenuItem
             // 
             this.alignerStringToolStripMenuItem.Name = "alignerStringToolStripMenuItem";
-            this.alignerStringToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.alignerStringToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.alignerStringToolStripMenuItem.Text = "Aligner string";
             this.alignerStringToolStripMenuItem.Click += new System.EventHandler(this.alignerStringToolStripMenuItem_Click);
             // 
@@ -524,9 +537,9 @@ namespace AgileStructure
             this.variantTypeToolStripMenuItem,
             this.toolStripMenuItem2,
             this.deletionsToolStripMenuItem,
-            this.inversionToolStripMenuItem,
             this.duplicationToolStripMenuItem,
             this.insertionToolStripMenuItem,
+            this.inversionToolStripMenuItem,
             this.translocationToolStripMenuItem});
             this.useSoftClipDataToolStripMenuItem.Name = "useSoftClipDataToolStripMenuItem";
             this.useSoftClipDataToolStripMenuItem.Size = new System.Drawing.Size(272, 22);
@@ -535,55 +548,55 @@ namespace AgileStructure
             // variantTypeToolStripMenuItem
             // 
             this.variantTypeToolStripMenuItem.Name = "variantTypeToolStripMenuItem";
-            this.variantTypeToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.variantTypeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.variantTypeToolStripMenuItem.Text = "Variant type";
             this.variantTypeToolStripMenuItem.Click += new System.EventHandler(this.variantTypeToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(141, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
             // 
             // deletionsToolStripMenuItem
             // 
             this.deletionsToolStripMenuItem.Name = "deletionsToolStripMenuItem";
-            this.deletionsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.deletionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deletionsToolStripMenuItem.Text = "Deletion";
             this.deletionsToolStripMenuItem.Click += new System.EventHandler(this.deletionsToolStripMenuItem_Click);
             // 
             // inversionToolStripMenuItem
             // 
             this.inversionToolStripMenuItem.Name = "inversionToolStripMenuItem";
-            this.inversionToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.inversionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.inversionToolStripMenuItem.Text = "Inversion";
             this.inversionToolStripMenuItem.Click += new System.EventHandler(this.inversionToolStripMenuItem_Click);
             // 
             // duplicationToolStripMenuItem
             // 
             this.duplicationToolStripMenuItem.Name = "duplicationToolStripMenuItem";
-            this.duplicationToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.duplicationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.duplicationToolStripMenuItem.Text = "Duplication";
             this.duplicationToolStripMenuItem.Click += new System.EventHandler(this.duplicationToolStripMenuItem_Click);
             // 
             // insertionToolStripMenuItem
             // 
             this.insertionToolStripMenuItem.Name = "insertionToolStripMenuItem";
-            this.insertionToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.insertionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.insertionToolStripMenuItem.Text = "Insertion";
             this.insertionToolStripMenuItem.Click += new System.EventHandler(this.insertionToolStripMenuItem_Click);
             // 
             // translocationToolStripMenuItem
             // 
             this.translocationToolStripMenuItem.Name = "translocationToolStripMenuItem";
-            this.translocationToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.translocationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.translocationToolStripMenuItem.Text = "Translocation";
             this.translocationToolStripMenuItem.Click += new System.EventHandler(this.translocationToolStripMenuItem_Click);
             // 
             // usePrimaryAlignmentsCIGARStringToolStripMenuItem
             // 
             this.usePrimaryAlignmentsCIGARStringToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.insertationToolStripMenuItem,
-            this.deletionToolStripMenuItem});
+            this.deletionToolStripMenuItem,
+            this.insertationToolStripMenuItem});
             this.usePrimaryAlignmentsCIGARStringToolStripMenuItem.Name = "usePrimaryAlignmentsCIGARStringToolStripMenuItem";
             this.usePrimaryAlignmentsCIGARStringToolStripMenuItem.Size = new System.Drawing.Size(272, 22);
             this.usePrimaryAlignmentsCIGARStringToolStripMenuItem.Text = "Use Primary alignment\'s CIGAR string";
@@ -650,19 +663,6 @@ namespace AgileStructure
             this.btnQuit.Text = "Quit";
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
-            // 
-            // toolStripMenuItem7
-            // 
-            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(303, 6);
-            // 
-            // onlyShowReadsWithALargeIndelToolStripMenuItem
-            // 
-            this.onlyShowReadsWithALargeIndelToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.onlyShowReadsWithALargeIndelToolStripMenuItem.Name = "onlyShowReadsWithALargeIndelToolStripMenuItem";
-            this.onlyShowReadsWithALargeIndelToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
-            this.onlyShowReadsWithALargeIndelToolStripMenuItem.Text = "Only show reads with a large indel";
-            this.onlyShowReadsWithALargeIndelToolStripMenuItem.Click += new System.EventHandler(this.onlyShowReadsWithALargeIndelToolStripMenuItem_Click);
             // 
             // Form1
             // 
