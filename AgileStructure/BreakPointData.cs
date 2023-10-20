@@ -41,6 +41,8 @@ namespace AgileStructure
             return places.Contains(place);
         }
 
+        public int Count
+        { get { return places.Length; } }
 
     }
 }

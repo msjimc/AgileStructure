@@ -853,6 +853,39 @@ namespace AgileStructure
             g_soft.FillRectangle(Brushes.White, bmp_soft.Width - 10, 0, 10, bmp_soft.Height);
         }
 
+
+        private int getFivePrimeSoftClipLength(string CIGAR)
+        {
+            int answer = 0;
+            char[] tags = { 'H', 'S', 'I', 'D', 'N', 'P', 'M', '=', 'X' };
+            int index = CIGAR.IndexOfAny(tags);
+            if (index > -1)
+            {
+                if (CIGAR[index]== 'S')
+                {
+                    string length = CIGAR.Substring(0, index);
+                    answer = Convert.ToInt32(length);
+                }
+            }
+            return answer;
+        }
+
+        private int getThreePrimeSoftClipLength(string CIGAR)
+        {
+            int answer = 0;
+            char[] tags = { 'H', 'S', 'I', 'D', 'N', 'P', 'M', '=', 'X' };
+            int index = CIGAR.Substring(0, CIGAR.Length -1 ).LastIndexOfAny(tags);
+            if (index > -1)
+            {
+                if (CIGAR[CIGAR.Length - 1] == 'S')
+                {
+                    string length = CIGAR.Substring(index + 1);
+                    answer = Convert.ToInt32(length.Substring(0, length.Length-1));
+                }
+            }
+            return answer;
+        }
+
         private int getAlignedLength(string CIGAR)
         {
             int sum = 0;
@@ -2373,11 +2406,10 @@ namespace AgileStructure
                         breakPoint1 = bestPlaces[1].getAveragePlace / 100;
                         breakPoint2 = bestPlaces[2].getAveragePlace / 100;
                         breakPoint3 = bestPlaces[0].getAveragePlace / 100;
-                        bestPlaces3rd = new BreakPointData[1] { bestPlaces[0] };
                     }
-                    //1= end
-                    //2=end
-                    //3 = start
+                    
+                    if (bestPlaces[2].Count < 2)
+                    { return false; }
                     if (bestPlaces[1] == null || breakPoint1 == breakPoint2 || breakPoint1 == breakPoint3 || breakPoint2==breakPoint3)
                     { return false; }
                     else
@@ -2706,21 +2738,26 @@ namespace AgileStructure
                     AlignedRead ar = DrawnARKeys[index];
                     if (referenceSequenceNames[ar.getreferenceIndex] == referenceSequenceTarget)
                     {
-                        if (places.ContainsKey(referenceSequenceNames[ar.getreferenceIndex]) == false)
+                        if (ar.hasFivePrimeSoftClip == true)
                         {
-                            places.Add(referenceSequenceNames[ar.getreferenceIndex], new List<int>());
-                            places[referenceSequenceNames[ar.getreferenceIndex]].Add(ar.getPosition);
+                            if (places.ContainsKey(referenceSequenceNames[ar.getreferenceIndex]) == false)
+                            {
+                                places.Add(referenceSequenceNames[ar.getreferenceIndex], new List<int>());
+                                places[referenceSequenceNames[ar.getreferenceIndex]].Add(ar.getPosition);
+                            }
+                            else
+                            { places[referenceSequenceNames[ar.getreferenceIndex]].Add(ar.getPosition); }
                         }
-                        else
-                        { places[referenceSequenceNames[ar.getreferenceIndex]].Add(ar.getPosition); }
-
-                        if (places.ContainsKey(referenceSequenceNames[ar.getreferenceIndex]) == false)
+                        if (ar.hasThreePrimeSoftClip == true)
                         {
-                            places.Add(referenceSequenceNames[ar.getreferenceIndex], new List<int>());
-                            places[referenceSequenceNames[ar.getreferenceIndex]].Add(ar.getEndPosition);
+                            if (places.ContainsKey(referenceSequenceNames[ar.getreferenceIndex]) == false)
+                            {
+                                places.Add(referenceSequenceNames[ar.getreferenceIndex], new List<int>());
+                                places[referenceSequenceNames[ar.getreferenceIndex]].Add(ar.getEndPosition);
+                            }
+                            else
+                            { places[referenceSequenceNames[ar.getreferenceIndex]].Add(ar.getEndPosition); }
                         }
-                        else
-                        { places[referenceSequenceNames[ar.getreferenceIndex]].Add(ar.getEndPosition); }
                     }
 
                     string secondaryCIGAR = ar.getSecondaryAlignmentTag;
@@ -2735,21 +2772,26 @@ namespace AgileStructure
                                 int startPoint = Convert.ToInt32(items[1]);
                                 if (referenceSequenceTarget.Equals(items[0]))
                                 {
-                                    if (places.ContainsKey(items[0]) == false)
+                                    if (getFivePrimeSoftClipLength(items[3]) > 50)
                                     {
-                                        places.Add(items[0], new List<int>());
-                                        places[items[0]].Add(startPoint);
+                                        if (places.ContainsKey(items[0]) == false)
+                                        {
+                                            places.Add(items[0], new List<int>());
+                                            places[items[0]].Add(startPoint);
+                                        }
+                                        else
+                                        { places[items[0]].Add(startPoint); }
                                     }
-                                    else
-                                    { places[items[0]].Add(startPoint); }
-
-                                    if (places.ContainsKey(items[0]) == false)
+                                    if (getThreePrimeSoftClipLength(items[3]) > 50)
                                     {
-                                        places.Add(items[0], new List<int>());
-                                        places[items[0]].Add(startPoint + getAlignedLength(items[3]));
+                                        if (places.ContainsKey(items[0]) == false)
+                                        {
+                                            places.Add(items[0], new List<int>());
+                                            places[items[0]].Add(startPoint + getAlignedLength(items[3]));
+                                        }
+                                        else
+                                        { places[items[0]].Add(startPoint + getAlignedLength(items[3])); }
                                     }
-                                    else
-                                    { places[items[0]].Add(startPoint + getAlignedLength(items[3])); }
                                 }
                             }
                         }

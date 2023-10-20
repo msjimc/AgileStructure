@@ -39,6 +39,7 @@
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 
+AgileStructure is composed of two components:  AgileStructure.exe which runs the user interface and analyses the data and bamreaderdll.dll which reads the bam file, extracts the relevant information which its sends to the AgileStructure.exe. To work, both files need to be in the same folder, when AgileStructure starts, it will look for the bamreaderdll.dll file and give an error message if it doesn't find it, the will start without the bamreaderdll.dll, but will do nothing. 
 
 ## Data requirements
 
@@ -64,7 +65,7 @@ To aid the analysis, it is possible to view the putative break points with refer
 
 ## Importing alignment data
 
-Data is imported as a pair of files, the pre-aligned bam files and its index file, by either pressing the ```BAM file``` button (Figure 1a) or by selecting the ```Analysis``` > ```Open BAM file``` option (Figure 1b)  and selecting the required file.
+Data is imported as a pair of files, the pre-aligned bam file and its index file, by either pressing the ```BAM file``` button (Figure 1a) or by selecting the ```Analysis``` > ```Open BAM file``` menu option (Figure 1b) and selecting the required ```bam``` file.
 
 ![Figure 1a](images/figure1a.jpg)
 
@@ -84,19 +85,19 @@ If AgileStructure appears to do nothing, it may because it is unable to find the
 
 ## Selecting the region to view
 
-Select the likely chromosome (reference sequence) from the dropdown list boz and enter the regions co-ordinates in the two text boxes to the right of the drop down list box and press the ```Get reads``` button (Figure 3).    
+Select the required chromosome (reference sequence) from the dropdown list box and enter the region's co-ordinates in the two text boxes to the right of the drop down list box and press the ```Get reads``` button (Figure 3). The co-ordinates are checked to make sure they are not greater than the chromosomes length as reported in the ```bam``` file. If no chromosome has been selected these values will be limited to '1'.    
 
 ![Figure 3](images/figure3.jpg)
 
 Figure 3
 
-The position of reads mapping to the region are shown as green (aligned to the forward strand) and red (aligned to the reverse strand) rectangles scaled to the length of the read. Soft clipped sequences are identified as pale green or red extensions to the darker green/red rectangles. The size of the pale rectangles is proportionate to their length and their location only indicates whether they are on the 5' or 3' of the aligned sequence.  
-It is important to note that in the default view reads are drawn as a solid box spanning the length of the alignment, if a read as a large deletion this will not be shown, however they can be visualised by selecting the ```Analsis``` > ```Look for indels within a read``` option (see section @@@@@@@@@).  
-AgileStructure does not have an upper limit on the size of the region or number of reads it will process and will attempt to read the requested data until the computer runs out of memory. While there is no upper limit, you should try to limit the amount of data reads as reading the underlying bam file can be a slow process due to its size.
+The position of reads mapping to the region are shown as green (aligned to the forward strand) and red (aligned to the reverse strand) rectangles scaled to the length of the read. Soft clipped sequences are identified as pale green or pale red extensions to the darker green/red aligned data. The size of the pale rectangles is proportionate to the length of the unaligned sequence and their location only indicates whether they are on the 5' or 3' of the aligned sequence.  
+It is important to note that in the default view, reads are drawn as a solid box spanning the length of the alignment, if a read as a large deletion this will not be shown, however they can be visualised by selecting the ```Analysis``` > ```Look for indels within a read``` option (see section [Identifying Indels using the primary alignments CIGAR string](#identifying-indels-using-the-primary-alignments-cigar-string)).  
+AgileStructure does not have an upper limit on the size of the region or number of reads it will process and will attempt to read the requested data until the computer runs out of memory. While there is no upper limit, you should try to limit the amount of data it reads as reading the underlying bam file can be a slow process due to its size.
 
 ## Hiding reads without a soft clipped segment
 
-When adding reads to the image, they are stacked so as little space as possible is used, however for alignments with a high read depth, the stacks may be to too tall to fit in the image. Since, only reads that have a soft clipped region are important in break point detection it is possible to hide those with out an unaligned area by selecting the ```Analysis``` > ```Only show reads with secondary alignments ``` option (Figure 4).
+When adding reads to the image, they are stacked so as little space as possible is used, however for alignments with a high read depth, the stacks may be to too tall to fit in the image. Since, reads that have a soft clipped region are more important in break point detection it is possible to hide those with out an unaligned fragment by selecting the ```Analysis``` > ```Only show reads with secondary alignments ``` option (Figure 4).
 
 ![Figure 4](images/figure4.jpg)
 
@@ -202,7 +203,7 @@ Figure 15b
 
 The message box reporting the mutation will also allow you to save the the mutation's annotation as well as the underlying sequence data to a text file by pressing the ```Yes``` button (an example is [here](images/breakPointData.txt)).
 
-The break point is annotated with reference to the reads selected in this case those whose primary alignment is on chromosome 4. However, the alignment will also contaion reads whose primary alignment is on the other side of the break point and whose soft clipped sequences mapped to the currently selected reference. To view these reads select the ```Variant determination``` > ```Switch region``` option , select the putative break point and reads as before (Figure 16a) and press the ```Variant determination``` > ```Use soft clip data``` > ```Translocation```. If the annotation is correct, both annotations should match with a small difference in the base pair position (Figure 16b).
+The break point is annotated with reference to the reads selected, in this case those whose primary alignment is on chromosome 4. However, the alignment will also contaion reads whose primary alignment is on the other side of the break point and whose soft clipped sequences mapped to the currently selected reference. To view these reads select the ```Variant determination``` > ```Switch region``` option , select the putative break point and reads as before (Figure 16a) and press the ```Variant determination``` > ```Use soft clip data``` > ```Translocation```. If the annotation is correct, both annotations should match with a small difference in the base pair position (Figure 16b).
 
 ![Figure 16a](images/figure16a.jpg)
 

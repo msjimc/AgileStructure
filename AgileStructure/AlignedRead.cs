@@ -445,5 +445,13 @@ namespace AgileStructure
 
         public bool hasLargeIndel
         { get { return largeIndel; } }
+
+        public bool hasFivePrimeSoftClip
+        { get { return (blocks[0].state == fragmentType.Unaligned && blocks[0].length > 50); } }
+
+        public bool hasThreePrimeSoftClip
+        { get { return (blocks[blocks.Count-1].state == fragmentType.Unaligned && blocks[blocks.Count-1].length > 50); } }
+
+
     }
 }
