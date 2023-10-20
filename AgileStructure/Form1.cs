@@ -2376,9 +2376,9 @@ namespace AgileStructure
                     else
                     {
                         bestPlaces = getBreakPointsOnSetChromosome(otherChromosome, true);
-                        breakPoint1 = bestPlaces[1].getAveragePlace;
-                        breakPoint2 = bestPlaces[2].getAveragePlace;
-                        breakPoint3 = bestPlaces[0].getAveragePlace;
+                        breakPoint1 = bestPlaces[1].getAveragePlace / 100;
+                        breakPoint2 = bestPlaces[2].getAveragePlace / 100;
+                        breakPoint3 = bestPlaces[0].getAveragePlace / 100;
                         bestPlaces3rd = new BreakPointData[1] { bestPlaces[0] };
                     }
                     //1= end
@@ -2466,45 +2466,47 @@ namespace AgileStructure
                 {
                     AlignedRead ar = DrawnARKeys[index];
                     bool primaryStrand = ar.getForward;
-
-                    string[] hits = ar.getSecondaryAlignmentTag.Substring(2).Split(';');
-                    foreach (string hit in hits)
+                    if (string.IsNullOrEmpty(ar.getSecondaryAlignmentTag) == false)
                     {
-                        if (string.IsNullOrEmpty(hit) == false)
+                        string[] hits = ar.getSecondaryAlignmentTag.Substring(2).Split(';');
+                        foreach (string hit in hits)
                         {
-                            string[] items = hit.Split(',');
-                            if (items[0].ToLower().Equals(bestPlaces[0].getReferenceName) == true)
+                            if (string.IsNullOrEmpty(hit) == false)
                             {
-                                string key = "";
-                                string secondaryStrandtrand = "";
-                                int startPoint = Convert.ToInt32(items[1]);
-                                int endPoint = startPoint + +getAlignedLength(items[3]);
-                                if (bestPlaces[0].inPlaces(startPoint) == true || bestPlaces[0].inPlaces(endPoint) == true || bestPlaces[1].inPlaces(startPoint) == true || bestPlaces[1].inPlaces(endPoint) == true)
+                                string[] items = hit.Split(',');
+                                if (items[0].ToLower().Equals(bestPlaces[0].getReferenceName) == true)
                                 {
-                                    secondaryStrandtrand = items[2];
-                                    if (primaryStrand == true)
+                                    string key = "";
+                                    string secondaryStrandtrand = "";
+                                    int startPoint = Convert.ToInt32(items[1]);
+                                    int endPoint = startPoint + +getAlignedLength(items[3]);
+                                    if (bestPlaces[0].inPlaces(startPoint) == true || bestPlaces[0].inPlaces(endPoint) == true || bestPlaces[1].inPlaces(startPoint) == true || bestPlaces[1].inPlaces(endPoint) == true)
                                     {
-                                        if (secondaryStrandtrand == "+")
-                                        { key += "++"; }
-                                        else { key += "+-"; }
+                                        secondaryStrandtrand = items[2];
+                                        if (primaryStrand == true)
+                                        {
+                                            if (secondaryStrandtrand == "+")
+                                            { key += "++"; }
+                                            else { key += "+-"; }
+                                        }
+                                        else
+                                        {
+                                            if (secondaryStrandtrand == "+")
+                                            { key += "-+"; }
+                                            else { key += "--"; }
+                                        }
                                     }
-                                    else
-                                    {
-                                        if (secondaryStrandtrand == "+")
-                                        { key += "-+"; }
-                                        else { key += "--"; }
-                                    }
+
+                                    if ((startPoint < pEnd || startPoint >= qEnd) && (ar.getPosition < pEnd || ar.getPosition >= qEnd))
+                                    { key += "outSide"; }
+                                    else if ((startPoint >= pEnd || startPoint < qEnd) && (ar.getPosition >= pEnd || ar.getPosition < qEnd))
+                                    { key += "inSide"; }
+
+
+                                    if (orientations.ContainsKey(key) == false)
+                                    { orientations.Add(key, 1); }
+                                    else { orientations[key]++; }
                                 }
-
-                                if ((startPoint < pEnd || startPoint >= qEnd) && (ar.getPosition < pEnd || ar.getPosition >= qEnd))
-                                { key += "outSide"; }
-                                else if ((startPoint >= pEnd || startPoint < qEnd) && (ar.getPosition >= pEnd || ar.getPosition < qEnd))
-                                { key += "inSide"; }
-
-
-                                if (orientations.ContainsKey(key) == false)
-                                { orientations.Add(key, 1); }
-                                else { orientations[key]++; }
                             }
                         }
                     }
@@ -2661,33 +2663,35 @@ namespace AgileStructure
                     { places[referenceSequenceNames[ar.getreferenceIndex]].Add(ar.getEndPosition); }
 
                     string secondaryCIGAR = ar.getSecondaryAlignmentTag;
-                    string[] hits = secondaryCIGAR.Substring(2).Split(';');
-                    foreach (string h in hits)
+                    if (string.IsNullOrEmpty(secondaryCIGAR) == false)
                     {
-                        if (string.IsNullOrEmpty(h) == false)
+                        string[] hits = secondaryCIGAR.Substring(2).Split(';');
+                        foreach (string h in hits)
                         {
-                            string[] items = h.Split(',');
-                            int startPoint = Convert.ToInt32(items[1]);
-                            if (sameReferenceSequence == referenceSequenceTarget.Equals(items[0]))
+                            if (string.IsNullOrEmpty(h) == false)
                             {
-                                if (places.ContainsKey(items[0]) == false)
+                                string[] items = h.Split(',');
+                                int startPoint = Convert.ToInt32(items[1]);
+                                if (sameReferenceSequence == referenceSequenceTarget.Equals(items[0]))
                                 {
-                                    places.Add(items[0], new List<int>());
-                                    places[items[0]].Add(startPoint);
-                                }
-                                else
-                                { places[items[0]].Add(startPoint); }
+                                    if (places.ContainsKey(items[0]) == false)
+                                    {
+                                        places.Add(items[0], new List<int>());
+                                        places[items[0]].Add(startPoint);
+                                    }
+                                    else
+                                    { places[items[0]].Add(startPoint); }
 
-                                if (places.ContainsKey(items[0]) == false)
-                                {
-                                    places.Add(items[0], new List<int>());
-                                    places[items[0]].Add(startPoint + getAlignedLength(items[3]));
+                                    if (places.ContainsKey(items[0]) == false)
+                                    {
+                                        places.Add(items[0], new List<int>());
+                                        places[items[0]].Add(startPoint + getAlignedLength(items[3]));
+                                    }
+                                    else
+                                    { places[items[0]].Add(startPoint + getAlignedLength(items[3])); }
                                 }
-                                else
-                                { places[items[0]].Add(startPoint + getAlignedLength(items[3])); }
                             }
                         }
-
                     }
                 }
             }
@@ -2726,33 +2730,35 @@ namespace AgileStructure
                     }
 
                     string secondaryCIGAR = ar.getSecondaryAlignmentTag;
-                    string[] hits = secondaryCIGAR.Substring(2).Split(';');
-                    foreach (string h in hits)
+                    if (string.IsNullOrEmpty(secondaryCIGAR) == false)
                     {
-                        if (string.IsNullOrEmpty(h) == false)
+                        string[] hits = secondaryCIGAR.Substring(2).Split(';');
+                        foreach (string h in hits)
                         {
-                            string[] items = h.Split(',');
-                            int startPoint = Convert.ToInt32(items[1]);
-                            if (referenceSequenceTarget.Equals(items[0]))
+                            if (string.IsNullOrEmpty(h) == false)
                             {
-                                if (places.ContainsKey(items[0]) == false)
+                                string[] items = h.Split(',');
+                                int startPoint = Convert.ToInt32(items[1]);
+                                if (referenceSequenceTarget.Equals(items[0]))
                                 {
-                                    places.Add(items[0], new List<int>());
-                                    places[items[0]].Add(startPoint);
-                                }
-                                else
-                                { places[items[0]].Add(startPoint); }
+                                    if (places.ContainsKey(items[0]) == false)
+                                    {
+                                        places.Add(items[0], new List<int>());
+                                        places[items[0]].Add(startPoint);
+                                    }
+                                    else
+                                    { places[items[0]].Add(startPoint); }
 
-                                if (places.ContainsKey(items[0]) == false)
-                                {
-                                    places.Add(items[0], new List<int>());
-                                    places[items[0]].Add(startPoint + getAlignedLength(items[3]));
+                                    if (places.ContainsKey(items[0]) == false)
+                                    {
+                                        places.Add(items[0], new List<int>());
+                                        places[items[0]].Add(startPoint + getAlignedLength(items[3]));
+                                    }
+                                    else
+                                    { places[items[0]].Add(startPoint + getAlignedLength(items[3])); }
                                 }
-                                else
-                                { places[items[0]].Add(startPoint + getAlignedLength(items[3])); }
                             }
                         }
-
                     }
                 }
             }
