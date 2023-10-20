@@ -465,6 +465,8 @@ namespace AgileStructure
                                         if (string.IsNullOrEmpty(r) == false)
                                         {
                                             AlignedRead ar = new AlignedRead(r, AR.Count + 1);
+                                            if (ar.getName.StartsWith("d58451d8-e83c-47cd-") == true)
+                                            { }
                                             if (ar.IsGood == true && ar.IsSupplementaryAlignment == false && ar.IsSecondaryAlignment == false)
                                             {
 
@@ -2364,15 +2366,7 @@ namespace AgileStructure
                     BreakPointData[] bestPlaces3rd;
 
                     if (otherChromosome != cboRef.Text)
-                    {
-                        return false;
-                        //bestPlaces = getBreakPointsOnSetChromosome(otherChromosome, false);
-                        //breakPoint1 = bestPlaces[0].getAveragePlace;
-                        //breakPoint2 = bestPlaces[1].getAveragePlace;
-
-                        //bestPlaces3rd = getBreakPointsOnSetChromosome(cboRef.Text, false);
-                        //breakPoint3 = bestPlaces3rd[0].getAveragePlace;
-                    }
+                    { return false; }
                     else
                     {
                         bestPlaces = getBreakPointsOnSetChromosome(otherChromosome, true);
@@ -2479,7 +2473,7 @@ namespace AgileStructure
                                     string key = "";
                                     string secondaryStrandtrand = "";
                                     int startPoint = Convert.ToInt32(items[1]);
-                                    int endPoint = startPoint + +getAlignedLength(items[3]);
+                                    int endPoint = startPoint + getAlignedLength(items[3]);
                                     if (bestPlaces[0].inPlaces(startPoint) == true || bestPlaces[0].inPlaces(endPoint) == true || bestPlaces[1].inPlaces(startPoint) == true || bestPlaces[1].inPlaces(endPoint) == true)
                                     {
                                         secondaryStrandtrand = items[2];
@@ -2816,7 +2810,7 @@ namespace AgileStructure
                     }
                 }
             }
-
+            System.Diagnostics.Debug.WriteLine("best 1 at " + bestRegions[0].getAveragePlace.ToString("N0"));
             foreach (string chr in places.Keys)
             {
                 if ((chr == bestRegions[0].getReferenceName) == sameReferenceSequence)
@@ -2840,30 +2834,62 @@ namespace AgileStructure
                             { counter++; }
                             index++;
                         }
+                        System.Diagnostics.Debug.WriteLine("counter = " + counter.ToString() + " place " + regionStart.ToString());
 
-                        if (counter > best2)
+                        if (regionStart > best2Place - 200 && regionStart < best2Place + 200)
                         {
-                            int tbest3 = best2;
-                            int tbest3Place = best2Place;
-                            BreakPointData tBestRegion = bestRegions[1];
-
+                            if (counter > best1)
+                            {
+                                best2 = counter;
+                                best2Place = regionStart;
+                                List<int> near2 = new List<int>();
+                                foreach (int p in chrPlaces)
+                                {
+                                    if (p >= regionStart - 200 && p <= regionStart + 200)
+                                    { near2.Add(p); }
+                                }
+                                bestRegions[1] = new BreakPointData(regionStart, near2.ToArray<int>(), chr);
+                                System.Diagnostics.Debug.WriteLine("updated best 2 at " + bestRegions[1].getAveragePlace.ToString("N0"));
+                            }
+                        }
+                        else if (counter > best2 && (regionStart < best2Place - 300 || regionStart > best2Place + 300))
+                        {
+                            int tempBest3 = best2;
+                            int tempBest3Place = best2Place;
+                            BreakPointData tempBestRegion = bestRegions[1];
 
                             best2 = counter;
                             best2Place = regionStart;
                             List<int> near2 = new List<int>();
                             foreach (int p in chrPlaces)
                             {
-                                if (p >= regionStart && p <= regionStart + 200)
+                                if (p >= regionStart - 200 && p <= regionStart + 200)
                                 { near2.Add(p); }
                             }
                             bestRegions[1] = new BreakPointData(regionStart, near2.ToArray<int>(), chr);
+                            System.Diagnostics.Debug.WriteLine("New best 2 at " + bestRegions[1].getAveragePlace.ToString("N0"));
 
-                            if (AreTwoBreakPointsTheSame(bestRegions[1], tBestRegion, 200) == false)
+                            if (AreTwoBreakPointsTheSame(bestRegions[1], tempBestRegion, 200) == false)
                             {
-                                best3 = tbest3;
-                                best3Place = tbest3Place;
-                                bestRegions[2] = tBestRegion;
+                                best3 = tempBest3;
+                                best3Place = tempBest3Place;
+                                bestRegions[2] = tempBestRegion;
+                                if (bestRegions[2] != null)
+                                { System.Diagnostics.Debug.WriteLine("New best 3 1 at " + bestRegions[2].getAveragePlace.ToString("N0")); }
                             }
+                        }
+                        else if (regionStart > best3Place - 300 && regionStart < best3Place + 300)
+                        {
+                            best3 = counter;
+                            best3Place = regionStart;
+                            List<int> near3 = new List<int>();
+                            foreach (int p in chrPlaces)
+                            {
+                                if (p >= regionStart - 200 && p <= regionStart + 200)
+                                { near3.Add(p); }
+                            }
+                            bestRegions[2] = new BreakPointData(regionStart, near3.ToArray<int>(), chr);
+                            System.Diagnostics.Debug.WriteLine("New best 3 2at " + bestRegions[2].getAveragePlace.ToString("N0"));
                         }
                         else if (counter > best3)
                         {
@@ -2876,9 +2902,11 @@ namespace AgileStructure
                                     near3.Add(p);
                             }
                             bestRegions[2] = new BreakPointData(regionStart, near3.ToArray<int>(), chr);
+                            System.Diagnostics.Debug.WriteLine("New best 3 3 at " + bestRegions[2].getAveragePlace.ToString("N0"));
                         }
                     }
-                }
+                    System.Diagnostics.Debug.WriteLine("best1 " + bestRegions[0].getAveragePlace.ToString("N0") + " best 2 " + best2Place.ToString("N0") + " best 3 " + best3Place.ToString("N0"));
+                }                
             }
             return bestRegions;
         }
@@ -2953,7 +2981,7 @@ namespace AgileStructure
                             index++;
                         }
 
-                        if (counter > best2)
+                        if (counter > best2 && regionStart < best2Place - 300 || regionStart > best2Place + 300)
                         {
                             best2 = counter;
                             best2Place = regionStart;
@@ -3009,7 +3037,7 @@ namespace AgileStructure
                     string mutation = "";
                     MutationType answer = testMutationType(bestPlaces);
 
-                    if (answer == MutationType.Deletion)
+                    if (answer == MutationType.Deletion || answer== MutationType.Inversion)
                     {
                         if (couldItBeAnInsert() == true)
                         { answer = MutationType.Insertion; }
