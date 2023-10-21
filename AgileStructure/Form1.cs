@@ -2403,6 +2403,7 @@ namespace AgileStructure
                     else
                     {
                         bestPlaces = getBreakPointsOnSetChromosome(otherChromosome, true);
+                        if (bestPlaces[2] == null) { return false; }
                         breakPoint1 = bestPlaces[1].getAveragePlace / 100;
                         breakPoint2 = bestPlaces[2].getAveragePlace / 100;
                         breakPoint3 = bestPlaces[0].getAveragePlace / 100;
@@ -2521,17 +2522,16 @@ namespace AgileStructure
                                             { key += "-+"; }
                                             else { key += "--"; }
                                         }
+
+                                        if ((startPoint < pEnd || startPoint >= qEnd) && (ar.getPosition < pEnd || ar.getPosition >= qEnd))
+                                        { key += "outSide"; }
+                                        else if ((startPoint >= pEnd || startPoint < qEnd) && (ar.getPosition >= pEnd || ar.getPosition < qEnd))
+                                        { key += "inSide"; }
+
+                                        if (orientations.ContainsKey(key) == false)
+                                        { orientations.Add(key, 1); }
+                                        else { orientations[key]++; }
                                     }
-
-                                    if ((startPoint < pEnd || startPoint >= qEnd) && (ar.getPosition < pEnd || ar.getPosition >= qEnd))
-                                    { key += "outSide"; }
-                                    else if ((startPoint >= pEnd || startPoint < qEnd) && (ar.getPosition >= pEnd || ar.getPosition < qEnd))
-                                    { key += "inSide"; }
-
-
-                                    if (orientations.ContainsKey(key) == false)
-                                    { orientations.Add(key, 1); }
-                                    else { orientations[key]++; }
                                 }
                             }
                         }
@@ -2672,21 +2672,27 @@ namespace AgileStructure
                 if (DrawnARKeys.ContainsKey(index) == true)
                 {
                     AlignedRead ar = DrawnARKeys[index];
-                    if (places.ContainsKey(referenceSequenceNames[ar.getreferenceIndex]) == false)
+                    if (ar.hasFivePrimeSoftClip == true)
                     {
-                        places.Add(referenceSequenceNames[ar.getreferenceIndex], new List<int>());
-                        places[referenceSequenceNames[ar.getreferenceIndex]].Add(ar.getPosition);
+                        if (places.ContainsKey(referenceSequenceNames[ar.getreferenceIndex]) == false)
+                        {
+                            places.Add(referenceSequenceNames[ar.getreferenceIndex], new List<int>());
+                            places[referenceSequenceNames[ar.getreferenceIndex]].Add(ar.getPosition);
+                        }
+                        else
+                        { places[referenceSequenceNames[ar.getreferenceIndex]].Add(ar.getPosition); }
                     }
-                    else
-                    { places[referenceSequenceNames[ar.getreferenceIndex]].Add(ar.getPosition); }
 
-                    if (places.ContainsKey(referenceSequenceNames[ar.getreferenceIndex]) == false)
+                    if (ar.hasThreePrimeSoftClip == true)
                     {
-                        places.Add(referenceSequenceNames[ar.getreferenceIndex], new List<int>());
-                        places[referenceSequenceNames[ar.getreferenceIndex]].Add(ar.getEndPosition);
+                        if (places.ContainsKey(referenceSequenceNames[ar.getreferenceIndex]) == false)
+                        {
+                            places.Add(referenceSequenceNames[ar.getreferenceIndex], new List<int>());
+                            places[referenceSequenceNames[ar.getreferenceIndex]].Add(ar.getEndPosition);
+                        }
+                        else
+                        { places[referenceSequenceNames[ar.getreferenceIndex]].Add(ar.getEndPosition); }
                     }
-                    else
-                    { places[referenceSequenceNames[ar.getreferenceIndex]].Add(ar.getEndPosition); }
 
                     string secondaryCIGAR = ar.getSecondaryAlignmentTag;
                     if (string.IsNullOrEmpty(secondaryCIGAR) == false)
@@ -2700,21 +2706,27 @@ namespace AgileStructure
                                 int startPoint = Convert.ToInt32(items[1]);
                                 if (sameReferenceSequence == referenceSequenceTarget.Equals(items[0]))
                                 {
-                                    if (places.ContainsKey(items[0]) == false)
+                                    if (getFivePrimeSoftClipLength(items[3]) > 50)
                                     {
-                                        places.Add(items[0], new List<int>());
-                                        places[items[0]].Add(startPoint);
+                                        if (places.ContainsKey(items[0]) == false)
+                                        {
+                                            places.Add(items[0], new List<int>());
+                                            places[items[0]].Add(startPoint);
+                                        }
+                                        else
+                                        { places[items[0]].Add(startPoint); }
                                     }
-                                    else
-                                    { places[items[0]].Add(startPoint); }
 
-                                    if (places.ContainsKey(items[0]) == false)
+                                    if (getThreePrimeSoftClipLength(items[3]) > 50)
                                     {
-                                        places.Add(items[0], new List<int>());
-                                        places[items[0]].Add(startPoint + getAlignedLength(items[3]));
+                                        if (places.ContainsKey(items[0]) == false)
+                                        {
+                                            places.Add(items[0], new List<int>());
+                                            places[items[0]].Add(startPoint + getAlignedLength(items[3]));
+                                        }
+                                        else
+                                        { places[items[0]].Add(startPoint + getAlignedLength(items[3])); }
                                     }
-                                    else
-                                    { places[items[0]].Add(startPoint + getAlignedLength(items[3])); }
                                 }
                             }
                         }
@@ -3023,7 +3035,7 @@ namespace AgileStructure
                             index++;
                         }
 
-                        if (counter > best2 && regionStart < best2Place - 300 || regionStart > best2Place + 300)
+                        if (counter > best2 && (regionStart < best2Place - 300 || regionStart > best2Place + 300))
                         {
                             best2 = counter;
                             best2Place = regionStart;
@@ -3060,7 +3072,10 @@ namespace AgileStructure
 
         private void variantTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
+            if (cboSecondaries.SelectedIndex == 0)
+            { MessageBox.Show("You must select a region containing the secondary alignments.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+
+                try
             {
                 if (selectedIndex.Count > 0)
                 {
@@ -3079,7 +3094,7 @@ namespace AgileStructure
                     string mutation = "";
                     MutationType answer = testMutationType(bestPlaces);
 
-                    if (answer == MutationType.Deletion || answer== MutationType.Inversion)
+                     if (answer == MutationType.Deletion || answer== MutationType.Inversion)
                     {
                         if (couldItBeAnInsert() == true)
                         { answer = MutationType.Insertion; }
@@ -3279,10 +3294,23 @@ namespace AgileStructure
 
                     startPoint.Sort();
                     endPoint.Sort();
+                    
+                    int middle = 0;
+                    int mediumStart = 0;
+                    int mediumEnd = 0;
 
-                    int middle = startPoint.Count / 2;
-                    int mediumStart = (startPoint[middle - 1] + startPoint[middle]) / 2;
-                    int mediumEnd = (endPoint[middle - 1] + endPoint[middle]) / 2;
+                    if (startPoint.Count % 2 == 0)
+                    {
+                        middle = startPoint.Count / 2;
+                        mediumStart = (startPoint[middle - 1] + startPoint[middle]) / 2;
+                        mediumEnd = (endPoint[middle - 1] + endPoint[middle]) / 2;
+                    }
+                    else
+                    {
+                        middle = startPoint.Count / 2;
+                        mediumStart = startPoint[middle];
+                        mediumEnd = endPoint[middle];
+                    }
 
                     sb.Append("\nMedian values\n" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + (mediumStart + 1).ToString("N0") + "ins" + (mediumStart - mediumEnd).ToString("N0") + "bp\n\nDo you want to save the inserts annotation?");
                     if (MessageBox.Show(sb.ToString(), "Inserts", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -3348,9 +3376,23 @@ namespace AgileStructure
                     startPoint.Sort();
                     endPoint.Sort();
 
-                    int middle = startPoint.Count / 2;
-                    int mediumStart = (startPoint[middle - 1] + startPoint[middle]) / 2;
-                    int mediumEnd = (endPoint[middle - 1] + endPoint[middle]) / 2;
+                    int middle = 0;
+                    int mediumStart =0;
+                    int mediumEnd = 0;
+
+                    if (startPoint.Count % 2 == 0)
+                    {
+                         middle = startPoint.Count / 2;
+                         mediumStart = (startPoint[middle - 1] + startPoint[middle]) / 2;
+                         mediumEnd = (endPoint[middle - 1] + endPoint[middle]) / 2;
+                    }
+                    else
+                    {
+                        middle = startPoint.Count / 2;
+                        mediumStart = startPoint[middle];
+                        mediumEnd = endPoint[middle];
+                    }
+
 
                     sb.Append("\nMedian breakpoints\n" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + mediumEnd.ToString("N0") + "del\n\nDo you want to save the data?" );
                     if (MessageBox.Show(sb.ToString(), "Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
