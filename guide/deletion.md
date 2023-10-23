@@ -1,5 +1,11 @@
 # Identifying a Deletion
 
+The patient was first described in: 
+> Watson CM, Crinnion LA, Tzika A, Mills A, Coates A, Pendlebury M, Hewitt S, Harrison SM, Daly C, Roberts P, Carr IM, Sheridan EG, Bonthron DT. (2014) Diagnostic whole genome sequencing and split-read mapping for nucleotide resolution breakpoint identification in CNTNAP2 deficiency syndrome. Am J Med Genet A. 164A:2649-55. doi: 10.1002/ajmg.a.36679.
+
+Sanger sequencing of the individual identified the variant to be: __chr7:146,534,699_146,611,541del__  for the hg19 reference sequence 
+
+
 __Prior information__  
 Using clinical phenotype data an individual was believed to have a mutation in the CNTNAP2 gene.  
 (The read data in in the AgileStructure_dta_sorted.bam file.)
@@ -38,10 +44,15 @@ However, for AgileStructure to annotate a break point it requires a region to be
 
 Figure 6
 
-After selecting all the reads spanning the deletions selecting the ```Variant determination``` > ```Use soft clip data``` > ```Deletion``` menu option prompts AgileStructure to analyse the selected reads and annotate the break point: chr7.146837,611_146,914,450 (Figure 7).  
+After selecting all the reads spanning the deletions selecting the ```Variant determination``` > ```Use soft clip data``` > ```Deletion``` menu option prompts AgileStructure to analyse the selected reads and annotate the break point: chr7.146,837,611_146,914,450del (Figure 7).  
 
 ![Figure 7](images/examples/figure7del.jpg)
 
 Figure 7
+
+As stated at the start the variant had perviously been identified as chr7.146,837,607_146,914,449del when the original coordinates are mapped from hg19 to hg38
+
+chr7.146,837,611_146,914,450del: AgileStructure
+chr7.146,837,607_146,914,449del: original publication
 
 [Return user guide](README.md#deletion) 
