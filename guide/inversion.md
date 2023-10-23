@@ -1,4 +1,4 @@
-# Identifying a translocation
+# Identifying a Inversion
 
 __Prior information__  
 Using standard cytogenetics tests an individual was found to have an inversion in chromosome 7 with the break points around 26 to 28 MB and 91 to 95 MB.  

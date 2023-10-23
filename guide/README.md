@@ -14,11 +14,11 @@
   * [Selecting reads linked to a break point](#selecting-reads-linked-to-a-break-point)
   * [Saving alignment information for selected reads](#saving-alignment-information-for-selected-reads)
   * [Annotating break points using soft clipped data](#annotating-break-points-using-soft-clipped-data)
-    + [Translocation](#translocation)
     + [Deletion](#deletion)
+    + [Duplication](#duplication)    
     + [Insertion](#insertion)
     + [Inversion](#inversion)
-    + [Duplication](#duplication)
+    + [Translocation](#translocation)
   * [Identifying Indels using the primary alignments CIGAR string](#identifying-indels-using-the-primary-alignments-cigar-string)
     + [Important note](#important-note)
     + [Identifying insertions using the primary alignments CIGAR string](#identifying-insertions-using-the-primary-alignments-cigar-string)
@@ -192,17 +192,24 @@ Figure 14b
 Once the variant type is determined it is then possible to get AgileStructure to annotate it by selecting the appropriate option (Figure 15a and 15b)
 
 ### Deletion 
+
 A worked example is [here](deletion.md).
+
 ### Duplication
+
 A worked example is [here](duplication.md).
 
 ### Insertion
 
+A worked example is [here](insertion.md).
+
 ### Inversion
+
 A worked example is [here](inversion.md).
 
 
 ### Translocation
+
  A worked example is [here](translocation.md).
 
 ## Identifying Indels using the primary alignments CIGAR string  
