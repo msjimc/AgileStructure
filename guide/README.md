@@ -263,7 +263,7 @@ As previously mentioned, AgileStructure displays the primary and secondary align
 
 ### Moving the region to the left and right arrow keys
 
-Rather than typing in new locations in to the text areas, its possible to move the region to the left or right by clicking on one of the text areas so that the text area becomes active (you could change the value by typing) and then pressing the CRTL + 'left arrow' or CRTL + 'right arrow' keys. 
+Rather than typing in new locations in to the text areas, its possible to move the region to the left or right by clicking on one of the text areas so that the text area becomes active (you could change the value by typing) and then pressing the ```CrtlL`````` + ```left arrow``` or ```Crtl`````` + ```right arrow``` keys. 
 
 ### Changing the regions by selecting a region with the mouse
 

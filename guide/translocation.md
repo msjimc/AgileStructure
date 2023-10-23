@@ -46,4 +46,4 @@ Figure 7
 
 The break point identified in the 2nd analysis: t(chr4;chr22)g.6,713,998:g.50,283,262) is derived from a different set of reads and so could be considered an independent test. While the base pair position of the two break points are slightly different it should be close enough to design a diagnostic PCR test.
 
-[Return user guide](README.md) 
+[Return user guide](README.md#translocation) 

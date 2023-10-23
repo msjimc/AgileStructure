@@ -65,4 +65,4 @@ Figure 10
 
 In this case the annotation changes by a base pair from chr17.68,543,927_68,601,120dup to chr17.68,543,928_68,601,120dup
 
-[Return user guide](README.md) 
+[Return user guide](README.md#duplication) 

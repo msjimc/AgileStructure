@@ -44,4 +44,4 @@ After selecting all the reads spanning the deletions selecting the ```Variant de
 
 Figure 7
 
-[Return user guide](README.md) 
+[Return user guide](README.md#deletion) 

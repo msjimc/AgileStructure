@@ -52,4 +52,4 @@ This set of reads is not as clear as those at the first site, with one secondary
 
 Figure 8
 
-[Return user guide](README.md)
+[Return user guide](README.md#inversion)

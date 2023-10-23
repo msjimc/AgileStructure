@@ -34,3 +34,5 @@ Once reads that map to all three break point sites have been selected, the varia
 Figure 5
 
 The annotated variant is very close to the expected annotation. 
+
+[Return user guide](README.md#insertion)
