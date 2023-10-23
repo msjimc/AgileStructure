@@ -191,32 +191,19 @@ Figure 14b
 
 Once the variant type is determined it is then possible to get AgileStructure to annotate it by selecting the appropriate option (Figure 15a and 15b)
 
-### Translocation
-
-![Figure 15a](images/figure15a.jpg)
-
-Figure 15a
-
-![Figure 15ba](images/figure15b.jpg)
-
-Figure 15b
-
-The message box reporting the mutation will also allow you to save the the mutation's annotation as well as the underlying sequence data to a text file by pressing the ```Yes``` button (an example is [here](images/breakPointData.txt)).
-
-The break point is annotated with reference to the reads selected, in this case those whose primary alignment is on chromosome 4. However, the alignment will also contaion reads whose primary alignment is on the other side of the break point and whose soft clipped sequences mapped to the currently selected reference. To view these reads select the ```Variant determination``` > ```Switch region``` option , select the putative break point and reads as before (Figure 16a) and press the ```Variant determination``` > ```Use soft clip data``` > ```Translocation```. If the annotation is correct, both annotations should match with a small difference in the base pair position (Figure 16b).
-
-![Figure 16a](images/figure16a.jpg)
-
-Figure 16a
-
-![Figure 15b](images/figure16b.jpg)
-
-Figure 16b
-
 ### Deletion 
-### Insertion
-### Inversion
+A worked example is [here](deletion.md).
 ### Duplication
+A worked example is [here](duplication.md).
+
+### Insertion
+
+### Inversion
+A worked example is [here](inversion.md).
+
+
+### Translocation
+ A worked example is [here](translocation.md).
 
 ## Identifying Indels using the primary alignments CIGAR string  
 
