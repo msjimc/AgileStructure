@@ -1,4 +1,4 @@
-# Identifying a translocation
+# Identifying a Translocation
 
 __Prior information__  
 Using standard cytogenetics tests an individual was found to have a translocation of the tip of chromosome 4 with the tip of chromosome 22. The breakpoint was narrowed down to around 6 to 7 Mb on chromosome 4 and 50 to 51 Mb on chromosome 22.  
