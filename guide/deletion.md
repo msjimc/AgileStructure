@@ -50,7 +50,7 @@ After selecting all the reads spanning the deletions selecting the ```Variant de
 
 Figure 7
 
-As stated at the start the variant had perviously been identified as chr7.146,837,607_146,914,449del when the original coordinates are mapped from hg19 to hg38
+As stated at the above, the variant had perviously been identified as chr7.146,837,607_146,914,449del when the original coordinates are mapped from hg19 to hg38:
 
 chr7.146,837,611_146,914,450del: AgileStructure
 chr7.146,837,607_146,914,449del: original publication
