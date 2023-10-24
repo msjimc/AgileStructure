@@ -3,7 +3,7 @@
 __Prior information__  
 Due to a lack of patient data with a large insertion, a reference sequence was created in which 0.5 Mb of sequence was removed from chromosome 1 at 10,000,000 bp and inserted at 200,000,000 bp of chromosome 1. When reads from a health individual are aligned to this data it would appear as if it has a 500 Kb insert at 10,000,000 bp on chromosome 1 which originated from 199,500,000 of chromosome 1. 
 
-Import the data by pressing the ```Bam file``` button and then selected chromosome 1 from the upper dropdown list box and enter the co-ordinates for the approximate position you want to start the search for the first break point in the  two text boxes to the right of the dropdown list and import the data by selecting the ```Analysis``` > ```Only show reads with secondary alignments``` menu option (Figure 1)
+Import the data by pressing the ```Bam file``` button and selecting the file and then select chromosome 1 from the upper dropdown list box and enter the co-ordinates for the approximate position you want to start the search for the first break point in the  two text boxes to the right of the dropdown list and import the data by selecting the ```Analysis``` > ```Only show reads with secondary alignments``` menu option (Figure 1)
 
 ![Figure 1](images/examples/figure1ins.jpg)
 
@@ -33,6 +33,6 @@ Once reads that map to all three break point sites have been selected, the varia
 
 Figure 5
 
-The annotated variant is very close to the expected annotation. 
+The annotated variant: chr1,10,00,000_10,000,001ins chr1.199,499,999_199,999,999 is very close to the expected annotation of chr1,10,00,000_10,000,001ins chr1.199,500,000_200_000,000. 
 
 [Return user guide](README.md#insertion)
