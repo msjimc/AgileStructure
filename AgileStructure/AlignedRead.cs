@@ -46,8 +46,6 @@ namespace AgileStructure
         private bool drawn = false;
         private bool largeIndel = false;
 
-        private List<string> variants = null;
-
         public AlignedRead(string line, int Index)
         {
             try
@@ -454,8 +452,5 @@ namespace AgileStructure
         public bool hasThreePrimeSoftClip
         { get { return (blocks[blocks.Count-1].state == fragmentType.Unaligned && blocks[blocks.Count-1].length > 50); } }
 
-        public List<string> GetVariants
-        { get { return variants; } }
-            
     }
 }
