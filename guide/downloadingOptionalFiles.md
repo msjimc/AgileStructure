@@ -19,7 +19,7 @@ Figure 2b Downloading repeat coordinates.
 
 <hr />
 
-In both cases the genome option is selected to obtain data from the entire genome with the format set using the "selected fields from primary and related tables" and "tsv (tab-separated) text file" options. Finally, to speed the downloading the data is compressed using the "gzip compressed" option. Pressing the "get output" directs the user to a 2nd page with which to selected what data fields are required (Figures 3a and 3b). Once the required fields have been set, pressing the "get output" button will start the download.
+In both cases the genome option is selected to obtain data from the entire genome with the format is set using the "selected fields from primary and related tables" and "tsv (tab-separated) text file" options. Finally, to speed the downloading the data is compressed using the "gzip compressed" option. Pressing the "get output" directs the user to a 2nd page with which to selected what data fields are required (Figures 3a and 3b). Once the required fields have been set, pressing the "get output" button will start the download.
 
 ![Figure 3a](images/fig3_genes.png)
 
