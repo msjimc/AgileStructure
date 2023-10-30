@@ -46,7 +46,7 @@ This annotation depends solely on reads with primary alignments at the 27.7 Mb s
 
 Figure 7
 
-This set of reads is not as clear as those at the first site, with one secondary alignment flanked by long soft clipped sequences. However, selecting the three reads and selecting the ```Variant determination``` > ```Use soft clip data``` > ```Inversion``` menu option annotates the inversion as chr7, 27,722,805_93,970,219inv  which is very close to the first annotation (Figure 8).
+This set of reads is not as clear as those at the first site, with one secondary alignment flanked by long soft clipped sequences. However, selecting the three reads and selecting the ```Variant determination``` > ```Use soft clip data``` > ```Inversion``` menu option annotates the inversion as chr7, 27,722,805_93,970,219inv (Figure 8), which is very close to the first annotation of chr7, 27,722,809_93,970,219inv (Figure 6).
 
 ![Figure 8](images/examples/figure8inv.jpg)
 

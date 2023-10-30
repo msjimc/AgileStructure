@@ -2590,12 +2590,12 @@ namespace AgileStructure
                     if (best1 > best2)
                     {
                         mutation = "t(" + bestPlaces[1].getReferenceName + ";" + bestPlaces[0].getReferenceName + ") (g."
-                            + breakPoint2.ToString("N0") + ";g." + breakPoint1.ToString("N0") + ")";
+                            + breakPoint2.ToString("N0") + ";g." + breakPoint1.ToString("N0");
                     }
                     else
                     {
                         mutation = "t(" + bestPlaces[0].getReferenceName + ";" + bestPlaces[1].getReferenceName + ") g."
-                            + breakPoint1.ToString("N0") + ";g." + breakPoint2.ToString("N0") + ")";
+                            + breakPoint1.ToString("N0") + ";g." + breakPoint2.ToString("N0");
                     }
 
                     if (MessageBox.Show(mutation + "\nSave with the selected read data?", "Translocation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)

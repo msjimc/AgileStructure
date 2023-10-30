@@ -41,7 +41,7 @@
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
-AgileStructure is composed of two components:  AgileStructure.exe which runs the user interface and analyses the data and bamreaderdll.dll which reads the bam file, extracts the relevant information which its passes to the AgileStructure.exe. To work, both files need to be in the same folder, when AgileStructure starts, it will look for the bamreaderdll.dll file and give an error message if it doesn't find it, it will start without the bamreaderdll.dll, but will do nothing.
+AgileStructure is composed of two components:  AgileStructure.exe which runs the user interface and analyses the data and bamreaderdll.dll which reads the ```bam`````` file, extracts the relevant information which it passes to the AgileStructure.exe. To work, both files need to be in the same folder, when AgileStructure starts, it will look for the bamreaderdll.dll file and give an error message if it doesn't find it: it will start without the bamreaderdll.dll, but will do nothing.
 
 ## Data requirements
 
@@ -51,20 +51,21 @@ AgileStructure is composed of two components:  AgileStructure.exe which runs the
 
 ### Aligned data format
 
-AgileStructure is designed to visualise aligned long read data formatted as indexed ```bam``` files. It's expected that the index file will have the same name as the bam file with the `*.bam.bai` extension appended to the bam files name, for instance the bam file:  
+AgileStructure is designed to visualise aligned long read data formatted as indexed ```bam``` files. It's expected that the index file will have the same name as the ```bam``` file with the ```*.bai``` extension appended to the bam files name, for instance the bam file:  
 ```CNTNAP2.srt.mm2.bam```  
 will have a index file named:  
 ```CNTNAP2.srt.mm2.bam.bai```  
-which will be in the same directory as the bam file.
+which will be in the same directory as the bam file.  
+The ```bam``` file must contain the header section which lists the name and size of each reference sequence in the reference genome.
 
 ### Preferred long read sequence aligners
 
-Long reads that span a break point will appear to consist of two regions of homology, mapping to different locations in the genome. How these chimeric alignments are reported are aligner specific. Some aligners such as minimap2 ([github](https://github.com/lh3/minimap2), [paper](https://academic.oup.com/bioinformatics/article/34/18/3094/4994778)), treat the two regions as different alignments, but will report the secondary alignment as a condensed CIGAR string in the primary alignments tag section, while others, report the read as two separate alignments, but not directly reference the other alignment's position and CIGAR string. However, for shorter indels both types of aligner may report them in the CIGAR string ([see section](#identifying-indels-using-the-primary-alignments-cigar-string)).  
-AgileStructure is only able to analyse reads in which the indel is reported in the primary alignment's CIGAR string or the secondary alignment is reported in the tag section, however reporting secondary alignments in the tag section is the most flexible method and will allow more complex break points to be processed. Consequently, it is recommended to align data using an aligner like minimap2. 
+Long reads that span a break point will appear to consist of two regions of homology, mapping to different locations in the genome. How these chimeric alignments are reported are aligner specific. Some aligners such as minimap2 ([github](https://github.com/lh3/minimap2), [paper](https://academic.oup.com/bioinformatics/article/34/18/3094/4994778)), treat the two regions as different alignments, but will report the secondary alignment as a condensed CIGAR string in the primary alignments tag section, while others, report the read as two separate alignments, but not directly reference the other alignment's position and CIGAR string. However, for shorter indels both types of aligner may report them in the CIGAR string ([see this section](#identifying-indels-using-the-primary-alignments-cigar-string)).  
+AgileStructure is only able to analyse reads in which the indel is reported in the primary alignment's CIGAR string or the secondary alignment is reported in the tag section: The reporting of the secondary alignment in the tag section is the most flexible method and will allow more complex break points to be processed. Consequently, it is recommended to align data using an aligner like minimap2. 
 
 ### Optional data
 
-To aid the analysis, it is possible to view the putative break points with reference to the  location of repeat and genes sequences. This data can be obtain from the USCS genome browser as described [here](downloadingOptionalFiles.md).
+To aid the analysis, it is possible to view the putative break points with reference to the  location of repeat and gene sequences. This data can be obtain from the USCS genome browser as described [here](downloadingOptionalFiles.md).
 
 ## Importing alignment data
 
@@ -88,8 +89,8 @@ If AgileStructure appears to do nothing, it may because it is unable to find the
 
 ### How indexed bam files are read
 
-Before indexing a bam file, reads are ordered with reference to the read's genomic coordinates and then the reads are compressed by the qzip algorithm to form discrete chunks of data containing reads that start in a small region, so chunk one may contain reads with alignments starting on chr 1 between 1 bp and 16,000 bp and 2nd chunk containing reads on chr 1 between 16,000 bp and 32, ooo bp. The indexing of a file creates a 2nd file (.bam.bai) that lists the start of each chunk in the bam file and the start position of the first read in that chunk.   
-When a program reads has to find reads mapping to a certain region, it looks in the bam.bai files to find the chunks that contain those reads. Once a its found the chunks mapping to the data, it looks up in the index file were that data starts in the bam file and then reads the data at that point in the bam file until it comes to the end of the compressed chunk. It repeats the process until it has read all the data for the region of interest. This works fine for short read data since all the reads in a chunk start between to well defined points (the genomic start site of the chunk and the end of the chunk plus the length of the read i.e. 16,000 bp to 32,000 bp plus 150 bp). However, with long read data, a read may be longer than the size of a chunk's region, so a read 20 kb long may start in  one chunk while the end is be in the next or the next but one chunk. This causes an issue when you select a small region, as reads that over lap the region may be listed in a number chunk much further upstream and so may not be found when reading the bam file.  Consequently, AgileStructure reads the chunk that ends upstream of the start of the region of interest, but if a read is particularly long it may be missed as it starts even further upstream. Therefore when selecting regions, initially select a slightly larger region than required and note if a long read spanning the break point disappears when you shrink the region.      
+Before indexing a bam file, reads are ordered with reference to the read's genomic coordinates and then the data is compressed by the qzip algorithm to form discrete chunks of data containing reads that start in a small region, so chunk one may contain reads with alignments starting on chr 1 between 1 bp and 16,000 bp with the next chunk containing reads on chr 1 between 16,000 bp and 32, ooo bp. The indexing of a file creates a 2nd file (.bam.bai) that lists the start of each chunk in the bam file and the start position of the first read in that chunk.   
+When a program has to find reads mapping to a certain region, it looks in the bam.bai files to find the chunks that contain start position of those reads. Once it's found the chunks mapping to the data, it looks up in the index file were that data starts in the bam file and then reads the data at that point in the bam file until it comes to the end of the compressed chunk. It repeats the process until it has read all the data for the region of interest. This works fine for short read data since all the reads in a chunk start between two well defined points (the genomic start site of the chunk and the end of the chunk plus the length of the read i.e. 16,000 bp to 32,000 bp plus 150 bp). However, with long read data, a read may be longer than the size of a chunk's region, so a read 20 kb long may start in  one chunk while its end may be in the next or the next but one chunk. This causes an issue when you select a small region, as reads that over lap the region may be listed in a chunk much further upstream and so may not be found when reading the bam file.  Consequently, AgileStructure reads the chunk that ends just before the start of the region of interest, but if a read is particularly long it may be missed as it starts even further upstream. Therefore when selecting regions, initially select a slightly larger (16 kb) region than required and note if a long read spanning the break point disappears when you shrink the region.      
 
 ## Selecting the region to view
 
@@ -105,7 +106,7 @@ AgileStructure does not have an upper limit on the size of the region or number 
 
 ## Hiding reads without a soft clipped segment
 
-When adding reads to the image, they are stacked so as little space as possible is used, however for alignments with a high read depth, the stacks may be to too tall to fit in the image. Since, reads that have a soft clipped region are more important in break point detection it is possible to hide those without an unaligned fragment by selecting the ```Analysis``` > ```Only show reads with secondary alignments ``` menu option (Figure 4).
+When adding reads to the display, they are stacked so as little space as possible is used, however for alignments with a high read depth, the stacks may be to too tall to fit in the image. Since, reads that have a soft clipped region are more important in break point detection it is possible to hide those without an unaligned fragment by selecting the ```Analysis``` > ```Only show reads with secondary alignments ``` menu option (Figure 4).
 
 ![Figure 4](images/figure4.jpg)
 
@@ -149,7 +150,7 @@ Figure 9
 
 ## Viewing read alignment information
 
-Selecting the ```Data``` > ```View read data``` will cause a resizable window to appear that consist solely of a text area. If the mouse cursor is held over a read, its underlying data will be written to the text area. For a sequence to be selected, the cursor has to hover over the read for a little while. This makes it possible to select a read and then quickly move the cursor to the new window and copy the data to paste in a document etc.
+Selecting the ```Data``` > ```View read data``` (Figure 10a) will cause a resizable window to appear that consist solely of a text area. If the mouse cursor is held over a read, its underlying data will be written to the text area (Figure 10b). For a sequence to be shown, the cursor has to hover over the read for a little while. This makes it possible to select a read and then quickly move the cursor to the new window and copy the data to paste in a document etc.
 
 ![Figure 10a](images/figure10a.jpg)
 
@@ -159,12 +160,12 @@ Figure 10a
 
 Figure 10b
 
-Since the read, quality score string and CIGAR string can be several thousand characters lond, the text area doesn't word wrap text and so if you want to read the end of a CIGAR string you must use the horizontal scroll bar.  
-As well as the sequence and quality string, this information contains the primary and secondary alignments' location etc as well all the tags added by the aligner. The format of the tag data may be aligner specific with the aligner's documentation giving a full description of them.
+Since the read, quality score string and CIGAR string can be several thousand characters long, the text area doesn't word wrap text (unless it's very long) and so if you want to read the end of a CIGAR string you must use the horizontal scroll bar.  
+As well as the sequence and quality string, this information contains the primary and secondary alignments' location as well all the tags added by the aligner. The format of the tag data may be aligner specific with the aligner's documentation giving a full description of them.
 
 ## Selecting reads linked to a break point
 
-When the upper image contains a large number of reads it may not be possible identify the reads associated with the selected break point, however clicking on a read in either image will cause it to be selected and drawn with a blue boarder. Clicking on all the reads linked to a break point in the lower image will help to identify the break point in the upper image (Figure 11)
+When the upper image contains a large number of reads, it may not be possible to identify the reads associated with the selected break point, however clicking on a read in either image will cause it to be selected and drawn with a blue boarder. Clicking on all the reads linked to a break point in the lower image will help to identify the break point in the upper image (Figure 11)
 
 ![Figure 11](images/figure11.jpg)
 
@@ -178,7 +179,7 @@ Figure 12
 
 ## Saving alignment information for selected reads
 
-Rather than manually saving the data for a series of read alignments, its possible to save all the data of selected reads to a text file using the ```Data``` > ```Save selected reads``` (Figure 13).
+Rather than manually saving the data for a series of read alignments, its possible to save the data of selected reads to a text file using the ```Data``` > ```Save selected reads``` (Figure 13).
 
 ![Figure 13](images/figure13.jpg)
 
@@ -186,7 +187,8 @@ Figure 13
 
 ## Annotating break points using soft clipped data
 
-Once the reads spanning a break point have been selected, is is possible to get AgileStructure to attempt to identify the type of : deletion, duplication, insertion, inversion or translocation. To see what type of mutation the break point represents select the ```Variant determination``` > ```Use soft clip data``` > ```Variant type``` menu option (Figure 14a). AgileStructure will scan the reads primary and secondary alignment data and the orientation of the soft clipped data with respect to the aligned sequences to determine what type of mutation it is. This is reported in a message box with the possible answers of "Deletion", "Insertion", "Inversion", "Duplication" or "Translocation" as well as messages indicating any error processing the data or user data selection issues (Figure 14b).
+Once the reads spanning a break point have been selected, is is possible to get AgileStructure to attempt to identify the type of variant: deletion, duplication, insertion, inversion or translocation. To see what type of mutation the break point represents select the ```Variant determination``` > ```Use soft clip data``` > ```Variant type``` menu option (Figure 14a). AgileStructure will scan the reads primary and secondary alignment data and the orientation of the soft clipped data with respect to the aligned sequences to determine what type of mutation it is. This is reported in a message box with the possible answers of "Deletion", "Insertion", "Inversion", "Duplication" or "Translocation" as well as messages indicating any error processing the data or user data selection issues (Figure 14b).  
+***For this feature to work a region must be selected in the lower panel***.
 
 ![Figure 14a](images/figure14a.jpg)
 
@@ -221,18 +223,18 @@ A worked example is [here](inversion.md).
 
 ## Identifying Indels using the primary alignments CIGAR string  
 
-AgileStructure was primarily designed to identify chromosomal break points by looking for sets reads whose alignment is broken in two, such that part of the read aligns at one location and the the other fragment is located some distance away or on a different chromosome. However, it is also able to identify insertions and deletions that do not cause the alignment to be fragmented, but whose presence is noted in the primary alignment's CIGAR string.  
-Selecting the ```Analysis``` > ```Look for indels within a read``` menu option (Figure A) causes the reads to be redrawn with deletions shown as a horizontal black line linking to blocks of aligned sequences while an insertion is shown as a vertical line projecting above and below the aligned sequence. Since ONT data contains numerous short indels, only insertions longer than 10 bp are shown/processed.
+AgileStructure was primarily designed to identify chromosomal break points by looking for sets of reads whose alignment is broken in two, such that part of the read aligns at one location and the the other fragment is located some distance away or on a different chromosome. However, it is also able to identify insertions and deletions that do not cause the alignment to be fragmented, but whose presence is noted in the primary alignment's CIGAR string.  
+Selecting the ```Analysis``` > ```Look for indels within a read``` menu option (Figure 15) causes the reads to be redrawn with deletions shown as a horizontal black line linking two blocks of aligned sequences while an insertion is shown as a vertical line projecting above and below the aligned sequence. Since ONT data contains numerous short indels, only insertions/deletions longer than 10 bp are shown/processed.
 
-![Figure A](images/figureA.jpg)
+![Figure 15](images/figureA.jpg)
 
-Figure A
+Figure 15
 
-When redrawn using the the CIGAR string to identify insertions and deletions their presence becomes apparent. For example in Figure B the large deletion spanning 1,495,000 bp to 1,534,000 bp and the insert at 1,586,000 bp (above the cursor) are easily identified.
+When redrawn using the the CIGAR string to identify insertions and deletions their presence becomes apparent. For example in Figure 16 the large deletion spanning 1,495,000 bp to 1,534,000 bp and the insert at 1,586,000 bp (above the cursor) are easily identified.
 
-![Figure B](images/figureB.jpg)
+![Figure 16](images/figureB.jpg)
 
-Figure B
+Figure 16
 
 ### Important note
 
@@ -240,33 +242,33 @@ Since ONT data is very noisy the exact point of the break point may appear to va
 
 ### Identifying insertions using the primary alignments CIGAR string
 
-To annotate an insert, select the reads the containing variant of interest and select ```Variant determination``` > ```Use primary alignment's CIGAR string``` > ```Insertion``` (Figure Ca). This will display a message box, listing any insertions over 10 bps followed by the read's name and the annotation of the variant. Analysis may require reads with multiple insertions to be deselected.
+To annotate an insert, select the reads the containing variant of interest and select ```Variant determination``` > ```Use primary alignment's CIGAR string``` > ```Insertion``` (Figure 17a). This will display a message box, listing any insertions over 10 bps followed by the read's name and the annotation of the variant. The analysis may require reads with multiple insertions to be deselected.
 
-![Figure Ca](images/figureCa.jpg)
+![Figure 17a](images/figureCa.jpg)
 
-Figure C
+Figure 17
 
-![Figure Cb](images/figureCb.jpg)
+![Figure 17b](images/figureCb.jpg)
 
-Figure Cb
+Figure 17b
 
 ### Identifying deletions using the primary alignments CIGAR string  
 
-To annotate a deletion, select the reads containing variant of interest and then select ```Variant determination``` > ```Use primary alignment's CIGAR string``` > ```Deletion``` menu option (Figure Da). This will open a message box, listing the deletions over 10 bps followed by the reads and finally the variant's annotation.
+To annotate a deletion, select the reads containing the variant of interest and then select ```Variant determination``` > ```Use primary alignment's CIGAR string``` > ```Deletion``` menu option (Figure 18a). This will open a message box, listing the deletions over 10 bps followed by the reads and finally the variant's annotation (Figure 18b).
 
-![Figure Da](images/figureDa.jpg)
+![Figure 18a](images/figureDa.jpg)
 
-Figure D
+Figure 18
 
-![Figure Db](images/figureDb.jpg)
+![Figure 18b](images/figureDb.jpg)
 
-Figure Db
+Figure 18b
 
 ## Navigating the read data
 
 ### Changing the region by typing the co-ordinates
 
-As previously mentioned, AgileStructure displays the primary and secondary alignments in two panels, above each are two text area where the start and end points of the displayed data can be changed. Since the primary read data is retrieved from the bam file which can be slow, changes to the primary alignment region are only made when the ```Get reads``` button is pressed. However, changes to the co-ordinates of secondary alignment image are displayed instantly.  
+As previously mentioned, AgileStructure displays the primary and secondary alignments in two panels, above each are two text areas where the start and end points of the displayed data can be changed. Since the primary read data is retrieved from the bam file which can be slow, changes to the primary alignment region are only made when the ```Get reads``` button is pressed. However, changes to the co-ordinates of secondary alignment image are displayed instantly.  
 
 ### Moving the region to the left and right arrow keys
 
@@ -274,57 +276,57 @@ Rather than typing in new locations in to the text areas, its possible to move t
 
 ### Changing the width of the region with the up and down arrow keys
 
-In a similar manner to moving the region to the right or left, it's possible to double or half the width of the region, but activating a text area and then pressing the ```CrtlL``` + ```up arrow``` or ```Crtl``` + ```down arrow``` keys. While the size of the region changes, it remains centered on the same point in the reference sequence.
+In a similar manner to moving the region to the right or left, it's possible to double or half the width of the region: Activate a text area and then pressing the ```CrtlL``` + ```up arrow``` or ```Crtl``` + ```down arrow``` keys. While the size of the region changes, it remains centered on the same point in the reference sequence.
 
 ### Changing the region by selecting a region with the mouse
 
-The mouse can be used to select a sub-region of the current display in either panel by moving the cursor to the desired start point and then moving the mouse to the end point while holding the right mouse button down (Figure Ea). When the mouse button is released the display is redrawn (Figure Eb). In figure Eb an insert can be seen in four reads, while its position appears variable, all the reads had a 134 to 135 bp insertion suggesting its position is inaccurately placed possibly due to sequencing errors in the flanking sequences (Figure Ec). The order of the reads in the message box is ordered by chromosomal position and so not in the same order as the reads are displayed.
+The mouse can be used to select a sub-region of the current display in either panel by moving the cursor to the desired start point and then moving the mouse to the end point while holding the right mouse button down (Figure 19a). When the mouse button is released the display is redrawn (Figure 19b). In figure 19b an insert can be seen in four reads, while its position appears variable, all the reads had a 134 to 135 bp insertion suggesting its position is inaccurately placed possibly due to sequencing errors in the flanking sequences (Figure 19c). The order of the reads in the message box is ordered by chromosomal position and so is not in the same order as the reads are displayed.
 
-![Figure Ea](images/figureEa.jpg)
+![Figure 19a](images/figureEa.jpg)
 
-Figure Ea
+Figure 19a
 
-![Figure Eb](images/figureEb.jpg)
+![Figure 19b](images/figureEb.jpg)
 
-Figure Eb
+Figure 19b
 
-![Figure Ec](images/figureEc.jpg)
+![Figure 19c](images/figureEc.jpg)
 
-Figure Ec
+Figure 19c
 
 ### Changing the regions using the History functions
 
-As each change in the either primary and secondary display co-ordinates is made, the old positions are saved, allowing the views to be recreated by selecting the appropriate co-ordinates from the lists in ```History``` > ```Primary alignments``` or ```History``` > ```Secondary alignments``` menu option (Figure F).
+As each change in either the primary and secondary display co-ordinates is made, the old positions are saved, allowing the views to be recreated by selecting the appropriate co-ordinates from the lists in ```History``` > ```Primary alignments``` or ```History``` > ```Secondary alignments``` menu option (Figure 20F).
 
-![Figure F](images/figureF.jpg)
+![Figure 20](images/figureF.jpg)
 
-Figure F
+Figure 20
 
 ## Selecting an area that contains a specific gene
 
-The [Displaying gene positions](#displaying-gene-positions) section explains how to import gene locations, once this has been done it is then possible to navigate to a region that contains a specific gene by selecting the ```Annotation``` > ```Gene coordinates``` menu option (Figure la).
+The [Displaying gene positions](#displaying-gene-positions) section explains how to import gene locations, once this has been done it is possible to navigate to a region that contains a specific gene by selecting the ```Annotation``` > ```Gene coordinates``` menu option (Figure 21a).
 
-![Figure La](images/figureLa.jpg)
+![Figure 21a](images/figureLa.jpg)
 
-Figure La
+Figure 21a
 
-This will open the ```Gene co-ordinates``` window which consists of two text areas, type the gene symbol for the gene of interest in the upper text area (Figure Lb).  
+This will open the ```Gene co-ordinates``` window which consists of two text areas, type the gene symbol for the gene of interest in the upper text area (Figure 21b).  
 
-![Figure Lb](images/figureLb.jpg)
+![Figure 21b](images/figureLb.jpg)
 
-Figure Lb
+Figure 21b
 
-Press the ```Find``` button and if the gene is present imported gene coordinate data, it's coordinates will be displayed in the lower text area (Figure Lc).
+Press the ```Find``` button and if the gene is present in the imported gene coordinate data, it's coordinates will be displayed in the lower text area (Figure 21Lc).
 
-![Figure Lc](images/figureLc.jpg)
+![Figure 21c](images/figureLc.jpg)
 
-Figure Lc
+Figure 21c
 
-Pressing ```Accept``` will reset the the coordinates in AgileStructure main window, pressing the ```Get reads``` button will then update the Primary alignment window (Figure Ld).
+Pressing ```Accept``` will reset the the coordinates in AgileStructure main window, pressing the ```Get reads``` button will then update the Primary alignment window (Figure 21d).
 
-![Figure Ld](images/figureLd.jpg)
+![Figure 21d](images/figureLd.jpg)
 
-Figure Ld
+Figure 21d
 
 ## Viewing data with reference to genomic features
 
@@ -332,60 +334,60 @@ It is possible to view the read data with reference to the genes and repeats aro
 
 ### Displaying gene positions
 
-Gene coordinate data can be imported by selecting the ```Annotation``` > ```Gene annotation file``` menu option (Figure G).
+Gene coordinate data can be imported by selecting the ```Annotation``` > ```Gene annotation file``` menu option (Figure 22).
 
-![Figure G](images/figureG.jpg)
+![Figure 22](images/figureG.jpg)
 
-Figure G
+Figure 22
 
-Genes are displayed as black rectangles with their exons drawn as either green (gene on forward strand) or yellow (gene on reverse strand) at the bottom of the displays. 
+Genes are displayed as black rectangles with their exons drawn as either green (gene on forward strand) or yellow (gene on reverse strand) at the bottom of the displays (Figure 23). 
 
-![Figure H](images/figureH.jpg)
+![Figure 23](images/figureH.jpg)
 
-Figure H
+Figure 23
 
-Clicking on a gene will cause is name to be displayed to the top left of the appropriate display, for instance in Figure I the genes near the break point (Primary alignment display: LOC105378240 and secondary alignment display: PLXNB2) have been selected.
+Clicking on a gene will cause is name to be displayed to the top left of the appropriate display, for instance in Figure 24 the genes near the break point (Primary alignment display: LOC105378240 and secondary alignment display: PLXNB2) have been selected.
 
-![Figure I](images/figureI.jpg)
+![Figure 24](images/figureI.jpg)
 
-Figure I
+Figure 24
 
 ### Displaying repeats positions
 
-Repeat coordinates are imported by selecting the ```Annotation``` > ```Select repeat annotation file``` option (Figure J). Unlike the gene positions, repeats are only drawn when the ```Annotation``` > ```Show repeats``` option is selected (Figure J). This is due to the large number of repeats requiring an excessive amount of memory to store and then slow to draw across large regions. Consequently, AgileStructure will only retain the repeat file's filename and reads the file each time it is required to draw them.  
+Repeat coordinates are imported by selecting the ```Annotation``` > ```Select repeat annotation file``` option (Figure 25). Unlike the gene positions, repeats are only drawn when the ```Annotation``` > ```Show repeats``` option is selected (Figure J). This is due to the large number of repeats requiring an excessive amount of memory to store and then slow to draw across large regions. Consequently, AgileStructure will only retain the repeat file's filename and reads the file each time it is required to draw them.  
 
-![Figure J](images/figureJ.jpg)
+![Figure 25](images/figureJ.jpg)
 
-Figure J
+Figure 25
 
-The repeats are drawn as black rectangles filled in pale blue (forward strand) or pale yellow (reverse strand) across a single row at the very bottom of the displays. As with the genes, clicking on a repeat will cause it's name, class and family to be displayed at the top left of the display. For example in Figure K, the repeats close to the break point (Primary alignment: AluSz, SINE, Alu and Secondary alignment: (CCCACC)n, Simple repeat, Simple repeat) have been selected.
+The repeats are drawn as black rectangles filled in pale blue (forward strand) or pale yellow (reverse strand) across a single row at the very bottom of the displays. As with the genes, clicking on a repeat will cause it's name, class and family to be displayed at the top left of the display. For example in Figure 26, the repeats close to the break point (Primary alignment: AluSz, SINE, Alu and Secondary alignment: (CCCACC)n, Simple repeat, Simple repeat) have been selected.
 
-![Figure K](images/figureK.jpg)
+![Figure 26K](images/figureK.jpg)
 
-Figure K
+Figure 26
 
 ## Miscellaneous functions
 
 ### Cursor location
 
-The ```Annotation``` > ```Show position of cursor``` menu option displays the genomic co-ordinates of cursor's position (Figure Mb). It should be remembered that this is inaccurate as a region 1 Mb wide, drawn on an image 860 pixels wide will have 1,162.8 bps mapped to each pixel and is only shown as an aid to understanding the region.
+The ```Annotation``` > ```Show position of cursor``` menu option displays the genomic co-ordinates of cursor's position (Figure 27b). It should be remembered that this is inaccurate as a region 1 Mb wide, drawn on an image 860 pixels wide will have 1,162.8 bps mapped to each pixel and is only shown as an aid to understanding the region.
 
-![Figure Ma](images/figureMa.jpg)
+![Figure 27a](images/figureMa.jpg)
 
-Figure Ma
+Figure 27a
 
-![Figure Mb](images/figureMb.jpg)
+![Figure 27b](images/figureMb.jpg)
 
-Figure Mb
+Figure 27b
 
 ### Aligner string
 
-Typically, the aligner used to map the reads on the reference genome will include the command line arguments used in the alignment. This can be viewed by selecting the ```Data``` > ```Aligner string``` menu option(Figure Na and Nb). This can prove useful when you need to be certain which reference genome was used in the alignment.
+Typically, the aligner used to map the reads on the reference genome will include the command line arguments used in the alignment. This can be viewed by selecting the ```Data``` > ```Aligner string``` menu option(Figure 28a and 28b). This can prove useful when you need to be certain which reference genome was used in the alignment.
 
-![Figure Na](images/figureNa.jpg)
+![Figure 28a](images/figureNa.jpg)
 
-Figure Na
+Figure 28a
 
-![Figure Nb](images/figureNb.jpg)
+![Figure 28b](images/figureNb.jpg)
 
-Figure Nb
+Figure 28b

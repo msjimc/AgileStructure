@@ -34,7 +34,7 @@ Consequently, it is possible to select the deletion without looking for the loca
 
 Figure 4
 
-To view the region in more detail, place the mouse cursor at the start of the region, press the right mouse button and move the cursor to the end of the region before releasing the mouse button to zoom in on the deletion (Figure 4).
+To view the region in more detail, place the mouse cursor at the start of the region, press the right mouse button and move the cursor to the end of the region (Figure 4) before releasing the mouse button to zoom in on the deletion (Figure 5).
 
 ![Figure 5](images/examples/figure5del.jpg)
 
@@ -52,7 +52,7 @@ After selecting all the reads spanning the deletion, selecting the ```Variant de
 
 Figure 7
 
-As stated above, the variant had perviously been identified as chr7.146,837,607_146,914,449del when the original coordinates are mapped from hg19 to hg38 using the [Lift Genome Annotations](https://genome.ucsc.edu/cgi-bin/hgLiftOver) webpage at the UCSC Genome Browser site:
+As stated above, the variant had perviously been identified as chr7.146,837,607_146,914,449del in the hg19 reference build, when the original coordinates are mapped from hg19 to hg38 using the [Lift Genome Annotations](https://genome.ucsc.edu/cgi-bin/hgLiftOver) webpage at the UCSC Genome Browser site, the regions can be seen to closely match:
 
 chr7.146,837,611_146,914,450del: AgileStructure  
 chr7.146,837,607_146,914,449del: original publication

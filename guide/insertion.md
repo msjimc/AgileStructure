@@ -15,13 +15,13 @@ Pressing the ```get reads``` button displays data at the synthetic break point a
 
 Figure 2
 
-While the site of the insertion is seen as a single point, the origin of the inserted sequence is shown as two break points flanking the inserted sequence. Consequently, the region of the insert should be expanded to contain both break points. This can be done, by first selecting the first region in the lower dropdown list and copying the location in the first lower text area (in this case 199,449,999) (Figure 3). 
+While the site of the insertion is seen as a single point, the origin of the inserted sequence is shown as two break points flanking the inserted sequence. Consequently, the region containing the original site of inserted sequence should be expanded to contain both break points. This can be done, by first selecting the first region in the lower dropdown list and copying the beginning of location in the first lower text area (in this case 199,449,999) (Figure 3). 
 
 ![Figure 3](images/examples/figure3ins.jpg)
 
 Figure 3
 
-Next, select the likely region of the 3' most break point and pasted the copied location back in the first lower text area and then selecting the reads aligning to this break point (Figure 4)
+Next, select the likely region of the 3' most break point and pasting the copied location back in the first lower text area and then selecting the reads aligning to this break point (Figure 4)
 
 ![Figure 4](images/examples/figure4ins.jpg)
 

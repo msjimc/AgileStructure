@@ -1,7 +1,7 @@
 # Identifying a Duplication
 
 __Prior information__  
-Using clinical phenotype data an individual was believed to have a mutation in the FAM20A gene, however only a single pathogenic variant was found in what is normally a recessive condition. Consequently, the region was screened for structural rearrangement that could affect the gene.
+Using clinical phenotype data an individual was believed to have a mutation in the FAM20A gene, however only a single pathogenic variant was found in what is normally a recessive condition. Consequently, the region was screened for structural rearrangement that could affect the gene.  
 (The aligned read data in in the AgileStructure_data_sorted.bam file.)
 
 Import the aligned data by pressing ```BAM file``` button. While it's possible to determine the location of the FAM20A gene from a number of sources, in this example we'll get AgileStructure to identify the region using the RefSeq gene data set. To do this first download the data set as described [here](downloadingOptionalFiles.md), pick the ```Annotation``` > ```Gene annotation file``` menu option and select the file (Figure 1). The annotation file must be for the same reference build as the reference sequences the read data was aligned too.
@@ -22,7 +22,7 @@ Pressing the ```Accept``` button will then cause the gene's coordinates to appea
 
 Figure 3
 
-While any rearrangement is presumed to affect FAM20A's expression, it may not directly impact on the gene's sequences, consequently the region was enlarged by placing the cursor in one of the upper text areas (such that you could type in the area) and the ```Ctrl``` + ```up arrow``` were pressed; this will double the size of the region. The number of reads displayed in the upper panel was reduced by selecting the ```Analysis``` > ```Only show reads with secondary alignments``` menu option (Figure 4)
+While the putative rearrangement is presumed to affect FAM20A's expression, it may not directly impact on the gene's sequences, consequently the region was enlarged by placing the cursor in one of the upper text areas (such that you could type in the area) and the ```Ctrl``` + ```up arrow``` were pressed; this will double the size of the region. The number of reads displayed in the upper panel was then reduced by selecting the ```Analysis``` > ```Only show reads with secondary alignments``` menu option (Figure 4)
 
 ![Figure 4](images/examples/figure4dup.jpg)
 
@@ -34,7 +34,7 @@ Two columns of reads with secondary alignments can readily be seen at positions 
 
 Figure 5
 
-Searching the the lower dropdown list for a region within the FAM20A gene reveals two regions with a noticeable number of reads with secondary alignments: chr17 68,543,840 bp (14) and chr17 68,601,102 bp (10). Select the first region and then, in the lower panel, click on each read spanning the break point to select it and show its primary alignment at the second break point in the upper window (Figure 6)
+Searching the lower dropdown list for a region within the FAM20A gene reveals two regions with a noticeable number of reads with secondary alignments: chr17 68,543,840 bp (14) and chr17 68,601,102 bp (10). Select the first region and then, in the lower panel, click on each read spanning the break point to select it and show its primary alignment at the second break point in the upper window (Figure 6)
 
 ![Figure 6](images/examples/figure6dup.jpg)
 
