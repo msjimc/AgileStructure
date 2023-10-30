@@ -395,7 +395,7 @@ namespace AgileStructure
             {
                 bool justChimeric = onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Checked;
                 bool justLargeIndels = onlyShowReadsWithALargeIndelToolStripMenuItem.Checked;
-                //chr7:146,833,830-146,845,586 or 146919450
+                
                 if (selectEnd > 0 && selectStart > 0 && cboRef.SelectedIndex > 0)
                 {
                     AddHistory();
@@ -446,7 +446,7 @@ namespace AgileStructure
                         }
                         else { endRegion = selectEnd; }
 
-                        lastReadPosition = IPs[indexRef].getBPStart;// + 16384;
+                        lastReadPosition = IPs[indexRef].getBPStart;
 
                         if (skipThisBlock == false)
                         {
