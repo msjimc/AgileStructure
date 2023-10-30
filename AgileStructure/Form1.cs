@@ -465,7 +465,7 @@ namespace AgileStructure
                                         if (string.IsNullOrEmpty(r) == false)
                                         {
                                             AlignedRead ar = new AlignedRead(r, AR.Count + 1);
-
+                                       
                                             if (ar.IsGood == true && ar.IsSupplementaryAlignment == false && ar.IsSecondaryAlignment == false)
                                             {
 
