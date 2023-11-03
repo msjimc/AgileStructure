@@ -411,9 +411,12 @@ namespace AgileStructure
                     makeBaseImage();
 
                     int index = cboRef.SelectedIndex - 1;
-                    ulong regionStart = (ulong)selectStart - 16384;
-                    if (regionStart < 0) { regionStart = 0; }
-                    ulong regionEnd = (ulong)selectEnd;
+                    int tempInt = selectStart - 16384;
+                    if (tempInt < 0) tempInt = 0;
+                    ulong regionStart = (ulong)tempInt;
+                    tempInt = selectEnd + 16384;
+                    if (tempInt < selectEnd) { tempInt = selectEnd; }
+                    ulong regionEnd = (ulong)tempInt;
 
                     APoint aP = new APoint();
                     aP.BPStart = regionStart;
@@ -446,7 +449,7 @@ namespace AgileStructure
                         }
                         else { endRegion = selectEnd; }
 
-                        lastReadPosition = IPs[indexRef].getBPStart;
+                        //lastReadPosition = IPs[indexRef].getBPStart;
 
                         if (skipThisBlock == false)
                         {
@@ -465,12 +468,13 @@ namespace AgileStructure
                                         if (string.IsNullOrEmpty(r) == false)
                                         {
                                             AlignedRead ar = new AlignedRead(r, AR.Count + 1);
-                                       
+                                            lastReadPosition = ar.getPosition;
+
                                             if (ar.IsGood == true && ar.IsSupplementaryAlignment == false && ar.IsSecondaryAlignment == false)
                                             {
                                                 if ((justChimeric == true && ar.getSecondaryAlignmentTag != "") || (justLargeIndels == true && ar.hasLargeIndel == true))
                                                 {
-                                                    AddRead(ar, lastReadPosition);
+                                                    AddRead(ar, lastReadPosition);                                                    
                                                     ar = null;
                                                 }
                                                 else if (justChimeric == true && ar.getSecondaryAlignmentTag != "")
