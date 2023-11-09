@@ -197,7 +197,7 @@ namespace AgileStructure
                 getBamHeader(file);
                 processBAIFile(file + ".bai");
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             { MessageBox.Show(ex.Message, "Error"); }
             history = new List<string>();
             historySecondary = new List<StringInt>();
@@ -395,7 +395,7 @@ namespace AgileStructure
             {
                 bool justChimeric = onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Checked;
                 bool justLargeIndels = onlyShowReadsWithALargeIndelToolStripMenuItem.Checked;
-                
+
                 if (selectEnd > 0 && selectStart > 0 && cboRef.SelectedIndex > 0)
                 {
                     AddHistory();
@@ -449,8 +449,6 @@ namespace AgileStructure
                         }
                         else { endRegion = selectEnd; }
 
-                        //lastReadPosition = IPs[indexRef].getBPStart;
-
                         if (skipThisBlock == false)
                         {
                             StringBuilder count = new StringBuilder(100);
@@ -459,43 +457,52 @@ namespace AgileStructure
                             {
                                 StringBuilder returnData = new StringBuilder(returnSize);
                                 int reply = getRegion(fn, returnData, returnData.Capacity, IP.get_StreamPoint, endRegion);
-                                string readData = returnData.ToString().Trim();
-                                string[] reads = readData.Split('\n');
-                                if (reads.Length > 0)
+                                string readData = returnData.ToString();
+                                if (readData.Length > 0)
                                 {
-                                    foreach (string r in reads)
+                                    int readIndex = readData.IndexOf("\n");
+                                    int lastReadIndex = 0; 
+                                    while (readIndex > -1)
                                     {
+                                        string r = readData.Substring(lastReadIndex + 1, readIndex - (1 + lastReadIndex));
                                         if (string.IsNullOrEmpty(r) == false)
                                         {
-                                            AlignedRead ar = new AlignedRead(r, AR.Count + 1);
-                                            lastReadPosition = ar.getPosition;
-
-                                            if (ar.IsGood == true && ar.IsSupplementaryAlignment == false && ar.IsSecondaryAlignment == false)
+                                            string name = getKey(r);
+                                            if (AR.ContainsKey(name) == false)
                                             {
-                                                if ((justChimeric == true && ar.getSecondaryAlignmentTag != "") || (justLargeIndels == true && ar.hasLargeIndel == true))
+
+                                                AlignedRead ar = new AlignedRead(r, AR.Count + 1);
+                                                lastReadPosition = ar.getPosition;
+
+                                                if (ar.IsGood == true && ar.IsSupplementaryAlignment == false && ar.IsSecondaryAlignment == false)
                                                 {
-                                                    AddRead(ar, lastReadPosition);                                                    
-                                                    ar = null;
-                                                }
-                                                else if (justChimeric == true && ar.getSecondaryAlignmentTag != "")
-                                                {
-                                                    AddRead(ar, lastReadPosition);
-                                                    ar = null;
-                                                }
-                                                else if (justLargeIndels == true && ar.hasLargeIndel == true)
-                                                {
-                                                    AddRead(ar, lastReadPosition);
-                                                    ar = null;
-                                                }
-                                                else if (justLargeIndels == false && justChimeric == false)
-                                                {
-                                                    AddRead(ar, lastReadPosition);
-                                                    ar = null;
+                                                    if ((justChimeric == true && ar.getSecondaryAlignmentTag != "") || (justLargeIndels == true && ar.hasLargeIndel == true))
+                                                    {
+                                                        AR.Add(name, ar);
+                                                        ar = null;
+                                                    }
+                                                    else if (justChimeric == true && ar.getSecondaryAlignmentTag != "")
+                                                    {
+                                                        AR.Add(name, ar);
+                                                        ar = null;
+                                                    }
+                                                    else if (justLargeIndels == true && ar.hasLargeIndel == true)
+                                                    {
+                                                        AR.Add(name, ar);
+                                                        ar = null;
+                                                    }
+                                                    else if (justLargeIndels == false && justChimeric == false)
+                                                    {
+                                                        AR.Add(name, ar);
+                                                        ar = null;
+                                                    }
                                                 }
                                             }
                                         }
+                                        lastReadIndex = readIndex;
+                                        readIndex = readData.IndexOf("\n", readIndex + 1);
                                     }
-
+                                    readData = null;
                                 }
                             }
                             drawPrimaryAlignments(false);
@@ -519,16 +526,25 @@ namespace AgileStructure
             finally
             { Text = title; }
         }
-
-        private void AddRead(AlignedRead ar, int lastReadPosition)
+        private string getKey(string read)
         {
-            if (AR.ContainsKey(ar.getKey) == false)
-            {
-                AR.Add(ar.getKey, ar);
-                if (lastReadPosition < ar.getPosition)
-                { lastReadPosition = ar.getPosition; }                
-            }
-        }
+            int index = read.IndexOf("\t");//end of name
+            int indexA = read.IndexOf("\t", index + 1);//end of flag
+            string name = read.Substring(index + 1, indexA - (1 + index));
+
+            index = read.IndexOf("\t", indexA + 1);//end of ref index            
+            indexA = read.IndexOf("\t", index + 1);//end of position**
+            name += "|" + read.Substring(index + 1, indexA - (1 + index));
+
+            index = read.IndexOf("\t", indexA + 1);//end ofmappQ
+            index = read.IndexOf("\t", index + 1);//end of CIGAR
+            index = read.IndexOf("\t", index + 1);//end of pair ref index
+            index = read.IndexOf("\t", index + 1);//end of pair ref position
+            index = read.IndexOf("\t", index + 1);//insert size
+            indexA = read.IndexOf("\t", index + 1);//end of end sequence**
+            name += "|" + read.Substring(index + 1, indexA - index).Length.ToString();
+            return name;
+        }  
 
         private void AddHistory()
         {
@@ -623,7 +639,8 @@ namespace AgileStructure
             {
                 makeBaseImage();
                 DrawGenes(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
-               resetReadsDrawnStatus();
+                //DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
+                resetReadsDrawnStatus();
             }
             drawAlignments(AR);
         }
@@ -757,30 +774,33 @@ namespace AgileStructure
 
         private void DrawGenes(Graphics g, int bmpHeigth, string chromosomeName, int startPoint, int endPoint)
         {
-            try
+            if (endPoint - startPoint > 100)
             {
-                if (drawGenes == true && gd != null)
+                try
                 {
-                    double xScale = (p1.Width - 20) / (double)(endPoint - startPoint);
-
-                    ChromosomalPoint left = new ChromosomalPoint(chromosomeName, startPoint - 50000);
-                    ChromosomalPoint right = new ChromosomalPoint(chromosomeName, endPoint + 50000);
-                    Point geneRange = gd.getIndexsRangeOffGenesInARegion(left, right);
-
-                   g.FillRectangle(Brushes.White, 0, bmpHeigth - 22, bmp.Width, 22);
-
-                    for (int index = geneRange.X; index <= geneRange.Y; index++)
+                    if (drawGenes == true && gd != null)
                     {
-                        int height = bmpHeigth - 14;
-                        if ((index & 1) == 1) { height -= 8; }
-                        if (gd.Genes[index].getChromosome.ToLower() == chromosomeName)
-                        { gd.Genes[index].DrawGene(g, 10, height, 5, xScale, startPoint); }
+                        double xScale = (p1.Width - 20) / (double)(endPoint - startPoint);
+
+                        ChromosomalPoint left = new ChromosomalPoint(chromosomeName, startPoint - 50000);
+                        ChromosomalPoint right = new ChromosomalPoint(chromosomeName, endPoint + 50000);
+                        Point geneRange = gd.getIndexsRangeOffGenesInARegion(left, right);
+
+                        g.FillRectangle(Brushes.White, 0, bmpHeigth - 22, bmp.Width, 22);
+
+                        for (int index = geneRange.X; index <= geneRange.Y; index++)
+                        {
+                            int height = bmpHeigth - 14;
+                            if ((index & 1) == 1) { height -= 8; }
+                            if (gd.Genes[index].getChromosome.ToLower() == chromosomeName)
+                            { gd.Genes[index].DrawGene(g, 10, height, 5, xScale, startPoint); }
+                        }
+                        g.FillRectangle(Brushes.White, 0, 0, 10, bmpHeigth);
+                        g.FillRectangle(Brushes.White, bmp.Width - 10, 0, 10, bmpHeigth);
                     }
-                    g.FillRectangle(Brushes.White, 0, 0, 10, bmpHeigth);
-                    g.FillRectangle(Brushes.White, bmp.Width - 10, 0, 10, bmpHeigth);
                 }
+                catch (Exception ex) { }
             }
-            catch (Exception ex) { }
         }
 
         private void DrawRepeats(Graphics g, int bmpHeigth, string chromosomeName, int startPoint, int endPoint)
@@ -802,7 +822,7 @@ namespace AgileStructure
                             { rd.Repeats[index].DrawRepeat(g, 10, height, 5, xScale, startPoint); }
                         }
                     }
-                 }
+                }
             }
             catch (Exception ex) { }
         }
@@ -861,7 +881,7 @@ namespace AgileStructure
             int index = CIGAR.IndexOfAny(tags);
             if (index > -1)
             {
-                if (CIGAR[index]== 'S')
+                if (CIGAR[index] == 'S')
                 {
                     string length = CIGAR.Substring(0, index);
                     answer = Convert.ToInt32(length);
@@ -874,13 +894,13 @@ namespace AgileStructure
         {
             int answer = 0;
             char[] tags = { 'H', 'S', 'I', 'D', 'N', 'P', 'M', '=', 'X' };
-            int index = CIGAR.Substring(0, CIGAR.Length -1 ).LastIndexOfAny(tags);
+            int index = CIGAR.Substring(0, CIGAR.Length - 1).LastIndexOfAny(tags);
             if (index > -1)
             {
                 if (CIGAR[CIGAR.Length - 1] == 'S')
                 {
                     string length = CIGAR.Substring(index + 1);
-                    answer = Convert.ToInt32(length.Substring(0, length.Length-1));
+                    answer = Convert.ToInt32(length.Substring(0, length.Length - 1));
                 }
             }
             return answer;
@@ -1322,7 +1342,7 @@ namespace AgileStructure
         private void p1_MouseUp(object sender, MouseEventArgs e)
         {
             if (p1RegionSelect == true)
-            {  
+            {
                 double xScale = (p1.Width - 20) / (double)(selectEnd - selectStart);
                 int placeNow = (int)((e.X - 10) / xScale) + selectStart;
                 int placeThen = (int)((mouseDown1 - 10) / xScale) + selectStart;
@@ -1341,7 +1361,7 @@ namespace AgileStructure
                         txtStart.Text = placeNow.ToString("N0");
                     }
                     btnGetReads.PerformClick();
-                  
+
                 }
                 else
                 { p1.Image = bmp; }
@@ -1431,8 +1451,8 @@ namespace AgileStructure
                 string chromosomeName = cboSecondaries.Text.Substring(0, cboSecondaries.Text.IndexOf(" ")).Trim();
                 if (drawGenes == true && gd != null)
                 { DrawGenes(g_soft, bmp_soft.Height, chromosomeName, selectSecondaryStart, selectSecondaryEnd); }
-             }
-            
+            }
+
         }
 
         private void p2_MouseClick(object sender, MouseEventArgs e)
@@ -1505,7 +1525,7 @@ namespace AgileStructure
         private void p2_MouseUp(object sender, MouseEventArgs e)
         {
             if (p2RegionSelect == true)
-            {              
+            {
                 double xScale = (p1.Width - 20) / (double)(selectSecondaryEnd - selectSecondaryStart);
                 int placeNow = (int)((e.X - 10) / xScale) + selectSecondaryStart;
                 int placeThen = (int)((mouseDown2 - 10) / xScale) + selectSecondaryStart;
@@ -1666,7 +1686,6 @@ namespace AgileStructure
             { resizing = false; }
             else
             {
-                timer1.Enabled = false;
                 if (cboSecondaries.Items.Count == 0) { return; }
                 timer1.Enabled = false;
                 int index = cboSecondaries.SelectedIndex;
@@ -1718,7 +1737,7 @@ namespace AgileStructure
         {
             if (e.Control == true)
             {
-                string control ="";
+                string control = "";
                 if ((TextBox)sender == txtStart || (TextBox)sender == txtEnd)
                 { control = "primary"; }
                 else if ((TextBox)sender == txtsStart || (TextBox)sender == txtsEnd)
@@ -1732,6 +1751,8 @@ namespace AgileStructure
                 { expand(control, true); }
                 else if (e.KeyCode == Keys.Down)
                 { expand(control, false); }
+
+
             }
             else
             {
@@ -1743,6 +1764,8 @@ namespace AgileStructure
                     else if (e.KeyValue == 37 || e.KeyValue == 39 || e.KeyValue == 9)
                     { e.SuppressKeyPress = false; }
                     else { e.SuppressKeyPress = true; }
+
+
                 }
             }
         }
@@ -1942,7 +1965,7 @@ namespace AgileStructure
                     txtsStart.Text = selectSecondaryStart.ToString("N0");
                     txtsEnd.Text = selectSecondaryEnd.ToString("N0");
                 }
-            }           
+            }
         }
 
         private void expand(string control, bool bigger)
@@ -1969,8 +1992,8 @@ namespace AgileStructure
                 }
                 else if (length > 200)
                 {
-                    selectStart += length/4;
-                    selectEnd -= length / 4;                    
+                    selectStart += length / 4;
+                    selectEnd -= length / 4;
 
                     txtStart.Text = selectStart.ToString("N0");
                     txtEnd.Text = selectEnd.ToString("N0");
@@ -1983,8 +2006,8 @@ namespace AgileStructure
 
                 if (bigger == true)
                 {
-                    selectSecondaryEnd += length/2;
-                    selectSecondaryStart -= length/2;
+                    selectSecondaryEnd += length / 2;
+                    selectSecondaryStart -= length / 2;
 
                     if (selectSecondaryStart < 1)
                     { selectSecondaryStart = 1; }
@@ -1997,8 +2020,8 @@ namespace AgileStructure
                 }
                 else if (length > 200)
                 {
-                    selectSecondaryStart += length/4;
-                    selectSecondaryEnd -= length /4;                 
+                    selectSecondaryStart += length / 4;
+                    selectSecondaryEnd -= length / 4;
 
                     txtsStart.Text = selectSecondaryStart.ToString("N0");
                     txtsEnd.Text = selectSecondaryEnd.ToString("N0");
@@ -2405,10 +2428,10 @@ namespace AgileStructure
                         breakPoint2 = bestPlaces[2].getAveragePlace / 100;
                         breakPoint3 = bestPlaces[0].getAveragePlace / 100;
                     }
-                    
+
                     if (bestPlaces[2].Count < 2)
                     { return false; }
-                    if (bestPlaces[1] == null || breakPoint1 == breakPoint2 || breakPoint1 == breakPoint3 || breakPoint2==breakPoint3)
+                    if (bestPlaces[1] == null || breakPoint1 == breakPoint2 || breakPoint1 == breakPoint3 || breakPoint2 == breakPoint3)
                     { return false; }
                     else
                     { return true; }
@@ -2593,7 +2616,7 @@ namespace AgileStructure
                     else
                     {
                         mutation = "t(" + bestPlaces[0].getReferenceName + ";" + bestPlaces[1].getReferenceName + ") g."
-                            + breakPoint1.ToString("N0") + ";g." + breakPoint2.ToString("N0") ;
+                            + breakPoint1.ToString("N0") + ";g." + breakPoint2.ToString("N0");
                     }
 
                     if (MessageBox.Show(mutation + "\nSave with the selected read data?", "Translocation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -2957,7 +2980,7 @@ namespace AgileStructure
                         }
                     }
                     System.Diagnostics.Debug.WriteLine("best1 " + bestRegions[0].getAveragePlace.ToString("N0") + " best 2 " + best2Place.ToString("N0") + " best 3 " + best3Place.ToString("N0"));
-                }                
+                }
             }
             return bestRegions;
         }
@@ -3072,7 +3095,7 @@ namespace AgileStructure
             if (cboSecondaries.SelectedIndex == 0)
             { MessageBox.Show("You must select a region containing the secondary alignments.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
 
-                try
+            try
             {
                 if (selectedIndex.Count > 0)
                 {
@@ -3091,7 +3114,7 @@ namespace AgileStructure
                     string mutation = "";
                     MutationType answer = testMutationType(bestPlaces);
 
-                     if (answer == MutationType.Deletion || answer== MutationType.Inversion)
+                    if (answer == MutationType.Deletion || answer == MutationType.Inversion)
                     {
                         if (couldItBeAnInsert() == true)
                         { answer = MutationType.Insertion; }
@@ -3135,7 +3158,7 @@ namespace AgileStructure
         private void btnFilter_Click(object sender, EventArgs e)
         {
 
-            repopulateSecondaryList();             
+            repopulateSecondaryList();
 
             FilterHits fh = new FilterHits(referenceSequenceNames, 2);
             if (fh.ShowDialog() == DialogResult.OK)
@@ -3168,7 +3191,7 @@ namespace AgileStructure
                     cboSecondaries.Items.Add("Select a region");
                     cboSecondaries.SelectedIndex = 0;
                 }
-            }            
+            }
         }
 
         private void repopulateSecondaryList()
@@ -3252,7 +3275,7 @@ namespace AgileStructure
                 List<int> startPoint = new List<int>();
                 List<int> endPoint = new List<int>();
                 List<string> inserts = new List<string>();
-                
+
                 foreach (int index in selectedIndex)
                 {
                     if (DrawnARKeys.ContainsKey(index) == true)
@@ -3282,7 +3305,7 @@ namespace AgileStructure
                     }
                 }
                 if (startPoint.Count > 1 && endPoint.Count > 1)
-                {                                     
+                {
                     inserts.Sort(new insertSorter());
                     StringBuilder sb = new StringBuilder();
 
@@ -3291,7 +3314,7 @@ namespace AgileStructure
 
                     startPoint.Sort();
                     endPoint.Sort();
-                    
+
                     int middle = 0;
                     int mediumStart = 0;
                     int mediumEnd = 0;
@@ -3316,10 +3339,10 @@ namespace AgileStructure
                         foreach (string s in inserts)
                         { sb.Append(s + "\n"); }
                         sb.Append("\nMedian values\n" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + (mediumStart + 1).ToString("N0") + "ins" + (mediumStart - mediumEnd).ToString("N0"));
-                        SaveToFile(sb.ToString()); 
+                        SaveToFile(sb.ToString());
                     }
                 }
-                else if (inserts.Count ==1)
+                else if (inserts.Count == 1)
                 {
                     if (MessageBox.Show("Only one insert\n" + inserts[0] + "\n\nDo you want to save the inserts annotation ? ", "Insertions", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     { SaveToFile(inserts[0]); }
@@ -3331,11 +3354,11 @@ namespace AgileStructure
         {
             if (selectedIndex.Count > 0)
             {
-                
+
                 List<int> startPoint = new List<int>();
                 List<int> endPoint = new List<int>();
                 List<string> deletions = new List<string>();
-                
+
                 foreach (int index in selectedIndex)
                 {
                     if (DrawnARKeys.ContainsKey(index) == true)
@@ -3369,19 +3392,19 @@ namespace AgileStructure
 
                     foreach (string s in deletions)
                     { sb.Append(s.Split('\t')[0] + "\n"); }
-                                                           
+
                     startPoint.Sort();
                     endPoint.Sort();
 
                     int middle = 0;
-                    int mediumStart =0;
+                    int mediumStart = 0;
                     int mediumEnd = 0;
 
                     if (startPoint.Count % 2 == 0)
                     {
-                         middle = startPoint.Count / 2;
-                         mediumStart = (startPoint[middle - 1] + startPoint[middle]) / 2;
-                         mediumEnd = (endPoint[middle - 1] + endPoint[middle]) / 2;
+                        middle = startPoint.Count / 2;
+                        mediumStart = (startPoint[middle - 1] + startPoint[middle]) / 2;
+                        mediumEnd = (endPoint[middle - 1] + endPoint[middle]) / 2;
                     }
                     else
                     {
@@ -3391,14 +3414,14 @@ namespace AgileStructure
                     }
 
 
-                    sb.Append("\nMedian breakpoints\n" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + mediumEnd.ToString("N0") + "del\n\nDo you want to save the data?" );
+                    sb.Append("\nMedian breakpoints\n" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + mediumEnd.ToString("N0") + "del\n\nDo you want to save the data?");
                     if (MessageBox.Show(sb.ToString(), "Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         foreach (string s in deletions)
                         { sb.Append(s + "\n"); }
                         sb.Append("\nMedian breakpoints\n" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + mediumEnd.ToString("N0") + "del");
                         SaveToFile(sb.ToString());
-                    
+
                     }
                 }
                 else if (deletions.Count == 1)
@@ -3412,7 +3435,7 @@ namespace AgileStructure
         private void Form1_Load(object sender, EventArgs e)
         {
             if (System.IO.File.Exists("bamreaderdll.dll") == false)
-            { MessageBox.Show("Could not find the require dll file!\nHave you put the bamreaderdll.dll file in the same folder as the AgileStructure.exe?","Error no dll file",MessageBoxButtons.OK,MessageBoxIcon.Error); }
+            { MessageBox.Show("Could not find the require dll file!\nHave you put the bamreaderdll.dll file in the same folder as the AgileStructure.exe?", "Error no dll file", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void openBAMFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3436,8 +3459,7 @@ namespace AgileStructure
             onlyShowReadsWithALargeIndelToolStripMenuItem.Checked = !onlyShowReadsWithALargeIndelToolStripMenuItem.Checked;
             if (lookForIndelsWithinAReadToolStripMenuItem.Checked == false)
             { lookForIndelsWithinAReadToolStripMenuItem.PerformClick(); }
-            else {btnGetReads.PerformClick(); }                        
+            else { btnGetReads.PerformClick(); }
         }
-         
     }
 }
