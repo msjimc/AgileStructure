@@ -78,13 +78,13 @@ namespace AgileStructure
             this.variantTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.deletionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.inversionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.duplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.insertionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inversionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.translocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usePrimaryAlignmentsCIGARStringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.insertationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deletionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.insertationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripSeparator();
             this.switchRegionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.historyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -478,39 +478,39 @@ namespace AgileStructure
             // viewReadDataToolStripMenuItem
             // 
             this.viewReadDataToolStripMenuItem.Name = "viewReadDataToolStripMenuItem";
-            this.viewReadDataToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.viewReadDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.viewReadDataToolStripMenuItem.Text = "View read data";
             this.viewReadDataToolStripMenuItem.Click += new System.EventHandler(this.viewReadDataToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(175, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
             // 
             // saveSelectedReadsToolStripMenuItem
             // 
             this.saveSelectedReadsToolStripMenuItem.Enabled = false;
             this.saveSelectedReadsToolStripMenuItem.Name = "saveSelectedReadsToolStripMenuItem";
-            this.saveSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.saveSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveSelectedReadsToolStripMenuItem.Text = "Save selected reads";
             this.saveSelectedReadsToolStripMenuItem.Click += new System.EventHandler(this.saveSelectedReadsToolStripMenuItem_Click);
             // 
             // clearSelectedReadsToolStripMenuItem
             // 
             this.clearSelectedReadsToolStripMenuItem.Name = "clearSelectedReadsToolStripMenuItem";
-            this.clearSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.clearSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.clearSelectedReadsToolStripMenuItem.Text = "Clear selected reads";
             this.clearSelectedReadsToolStripMenuItem.Click += new System.EventHandler(this.clearSelectedReadsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(175, 6);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(177, 6);
             // 
             // alignerStringToolStripMenuItem
             // 
             this.alignerStringToolStripMenuItem.Name = "alignerStringToolStripMenuItem";
-            this.alignerStringToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.alignerStringToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.alignerStringToolStripMenuItem.Text = "Aligner string";
             this.alignerStringToolStripMenuItem.Click += new System.EventHandler(this.alignerStringToolStripMenuItem_Click);
             // 
@@ -548,47 +548,47 @@ namespace AgileStructure
             // variantTypeToolStripMenuItem
             // 
             this.variantTypeToolStripMenuItem.Name = "variantTypeToolStripMenuItem";
-            this.variantTypeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.variantTypeToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.variantTypeToolStripMenuItem.Text = "Variant type";
             this.variantTypeToolStripMenuItem.Click += new System.EventHandler(this.variantTypeToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(141, 6);
             // 
             // deletionsToolStripMenuItem
             // 
             this.deletionsToolStripMenuItem.Name = "deletionsToolStripMenuItem";
-            this.deletionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deletionsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.deletionsToolStripMenuItem.Text = "Deletion";
             this.deletionsToolStripMenuItem.Click += new System.EventHandler(this.deletionsToolStripMenuItem_Click);
-            // 
-            // inversionToolStripMenuItem
-            // 
-            this.inversionToolStripMenuItem.Name = "inversionToolStripMenuItem";
-            this.inversionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.inversionToolStripMenuItem.Text = "Inversion";
-            this.inversionToolStripMenuItem.Click += new System.EventHandler(this.inversionToolStripMenuItem_Click);
             // 
             // duplicationToolStripMenuItem
             // 
             this.duplicationToolStripMenuItem.Name = "duplicationToolStripMenuItem";
-            this.duplicationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.duplicationToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.duplicationToolStripMenuItem.Text = "Duplication";
             this.duplicationToolStripMenuItem.Click += new System.EventHandler(this.duplicationToolStripMenuItem_Click);
             // 
             // insertionToolStripMenuItem
             // 
             this.insertionToolStripMenuItem.Name = "insertionToolStripMenuItem";
-            this.insertionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.insertionToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.insertionToolStripMenuItem.Text = "Insertion";
             this.insertionToolStripMenuItem.Click += new System.EventHandler(this.insertionToolStripMenuItem_Click);
+            // 
+            // inversionToolStripMenuItem
+            // 
+            this.inversionToolStripMenuItem.Name = "inversionToolStripMenuItem";
+            this.inversionToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.inversionToolStripMenuItem.Text = "Inversion";
+            this.inversionToolStripMenuItem.Click += new System.EventHandler(this.inversionToolStripMenuItem_Click);
             // 
             // translocationToolStripMenuItem
             // 
             this.translocationToolStripMenuItem.Name = "translocationToolStripMenuItem";
-            this.translocationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.translocationToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.translocationToolStripMenuItem.Text = "Translocation";
             this.translocationToolStripMenuItem.Click += new System.EventHandler(this.translocationToolStripMenuItem_Click);
             // 
@@ -601,19 +601,19 @@ namespace AgileStructure
             this.usePrimaryAlignmentsCIGARStringToolStripMenuItem.Size = new System.Drawing.Size(272, 22);
             this.usePrimaryAlignmentsCIGARStringToolStripMenuItem.Text = "Use Primary alignment\'s CIGAR string";
             // 
-            // insertationToolStripMenuItem
-            // 
-            this.insertationToolStripMenuItem.Name = "insertationToolStripMenuItem";
-            this.insertationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.insertationToolStripMenuItem.Text = "Insertion";
-            this.insertationToolStripMenuItem.Click += new System.EventHandler(this.insertationToolStripMenuItem_Click);
-            // 
             // deletionToolStripMenuItem
             // 
             this.deletionToolStripMenuItem.Name = "deletionToolStripMenuItem";
-            this.deletionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deletionToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.deletionToolStripMenuItem.Text = "Deletion";
             this.deletionToolStripMenuItem.Click += new System.EventHandler(this.deletionToolStripMenuItem_Click);
+            // 
+            // insertationToolStripMenuItem
+            // 
+            this.insertationToolStripMenuItem.Name = "insertationToolStripMenuItem";
+            this.insertationToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.insertationToolStripMenuItem.Text = "Insertion";
+            this.insertationToolStripMenuItem.Click += new System.EventHandler(this.insertationToolStripMenuItem_Click);
             // 
             // toolStripMenuItem8
             // 

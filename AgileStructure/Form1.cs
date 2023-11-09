@@ -623,8 +623,7 @@ namespace AgileStructure
             {
                 makeBaseImage();
                 DrawGenes(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
-                //DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
-                resetReadsDrawnStatus();
+               resetReadsDrawnStatus();
             }
             drawAlignments(AR);
         }
@@ -1667,6 +1666,7 @@ namespace AgileStructure
             { resizing = false; }
             else
             {
+                timer1.Enabled = false;
                 if (cboSecondaries.Items.Count == 0) { return; }
                 timer1.Enabled = false;
                 int index = cboSecondaries.SelectedIndex;
@@ -1732,8 +1732,6 @@ namespace AgileStructure
                 { expand(control, true); }
                 else if (e.KeyCode == Keys.Down)
                 { expand(control, false); }
-
-
             }
             else
             {
@@ -1745,8 +1743,6 @@ namespace AgileStructure
                     else if (e.KeyValue == 37 || e.KeyValue == 39 || e.KeyValue == 9)
                     { e.SuppressKeyPress = false; }
                     else { e.SuppressKeyPress = true; }
-
-
                 }
             }
         }
@@ -3442,5 +3438,6 @@ namespace AgileStructure
             { lookForIndelsWithinAReadToolStripMenuItem.PerformClick(); }
             else {btnGetReads.PerformClick(); }                        
         }
+         
     }
 }
