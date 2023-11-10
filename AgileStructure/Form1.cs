@@ -457,14 +457,20 @@ namespace AgileStructure
                             {
                                 StringBuilder returnData = new StringBuilder(returnSize);
                                 int reply = getRegion(fn, returnData, returnData.Capacity, IP.get_StreamPoint, endRegion);
-                                string readData = returnData.ToString();
-                                if (readData.Length > 0)
+                                //string readData = returnData.ToString();
+                                if (returnData.Length > 0)
                                 {
-                                    int readIndex = readData.IndexOf("\n");
-                                    int lastReadIndex = 0; 
-                                    while (readIndex > -1)
+                                    int place = 1;
+                                    string r = "";
+                                    //int readIndex = readData.IndexOf("\n");
+                                    //int lastReadIndex = 0; 
+                                    //while (readIndex > -1)
+                                    while (place > 0)
                                     {
-                                        string r = readData.Substring(lastReadIndex + 1, readIndex - (1 + lastReadIndex));
+                                        
+                                        place = GetNextRead(returnData, place, ref r) + 1;
+                                        //string r = readData.Substring(lastReadIndex + 1, readIndex - (1 + lastReadIndex));
+                                       
                                         if (string.IsNullOrEmpty(r) == false)
                                         {
                                             string name = getKey(r);
@@ -499,10 +505,11 @@ namespace AgileStructure
                                                 }
                                             }
                                         }
-                                        lastReadIndex = readIndex;
-                                        readIndex = readData.IndexOf("\n", readIndex + 1);
+                                        //lastReadIndex = readIndex;
+                                        //readIndex = readData.IndexOf("\n", readIndex + 1);
                                     }
-                                    readData = null;
+                                    returnData = null;
+                                    //readData = null;
                                 }
                             }
                             drawPrimaryAlignments(false);
@@ -510,7 +517,7 @@ namespace AgileStructure
                         skipThisBlock = false;
                         indexRef++;
                         if (AR.Count > 0)
-                        { Text = "Loaded: " + AR.Count().ToString() + " reads"; }
+                        { Text = "Loaded: " + AR.Count().ToString() + " reads. Current read start point: " + lastReadPosition.ToString("N0"); }
                         Application.DoEvents();
                         counter++;
                     }
@@ -526,6 +533,43 @@ namespace AgileStructure
             finally
             { Text = title; }
         }
+
+        private int GetNextRead(StringBuilder sb, int startIndex, ref string read) 
+        {
+            int index = 0;
+
+            if (startIndex >= sb.Length)
+            {
+                read = "";
+                return -1;
+            }
+
+            if (sb[startIndex] == '\n')
+            { startIndex++; }
+            index = startIndex;
+            while (index < sb.Length)
+            {
+                if (sb[index] == '\n')
+                { 
+                    read = sb.ToString(startIndex, index - startIndex);
+                    return index;
+                }
+                index++;
+            }
+            return -1;
+        }
+
+        public int IndexOf(StringBuilder sb, string value, int startIndex, bool ignoreCase)
+        {
+            int len = value.Length;
+            int max = (sb.Length - len) + 1;
+
+            for (int i1 = startIndex; i1 < max; ++i1)
+                if (sb[i1] == '\n')
+                { return i1; }
+            return -1;
+        }
+
         private string getKey(string read)
         {
             int index = read.IndexOf("\t");//end of name
