@@ -457,20 +457,17 @@ namespace AgileStructure
                             {
                                 StringBuilder returnData = new StringBuilder(returnSize);
                                 int reply = getRegion(fn, returnData, returnData.Capacity, IP.get_StreamPoint, endRegion);
-                                //string readData = returnData.ToString();
+                               
                                 if (returnData.Length > 0)
                                 {
                                     int place = 1;
                                     string r = "";
-                                    //int readIndex = readData.IndexOf("\n");
-                                    //int lastReadIndex = 0; 
-                                    //while (readIndex > -1)
+                                   
                                     while (place > 0)
                                     {
                                         
                                         place = GetNextRead(returnData, place, ref r) + 1;
-                                        //string r = readData.Substring(lastReadIndex + 1, readIndex - (1 + lastReadIndex));
-                                       
+                                        
                                         if (string.IsNullOrEmpty(r) == false)
                                         {
                                             string name = getKey(r);
@@ -505,11 +502,8 @@ namespace AgileStructure
                                                 }
                                             }
                                         }
-                                        //lastReadIndex = readIndex;
-                                        //readIndex = readData.IndexOf("\n", readIndex + 1);
                                     }
                                     returnData = null;
-                                    //readData = null;
                                 }
                             }
                             drawPrimaryAlignments(false);
@@ -525,8 +519,7 @@ namespace AgileStructure
                     AddSecondaryAlignmentsBlocks();
                     makeBlankSecondaryBase();
                     DrawGenes(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
-                    //DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
-
+                    
                     p1.Image = bmp;
                 }
             }
@@ -546,7 +539,9 @@ namespace AgileStructure
 
             if (sb[startIndex] == '\n')
             { startIndex++; }
+
             index = startIndex;
+
             while (index < sb.Length)
             {
                 if (sb[index] == '\n')
