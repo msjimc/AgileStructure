@@ -18,4 +18,4 @@ The AgileStructure guide is [here:](guide/README.md)
 
 ## Download
 
-The compiled can be downloaded from [here:](program/README.md)
+The compiled program can be downloaded from [here:](program/README.md)
