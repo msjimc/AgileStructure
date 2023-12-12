@@ -2188,23 +2188,36 @@ namespace AgileStructure
 
         private void saveSelectedReadsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (selectedIndex.Count > 0)
+           if (selectedIndex.Count > 0)
             {
-                string file = FileString.SaveAs("Select a text file to append the read data too", "text file (*.txt)|*.txt");
+                string file = FileString.SaveAs("Select a text file to append the read data too", "text file (*.txt;*.fa)|*.txt;*.fa");
                 if (file == "Cancel") { return; }
 
                 System.IO.StreamWriter fw = null;
 
                 try
                 {
+                    
                     fw = new System.IO.StreamWriter(file);
-                    for (int index = 0; index < selectedIndex.Count; index++)
+                    if (file.LastIndexOf(".txt") == file.Length-4)
                     {
-                        int key = selectedIndex[index];
-                        if (DrawnARKeys.ContainsKey(key) == true)
+                        foreach (AlignedRead ar in AR.Values)
                         {
-                            string[] data = DrawnARKeys[key].displayDataArray();
-                            fw.Write(data[0] + referenceSequenceNames[Convert.ToInt32(data[1])] + data[2]);
+                            if (ar.IsSelected == true)
+                            {
+                                string[] data = ar.displayDataArray();
+                                fw.Write(data[0] + referenceSequenceNames[Convert.ToInt32(data[1])] + data[2]);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (AlignedRead ar in AR.Values)
+                        {
+                            if (ar.IsSelected == true)
+                            {
+                                fw.Write(">" + ar.getName + "\n" + ar.getSequence + "\n");
+                            }
                         }
                     }
                 }
