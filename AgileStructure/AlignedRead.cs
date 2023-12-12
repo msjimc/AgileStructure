@@ -45,6 +45,7 @@ namespace AgileStructure
         private bool isSupplementaryAlignment;
         private bool drawn = false;
         private bool largeIndel = false;
+        private bool isSelected = false;
 
         public AlignedRead(string line, int Index)
         {
@@ -192,8 +193,9 @@ namespace AgileStructure
                 r.X =  10.0f + (float)(alignStart * XScale);
                 r.Width = alignEnd - r.X;
                 Pen box = new Pen(Color.Blue, 2);
-                g.DrawRectangle(box, r.X, r.Y + 1, r.Width, r.Height - 1);
+                g.DrawRectangle(box, r.X, r.Y + 1, r.Width, r.Height - 1);isSelected = true;
             }
+            else { isSelected = false; }
             
             drawn = true;
         }
@@ -451,6 +453,8 @@ namespace AgileStructure
 
         public bool hasThreePrimeSoftClip
         { get { return (blocks[blocks.Count-1].state == fragmentType.Unaligned && blocks[blocks.Count-1].length > 50); } }
-
+        
+         public bool IsSelected
+        { get { return isSelected; } }
     }
 }
