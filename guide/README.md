@@ -41,7 +41,7 @@
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
-AgileStructure is composed of two components:  AgileStructure.exe which runs the user interface and analyses the data and bamreaderdll.dll which reads the ```bam``` file, extracts the relevant information, which then it passes to the AgileStructure.exe. To work, both files need to be in the same folder, when AgileStructure starts, it will look for the bamreaderdll.dll file and give an error message if it doesn't find it: it will start without the bamreaderdll.dll, but will do nothing.
+AgileStructure is composed of three components:  AgileStructure.exe, AgileStructure.dll and AgileStructure.deps.json, to work, all the files need to be in the same folder.
 
 ## Data requirements
 
@@ -84,8 +84,6 @@ AgileStructure will read the header section of the bam file and populate the dro
 ![Figure 2](images/figure2.jpg)
 
 Figure 2
-
-If AgileStructure appears to do nothing, it may because it is unable to find the bamreaderdll.dll file: this must be in the same folder as AgileStructure.exe.
 
 ### How indexed bam files are read
 

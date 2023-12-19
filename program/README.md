@@ -5,7 +5,7 @@ This folder contains the precompiled program and dll files as both individual fi
 
 #### Important note  
 
-Once downloaded it is important that the AgileStructure.exe and BamReaderdll.dll are located in the same folder. 
+Once downloaded it is important that the AgileStructure.exe, AgileStructure.dll and AgileStructure.deps.json are located in the same folder. 
 <hr />
 
 * [Downloading the zip file](#downloading-the-zip-file)
@@ -75,4 +75,4 @@ And finally, select the 'Keep anyway' option (Figure 10) and the download will s
 
 Figure 5
 
-Repeat the process for the BamReaderdll.dll file.
+Repeat the process for the AgileStructure.dll and AgileStructure.deps.json file.
