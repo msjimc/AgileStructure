@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using AgileStructure;
 using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
+using System.Formats.Tar;
 
 namespace AgileStructure
 {
@@ -94,23 +95,6 @@ namespace AgileStructure
         List<StringInt> historySecondary;
 
 
-        [DllImport(@"BamReaderdll.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 getRegion(StringBuilder fileName, StringBuilder returnData, int len, UInt64 startPoint, int endPoint);
-
-        [DllImport(@"BamReaderdll.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 getRegionReturnSize(StringBuilder fileName, StringBuilder count, UInt64 startPoint, int endPoint);
-
-        [DllImport(@"BamReaderdll.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 getString(char[] fileName, int len);
-
-        [DllImport(@"BamReaderdll.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 getHeaderSize(StringBuilder fileName, int len);
-
-        [DllImport(@"BamReaderdll.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 getHeader(StringBuilder fileName, int len);
-
-
-
         public Form1()
         {
             InitializeComponent();
@@ -143,15 +127,16 @@ namespace AgileStructure
 
         private void getBamHeader(string bamFileName)
         {
+            BAMReader br = null;
             try
             {
                 StringBuilder sb = new StringBuilder(100);
-                sb.Append(bamFileName + '\0');
-                int answer = getHeaderSize(sb, sb.Capacity);
-                sb.Capacity = answer;
-                answer = getHeader(sb, sb.Capacity);
 
-                string[] headers = sb.ToString().Split('\n');
+                br = new BAMReader(bamFileName);
+                List<string> headers = br.getHeader();
+                br.Dispose();
+                br = null;
+
                 alignerString = "";
                 int counter = 0;
                 foreach (string s in headers)
@@ -324,6 +309,11 @@ namespace AgileStructure
 
         private void button4_Click(object sender, EventArgs e)
         {
+            ReadFile();
+        }
+
+        private void ReadFile()
+        { 
             string title = Text;
             try
             {
@@ -366,9 +356,8 @@ namespace AgileStructure
                     int endRegion;
                     int lastReadPosition = 0;
                     int lastRefIndex = index;
-                    bool skipThisBlock = false;
-                    StringBuilder fn = new StringBuilder(100);
-                    fn.Append(fileName + "\0");
+                    bool skipThisBlock = false;                    
+                    int count = 0;
 
                     while (indexRef < IPs.Length && lastReadPosition <= (int)regionEnd && lastRefIndex == IPs[indexRef].NameIndex)
                     {
@@ -379,69 +368,71 @@ namespace AgileStructure
                         {
                             endRegion = IPs[indexRef + 1].getBPStart;
                             if (IPs[indexRef].get_StreamPoint == IPs[indexRef + 1].get_StreamPoint)
-                            { skipThisBlock = true; }
+                            {
+                                skipThisBlock = true;
+                                if (AR.Count > 0)
+                                { break; }
+                            }
                         }
                         else { endRegion = selectEnd; }
 
                         if (skipThisBlock == false)
                         {
-                            StringBuilder count = new StringBuilder(100);
-                            int returnSize = getRegionReturnSize(fn, count, IP.get_StreamPoint, endRegion);
-                            if (returnSize > 1)
+                            BAMReader br = new BAMReader(fileName, (long)IP.get_StreamPoint);
+                            string r = br.NextAlignedRead(true, referenceSequenceNames);
+                            AlignedRead art = new AlignedRead(r, AR.Count + 1);
+                            lastReadPosition = art.getPosition;                            
+
+                            while (r.Length > 0 && lastReadPosition < selectEnd)
                             {
-                                StringBuilder returnData = new StringBuilder(returnSize);
-                                int reply = getRegion(fn, returnData, returnData.Capacity, IP.get_StreamPoint, endRegion);
-                               
-                                if (returnData.Length > 0)
+                                string name = getKey(r);
+                                if (AR.ContainsKey(name) == false)
                                 {
-                                    int place = 1;
-                                    string r = "";
-                                   
-                                    while (place > 0)
+
+                                    AlignedRead ar = new AlignedRead(r, AR.Count + 1);
+                                    lastReadPosition = ar.getPosition;
+
+                                    if (ar.IsGood == true && ar.IsSupplementaryAlignment == false && ar.IsSecondaryAlignment == false)
                                     {
-                                        
-                                        place = GetNextRead(returnData, place, ref r) + 1;
-                                        
-                                        if (string.IsNullOrEmpty(r) == false)
+                                        if ((justChimeric == true && ar.getSecondaryAlignmentTag != "") || (justLargeIndels == true && ar.hasLargeIndel == true))
                                         {
-                                            string name = getKey(r);
-                                            if (AR.ContainsKey(name) == false)
-                                            {
-
-                                                AlignedRead ar = new AlignedRead(r, AR.Count + 1);
-                                                lastReadPosition = ar.getPosition;
-
-                                                if (ar.IsGood == true && ar.IsSupplementaryAlignment == false && ar.IsSecondaryAlignment == false)
-                                                {
-                                                    if ((justChimeric == true && ar.getSecondaryAlignmentTag != "") || (justLargeIndels == true && ar.hasLargeIndel == true))
-                                                    {
-                                                        AR.Add(name, ar);
-                                                        ar = null;
-                                                    }
-                                                    else if (justChimeric == true && ar.getSecondaryAlignmentTag != "")
-                                                    {
-                                                        AR.Add(name, ar);
-                                                        ar = null;
-                                                    }
-                                                    else if (justLargeIndels == true && ar.hasLargeIndel == true)
-                                                    {
-                                                        AR.Add(name, ar);
-                                                        ar = null;
-                                                    }
-                                                    else if (justLargeIndels == false && justChimeric == false)
-                                                    {
-                                                        AR.Add(name, ar);
-                                                        ar = null;
-                                                    }
-                                                }
-                                            }
+                                            AR.Add(name, ar);
+                                            ar = null;
+                                            count++;
+                                        }
+                                        else if (justChimeric == true && ar.getSecondaryAlignmentTag != "")
+                                        {
+                                            AR.Add(name, ar);
+                                            ar = null;
+                                            count++;
+                                        }
+                                        else if (justLargeIndels == true && ar.hasLargeIndel == true)
+                                        {
+                                            AR.Add(name, ar);
+                                            ar = null;
+                                            count++;
+                                        }
+                                        else if (justLargeIndels == false && justChimeric == false)
+                                        {
+                                            count++;
+                                            AR.Add(name, ar);
+                                            ar = null;
+                                            count++;
+                                        }
+                                        if (count > 99)
+                                        {
+                                            Text = "Loaded: " + AR.Count().ToString() + " reads. Current read start point: " + lastReadPosition.ToString("N0");
+                                            drawPrimaryAlignments(false);
+                                            Application.DoEvents();
+                                            count = 0;
                                         }
                                     }
-                                    returnData = null;
                                 }
-                            }
-                            drawPrimaryAlignments(false);
+                                r = br.NextAlignedRead(true, referenceSequenceNames);
+                            }                        
+                            br.Dispose();
                         }
+                      
                         skipThisBlock = false;
                         indexRef++;
                         if (AR.Count > 0)
@@ -3420,8 +3411,6 @@ namespace AgileStructure
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (System.IO.File.Exists("bamreaderdll.dll") == false)
-            { MessageBox.Show("Could not find the require dll file!\nHave you put the bamreaderdll.dll file in the same folder as the AgileStructure.exe?", "Error no dll file", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void openBAMFileToolStripMenuItem_Click(object sender, EventArgs e)
