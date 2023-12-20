@@ -355,6 +355,7 @@ namespace AgileStructure
                     int counter = 1;
                     int endRegion;
                     int lastReadPosition = 0;
+                    int currentChromosome = index;
                     int lastRefIndex = index;
                     bool skipThisBlock = false;                    
                     int count = 0;
@@ -383,7 +384,7 @@ namespace AgileStructure
                             AlignedRead art = new AlignedRead(r, AR.Count + 1);
                             lastReadPosition = art.getPosition;                            
 
-                            while (r.Length > 0 && lastReadPosition < selectEnd)
+                            while (r.Length > 0 && lastReadPosition < selectEnd && currentChromosome == index )
                             {
                                 string name = getKey(r);
                                 if (AR.ContainsKey(name) == false)
@@ -391,6 +392,7 @@ namespace AgileStructure
 
                                     AlignedRead ar = new AlignedRead(r, AR.Count + 1);
                                     lastReadPosition = ar.getPosition;
+                                    currentChromosome = ar.getreferenceIndex;
 
                                     if (ar.IsGood == true && ar.IsSupplementaryAlignment == false && ar.IsSecondaryAlignment == false)
                                     {
