@@ -38,7 +38,7 @@
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
-AgileStructure is composed of three components:  AgileStructure.exe, AgileStructure.dll and AgileStructure.deps.json, to work, all the files need to be in the same folder.
+AgileStructure is composed of three components:  AgileStructure.exe, AgileStructure.dll and AgileStructure.runtimeconfig.json, to work, all the files need to be in the same folder.
 
 ## Data requirements
 

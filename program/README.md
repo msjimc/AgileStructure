@@ -1,11 +1,11 @@
 # Download
-This folder contains the precompiled program and dll files as both individual files and a zip file. Due to heightened security by some organisation's IT departments it may not be possible to run a program extracted from a zip file. Consequently, you may have to try downloading the program both ways until one way works. 
+This folder contains the precompiled program, dll and config files as both individual files and a zip file. Due to heightened security by some organisation's IT departments it may not be possible to run a program extracted from a zip file. Consequently, you may have to try downloading the program both ways until one way works. 
 
 <hr />
 
 #### Important note  
 
-Once downloaded it is important that the AgileStructure.exe, AgileStructure.dll and AgileStructure.deps.json are located in the same folder. 
+Once downloaded it is important that the AgileStructure.exe, AgileStructure.dll and AgileStructure.runtimeconfig.json are located in the same folder. 
 <hr />
 
 * [Downloading the zip file](#downloading-the-zip-file)
@@ -75,4 +75,4 @@ And finally, select the 'Keep anyway' option (Figure 10) and the download will s
 
 Figure 5
 
-Repeat the process for the AgileStructure.dll and AgileStructure.deps.json file.
+Repeat the process for the AgileStructure.dll and AgileStructure.runtimeconfig.json file.
