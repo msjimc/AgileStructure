@@ -3415,7 +3415,7 @@ namespace AgileStructure
 
         private void openBAMFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            button2.PerformClick();
+            ReadFile();
         }
 
         private void onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem_Click(object sender, EventArgs e)
