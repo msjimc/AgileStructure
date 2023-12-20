@@ -76,3 +76,11 @@ And finally, select the 'Keep anyway' option (Figure 10) and the download will s
 Figure 5
 
 Repeat the process for the AgileStructure.dll and AgileStructure.runtimeconfig.json file.
+
+# Running AgileStructure
+
+To run AgileStructure double click on the file in File Explorer and it should start. If it doesn't, first make sure that all three files are in the same folder (AgileStructure.exe, AgileStructure.dll and AgileStructure.runtimeconfig.json). If you get an error message such as the one in Figure 6, go to the [.Net download page](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) and select the appropriate ".NET Desktop Runtime". There are a number of options make sure you chose the Desktop version.
+
+![figure 6](images/figure11.jpg)
+
+Figure 6
