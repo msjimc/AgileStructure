@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using AgileStructure;
 using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
-using System.Formats.Tar;
+
 
 namespace AgileStructure
 {
@@ -382,51 +382,60 @@ namespace AgileStructure
                             BAMReader br = new BAMReader(fileName, (long)IP.get_StreamPoint);
                             string r = br.NextAlignedRead(true, referenceSequenceNames);
                             AlignedRead art = new AlignedRead(r, AR.Count + 1);
-                            lastReadPosition = art.getPosition;                            
+                            if (art.getreferenceIndex == index)
+                            { lastReadPosition = art.getPosition; }
+                            else { lastReadPosition = 0; }
 
-                            while (r.Length > 0 && lastReadPosition < selectEnd && currentChromosome == index )
+                            while (r.Length > 0 && (lastReadPosition < selectEnd || currentChromosome < index))
                             {
                                 string name = getKey(r);
                                 if (AR.ContainsKey(name) == false)
                                 {
 
                                     AlignedRead ar = new AlignedRead(r, AR.Count + 1);
-                                    lastReadPosition = ar.getPosition;
-                                    currentChromosome = ar.getreferenceIndex;
 
-                                    if (ar.IsGood == true && ar.IsSupplementaryAlignment == false && ar.IsSecondaryAlignment == false)
+                                    currentChromosome = ar.getreferenceIndex;
+                                    if (ar.getreferenceIndex == index)
+                                    { lastReadPosition = ar.getPosition; }
+                                    else { lastReadPosition = 0; }
+
+                                    if (lastReadPosition <= selectEnd && lastReadPosition >= selectStart && currentChromosome == index)
                                     {
-                                        if ((justChimeric == true && ar.getSecondaryAlignmentTag != "") || (justLargeIndels == true && ar.hasLargeIndel == true))
+                                        if (ar.IsGood == true && ar.IsSupplementaryAlignment == false && ar.IsSecondaryAlignment == false)
                                         {
-                                            AR.Add(name, ar);
-                                            ar = null;
-                                            count++;
-                                        }
-                                        else if (justChimeric == true && ar.getSecondaryAlignmentTag != "")
-                                        {
-                                            AR.Add(name, ar);
-                                            ar = null;
-                                            count++;
-                                        }
-                                        else if (justLargeIndels == true && ar.hasLargeIndel == true)
-                                        {
-                                            AR.Add(name, ar);
-                                            ar = null;
-                                            count++;
-                                        }
-                                        else if (justLargeIndels == false && justChimeric == false)
-                                        {
-                                            count++;
-                                            AR.Add(name, ar);
-                                            ar = null;
-                                            count++;
-                                        }
-                                        if (count > 99)
-                                        {
-                                            Text = "Loaded: " + AR.Count().ToString() + " reads. Current read start point: " + lastReadPosition.ToString("N0");
-                                            drawPrimaryAlignments(false);
-                                            Application.DoEvents();
-                                            count = 0;
+                                            if ((justChimeric == true && ar.getSecondaryAlignmentTag != "") || (justLargeIndels == true && ar.hasLargeIndel == true))
+                                            {
+                                                AR.Add(name, ar);
+                                                ar = null;
+                                                count++;
+                                            }
+                                            else if (justChimeric == true && ar.getSecondaryAlignmentTag != "")
+                                            {
+                                                AR.Add(name, ar);
+                                                ar = null;
+                                                count++;
+                                            }
+                                            else if (justLargeIndels == true && ar.hasLargeIndel == true)
+                                            {
+                                                AR.Add(name, ar);
+                                                ar = null;
+                                                count++;
+                                            }
+                                            else if (justLargeIndels == false && justChimeric == false)
+                                            {
+                                                count++;
+                                                AR.Add(name, ar);
+                                                ar = null;
+                                                count++;
+                                            }
+
+                                            if (count > 99)
+                                            {
+                                                Text = "Loaded: " + AR.Count().ToString() + " reads. Current read start point: " + lastReadPosition.ToString("N0");
+                                                drawPrimaryAlignments(false);
+                                                Application.DoEvents();
+                                                count = 0;
+                                            }
                                         }
                                     }
                                 }
@@ -442,9 +451,11 @@ namespace AgileStructure
                         Application.DoEvents();
                         counter++;
                     }
+                    drawPrimaryAlignments(false);
                     setSecondaryAlignmentBins();
                     AddSecondaryAlignmentsBlocks();
                     makeBlankSecondaryBase();
+                    
                     DrawGenes(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
                     
                     p1.Image = bmp;
