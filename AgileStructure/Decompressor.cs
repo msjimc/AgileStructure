@@ -25,11 +25,17 @@ namespace AgileStructure
 		{  }
 
 		public Decompressor(string FileName)
-		{						
-			positionInChunk = 0;
-			currentFile = System.IO.File.Open(FileName, System.IO.FileMode.Open, System.IO.FileAccess.Read);			
-			decompressor = new GZipStream(currentFile, CompressionMode.Decompress, true);
-			endofFile = false;
+        {
+			try
+			{
+				positionInChunk = 0;
+				currentFile = System.IO.File.Open(FileName, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+				decompressor = new GZipStream(currentFile, CompressionMode.Decompress, true);
+				endofFile = false;
+			}
+			catch(Exception ex)
+			{ throw new Exception("file open"); }
+
 		}
 
 		public void Dispose()

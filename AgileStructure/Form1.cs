@@ -317,6 +317,7 @@ namespace AgileStructure
             string title = Text;
             try
             {
+                this.Enabled = false;
                 bool justChimeric = onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Checked;
                 bool justLargeIndels = onlyShowReadsWithALargeIndelToolStripMenuItem.Checked;
 
@@ -360,7 +361,7 @@ namespace AgileStructure
                     bool skipThisBlock = false;                    
                     int count = 0;
 
-                    while (indexRef < IPs.Length && lastReadPosition <= (int)regionEnd && lastRefIndex == IPs[indexRef].NameIndex)
+                    while (indexRef < IPs.Length && lastReadPosition <= (int)regionEnd && lastRefIndex <= IPs[indexRef].NameIndex)
                     {
 
                         if (indexRef > IPs.GetUpperBound(0)) { break; }
@@ -368,25 +369,27 @@ namespace AgileStructure
                         if (indexRef + 1 < IPs.Length)
                         {
                             endRegion = IPs[indexRef + 1].getBPStart;
-                            if (IPs[indexRef].get_StreamPoint == IPs[indexRef + 1].get_StreamPoint)
+                            if (IPs[indexRef].get_StreamPoint == IPs[indexRef + 1].get_StreamPoint || lastReadPosition > IP.getBPStart)
                             {
                                 skipThisBlock = true;
-                                if (AR.Count > 0)
-                                { break; }
                             }
                         }
                         else { endRegion = selectEnd; }
 
                         if (skipThisBlock == false)
                         {
-                            BAMReader br = new BAMReader(fileName, (long)IP.get_StreamPoint);
+                            BAMReader br;
+                            try
+                            { br = new BAMReader(fileName, (long)IP.get_StreamPoint); }
+                            catch(Exception ex)
+                            { return; }
                             string r = br.NextAlignedRead(true, referenceSequenceNames);
                             AlignedRead art = new AlignedRead(r, AR.Count + 1);
-                            if (art.getreferenceIndex == index)
+                            if (art.getreferenceIndex == index )
                             { lastReadPosition = art.getPosition; }
                             else { lastReadPosition = 0; }
 
-                            while (r.Length > 0 && (lastReadPosition < selectEnd || currentChromosome < index))
+                            while (r.Length > 0 && (lastReadPosition < selectEnd && currentChromosome <= index))
                             {
                                 string name = getKey(r);
                                 if (AR.ContainsKey(name) == false)
@@ -428,6 +431,7 @@ namespace AgileStructure
                                                 ar = null;
                                                 count++;
                                             }
+                                            else { count++; }
 
                                             if (count > 99)
                                             {
@@ -443,7 +447,8 @@ namespace AgileStructure
                             }                        
                             br.Dispose();
                         }
-                      
+                        if (lastReadPosition > selectEnd || index < currentChromosome)
+                        { break; }
                         skipThisBlock = false;
                         indexRef++;
                         if (AR.Count > 0)
@@ -462,7 +467,10 @@ namespace AgileStructure
                 }
             }
             finally
-            { Text = title; }
+            { 
+                Text = title;
+                this.Enabled = true;
+            }
         }
 
         private int GetNextRead(StringBuilder sb, int startIndex, ref string read) 
@@ -757,6 +765,7 @@ namespace AgileStructure
                 {
                     if (drawGenes == true && gd != null)
                     {
+                        chromosomeName = chromosomeName.ToLower();
                         double xScale = (p1.Width - 20) / (double)(endPoint - startPoint);
 
                         ChromosomalPoint left = new ChromosomalPoint(chromosomeName, startPoint - 50000);
@@ -2511,7 +2520,7 @@ namespace AgileStructure
                             if (string.IsNullOrEmpty(hit) == false)
                             {
                                 string[] items = hit.Split(',');
-                                if (items[0].ToLower().Equals(bestPlaces[0].getReferenceName) == true)
+                                if (items[0].ToLower().Equals(bestPlaces[0].getReferenceName.ToLower()) == true)
                                 {
                                     string key = "";
                                     string secondaryStrandtrand = "";

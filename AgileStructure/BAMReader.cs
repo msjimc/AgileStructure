@@ -111,10 +111,15 @@ namespace AgileStructure
 
 		public BAMReader(string FileName, long startFrom)
         {
-			BamFileName = FileName;
-			decom = new Decompressor(FileName);
-			decom.SetFile(FileName, startFrom);
-			pos = int.MaxValue;
+			try
+			{
+				BamFileName = FileName;
+				decom = new Decompressor(FileName);
+				decom.SetFile(FileName, startFrom);
+				pos = int.MaxValue;
+			}
+			catch(Exception ex)
+			{ throw new Exception("File open"); }
         }
 
 		public void Dispose()
