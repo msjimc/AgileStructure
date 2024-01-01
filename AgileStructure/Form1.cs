@@ -1672,8 +1672,14 @@ namespace AgileStructure
             { resizing = false; }
             else
             {
-                if (cboSecondaries.Items.Count == 0) { return; }
                 timer1.Enabled = false;
+                if (cboSecondaries.Items.Count == 0) 
+                {
+                    makeBlankImage();
+                    makeBlankSecondaryBase();
+                    return; 
+                }
+                
                 int index = cboSecondaries.SelectedIndex;
                 int startPoint = (int)selectSecondaryStart;
                 int endPoint = (int)selectSecondaryEnd;
