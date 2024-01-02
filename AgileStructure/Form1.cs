@@ -119,6 +119,8 @@ namespace AgileStructure
             { MessageBox.Show(ex.Message, "Error"); }
             history = new List<string>();
             historySecondary = new List<StringInt>();
+            primaryAlignmentsToolStripMenuItem.DropDownItems.Clear();
+            secondaryAlignmentsToolStripMenuItem.DropDownItems.Clear();
 
             makeBlankImage();
             makeBlankSecondaryBase();
@@ -514,8 +516,9 @@ namespace AgileStructure
         private string getKey(string read)
         {
             int index = read.IndexOf("\t");//end of name
+            string name = read.Substring(0, index);
             int indexA = read.IndexOf("\t", index + 1);//end of flag
-            string name = read.Substring(index + 1, indexA - (1 + index));
+            name += "|" + read.Substring(index + 1, indexA - (1 + index));
 
             index = read.IndexOf("\t", indexA + 1);//end of ref index            
             indexA = read.IndexOf("\t", index + 1);//end of position**
