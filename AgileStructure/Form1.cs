@@ -3032,7 +3032,7 @@ namespace AgileStructure
                         foreach (int p in chrPlaces)
                         {
                             if (p >= regionStart && p <= regionStart + 200)
-                                near.Add(p);
+                            { near.Add(p); }
                         }
                         bestRegions[0] = new BreakPointData(regionStart, near.ToArray<int>(), chr);
                     }
