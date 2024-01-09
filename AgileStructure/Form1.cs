@@ -2677,7 +2677,7 @@ namespace AgileStructure
                     }
                     else
                     {
-                        mutation = "t(" + bestPlaces[0].getReferenceName + ";" + bestPlaces[1].getReferenceName + ") g."
+                        mutation = "t(" + bestPlaces[0].getReferenceName + ";" + bestPlaces[1].getReferenceName + ") (g."
                             + breakPoint1.ToString("N0") + ";g." + breakPoint2.ToString("N0") +")";
                     }
 
