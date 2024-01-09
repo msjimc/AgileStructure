@@ -116,7 +116,10 @@ namespace AgileStructure
                 processBAIFile(file + ".bai");
             }
             catch (Exception ex)
-            { MessageBox.Show(ex.Message, "Error"); }
+            {
+                if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                MessageBox.Show(ex.Message, "Error"); 
+            }
             history = new List<string>();
             historySecondary = new List<StringInt>();
             primaryAlignmentsToolStripMenuItem.DropDownItems.Clear();
@@ -1713,6 +1716,7 @@ namespace AgileStructure
 
             try
             {
+                if (id != null) { id.WindowState = FormWindowState.Minimized; }
                 TextBox txt = (TextBox)sender;
                 string value = txt.Text.Trim().Replace(",", "");
                 if (string.IsNullOrEmpty(value) == false)
@@ -1723,6 +1727,7 @@ namespace AgileStructure
             catch //(Exception ex)
             {
                 e.Cancel = true;
+                if (id != null) { id.WindowState = FormWindowState.Minimized; }
                 MessageBox.Show("Must be a whole number", "Not a whole number", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally { ignoreValidation = false; }
@@ -2181,6 +2186,7 @@ namespace AgileStructure
                 }
                 catch (Exception ex)
                 {
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
                     MessageBox.Show("Could save data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
@@ -2201,6 +2207,7 @@ namespace AgileStructure
                 }
                 catch (Exception ex)
                 {
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
                     MessageBox.Show("Could save data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
@@ -2245,6 +2252,7 @@ namespace AgileStructure
                 }
                 catch (Exception ex)
                 {
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
                     MessageBox.Show("Could save data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
@@ -2271,7 +2279,11 @@ namespace AgileStructure
                     int breakPoint1 = bestPlaces[0].getAveragePlace;
                     int breakPoint2 = bestPlaces[1].getAveragePlace;
                     if (bestPlaces[1] == null)
-                    { MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                    {
+                        if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                        MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                        return; 
+                    }
 
                     string mutation = "";
                     MutationType answer = testMutationType(bestPlaces);
@@ -2282,16 +2294,22 @@ namespace AgileStructure
                     { mutation += cboRef.Text + "." + breakPoint2.ToString("N0") + "_" + breakPoint1.ToString("N0") + "del"; }
                     else
                     { mutation += cboRef.Text + "." + breakPoint1.ToString("N0") + "_" + breakPoint2.ToString("N0") + "del"; }
-
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
                     if (MessageBox.Show(mutation + "\nSave with the selected read data?", "Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     { SaveToFile(mutation); }
 
                 }
                 else
-                { MessageBox.Show("Please select the reads spanning the break point by clicking on them.", "No reads selected"); }
+                {
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                    MessageBox.Show("Please select the reads spanning the break point by clicking on them.", "No reads selected"); 
+                }
             }
             catch (Exception ex)
-            { MessageBox.Show("Could not identify the variant using the selected reads", "Error"); }
+            {
+                if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                MessageBox.Show("Could not identify the variant using the selected reads", "Error");
+            }
         }
 
         private void inversionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2305,7 +2323,11 @@ namespace AgileStructure
                     int breakPoint2 = bestPlaces[1].getAveragePlace;
 
                     if (bestPlaces[1] == null)
-                    { MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                    { 
+                        if (id != null) { id.WindowState = FormWindowState.Minimized; } 
+                        MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return; 
+                    }
 
                     string mutation = "";
                     MutationType answer = testMutationType(bestPlaces);
@@ -2316,16 +2338,23 @@ namespace AgileStructure
                     { mutation += cboRef.Text + "." + breakPoint2.ToString("N0") + "_" + breakPoint1.ToString("N0") + "inv"; }
                     else
                     { mutation += cboRef.Text + "." + breakPoint1.ToString("N0") + "_" + breakPoint2.ToString("N0") + "inv"; }
-
+                    
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
                     if (MessageBox.Show(mutation + "\nSave with the selected read data?", "Inversion", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     { SaveToFile(mutation); }
 
                 }
                 else
-                { MessageBox.Show("Please select the reads spanning the break point by clicking on them.", "No reads selected"); }
+                {
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                    MessageBox.Show("Please select the reads spanning the break point by clicking on them.", "No reads selected"); 
+                }
             }
             catch (Exception ex)
-            { MessageBox.Show("Could not identify the variant using the selected reads", "Error"); }
+            {
+                if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                MessageBox.Show("Could not identify the variant using the selected reads", "Error"); 
+            }
         }
 
         private void duplicationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2337,9 +2366,12 @@ namespace AgileStructure
                     BreakPointData[] bestPlaces = getBreakPoints(true, cboRef.Text);
                     int breakPoint1 = bestPlaces[0].getAveragePlace;
                     int breakPoint2 = bestPlaces[1].getAveragePlace;
-
+                   
                     if (bestPlaces[1] == null)
-                    { MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                    { 
+                        if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                        MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; 
+                    }
 
                     string mutation = "";
                     MutationType answer = testMutationType(bestPlaces);
@@ -2350,15 +2382,22 @@ namespace AgileStructure
                     { mutation += cboRef.Text + "." + breakPoint2.ToString("N0") + "_" + breakPoint1.ToString("N0") + "dup"; }
                     else
                     { mutation += cboRef.Text + "." + breakPoint1.ToString("N0") + "_" + breakPoint2.ToString("N0") + "dup"; }
-
+                    
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
                     if (MessageBox.Show(mutation + "\nSave with the selected read data?", "Inversion", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     { SaveToFile(mutation); }
                 }
                 else
-                { MessageBox.Show("Please select the reads spanning the break point by clicking on them.", "No reads selected"); }
+                {
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                    MessageBox.Show("Please select the reads spanning the break point by clicking on them.", "No reads selected"); 
+                }
             }
             catch (Exception ex)
-            { MessageBox.Show("Could not identify the variant using the selected reads", "Error"); }
+            {
+                if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                MessageBox.Show("Could not identify the variant using the selected reads", "Error"); 
+            }
         }
 
         private void insertionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2393,7 +2432,11 @@ namespace AgileStructure
                     }
 
                     if (bestPlaces[1] == null)
-                    { MessageBox.Show("Could not find all the breakpoints", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                    {
+                        if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                        MessageBox.Show("Could not find all the breakpoints", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                        return; 
+                    }
 
                     string mutation = bestPlaces3rd[0].getReferenceName + "." + breakPoint3.ToString("N0") + "_" + (breakPoint3 + 1).ToString("N0") + "ins " + bestPlaces[0].getReferenceName + ".";
 
@@ -2403,14 +2446,21 @@ namespace AgileStructure
                     else
                     { mutation += breakPoint1.ToString("N0") + "_" + breakPoint2.ToString("N0"); }
 
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
                     if (MessageBox.Show(mutation + "\nSave with the selected read data?", "Inversion", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     { SaveToFile(mutation); }
                 }
                 else
-                { MessageBox.Show("Please select the reads spanning the break point by clicking on them.", "No reads selected"); }
+                {
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                    MessageBox.Show("Please select the reads spanning the break point by clicking on them.", "No reads selected");
+                }
             }
             catch (Exception ex)
-            { MessageBox.Show("Could not identify the variant using the selected reads", "Error"); }
+            {
+                if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                MessageBox.Show("Could not identify the variant using the selected reads", "Error");
+            }
         }
 
         private bool couldItBeAnInsert()
@@ -2606,7 +2656,11 @@ namespace AgileStructure
                     int breakPoint2 = bestPlaces[1].getAveragePlace;
 
                     if (bestPlaces[1] == null)
-                    { MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                    {
+                        if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                        MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
 
                     string mutation = "";
                     MutationType answer = testMutationType(bestPlaces);
@@ -2619,27 +2673,32 @@ namespace AgileStructure
                     if (best1 > best2)
                     {
                         mutation = "t(" + bestPlaces[1].getReferenceName + ";" + bestPlaces[0].getReferenceName + ") (g."
-                            + breakPoint2.ToString("N0") + ";g." + breakPoint1.ToString("N0");
+                            + breakPoint2.ToString("N0") + ";g." + breakPoint1.ToString("N0") + ")";
                     }
                     else
                     {
                         mutation = "t(" + bestPlaces[0].getReferenceName + ";" + bestPlaces[1].getReferenceName + ") g."
-                            + breakPoint1.ToString("N0") + ";g." + breakPoint2.ToString("N0");
+                            + breakPoint1.ToString("N0") + ";g." + breakPoint2.ToString("N0") +")";
                     }
 
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
                     if (MessageBox.Show(mutation + "\nSave with the selected read data?", "Translocation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     { SaveToFile(mutation); }
 
                 }
             }
             catch (Exception ex)
-            { MessageBox.Show("Could not identify the variant using the selected reads", "Error"); }
+            {
+                if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                MessageBox.Show("Could not identify the variant using the selected reads", "Error"); 
+            }
         }
 
         private void unbalancedTranslocationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
+                if (id != null) { id.WindowState = FormWindowState.Minimized; }
                 if (selectedIndex.Count > 0)
                 {
                     BreakPointData[] bestPlaces = getBreakPointsOnUnbalancedTranslocation(cboRef.Text, cboSecondaries.Text);
@@ -2648,7 +2707,11 @@ namespace AgileStructure
                     
 
                     if (bestPlaces[1] == null)
-                    { MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                    {
+                        if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                        MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return; 
+                    }
 
                     string mutation = "The rearrangement could be an unbalanced translocation of.\n";
                     string mutation1 = ""; 
@@ -2659,12 +2722,12 @@ namespace AgileStructure
                     if (best1 > best2)
                     {
                         mutation1 += "t(" + bestPlaces[1].getReferenceName + ";" + bestPlaces[0].getReferenceName + ") (g."
-                            + breakPoint2.ToString("N0") + ";g." + breakPoint1.ToString("N0");
+                            + breakPoint2.ToString("N0") + ";g." + breakPoint1.ToString("N0") + ")";
                     }
                     else
                     {
                         mutation1 += "t(" + bestPlaces[0].getReferenceName + ";" + bestPlaces[1].getReferenceName + ") g."
-                            + breakPoint1.ToString("N0") + ";g." + breakPoint2.ToString("N0");
+                            + breakPoint1.ToString("N0") + ";g." + breakPoint2.ToString("N0") + ")";
                     }
 
                     string mutation2 = "";
@@ -2679,23 +2742,26 @@ namespace AgileStructure
                     if (best1 > best2)
                     {
                         mutation2 = "t(" + bestPlaces[1].getReferenceName + ";" + bestPlaces[0].getReferenceName + ") (g."
-                            + breakPoint2.ToString("N0") + ";g." + breakPoint1.ToString("N0");
+                            + breakPoint2.ToString("N0") + ";g." + breakPoint1.ToString("N0") +")";
                     }
                     else
                     {
                         mutation2 = "t(" + bestPlaces[0].getReferenceName + ";" + bestPlaces[1].getReferenceName + ") g."
-                            + breakPoint1.ToString("N0") + ";g." + breakPoint2.ToString("N0");
+                            + breakPoint1.ToString("N0") + ";g." + breakPoint2.ToString("N0") + ")";
                     }
 
 
-
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
                     if (MessageBox.Show(mutation + "\n" + mutation1 + "\n"  + mutation2+ "\nSave with the selected read data?", "Unbalanced Translocation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     { SaveToFile(mutation + "\n" + mutation1 + "\n" + mutation2); }
 
                 }
             }
             catch (Exception ex)
-            { MessageBox.Show("Could not identify the variant using the selected reads", "Error"); }
+            {
+                if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                MessageBox.Show("Could not identify the variant using the selected reads", "Error");
+            }
         }
         private void SaveToFile(string mutation)
         {
@@ -3338,7 +3404,11 @@ namespace AgileStructure
         private void variantTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (cboSecondaries.SelectedIndex == 0)
-            { MessageBox.Show("You must select a region containing the secondary alignments.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+            {
+                if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                MessageBox.Show("You must select a region containing the secondary alignments.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                return; 
+            }
 
             try
             {
@@ -3351,7 +3421,11 @@ namespace AgileStructure
 
                     BreakPointData[] bestPlaces = getBreakPoints(sameSequence, cboRef.Text);
                     if (bestPlaces[1] == null)
-                    { MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                    {
+                        if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                        MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return; 
+                    }
 
                     int breakPoint1 = bestPlaces[0].getAveragePlace;
                     int breakPoint2 = bestPlaces[1].getAveragePlace;
@@ -3364,14 +3438,22 @@ namespace AgileStructure
                         if (couldItBeAnInsert() == true)
                         { answer = MutationType.Insertion; }
                     }
-
+                    
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
                     mutation = setMutationPrefix(answer);
                     MessageBox.Show(mutation, "Rearrangement type", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
-                { MessageBox.Show("Please select the reads spanning the break point by clicking on them.", "No reads selected"); }
+                {
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                    MessageBox.Show("Please select the reads spanning the break point by clicking on them.", "No reads selected"); 
+                }
             }
-            catch { MessageBox.Show("Something went wrong does the alignments contian softclipped cigar strings!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch 
+            {
+                if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                MessageBox.Show("Something went wrong does the alignments contian softclipped cigar strings!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            }
         }
 
         private void geneCoordinatesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3500,6 +3582,7 @@ namespace AgileStructure
 
         private void alignerStringToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (id != null) { id.WindowState = FormWindowState.Minimized; }
             if (string.IsNullOrEmpty(alignerString) == true)
             { MessageBox.Show("No data", "Aligner command string", MessageBoxButtons.OK, MessageBoxIcon.Information); }
             else
@@ -3578,6 +3661,8 @@ namespace AgileStructure
                     }
 
                     sb.Append("\nMedian values\n" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + (mediumStart + 1).ToString("N0") + "ins" + (mediumStart - mediumEnd).ToString("N0") + "bp\n\nDo you want to save the inserts annotation?");
+
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
                     if (MessageBox.Show(sb.ToString(), "Inserts", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         sb = new StringBuilder();
@@ -3589,6 +3674,7 @@ namespace AgileStructure
                 }
                 else if (inserts.Count == 1)
                 {
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
                     if (MessageBox.Show("Only one insert\n" + inserts[0] + "\n\nDo you want to save the inserts annotation ? ", "Insertions", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     { SaveToFile(inserts[0]); }
                 }
@@ -3660,6 +3746,7 @@ namespace AgileStructure
 
 
                     sb.Append("\nMedian breakpoints\n" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + mediumEnd.ToString("N0") + "del\n\nDo you want to save the data?");
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
                     if (MessageBox.Show(sb.ToString(), "Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         foreach (string s in deletions)
@@ -3671,6 +3758,7 @@ namespace AgileStructure
                 }
                 else if (deletions.Count == 1)
                 {
+                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
                     if (MessageBox.Show("Only one insert\n" + deletions[0] + "\n\nDo you want to save the inserts annotation ? ", "Insertions", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     { SaveToFile(deletions[0]); }
                 }
