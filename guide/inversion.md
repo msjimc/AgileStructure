@@ -2,7 +2,7 @@
 
 __Prior information__  
 Using standard cytogenetics tests an individual was found to have an inversion in chromosome 7 with the break points around 26 to 28 MB and 91 to 95 MB.  
-(The read data in in the AgileStructure_dta_sorted.bam file.)
+(The read data in in the AgileStructure_data_sorted.bam file.)
 
 Import the data by pressing the ```Bam file``` button and then selected chromosome 7 from the upper dropdown list box and enter the co-ordinates for the approximate position you want to start the search for the first break point in the  two text boxes to the right of the dropdown list and import the data by selecting the ```Analysis``` > ```Only show reads with secondary alignments``` menu option (Figure 1)
 
