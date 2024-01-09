@@ -46,15 +46,20 @@ However, while you don't need to use the lower panel to identify the deletion's 
 
 Figure 6
 
-After selecting all the reads spanning the deletion, selecting the ```Variant determination``` > ```Use soft clip data``` > ```Deletion``` menu option prompts AgileStructure to analyse the selected reads and annotate the break point has: chr7.146,837,611_146,914,450del (Figure 7).  
+After selecting all the reads spanning the deletion, selecting the ```Variant determination``` > ```Use soft clip data``` > ```Deletion``` menu option prompts AgileStructure to analyse the selected reads and annotate the break point has:  
+__chr7.146,837,611_146,914,450del__ (Figure 7).  
+
 
 ![Figure 7](images/examples/figure7del.jpg)
 
 Figure 7
 
-As stated above, the variant had perviously been identified as chr7.146,837,607_146,914,449del in the hg19 reference build, when the original coordinates are mapped from hg19 to hg38 using the [Lift Genome Annotations](https://genome.ucsc.edu/cgi-bin/hgLiftOver) webpage at the UCSC Genome Browser site, the regions can be seen to closely match:
+As stated above, the variant had perviously been identified as __chr7.146,837,607_146,914,449del__ in the hg19 reference build, when the original coordinates are mapped from hg19 to hg38 using the [Lift Genome Annotations](https://genome.ucsc.edu/cgi-bin/hgLiftOver) webpage at the UCSC Genome Browser site, the regions can be seen to closely match:
 
-chr7.146,837,611_146,914,450del: AgileStructure  
-chr7.146,837,607_146,914,449del: original publication
+|Origin|Variant|
+|-|-|
+|Publication|chr7.146,837,607_146,914,449del|
+|This guide|chr7.146,837,611_146,914,450del|
+
 
 [Return user guide](README.md#deletion) 

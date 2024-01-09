@@ -108,10 +108,12 @@ The break point identified in the 2nd analysis:
 __t(chr6;chr8) (g.167,281,716;g.113,696,100)__  
 is derived from a different set of reads and so could be considered an independent test. While the base pair position of the two break points are slightly different from each other (Table 1) and the published position, it should be close enough to design a diagnostic PCR test.
 
-|Origin|Varaiant|
+|Origin|Variant|
 |-|-|
 |Published variant|t(chr6;chr8) (g.167,281,717:g.113,696,089)|
 |Using primary alignments on chr8|t(chr6;chr8) (g.167,281,719;g.113,696,098)|
 |Using primary alignments on chr6|t(chr6;chr8) (g.167,281,716;g.113,696,100)|
+
+#### Table 1
 
 [Return user guide](README.md#translocation) 

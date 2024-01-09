@@ -50,7 +50,7 @@ This annotation depends solely on reads with primary alignments at the 27.7 Mb s
 
 Figure 7
 
-This set of reads is not as clear as those at the first site, with one secondary alignment flanked by long soft clipped sequences. However, selecting the three reads and selecting the ```Variant determination``` > ```Use soft clip data``` > ```Inversion``` menu option annotates the inversion as chr7, 27,722,805_93,970,219inv (Figure 8), which is very close to the first annotation of chr7, 27,722,809_93,970,219inv (Figure 6).
+This set of reads is not as clear as those at the first site, with one secondary alignment flanked by long soft clipped sequences. However, selecting the three reads and selecting the ```Variant determination``` > ```Use soft clip data``` > ```Inversion``` menu option annotates the inversion as chr7, 27,722,805_93,970,218inv (Figure 8), which is very close to the first annotation of chr7, 27,722,809_93,970,219inv (Figure 6).
 
 ![Figure 8](images/examples/figure8inv.jpg)
 
@@ -58,4 +58,14 @@ Figure 8
 
 [Return user guide](README.md#inversion)
 
-The published break point was identified as chr7.27,762,423_93,599,530inv when aligned to the hg19 human reference sequence. When these co-ordinates are mapped to hg38 using the [Lift Genome Annotations](https://genome.ucsc.edu/cgi-bin/hgLiftOver) the published mutation becomes: chr7.27,722,804_93,970,219inv which is very close to the results found here:  chr7.27,722,809_93,970,219inv and chr7.27,722,809_93,970,219inv
+The published break point was identified as chr7.27,762,423_93,599,530inv when aligned to the hg19 human reference sequence. When these co-ordinates are mapped to hg38 using the [Lift Genome Annotations](https://genome.ucsc.edu/cgi-bin/hgLiftOver) the published mutation becomes: chr7.27,722,804_93,970,219inv which is very close to the results found here:  chr7.27,722,809_93,970,219inv and chr7.27,722,809_93,970,218inv
+
+|Origin|Variant|
+|-|-|
+|Published variant|chr7.27,722,804_93,970,219inv|
+|Using primary alignments at 27 Mb|chr7, 27,722,809_93,970,219inv|
+|Using primary alignments at 93 Mb|chr7.27,722,805_93,970,218inv|
+
+#### Table 1
+
+[Return user guide](README.md#inversion) 
