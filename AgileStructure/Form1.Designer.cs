@@ -116,9 +116,11 @@ namespace AgileStructure
             this.groupBox1.Controls.Add(this.cboRef);
             this.groupBox1.Controls.Add(this.btnGetReads);
             this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1125, 65);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Size = new System.Drawing.Size(2089, 139);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Region selection";
@@ -126,9 +128,10 @@ namespace AgileStructure
             // txtEnd
             // 
             this.txtEnd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEnd.Location = new System.Drawing.Point(890, 24);
+            this.txtEnd.Location = new System.Drawing.Point(1653, 51);
+            this.txtEnd.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtEnd.Name = "txtEnd";
-            this.txtEnd.Size = new System.Drawing.Size(132, 23);
+            this.txtEnd.Size = new System.Drawing.Size(242, 39);
             this.txtEnd.TabIndex = 4;
             this.txtEnd.TextChanged += new System.EventHandler(this.txtEnd_TextChanged);
             this.txtEnd.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNumber_KeyDown);
@@ -138,9 +141,10 @@ namespace AgileStructure
             // txtStart
             // 
             this.txtStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtStart.Location = new System.Drawing.Point(750, 24);
+            this.txtStart.Location = new System.Drawing.Point(1393, 51);
+            this.txtStart.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtStart.Name = "txtStart";
-            this.txtStart.Size = new System.Drawing.Size(132, 23);
+            this.txtStart.Size = new System.Drawing.Size(242, 39);
             this.txtStart.TabIndex = 3;
             this.txtStart.TextChanged += new System.EventHandler(this.txtStart_TextChanged);
             this.txtStart.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNumber_KeyDown);
@@ -153,18 +157,20 @@ namespace AgileStructure
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboRef.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboRef.FormattingEnabled = true;
-            this.cboRef.Location = new System.Drawing.Point(101, 24);
+            this.cboRef.Location = new System.Drawing.Point(188, 51);
+            this.cboRef.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.cboRef.Name = "cboRef";
-            this.cboRef.Size = new System.Drawing.Size(641, 23);
+            this.cboRef.Size = new System.Drawing.Size(1187, 40);
             this.cboRef.TabIndex = 2;
             this.cboRef.SelectedIndexChanged += new System.EventHandler(this.cboRef_SelectedIndexChanged);
             // 
             // btnGetReads
             // 
             this.btnGetReads.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGetReads.Location = new System.Drawing.Point(1030, 22);
+            this.btnGetReads.Location = new System.Drawing.Point(1913, 47);
+            this.btnGetReads.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnGetReads.Name = "btnGetReads";
-            this.btnGetReads.Size = new System.Drawing.Size(87, 27);
+            this.btnGetReads.Size = new System.Drawing.Size(162, 58);
             this.btnGetReads.TabIndex = 5;
             this.btnGetReads.Text = "Get reads";
             this.btnGetReads.UseVisualStyleBackColor = true;
@@ -172,9 +178,10 @@ namespace AgileStructure
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(7, 22);
+            this.button2.Location = new System.Drawing.Point(13, 47);
+            this.button2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(87, 27);
+            this.button2.Size = new System.Drawing.Size(162, 58);
             this.button2.TabIndex = 1;
             this.button2.Text = "BAM file";
             this.button2.UseVisualStyleBackColor = true;
@@ -186,18 +193,21 @@ namespace AgileStructure
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbpP1.Controls.Add(this.p1);
-            this.gbpP1.Location = new System.Drawing.Point(0, 75);
+            this.gbpP1.Location = new System.Drawing.Point(0, 160);
+            this.gbpP1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.gbpP1.Name = "gbpP1";
-            this.gbpP1.Size = new System.Drawing.Size(1128, 248);
+            this.gbpP1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gbpP1.Size = new System.Drawing.Size(2095, 528);
             this.gbpP1.TabIndex = 6;
             this.gbpP1.TabStop = false;
             // 
             // p1
             // 
             this.p1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.p1.Location = new System.Drawing.Point(3, 19);
+            this.p1.Location = new System.Drawing.Point(6, 38);
+            this.p1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.p1.Name = "p1";
-            this.p1.Size = new System.Drawing.Size(1122, 226);
+            this.p1.Size = new System.Drawing.Size(2083, 484);
             this.p1.TabIndex = 0;
             this.p1.TabStop = false;
             this.p1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.p1_MouseClick);
@@ -212,18 +222,21 @@ namespace AgileStructure
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbpP2.Controls.Add(this.p2);
-            this.gbpP2.Location = new System.Drawing.Point(0, 75);
+            this.gbpP2.Location = new System.Drawing.Point(0, 160);
+            this.gbpP2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.gbpP2.Name = "gbpP2";
-            this.gbpP2.Size = new System.Drawing.Size(1132, 240);
+            this.gbpP2.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gbpP2.Size = new System.Drawing.Size(2102, 510);
             this.gbpP2.TabIndex = 2;
             this.gbpP2.TabStop = false;
             // 
             // p2
             // 
             this.p2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.p2.Location = new System.Drawing.Point(3, 19);
+            this.p2.Location = new System.Drawing.Point(6, 38);
+            this.p2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.p2.Name = "p2";
-            this.p2.Size = new System.Drawing.Size(1126, 218);
+            this.p2.Size = new System.Drawing.Size(2090, 466);
             this.p2.TabIndex = 0;
             this.p2.TabStop = false;
             this.p2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.p2_MouseClick);
@@ -241,18 +254,21 @@ namespace AgileStructure
             this.groupBox4.Controls.Add(this.txtsStart);
             this.groupBox4.Controls.Add(this.cboSecondaries);
             this.groupBox4.Controls.Add(this.btnSecondaryView);
-            this.groupBox4.Location = new System.Drawing.Point(0, 3);
+            this.groupBox4.Location = new System.Drawing.Point(0, 6);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(1128, 65);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox4.Size = new System.Drawing.Size(2095, 139);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Secondary alignment region";
             // 
             // btnFilter
             // 
-            this.btnFilter.Location = new System.Drawing.Point(11, 22);
+            this.btnFilter.Location = new System.Drawing.Point(20, 47);
+            this.btnFilter.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(87, 27);
+            this.btnFilter.Size = new System.Drawing.Size(162, 58);
             this.btnFilter.TabIndex = 8;
             this.btnFilter.Text = "Filter";
             this.btnFilter.UseVisualStyleBackColor = true;
@@ -261,9 +277,10 @@ namespace AgileStructure
             // txtsEnd
             // 
             this.txtsEnd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsEnd.Location = new System.Drawing.Point(894, 24);
+            this.txtsEnd.Location = new System.Drawing.Point(1660, 51);
+            this.txtsEnd.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtsEnd.Name = "txtsEnd";
-            this.txtsEnd.Size = new System.Drawing.Size(132, 23);
+            this.txtsEnd.Size = new System.Drawing.Size(242, 39);
             this.txtsEnd.TabIndex = 11;
             this.txtsEnd.TextChanged += new System.EventHandler(this.txtsEnd_TextChanged);
             this.txtsEnd.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNumber_KeyDown);
@@ -273,9 +290,10 @@ namespace AgileStructure
             // txtsStart
             // 
             this.txtsStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsStart.Location = new System.Drawing.Point(754, 24);
+            this.txtsStart.Location = new System.Drawing.Point(1400, 51);
+            this.txtsStart.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtsStart.Name = "txtsStart";
-            this.txtsStart.Size = new System.Drawing.Size(132, 23);
+            this.txtsStart.Size = new System.Drawing.Size(242, 39);
             this.txtsStart.TabIndex = 10;
             this.txtsStart.TextChanged += new System.EventHandler(this.txtsStart_TextChanged);
             this.txtsStart.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNumber_KeyDown);
@@ -288,18 +306,20 @@ namespace AgileStructure
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboSecondaries.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSecondaries.FormattingEnabled = true;
-            this.cboSecondaries.Location = new System.Drawing.Point(101, 24);
+            this.cboSecondaries.Location = new System.Drawing.Point(188, 51);
+            this.cboSecondaries.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.cboSecondaries.Name = "cboSecondaries";
-            this.cboSecondaries.Size = new System.Drawing.Size(645, 23);
+            this.cboSecondaries.Size = new System.Drawing.Size(1194, 40);
             this.cboSecondaries.TabIndex = 9;
             this.cboSecondaries.SelectedIndexChanged += new System.EventHandler(this.cboSecondaries_SelectedIndexChanged);
             // 
             // btnSecondaryView
             // 
             this.btnSecondaryView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSecondaryView.Location = new System.Drawing.Point(1034, 22);
+            this.btnSecondaryView.Location = new System.Drawing.Point(1920, 47);
+            this.btnSecondaryView.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnSecondaryView.Name = "btnSecondaryView";
-            this.btnSecondaryView.Size = new System.Drawing.Size(87, 27);
+            this.btnSecondaryView.Size = new System.Drawing.Size(162, 58);
             this.btnSecondaryView.TabIndex = 12;
             this.btnSecondaryView.Text = "Select";
             this.btnSecondaryView.UseVisualStyleBackColor = true;
@@ -310,7 +330,8 @@ namespace AgileStructure
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(14, 31);
+            this.splitContainer1.Location = new System.Drawing.Point(26, 66);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -323,9 +344,9 @@ namespace AgileStructure
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox4);
             this.splitContainer1.Panel2.Controls.Add(this.gbpP2);
-            this.splitContainer1.Size = new System.Drawing.Size(1132, 662);
-            this.splitContainer1.SplitterDistance = 328;
-            this.splitContainer1.SplitterWidth = 5;
+            this.splitContainer1.Size = new System.Drawing.Size(2102, 1412);
+            this.splitContainer1.SplitterDistance = 699;
+            this.splitContainer1.SplitterWidth = 11;
             this.splitContainer1.TabIndex = 7;
             // 
             // timer1
@@ -343,8 +364,7 @@ namespace AgileStructure
             this.historyToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(1160, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(2154, 40);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -358,26 +378,26 @@ namespace AgileStructure
             this.toolStripMenuItem7,
             this.lookForIndelsWithinAReadToolStripMenuItem});
             this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
-            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(62, 22);
+            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(119, 36);
             this.fileToolStripMenuItem1.Text = "Analysis";
             // 
             // openBAMFileToolStripMenuItem
             // 
             this.openBAMFileToolStripMenuItem.Name = "openBAMFileToolStripMenuItem";
-            this.openBAMFileToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
+            this.openBAMFileToolStripMenuItem.Size = new System.Drawing.Size(615, 44);
             this.openBAMFileToolStripMenuItem.Text = "Open BAM file";
             this.openBAMFileToolStripMenuItem.Click += new System.EventHandler(this.openBAMFileToolStripMenuItem_Click);
             // 
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(303, 6);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(612, 6);
             // 
             // onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem
             // 
             this.onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Name = "onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem";
-            this.onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
+            this.onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Size = new System.Drawing.Size(615, 44);
             this.onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Text = "Only show reads with secondary alignments";
             this.onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem.Click += new System.EventHandler(this.onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem_Click);
             // 
@@ -385,20 +405,20 @@ namespace AgileStructure
             // 
             this.onlyShowReadsWithALargeIndelToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.onlyShowReadsWithALargeIndelToolStripMenuItem.Name = "onlyShowReadsWithALargeIndelToolStripMenuItem";
-            this.onlyShowReadsWithALargeIndelToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
+            this.onlyShowReadsWithALargeIndelToolStripMenuItem.Size = new System.Drawing.Size(615, 44);
             this.onlyShowReadsWithALargeIndelToolStripMenuItem.Text = "Only show reads with a large indel";
             this.onlyShowReadsWithALargeIndelToolStripMenuItem.Click += new System.EventHandler(this.onlyShowReadsWithALargeIndelToolStripMenuItem_Click);
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(303, 6);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(612, 6);
             // 
             // lookForIndelsWithinAReadToolStripMenuItem
             // 
             this.lookForIndelsWithinAReadToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.lookForIndelsWithinAReadToolStripMenuItem.Name = "lookForIndelsWithinAReadToolStripMenuItem";
-            this.lookForIndelsWithinAReadToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
+            this.lookForIndelsWithinAReadToolStripMenuItem.Size = new System.Drawing.Size(615, 44);
             this.lookForIndelsWithinAReadToolStripMenuItem.Text = "Look for indels within a read";
             this.lookForIndelsWithinAReadToolStripMenuItem.Click += new System.EventHandler(this.lookForIndelsWithinAReadToolStripMenuItem_Click);
             // 
@@ -413,13 +433,13 @@ namespace AgileStructure
             this.toolStripMenuItem5,
             this.showPositionOfCursorToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(79, 22);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(153, 36);
             this.fileToolStripMenuItem.Text = "Annotation";
             // 
             // gTFAnnotationFileToolStripMenuItem
             // 
             this.gTFAnnotationFileToolStripMenuItem.Name = "gTFAnnotationFileToolStripMenuItem";
-            this.gTFAnnotationFileToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.gTFAnnotationFileToolStripMenuItem.Size = new System.Drawing.Size(449, 44);
             this.gTFAnnotationFileToolStripMenuItem.Text = "Gene annotation file";
             this.gTFAnnotationFileToolStripMenuItem.Click += new System.EventHandler(this.gTFAnnotationFileToolStripMenuItem_Click);
             // 
@@ -427,19 +447,19 @@ namespace AgileStructure
             // 
             this.geneCoordinatesToolStripMenuItem.Enabled = false;
             this.geneCoordinatesToolStripMenuItem.Name = "geneCoordinatesToolStripMenuItem";
-            this.geneCoordinatesToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.geneCoordinatesToolStripMenuItem.Size = new System.Drawing.Size(449, 44);
             this.geneCoordinatesToolStripMenuItem.Text = "Gene coordinates";
             this.geneCoordinatesToolStripMenuItem.Click += new System.EventHandler(this.geneCoordinatesToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(218, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(446, 6);
             // 
             // repeatAnnotationFileToolStripMenuItem
             // 
             this.repeatAnnotationFileToolStripMenuItem.Name = "repeatAnnotationFileToolStripMenuItem";
-            this.repeatAnnotationFileToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.repeatAnnotationFileToolStripMenuItem.Size = new System.Drawing.Size(449, 44);
             this.repeatAnnotationFileToolStripMenuItem.Text = "Select repeat annotation file";
             this.repeatAnnotationFileToolStripMenuItem.Click += new System.EventHandler(this.repeatAnnotationFileToolStripMenuItem_Click);
             // 
@@ -447,20 +467,20 @@ namespace AgileStructure
             // 
             this.showRepeatsToolStripMenuItem.Enabled = false;
             this.showRepeatsToolStripMenuItem.Name = "showRepeatsToolStripMenuItem";
-            this.showRepeatsToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.showRepeatsToolStripMenuItem.Size = new System.Drawing.Size(449, 44);
             this.showRepeatsToolStripMenuItem.Text = "Show repeats";
             this.showRepeatsToolStripMenuItem.Click += new System.EventHandler(this.showRepeatsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(218, 6);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(446, 6);
             // 
             // showPositionOfCursorToolStripMenuItem
             // 
             this.showPositionOfCursorToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.showPositionOfCursorToolStripMenuItem.Name = "showPositionOfCursorToolStripMenuItem";
-            this.showPositionOfCursorToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.showPositionOfCursorToolStripMenuItem.Size = new System.Drawing.Size(449, 44);
             this.showPositionOfCursorToolStripMenuItem.Text = "Show position of cursor";
             this.showPositionOfCursorToolStripMenuItem.Click += new System.EventHandler(this.showPositionOfCursorToolStripMenuItem_Click);
             // 
@@ -474,45 +494,45 @@ namespace AgileStructure
             this.toolStripMenuItem6,
             this.alignerStringToolStripMenuItem});
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
-            this.dataToolStripMenuItem.Size = new System.Drawing.Size(43, 22);
+            this.dataToolStripMenuItem.Size = new System.Drawing.Size(83, 36);
             this.dataToolStripMenuItem.Text = "Data";
             // 
             // viewReadDataToolStripMenuItem
             // 
             this.viewReadDataToolStripMenuItem.Name = "viewReadDataToolStripMenuItem";
-            this.viewReadDataToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.viewReadDataToolStripMenuItem.Size = new System.Drawing.Size(360, 44);
             this.viewReadDataToolStripMenuItem.Text = "View read data";
             this.viewReadDataToolStripMenuItem.Click += new System.EventHandler(this.viewReadDataToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(175, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(357, 6);
             // 
             // saveSelectedReadsToolStripMenuItem
             // 
             this.saveSelectedReadsToolStripMenuItem.Enabled = false;
             this.saveSelectedReadsToolStripMenuItem.Name = "saveSelectedReadsToolStripMenuItem";
-            this.saveSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.saveSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(360, 44);
             this.saveSelectedReadsToolStripMenuItem.Text = "Save selected reads";
             this.saveSelectedReadsToolStripMenuItem.Click += new System.EventHandler(this.saveSelectedReadsToolStripMenuItem_Click);
             // 
             // clearSelectedReadsToolStripMenuItem
             // 
             this.clearSelectedReadsToolStripMenuItem.Name = "clearSelectedReadsToolStripMenuItem";
-            this.clearSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.clearSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(360, 44);
             this.clearSelectedReadsToolStripMenuItem.Text = "Clear selected reads";
             this.clearSelectedReadsToolStripMenuItem.Click += new System.EventHandler(this.clearSelectedReadsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(175, 6);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(357, 6);
             // 
             // alignerStringToolStripMenuItem
             // 
             this.alignerStringToolStripMenuItem.Name = "alignerStringToolStripMenuItem";
-            this.alignerStringToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.alignerStringToolStripMenuItem.Size = new System.Drawing.Size(360, 44);
             this.alignerStringToolStripMenuItem.Text = "Aligner string";
             this.alignerStringToolStripMenuItem.Click += new System.EventHandler(this.alignerStringToolStripMenuItem_Click);
             // 
@@ -525,13 +545,13 @@ namespace AgileStructure
             this.toolStripMenuItem8,
             this.switchRegionToolStripMenuItem});
             this.variantDeterminationToolStripMenuItem.Name = "variantDeterminationToolStripMenuItem";
-            this.variantDeterminationToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.variantDeterminationToolStripMenuItem.Size = new System.Drawing.Size(265, 36);
             this.variantDeterminationToolStripMenuItem.Text = "Variant determination";
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(269, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(541, 6);
             // 
             // useSoftClipDataToolStripMenuItem
             // 
@@ -545,61 +565,61 @@ namespace AgileStructure
             this.translocationToolStripMenuItem,
             this.unbalancedTranslocationToolStripMenuItem});
             this.useSoftClipDataToolStripMenuItem.Name = "useSoftClipDataToolStripMenuItem";
-            this.useSoftClipDataToolStripMenuItem.Size = new System.Drawing.Size(272, 22);
+            this.useSoftClipDataToolStripMenuItem.Size = new System.Drawing.Size(544, 44);
             this.useSoftClipDataToolStripMenuItem.Text = "Use soft clip data";
             // 
             // variantTypeToolStripMenuItem
             // 
             this.variantTypeToolStripMenuItem.Name = "variantTypeToolStripMenuItem";
-            this.variantTypeToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.variantTypeToolStripMenuItem.Size = new System.Drawing.Size(385, 44);
             this.variantTypeToolStripMenuItem.Text = "Variant type";
             this.variantTypeToolStripMenuItem.Click += new System.EventHandler(this.variantTypeToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(206, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(382, 6);
             // 
             // deletionsToolStripMenuItem
             // 
             this.deletionsToolStripMenuItem.Name = "deletionsToolStripMenuItem";
-            this.deletionsToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.deletionsToolStripMenuItem.Size = new System.Drawing.Size(385, 44);
             this.deletionsToolStripMenuItem.Text = "Deletion";
             this.deletionsToolStripMenuItem.Click += new System.EventHandler(this.deletionsToolStripMenuItem_Click);
             // 
             // duplicationToolStripMenuItem
             // 
             this.duplicationToolStripMenuItem.Name = "duplicationToolStripMenuItem";
-            this.duplicationToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.duplicationToolStripMenuItem.Size = new System.Drawing.Size(385, 44);
             this.duplicationToolStripMenuItem.Text = "Duplication";
             this.duplicationToolStripMenuItem.Click += new System.EventHandler(this.duplicationToolStripMenuItem_Click);
             // 
             // insertionToolStripMenuItem
             // 
             this.insertionToolStripMenuItem.Name = "insertionToolStripMenuItem";
-            this.insertionToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.insertionToolStripMenuItem.Size = new System.Drawing.Size(385, 44);
             this.insertionToolStripMenuItem.Text = "Insertion";
             this.insertionToolStripMenuItem.Click += new System.EventHandler(this.insertionToolStripMenuItem_Click);
             // 
             // inversionToolStripMenuItem
             // 
             this.inversionToolStripMenuItem.Name = "inversionToolStripMenuItem";
-            this.inversionToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.inversionToolStripMenuItem.Size = new System.Drawing.Size(385, 44);
             this.inversionToolStripMenuItem.Text = "Inversion";
             this.inversionToolStripMenuItem.Click += new System.EventHandler(this.inversionToolStripMenuItem_Click);
             // 
             // translocationToolStripMenuItem
             // 
             this.translocationToolStripMenuItem.Name = "translocationToolStripMenuItem";
-            this.translocationToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.translocationToolStripMenuItem.Size = new System.Drawing.Size(385, 44);
             this.translocationToolStripMenuItem.Text = "Translocation";
             this.translocationToolStripMenuItem.Click += new System.EventHandler(this.translocationToolStripMenuItem_Click);
             // 
             // unbalancedTranslocationToolStripMenuItem
             // 
             this.unbalancedTranslocationToolStripMenuItem.Name = "unbalancedTranslocationToolStripMenuItem";
-            this.unbalancedTranslocationToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.unbalancedTranslocationToolStripMenuItem.Text = "Unbalanced translocation";
+            this.unbalancedTranslocationToolStripMenuItem.Size = new System.Drawing.Size(385, 44);
+            this.unbalancedTranslocationToolStripMenuItem.Text = "Complex translocation";
             this.unbalancedTranslocationToolStripMenuItem.Click += new System.EventHandler(this.unbalancedTranslocationToolStripMenuItem_Click);
             // 
             // usePrimaryAlignmentsCIGARStringToolStripMenuItem
@@ -608,32 +628,32 @@ namespace AgileStructure
             this.deletionToolStripMenuItem,
             this.insertationToolStripMenuItem});
             this.usePrimaryAlignmentsCIGARStringToolStripMenuItem.Name = "usePrimaryAlignmentsCIGARStringToolStripMenuItem";
-            this.usePrimaryAlignmentsCIGARStringToolStripMenuItem.Size = new System.Drawing.Size(272, 22);
+            this.usePrimaryAlignmentsCIGARStringToolStripMenuItem.Size = new System.Drawing.Size(544, 44);
             this.usePrimaryAlignmentsCIGARStringToolStripMenuItem.Text = "Use Primary alignment\'s CIGAR string";
             // 
             // deletionToolStripMenuItem
             // 
             this.deletionToolStripMenuItem.Name = "deletionToolStripMenuItem";
-            this.deletionToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.deletionToolStripMenuItem.Size = new System.Drawing.Size(240, 44);
             this.deletionToolStripMenuItem.Text = "Deletion";
             this.deletionToolStripMenuItem.Click += new System.EventHandler(this.deletionToolStripMenuItem_Click);
             // 
             // insertationToolStripMenuItem
             // 
             this.insertationToolStripMenuItem.Name = "insertationToolStripMenuItem";
-            this.insertationToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.insertationToolStripMenuItem.Size = new System.Drawing.Size(240, 44);
             this.insertationToolStripMenuItem.Text = "Insertion";
             this.insertationToolStripMenuItem.Click += new System.EventHandler(this.insertationToolStripMenuItem_Click);
             // 
             // toolStripMenuItem8
             // 
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(269, 6);
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(541, 6);
             // 
             // switchRegionToolStripMenuItem
             // 
             this.switchRegionToolStripMenuItem.Name = "switchRegionToolStripMenuItem";
-            this.switchRegionToolStripMenuItem.Size = new System.Drawing.Size(272, 22);
+            this.switchRegionToolStripMenuItem.Size = new System.Drawing.Size(544, 44);
             this.switchRegionToolStripMenuItem.Text = "Switch region";
             this.switchRegionToolStripMenuItem.Click += new System.EventHandler(this.switchRegionToolStripMenuItem_Click);
             // 
@@ -643,19 +663,19 @@ namespace AgileStructure
             this.primaryAlignmentsToolStripMenuItem,
             this.secondaryAlignmentsToolStripMenuItem});
             this.historyToolStripMenuItem.Name = "historyToolStripMenuItem";
-            this.historyToolStripMenuItem.Size = new System.Drawing.Size(57, 22);
+            this.historyToolStripMenuItem.Size = new System.Drawing.Size(109, 36);
             this.historyToolStripMenuItem.Text = "History";
             // 
             // primaryAlignmentsToolStripMenuItem
             // 
             this.primaryAlignmentsToolStripMenuItem.Name = "primaryAlignmentsToolStripMenuItem";
-            this.primaryAlignmentsToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.primaryAlignmentsToolStripMenuItem.Size = new System.Drawing.Size(383, 44);
             this.primaryAlignmentsToolStripMenuItem.Text = "Primary alignments";
             // 
             // secondaryAlignmentsToolStripMenuItem
             // 
             this.secondaryAlignmentsToolStripMenuItem.Name = "secondaryAlignmentsToolStripMenuItem";
-            this.secondaryAlignmentsToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.secondaryAlignmentsToolStripMenuItem.Size = new System.Drawing.Size(383, 44);
             this.secondaryAlignmentsToolStripMenuItem.Text = "Secondary alignments";
             // 
             // timer2
@@ -666,9 +686,10 @@ namespace AgileStructure
             // btnQuit
             // 
             this.btnQuit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnQuit.Location = new System.Drawing.Point(1058, 704);
+            this.btnQuit.Location = new System.Drawing.Point(1965, 1502);
+            this.btnQuit.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnQuit.Name = "btnQuit";
-            this.btnQuit.Size = new System.Drawing.Size(87, 27);
+            this.btnQuit.Size = new System.Drawing.Size(162, 58);
             this.btnQuit.TabIndex = 8;
             this.btnQuit.Text = "Quit";
             this.btnQuit.UseVisualStyleBackColor = true;
@@ -676,13 +697,14 @@ namespace AgileStructure
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1160, 744);
+            this.ClientSize = new System.Drawing.Size(2154, 1587);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "Form1";
             this.Text = "Genomic rearrangements";
             this.Load += new System.EventHandler(this.Form1_Load);

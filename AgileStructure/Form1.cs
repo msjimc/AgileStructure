@@ -3129,7 +3129,7 @@ namespace AgileStructure
                     }
                 }
             }
-            System.Diagnostics.Debug.WriteLine("best 1 at " + bestRegions[0].getAveragePlace.ToString("N0"));
+            
             foreach (string chr in places.Keys)
             {
                 if ((chr == bestRegions[0].getReferenceName) == sameReferenceSequence)
