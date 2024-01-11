@@ -401,58 +401,65 @@ namespace AgileStructure
                                 {
 
                                     AlignedRead ar = new AlignedRead(r, AR.Count + 1);
-
-                                    currentChromosome = ar.getreferenceIndex;
-                                    if (ar.getreferenceIndex == index)
-                                    { lastReadPosition = ar.getPosition; }
-                                    else { lastReadPosition = 0; }
-
-                                    if (lastReadPosition <= selectEnd && lastReadPosition >= selectStart && currentChromosome == index)
+                                    if (ar.IsGood == true)
                                     {
-                                        if (ar.IsGood == true && ar.IsSupplementaryAlignment == false && ar.IsSecondaryAlignment == false)
-                                        {
-                                            if ((justChimeric == true && ar.getSecondaryAlignmentTag != "") || (justLargeIndels == true && ar.hasLargeIndel == true))
-                                            {
-                                                AR.Add(name, ar);
-                                                ar = null;
-                                                count++;
-                                            }
-                                            else if (justChimeric == true && ar.getSecondaryAlignmentTag != "")
-                                            {
-                                                AR.Add(name, ar);
-                                                ar = null;
-                                                count++;
-                                            }
-                                            else if (justLargeIndels == true && ar.hasLargeIndel == true)
-                                            {
-                                                AR.Add(name, ar);
-                                                ar = null;
-                                                count++;
-                                            }
-                                            else if (justLargeIndels == false && justChimeric == false)
-                                            {
-                                                count++;
-                                                AR.Add(name, ar);
-                                                ar = null;
-                                                count++;
-                                            }
-                                            else { count++; }
+                                        currentChromosome = ar.getreferenceIndex;
+                                        if (ar.getreferenceIndex == index)
+                                        { lastReadPosition = ar.getPosition; }
+                                        else { lastReadPosition = 0; }
 
-                                            if (count > 99)
+                                        if (lastReadPosition <= selectEnd && lastReadPosition >= selectStart - 1 && currentChromosome == index)
+                                        {
+                                            if (ar.IsGood == true && ar.IsSupplementaryAlignment == false && ar.IsSecondaryAlignment == false)
                                             {
-                                                Text = "Loaded: " + AR.Count().ToString() + " reads. Current read start point: " + lastReadPosition.ToString("N0");
-                                                drawPrimaryAlignments(false);
-                                                Application.DoEvents();
-                                                count = 0;
+                                                if ((justChimeric == true && ar.getSecondaryAlignmentTag != "") || (justLargeIndels == true && ar.hasLargeIndel == true))
+                                                {
+                                                    AR.Add(name, ar);
+                                                    ar = null;
+                                                    count++;
+                                                }
+                                                else if (justChimeric == true && ar.getSecondaryAlignmentTag != "")
+                                                {
+                                                    AR.Add(name, ar);
+                                                    ar = null;
+                                                    count++;
+                                                }
+                                                else if (justLargeIndels == true && ar.hasLargeIndel == true)
+                                                {
+                                                    AR.Add(name, ar);
+                                                    ar = null;
+                                                    count++;
+                                                }
+                                                else if (justLargeIndels == false && justChimeric == false)
+                                                {
+                                                    count++;
+                                                    AR.Add(name, ar);
+                                                    ar = null;
+                                                    count++;
+                                                }
+                                                else { count++; }
+
+                                                if (count > 99)
+                                                {
+                                                    Text = "Loaded: " + AR.Count().ToString() + " reads. Current read start point: " + lastReadPosition.ToString("N0");
+                                                    drawPrimaryAlignments(false);
+                                                    Application.DoEvents();
+                                                    count = 0;
+                                                }
                                             }
                                         }
+                                    }
+                                    else
+                                    {
+                                        if (ar.getPosition == -1)
+                                        { break; }
                                     }
                                 }
                                 r = br.NextAlignedRead(true, referenceSequenceNames);
                             }                        
                             br.Dispose();
                         }
-                        if (lastReadPosition > selectEnd || index < currentChromosome)
+                        if (lastReadPosition > selectEnd || index < currentChromosome || currentChromosome == -1)
                         { break; }
                         skipThisBlock = false;
                         indexRef++;
