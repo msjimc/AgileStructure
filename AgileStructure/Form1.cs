@@ -3778,7 +3778,7 @@ namespace AgileStructure
 
         private void openBAMFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReadFile();
+            button2.PerformClick();
         }
 
         private void onlyShowReadsWithSecondaryAlignmentsToolStripMenuItem_Click(object sender, EventArgs e)
