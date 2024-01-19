@@ -1,51 +1,87 @@
-# Downloading binaries
+# Download
+This folder contains the precompiled program, dll and config files as both individual files and a zip file. Due to heightened security by some organisation's IT departments it may not be possible to run a program extracted from a zip file. Consequently, you may have to try downloading the program both ways until one way works. 
 
-It is possible to download the whole of this GitHub repository by selecting the green 'Code' button (Figure 1) and either selecting the 'Download ZIP' option or by copying the "https://github.com/msjimc/AgileROH.git" link and using a download manager such as wget on Linux. This will download the whole repository with the programs in the Programs > Windows or Programs > Linux folders. 
+<hr />
 
-![Figure 1](images/figurea.jpg)
+#### Important note  
+
+Once downloaded it is important that the AgileStructure.exe, AgileStructure.dll and AgileStructure.runtimeconfig.json are located in the same folder. 
+<hr />
+
+* [Downloading the zip file](#downloading-the-zip-file)
+* [Downloading the individual files](#downloading-the-individual-files)
+
+## Downloading the zip file
+
+First click on the program file (AgileStructure.zip in the table above) which will take you to a new page, on the upper righthand corner click on the icon of a tray with an arrow pointing to it (Figure 1). This will then start the download which will ultimately prompt you to either save it or open the zip file (Figure 2).
+
+![figure 1](images/figure1.jpg)
+
 Figure 1
 
-<hr />
-The process of downloading the prebuilt programs may be more involved on a Windows computer. First navigate to the Program/Window folder and click on the required program (Figure 2)
+Click on the "Save a"s button (Figure 2)
 
-![Figure 2](images/figure1.jpg)
+![figure 2](images/figure2.jpg)
+
 Figure 2
 
-<hr />
+Once downloaded go to the zip file and extract it, saving the files to the desired location (Figure 3)
 
-Then click on the 'Download' icon (Figure 3)
+![figure 3](images/figure3.jpg)
 
-![Figure 3](images/figure2.jpg)
 Figure 3
 
-<hr />
+When you double click on the AgileStructure.exe file you'll get a warning message, click on the 'Run  anyway' option (Figure 4)
 
-Select 'Save as' (Figure 4) 
+![figure 4](images/figure4.jpg)
 
-![Figure 4](images/figure3.jpg)
 Figure 4
 
-<hr />
+And finally, click on the 'Run  anyway' option and the program should start (Figure 5).
 
-This will create a warning message, click on the three ellipses (Figure 5)
+![figure 5](images/figure5.jpg)
 
-![Figure 5](images/figure4.jpg)
 Figure 5
 
-<hr />
+## Downloading the individual files
 
-and select 'Keep' (Figure 6)
+First click on the program file (AgileStructure.exe in the table above) which will take you to a new page, on the upper righthand corner click on the icon of a tray with an arrow pointing to it (Figure 6). This will then start the download which will ultimately get you to the first warning (Figure 2).
 
-![Figure 6](images/figure5.jpg)
+![figure 6](images/figure6.jpg)
+
 Figure 6
 
-<hr />
+Move the mouse to the right of the message and three dots will appear next to a bin icon (Figure 7), click on the dots.
 
-On the next warning message select 'Show more' followed by the 'Keep anyway' link (Figure 7)
+![figure 7](images/figure7.jpg)
 
-![Figure 7](images/figure6.jpg)
 Figure 7
 
-<hr />
+Next select 'Keep' (Figure 8)
 
-This should then allow you to save the program.
+![figure 8](images/figure8.jpg)
+
+Figure 8
+
+On the next warning, click on the 'Show more' label (Figure 9)
+
+![figure 9](images/figure9.jpg)
+
+Figure 9
+
+And finally, select the 'Keep anyway' option (Figure 10) and the download will start.
+
+![figure 5](images/figure10.jpg)
+
+Figure 5
+
+Repeat the process for the AgileStructure.dll and AgileStructure.runtimeconfig.json file.
+
+# Running AgileStructure
+
+To run AgileStructure double click on the file in File Explorer and it should start. If it doesn't, first make sure that all three files are in the same folder (AgileStructure.exe, AgileStructure.dll and AgileStructure.runtimeconfig.json). If you get an error message such as the one in Figure 6, go to the [.Net download page](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) and select the appropriate ".NET Desktop Runtime". There are a number of options make sure you chose the Desktop version.
+
+
+![figure 6](images/figure11.jpg)
+
+Figure 6
