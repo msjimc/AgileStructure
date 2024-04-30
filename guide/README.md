@@ -38,17 +38,17 @@
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
-AgileStructure is composed of three components:  AgileStructure.exe, AgileStructure.dll and AgileStructure.runtimeconfig.json, to work, all the files need to be in the same folder.
+```AgileStructure``` is composed of three components:  AgileStructure.exe, AgileStructure.dll and AgileStructure.runtimeconfig.json, to work, all the files need to be in the same folder.
 
 ## Data requirements
 
 ### Prior knowledge of the likely location of the break point
 
- AgileStructure is designed to identify break points with user assistance rather than scan the whole alignment for possible break points, consequently its expected that the user will have some prior knowledge as to where the break point is such has a cytogenetics and/or karyotyping report, a list of known disease genes for the patients condition or a single pathogenic variant in a patient with a recessive disease for whom a second pathogenic variant can not be found. 
+ ```AgileStructure``` is designed to identify break points with user assistance rather than scan the whole alignment for possible break points, consequently its expected that the user will have some prior knowledge as to where the break point is such has a cytogenetics and/or karyotyping report, a list of known disease genes for the patients condition or a single pathogenic variant in a patient with a recessive disease for whom a second pathogenic variant can not be found. 
 
 ### Aligned data format
 
-AgileStructure is designed to visualise aligned long read data formatted as indexed ```bam``` files. It's expected that the index file will have the same name as the ```bam``` file with the ```*.bai``` extension appended to the bam files name, for instance the bam file:  
+```AgileStructure``` is designed to visualise aligned long read data formatted as indexed ```bam``` files. It's expected that the index file will have the same name as the ```bam``` file with the ```*.bai``` extension appended to the bam file's name, for instance the bam file:  
 ```CNTNAP2.srt.mm2.bam```  
 will have a index file named:  
 ```CNTNAP2.srt.mm2.bam.bai```  
@@ -58,7 +58,7 @@ The ```bam``` file must contain the header section which lists the name and size
 ### Preferred long read sequence aligners
 
 Long reads that span a break point will appear to consist of two regions of homology, mapping to different locations in the genome. How these chimeric alignments are reported are aligner specific. Some aligners such as minimap2 ([github](https://github.com/lh3/minimap2), [paper](https://academic.oup.com/bioinformatics/article/34/18/3094/4994778)), treat the two regions as different alignments, but will report the secondary alignment as a condensed CIGAR string in the primary alignments tag section, while others, report the read as two separate alignments, but not directly reference the other alignment's position and CIGAR string. However, for shorter indels both types of aligner may report them in the CIGAR string ([see this section](#identifying-indels-using-the-primary-alignments-cigar-string)).  
-AgileStructure is only able to analyse reads in which the indel is reported in the primary alignment's CIGAR string or the secondary alignment is reported in the tag section: The reporting of the secondary alignment in the tag section is the most flexible method and will allow more complex break points to be processed. Consequently, it is recommended to align data using an aligner like minimap2. 
+```AgileStructure``` is only able to analyse reads in which the indel is reported in the primary alignment's CIGAR string or the secondary alignment is reported in the tag section: The reporting of the secondary alignment in the tag section is the most flexible method and will allow more complex break points to be processed. Consequently, it is recommended to align data using an aligner such as minimap2. 
 
 ### Optional data
 
@@ -76,16 +76,16 @@ Figure 1a
 
 Figure 1b
 
-AgileStructure will read the header section of the bam file and populate the dropdown list box with the name of the reference sequences in the bam file (Figure 2).
+```AgileStructure``` will read the header section of the bam file and populate the dropdown list box next to the ```BAM file``` button, with the name of the reference sequences in the bam file (Figure 2).
 
 ![Figure 2](images/figure2.jpg)
 
 Figure 2
 
-### How indexed bam files are read
+### How indexed bam files are processed
 
-Before indexing a bam file, reads are ordered with reference to the read's genomic coordinates and then the data is compressed by the qzip algorithm to form discrete chunks of data containing reads that start in a small region, so chunk one may contain reads with alignments starting on chr 1 between 1 bp and 16,000 bp with the next chunk containing reads on chr 1 between 16,000 bp and 32,000 bp. The indexing of a file creates a 2nd file (.bam.bai) that lists the start of each chunk in the bam file and the start position of the first read in that chunk.   
-When a program has to find reads mapping to a certain region, it looks in the bam.bai files to find the chunks that contain start position of those reads. Once it's found the chunks mapping to the data, it looks up in the index file were that data starts in the bam file and then reads the data at that point in the bam file until it comes to the end of the compressed chunk. It repeats the process until it has read all the data for the region of interest. This works fine for short read data since all the reads in a chunk start between two well defined points (the genomic start site of the chunk and the end of the chunk plus the length of the read i.e. 16,000 bp to 32,000 bp plus 150 bp). However, with long read data, a read may be longer than the size of a chunk's region, so a read 20 kb long may start in  one chunk while its end may be in the next or the next but one chunk. This causes an issue when you select a small region, as reads that over lap the region may be listed in a chunk much further upstream and so may not be found when reading the bam file.  Consequently, AgileStructure reads the chunk that ends just before the start of the region of interest, but if a read is particularly long it may be missed as it starts even further upstream. Therefore when selecting regions, initially select a slightly larger (16 kb) region than required and note if a long read spanning the break point disappears when you shrink the region.      
+Before indexing a bam file, reads are ordered with reference to the read's genomic coordinates with the data then compressed with the qzip algorithm to form discrete chunks of compressed data containing reads that start in a small region. For example the first chunk in a file may contain reads with alignments starting on chr 1 between 1 bp and 16,000 bp with the next chunk containing reads whose alignment starts on chr 1 between 16,000 bp and 32,000 bp. The indexing of a file creates a 2nd file (.bam.bai) that lists the start point of each chunk in the bam file and the start position of the first read in that chunk.   
+When a program has to find reads mapping to a certain region, it looks in the bam.bai files to find the chunks that contain the start positions of the reads mapped to the region. Once it's found the chunks mapping to the data, it looks up in the index file were that data starts in the bam file and then reads the data at that point in the bam file until it comes to the end of the compressed chunk. It repeats the process until it has read all the data for the region of interest. This works fine for short read data since all the reads in a chunk start between two well defined points (the genomic start site of the chunk and the end of the chunk plus the length of the read i.e. 16,000 bp to 32,000 bp plus 150 bp). However, with long read data, a read may be longer than the size of a chunk's region, so a read 20 kb long may start in  one chunk while its end may be in the next or the next but one chunk. This causes an issue when you select a small region, as reads that over lap the region may be listed in a chunk much further upstream and so may not be found when reading the bam file.  Consequently, ```AgileStructure``` reads the chunk that ends just before the start of the region of interest, but if a read is particularly long it may be missed as it starts even further upstream. Therefore when selecting regions, initially select a slightly larger (16 kb added to each side) region than required and note if a long read spanning the break point disappears when you shrink the region.      
 
 ## Selecting the region to view
 
@@ -97,7 +97,7 @@ Figure 3
 
 The position of reads mapping to the region are shown as green (aligned to the forward strand) and red (aligned to the reverse strand) rectangles scaled to the length of the read. Soft clipped sequences are identified as pale green or pale red extensions to the darker green/red aligned data. The size of the pale rectangles is proportionate to the length of the unaligned sequence and their location only indicates whether they are on the 5' or 3' of the aligned sequence.  
 It is important to note that in the default view, reads are drawn as a solid box spanning the length of the alignment, if a read as a large deletion this will not be shown, however they can be visualised by selecting the ```Analysis``` > ```Look for indels within a read``` menu option (see section [Identifying Indels using the primary alignments CIGAR string](#identifying-indels-using-the-primary-alignments-cigar-string)).  
-AgileStructure does not have an upper limit on the size of the region or number of reads it will process and will attempt to read the requested data until the computer runs out of memory. While there is no upper limit, you should try to limit the amount of data it reads as reading the underlying bam file can be a slow process due to its size.
+```AgileStructure``` does not have an upper limit on the size of the region or number of reads it will process and will attempt to read the requested data until it as processed the region or the computer runs out of memory. While there is no upper limit, you should try to limit the amount of data it reads as reading the underlying bam file can be a slow process due to its size.
 
 ## Hiding reads without a soft clipped segment
 
@@ -111,11 +111,11 @@ The filtered image will contain fewer reads, making those at the break point mor
 
 ![Figure 5](images/figure5.jpg)
 
-Figure 5
+Figure 5: When reads with no secondary alignment are removed the break point is more apparent: see mouse cursor in Figure 5 and compare to same region in Figure 3
 
 ## Looking for putative break points in the selected region.
 
-It may be possible to simply identify the the break point  at this point, especially for large homozygous deletions, but in many situation particularly for heterozygous break points they may not standout. Consequently, AgileStructure scans the displayed reads, looking for 250 bp regions in which multiple read alignments prematurely terminate and the remaining soft clipped sequence all maps to the same secondary location. These regions are then noted and entered in to the lower drop down list box (Figure 6).
+It may be possible to simply identify the the break point  at this point, especially for large homozygous deletions, but in many situations particularly for heterozygous break points they may not standout. Consequently, ```AgileStructure``` scans the displayed reads, looking for 250 bp regions in which multiple read alignments prematurely terminate and the remaining soft clipped sequences all maps to the same secondary location. These regions are then noted and entered in to the lower drop down list box (Figure 6).
 
 ![Figure 6](images/figure6.jpg)
 
@@ -137,7 +137,7 @@ Pressing the ```Accept``` button will remove all break points that do not match 
 
 Figure 8
 
-Selecting a break point from this list will cause the reads with soft clipped sequences mapped to the break point's flanking regions to be displayed in the lower panel (Figure 9). As before, reads are drawn in green or red for those mapping to the forward and reverse strands, with aligned sequences darker than the unaligned soft clipped sequences. It is important to note that only reads that are present in the upper image are shown in the lower image and that sequences that were aligned to the reference sequence in the upper image will be unaligned, soft clipped sequences in the lower image.
+Selecting a break point from this list will cause the reads with soft clipped sequences mapped to the second break point's flanking regions to be displayed in the lower panel (Figure 9). As before, reads are drawn in green or red for those mapping to the forward and reverse strands, with aligned sequences darker than the unaligned soft clipped sequences. It is important to note that only reads that are present in the upper image are shown in the lower image and that sequences that were aligned to the reference sequence in the upper image will be unaligned, soft clipped sequences in the lower image.
 
 ![Figure 9](images/figure9.jpg)
 
@@ -145,7 +145,7 @@ Figure 9
 
 ## Viewing read alignment information
 
-Selecting the ```Data``` > ```View read data``` (Figure 10a) will cause a resizable window to appear that consist solely of a text area. If the mouse cursor is held over a read, its underlying data will be written to the text area (Figure 10b). For a sequence to be shown, the cursor has to hover over the read for a little while. This makes it possible to select a read and then quickly move the cursor to the new window and copy the data to paste in a document etc.
+Selecting the ```Data``` > ```View read data``` (Figure 10a) will cause a resizable window to appear that consists solely of a text area. If the mouse cursor is held over a read, its underlying data will be written to the text area (Figure 10b). For a sequence to be shown, the cursor has to hover over the read for a little while. This makes it possible to select a read and then quickly move the cursor to the new window and copy the data to paste in a document etc.
 
 ![Figure 10a](images/figure10a.jpg)
 
@@ -156,17 +156,17 @@ Figure 10a
 Figure 10b
 
 Since the read, quality score string and CIGAR string can be several thousand characters long, the text area doesn't word wrap text (unless it's very long) and so if you want to read the end of a CIGAR string you must use the horizontal scroll bar.  
-As well as the sequence and quality string, this information contains the primary and secondary alignments' location as well all the tags added by the aligner. The format of the tag data may be aligner specific with the aligner's documentation giving a full description of them.
+As well as the sequence and quality string, this information contains the primary and secondary alignment location's, as well all the tags added by the aligner. The format of the tag data can be aligner specific with the aligner's documentation giving a full description of each tag's meaning.
 
 ## Selecting reads linked to a break point
 
-When the upper image contains a large number of reads, it may not be possible to identify the reads associated with the selected break point, however clicking on a read in either image will cause it to be selected and drawn with a blue boarder. Clicking on all the reads linked to a break point in the lower image will help to identify the break point in the upper image (Figure 11)
+When the upper image contains a large number of reads, it may not be possible to identify the reads associated with the selected break point, however clicking on a read in either image will cause it to be selected and drawn with a blue boarder. Clicking on all the reads linked to a break point in the lower image will help to identify the location of the break point in the upper image (Figure 11)
 
 ![Figure 11](images/figure11.jpg)
 
 Figure 11
 
-If you click on a selected read, it will be deselected, while selecting the ```Data``` > ```Clear selected reads``` option will deselect all selected reads (Figure 12). Finally, if read data is imported from the bam file (i.e. the ```Get reads``` button is pressed) the selection will be cleared.
+If you click on a selected read, it will be deselected, while selecting the ```Data``` > ```Clear selected reads``` option will deselect all selected reads (Figure 12). Finally, if new data is imported from the bam file (i.e. the ```Get reads``` button is pressed) the selection will be cleared.
 
 ![Figure 12](images/figure12.jpg)
 
@@ -182,7 +182,7 @@ Figure 13
 
 ## Annotating break points using soft clipped data
 
-Once the reads spanning a break point have been selected, is is possible to get AgileStructure to attempt to identify the type of variant: deletion, duplication, insertion, inversion or translocation. To see what type of mutation the break point represents select the ```Variant determination``` > ```Use soft clip data``` > ```Variant type``` menu option (Figure 14a). AgileStructure will scan the reads primary and secondary alignment data and the orientation of the soft clipped data with respect to the aligned sequences to determine what type of mutation it is. This is reported in a message box with the possible answers of "Deletion", "Insertion", "Inversion", "Duplication" or "Translocation" as well as messages indicating any error processing the data or user data selection issues (Figure 14b).  
+Once the reads spanning a break point have been selected, is is possible to get ```AgileStructure``` to attempt to identify the type of variant: deletion, duplication, insertion, inversion or translocation. To see what type of mutation the break point represents select the ```Variant determination``` > ```Use soft clip data``` > ```Variant type``` menu option (Figure 14a). ```AgileStructure``` will scan the reads primary and secondary alignment data and the orientation of the soft clipped data with respect to the aligned sequences to determine what type of mutation it is. This is reported in a message box with the possible answers of "Deletion", "Insertion", "Inversion", "Duplication" or "Translocation" as well as messages indicating any error processing the data or user data selection issues (Figure 14b).  
 ***For this feature to work a region must be selected in the lower panel***.
 
 ![Figure 14a](images/figure14a.jpg)
@@ -193,7 +193,7 @@ Figure 14a
 
 Figure 14b
 
-Once the variant type is determined it is then possible to get AgileStructure to annotate it by selecting the appropriate option. The links below show examples of analysing each type of mutation
+Once the variant type is determined it is then possible to get ```AgileStructure``` to annotate it by selecting the appropriate option. The links below show examples of analysing each type of mutation
 
 ### Deletion
 
@@ -218,7 +218,7 @@ A worked example is [here](inversion.md).
 
 ## Identifying Indels using the primary alignments CIGAR string  
 
-AgileStructure was primarily designed to identify chromosomal break points by looking for sets of reads whose alignment is broken in two, such that part of the read aligns at one location and the the other fragment is located some distance away or on a different chromosome. However, it is also able to identify insertions and deletions that do not cause the alignment to be fragmented, but whose presence is noted in the primary alignment's CIGAR string.  
+```AgileStructure``` was primarily designed to identify chromosomal break points by looking for sets of reads whose alignment is broken in two, such that part of the read aligns at one location and the the other fragment is located some distance away or on a different chromosome. However, it is also able to identify insertions and deletions that do not cause the alignment to be fragmented, but whose presence is noted in the primary alignment's CIGAR string.  
 Selecting the ```Analysis``` > ```Look for indels within a read``` menu option (Figure 15) causes the reads to be redrawn with deletions shown as a horizontal black line linking two blocks of aligned sequences while an insertion is shown as a vertical line projecting above and below the aligned sequence. Since ONT data contains numerous short indels, only insertions/deletions longer than 10 bp are shown/processed.
 
 ![Figure 15](images/figureA.jpg)
@@ -233,7 +233,7 @@ Figure 16
 
 ### Important note
 
-Since ONT data is very noisy the exact point of the break point may appear to vary by a number of base pairs between different reads, while artefactual indels may also be present in the reads. Consequently AgileStructure scans the beginning and ends of the indels, sorts them by position and then reports the median values in the reported variant. Using the median value rather than the average reduces the chance an artifactual indel unduly influences the annotation, but it is important that the individual indels are checked to make sure a 2nd indel is not somehow disrupting the annotation.
+Since ONT data is very noisy the exact point of the break point may appear to vary by a number of base pairs between different reads, while artefactual indels may also be present in the reads. Consequently ```AgileStructure``` scans the beginning and ends of the indels, sorts them by position and then reports the median values in the reported variant. Using the median value rather than the average reduces the chance an artifactual indel unduly influences the annotation, but it is important that the individual indels are checked to make sure a 2nd indel is not somehow disrupting the annotation.
 
 ### Identifying insertions using the primary alignments CIGAR string
 
@@ -263,7 +263,7 @@ Figure 18b
 
 ### Changing the region by typing the co-ordinates
 
-As previously mentioned, AgileStructure displays the primary and secondary alignments in two panels, above each are two text areas where the start and end points of the displayed data can be changed. Since the primary read data is retrieved from the bam file which can be slow, changes to the primary alignment region are only made when the ```Get reads``` button is pressed. However, changes to the co-ordinates of secondary alignment image are displayed instantly.  
+As previously mentioned, ```AgileStructure``` displays the primary and secondary alignments in two panels, above each are two text areas where the start and end points of the displayed data can be changed. Since the primary read data is retrieved from the bam file which can be slow, changes to the primary alignment region are only made when the ```Get reads``` button is pressed. However, changes to the co-ordinates of secondary alignment image are displayed instantly.  
 
 ### Moving the region to the left and right arrow keys
 
@@ -317,7 +317,7 @@ Press the ```Find``` button and if the gene is present in the imported gene coor
 
 Figure 21c
 
-Pressing ```Accept``` will reset the the coordinates in AgileStructure main window, pressing the ```Get reads``` button will then update the Primary alignment window (Figure 21d).
+Pressing ```Accept``` will reset the the coordinates in ```AgileStructure``` main window, pressing the ```Get reads``` button will then update the Primary alignment window (Figure 21d).
 
 ![Figure 21d](images/figureLd.jpg)
 
@@ -349,7 +349,7 @@ Figure 24
 
 ### Displaying repeats positions
 
-Repeat coordinates are imported by selecting the ```Annotation``` > ```Select repeat annotation file``` option (Figure 25). Unlike the gene positions, repeats are only drawn when the ```Annotation``` > ```Show repeats``` option is selected (Figure J). This is due to the large number of repeats requiring an excessive amount of memory to store and then slow to draw across large regions. Consequently, AgileStructure will only retain the repeat file's filename and reads the file each time it is required to draw them.  
+Repeat coordinates are imported by selecting the ```Annotation``` > ```Select repeat annotation file``` option (Figure 25). Unlike the gene positions, repeats are only drawn when the ```Annotation``` > ```Show repeats``` option is selected (Figure J). This is due to the large number of repeats requiring an excessive amount of memory to store and then slow to draw across large regions. Consequently, ```AgileStructure``` will only retain the repeat file's filename and reads the file each time it is required to draw them.  
 
 ![Figure 25](images/figureJ.jpg)
 
