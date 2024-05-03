@@ -8,13 +8,13 @@ __Prior information__
 Using standard cytogenetics tests an individual was found to have an inversion in chromosome 7 with the break points around 26 to 28 MB and 91 to 95 MB.  
 (The read data in in the AgileStructure_data_sorted.bam file.)    
 
-Import the data by pressing the ```Bam file``` button and then selected chromosome 7 from the upper dropdown list box and enter the co-ordinates for the approximate position you want to start the search for the first break point in the  two text boxes to the right of the dropdown list and import the data by selecting the ```Analysis``` > ```Only show reads with secondary alignments``` menu option (Figure 1)
+Import the data by pressing the ```Bam file``` button and then selected chromosome 7 from the upper dropdown list box and enter the coordinates for the approximate position you want to start the search for the first break point in the  two text boxes to the right of the dropdown list and import the data by selecting the ```Analysis``` > ```Only show reads with secondary alignments``` menu option (Figure 1)
 
 ![Figure 1](images/examples/figure1inv.jpg)
 
 Figure 1
 
-Reads with secondary alignments are then displayed with possible breakpoints listed in the lower dropdown list (Figure 2)
+Reads with secondary alignments are then displayed with possible breakpoints listed in the lower dropdown list (Figure 2).
 
 ![Figure 2](images/examples/figure2inv.jpg)
 
@@ -26,7 +26,7 @@ Since no obvious regions were identified, the cursor is placed in one of the upp
 
 Figure 3
 
-Pressing the ```Get reads``` button will display the read data for the new region and populate the lower dropdown list box with possible sites for the second break point. In this case a region at chr7 93 Mb can be seen (Figure 4) 
+Pressing the ```Get reads``` button will display the read data for the new region and populate the lower dropdown list box with possible sites for the second break point. In this case a region on chr7 at 93 Mb can be seen (Figure 4) 
 
 ![Figure 4](images/examples/figure4inv.jpg)
 
@@ -58,11 +58,11 @@ Figure 8
 
 [Return user guide](README.md#inversion)
 
-The published break point was identified as chr7.27,762,423_93,599,530inv when aligned to the hg19 human reference sequence. When these co-ordinates are mapped to hg38 using the [Lift Genome Annotations](https://genome.ucsc.edu/cgi-bin/hgLiftOver) the published mutation becomes: chr7.27,722,804_93,970,219inv which is very close to the results found here:  chr7.27,722,809_93,970,219inv and chr7.27,722,809_93,970,218inv
+The published break point was identified as chr7.27,762,423_93,599,530inv when aligned to the hg19 human reference sequence. When these coordinates are mapped to hg38 using the [Lift Genome Annotations](https://genome.ucsc.edu/cgi-bin/hgLiftOver) the published mutation becomes: chr7.27,722,804_93,970,219inv which is very close to the results found here:  chr7.27,722,809_93,970,219inv and chr7.27,722,809_93,970,218inv
 
 |Origin|Variant|
 |-|-|
-|Published variant|chr7.27,722,804_93,970,219inv|
+|Published variant (transferred to hg38)|chr7.27,722,804_93,970,219inv|
 |Using primary alignments at 27 Mb|chr7, 27,722,809_93,970,219inv|
 |Using primary alignments at 93 Mb|chr7.27,722,805_93,970,218inv|
 

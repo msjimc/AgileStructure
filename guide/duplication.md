@@ -75,6 +75,8 @@ In this case the annotation changes by a base pair from ___chr17.68,543,927_68,6
 
 ## Case 2
 
+The case study involves the Agmo knock out mouse discussed in Case 2 in the [Identification of insertions](insertion.md) read me file.
+
 This transgenic mouse is described here:
 
 > Sailer S, Coassin S, Lackner K, Fischer C, McNeill E, Streiter G, Kremser C, Maglione M, Green CM, Moralli D, Moschen AR, Keller MA, Golderer G, Werner-Felmayer G, Tegeder I, Channon KM, Davies B, Werner ER, Watschinger K. When the genome bluffs: a tandem duplication event during generation of a novel ___Agmo___ knockout mouse model fools routine genotyping. Cell Biosci. 2021 Mar 16;11(1):54. doi: 10.1186/s13578-021-00566-9. PMID: 33726865; PMCID: PMC7962373.
