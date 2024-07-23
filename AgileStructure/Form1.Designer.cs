@@ -208,7 +208,7 @@ namespace AgileStructure
             gbpP2.Controls.Add(p2);
             gbpP2.Location = new System.Drawing.Point(0, 75);
             gbpP2.Name = "gbpP2";
-            gbpP2.Size = new System.Drawing.Size(1139, 240);
+            gbpP2.Size = new System.Drawing.Size(1135, 250);
             gbpP2.TabIndex = 2;
             gbpP2.TabStop = false;
             // 
@@ -217,7 +217,7 @@ namespace AgileStructure
             p2.Dock = System.Windows.Forms.DockStyle.Fill;
             p2.Location = new System.Drawing.Point(3, 19);
             p2.Name = "p2";
-            p2.Size = new System.Drawing.Size(1133, 218);
+            p2.Size = new System.Drawing.Size(1129, 228);
             p2.TabIndex = 0;
             p2.TabStop = false;
             p2.MouseClick += p2_MouseClick;
