@@ -82,6 +82,7 @@ namespace AgileStructure
             insertionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             inversionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             translocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
             usePrimaryAlignmentsCIGARStringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             deletionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             insertationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -207,7 +208,7 @@ namespace AgileStructure
             gbpP2.Controls.Add(p2);
             gbpP2.Location = new System.Drawing.Point(0, 75);
             gbpP2.Name = "gbpP2";
-            gbpP2.Size = new System.Drawing.Size(1139, 242);
+            gbpP2.Size = new System.Drawing.Size(1139, 240);
             gbpP2.TabIndex = 2;
             gbpP2.TabStop = false;
             // 
@@ -216,7 +217,7 @@ namespace AgileStructure
             p2.Dock = System.Windows.Forms.DockStyle.Fill;
             p2.Location = new System.Drawing.Point(3, 19);
             p2.Name = "p2";
-            p2.Size = new System.Drawing.Size(1133, 220);
+            p2.Size = new System.Drawing.Size(1133, 218);
             p2.TabIndex = 0;
             p2.TabStop = false;
             p2.MouseClick += p2_MouseClick;
@@ -495,7 +496,7 @@ namespace AgileStructure
             // 
             // useSoftClipDataToolStripMenuItem
             // 
-            useSoftClipDataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { variantTypeToolStripMenuItem, toolStripMenuItem2, deletionsToolStripMenuItem, duplicationToolStripMenuItem, insertionToolStripMenuItem, inversionToolStripMenuItem, translocationToolStripMenuItem });
+            useSoftClipDataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { variantTypeToolStripMenuItem, toolStripMenuItem2, deletionsToolStripMenuItem, duplicationToolStripMenuItem, insertionToolStripMenuItem, inversionToolStripMenuItem, translocationToolStripMenuItem, toolStripMenuItem11 });
             useSoftClipDataToolStripMenuItem.Name = "useSoftClipDataToolStripMenuItem";
             useSoftClipDataToolStripMenuItem.Size = new System.Drawing.Size(272, 22);
             useSoftClipDataToolStripMenuItem.Text = "Use soft clip data";
@@ -503,56 +504,56 @@ namespace AgileStructure
             // variantTypeToolStripMenuItem
             // 
             variantTypeToolStripMenuItem.Name = "variantTypeToolStripMenuItem";
-            variantTypeToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            variantTypeToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             variantTypeToolStripMenuItem.Text = "Variant type";
             variantTypeToolStripMenuItem.Click += variantTypeToolStripMenuItem_Click;
             // 
             // toolStripMenuItem2
             // 
             toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new System.Drawing.Size(141, 6);
+            toolStripMenuItem2.Size = new System.Drawing.Size(207, 6);
             // 
             // deletionsToolStripMenuItem
             // 
             deletionsToolStripMenuItem.Name = "deletionsToolStripMenuItem";
-            deletionsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            deletionsToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             deletionsToolStripMenuItem.Text = "Deletion";
             deletionsToolStripMenuItem.Click += deletionsToolStripMenuItem_Click;
             // 
             // duplicationToolStripMenuItem
             // 
             duplicationToolStripMenuItem.Name = "duplicationToolStripMenuItem";
-            duplicationToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            duplicationToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             duplicationToolStripMenuItem.Text = "Duplication";
             duplicationToolStripMenuItem.Click += duplicationToolStripMenuItem_Click;
             // 
             // insertionToolStripMenuItem
             // 
             insertionToolStripMenuItem.Name = "insertionToolStripMenuItem";
-            insertionToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            insertionToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             insertionToolStripMenuItem.Text = "Insertion";
             insertionToolStripMenuItem.Click += insertionToolStripMenuItem_Click;
             // 
             // inversionToolStripMenuItem
             // 
             inversionToolStripMenuItem.Name = "inversionToolStripMenuItem";
-            inversionToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            inversionToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             inversionToolStripMenuItem.Text = "Inversion";
             inversionToolStripMenuItem.Click += inversionToolStripMenuItem_Click;
             // 
             // translocationToolStripMenuItem
             // 
             translocationToolStripMenuItem.Name = "translocationToolStripMenuItem";
-            translocationToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            translocationToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             translocationToolStripMenuItem.Text = "Translocation";
             translocationToolStripMenuItem.Click += translocationToolStripMenuItem_Click;
             // 
-            // unbalancedTranslocationToolStripMenuItem
+            // toolStripMenuItem11
             // 
-            this.unbalancedTranslocationToolStripMenuItem.Name = "unbalancedTranslocationToolStripMenuItem";
-            this.unbalancedTranslocationToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.unbalancedTranslocationToolStripMenuItem.Text = "Complex translocation";
-            this.unbalancedTranslocationToolStripMenuItem.Click += new System.EventHandler(this.unbalancedTranslocationToolStripMenuItem_Click);
+            toolStripMenuItem11.Name = "toolStripMenuItem11";
+            toolStripMenuItem11.Size = new System.Drawing.Size(210, 22);
+            toolStripMenuItem11.Text = "Unbalanced Translocation";
+            toolStripMenuItem11.Click += unbalancedTranslocationToolStripMenuItem_Click;
             // 
             // usePrimaryAlignmentsCIGARStringToolStripMenuItem
             // 
@@ -719,6 +720,7 @@ namespace AgileStructure
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem onlyShowReadsWithALargeIndelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unbalancedTranslocationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem11;
     }
 }
 
