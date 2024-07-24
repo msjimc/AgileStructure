@@ -3,7 +3,9 @@
 #### Contents
 - [Introduction](#Introduction)
 - [Guide](guide)
+    * [Running on Linux, BSD or macOS](#running-on-linux-bsd-or-macos)
 - [Download](program)
+
 
 ## Introduction
 
@@ -15,6 +17,9 @@ Once generated, the data is typically aligned to the appropriate genome using a 
 ## Guide
 
 The AgileStructure guide is [here:](guide/README.md)
+
+### Running on Linux, BSD or macOS
+AgileStructure can be run on most POSIX like systems via WINE whose installation is covered [here](https://github.com/msjimc/RunningWindowsProgramsOnLinux)
 
 ## Download
 

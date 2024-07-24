@@ -1,5 +1,8 @@
 # AgileStructure user guide
 
+- [Installation](#installation)
+  * [Windows](#windows-computers)
+  * [Linux, BSD and macOS](#linux-macos-and-bsd)
 - [Data requirements](#data-requirements)
   * [Prior knowledge of the likely location of the break point](#prior-knowledge-of-the-likely-location-of-the-break-point)
   * [Aligned data format](#aligned-data-format)
@@ -39,8 +42,14 @@
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
+## Installation
 
-```AgileStructure``` is composed of three components:  AgileStructure.exe, AgileStructure.dll and AgileStructure.runtimeconfig.json, to work, all the files need to be in the same folder.
+### WIndows computers
+```AgileStructure``` can be run simply by downloading [agileAgileStructure.exe](../program/AgileStructure.exe), [AgileStructure.dll](../program/AgileStructure.dll) and [AgileStructure.runtimeconfig.jsonstructure](../program/AgileStructure.runtimeconfig.json) files to the same folder and then double clicking on the agileAgileStructure.exe file. The program requires the .Net 6.0 (or later) frame work to be install which can be obtained from here: [version 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) or [version 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) and selecting the appropriate ***.NET Desktop Runtime \*.\*.\****  
+
+### Linux, macOS and BSD
+
+Like Windows computers, AgileStructure doesn't require installation (just download the [3 files](../program/) to the same folder), but does require ___Wine___ to be installed on the computer. A number of short guides covering the installation of ___Wine___ on ~20 versions of Linux, BSD and macOS can be found [here](https://github.com/msjimc/RunningWindowsProgramsOnLinux).  ```AgileStructure``` also requires the installation of the .Net frameworks usually achieved via ___Winetricks___.
 
 ## Data requirements
 
