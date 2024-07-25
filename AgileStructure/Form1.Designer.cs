@@ -117,7 +117,7 @@ namespace AgileStructure
             groupBox1.Controls.Add(button2);
             groupBox1.Location = new System.Drawing.Point(3, 3);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(1132, 65);
+            groupBox1.Size = new System.Drawing.Size(1160, 65);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Region selection";
@@ -125,7 +125,7 @@ namespace AgileStructure
             // txtEnd
             // 
             txtEnd.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            txtEnd.Location = new System.Drawing.Point(897, 24);
+            txtEnd.Location = new System.Drawing.Point(925, 24);
             txtEnd.Name = "txtEnd";
             txtEnd.Size = new System.Drawing.Size(132, 23);
             txtEnd.TabIndex = 4;
@@ -137,7 +137,7 @@ namespace AgileStructure
             // txtStart
             // 
             txtStart.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            txtStart.Location = new System.Drawing.Point(757, 24);
+            txtStart.Location = new System.Drawing.Point(785, 24);
             txtStart.Name = "txtStart";
             txtStart.Size = new System.Drawing.Size(132, 23);
             txtStart.TabIndex = 3;
@@ -153,14 +153,14 @@ namespace AgileStructure
             cboRef.FormattingEnabled = true;
             cboRef.Location = new System.Drawing.Point(101, 24);
             cboRef.Name = "cboRef";
-            cboRef.Size = new System.Drawing.Size(648, 23);
+            cboRef.Size = new System.Drawing.Size(676, 23);
             cboRef.TabIndex = 2;
             cboRef.SelectedIndexChanged += cboRef_SelectedIndexChanged;
             // 
             // btnGetReads
             // 
             btnGetReads.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnGetReads.Location = new System.Drawing.Point(1037, 22);
+            btnGetReads.Location = new System.Drawing.Point(1065, 22);
             btnGetReads.Name = "btnGetReads";
             btnGetReads.Size = new System.Drawing.Size(87, 27);
             btnGetReads.TabIndex = 5;
@@ -184,7 +184,7 @@ namespace AgileStructure
             gbpP1.Controls.Add(p1);
             gbpP1.Location = new System.Drawing.Point(0, 75);
             gbpP1.Name = "gbpP1";
-            gbpP1.Size = new System.Drawing.Size(1135, 250);
+            gbpP1.Size = new System.Drawing.Size(1163, 250);
             gbpP1.TabIndex = 6;
             gbpP1.TabStop = false;
             // 
@@ -193,7 +193,7 @@ namespace AgileStructure
             p1.Dock = System.Windows.Forms.DockStyle.Fill;
             p1.Location = new System.Drawing.Point(3, 19);
             p1.Name = "p1";
-            p1.Size = new System.Drawing.Size(1129, 228);
+            p1.Size = new System.Drawing.Size(1157, 228);
             p1.TabIndex = 0;
             p1.TabStop = false;
             p1.MouseClick += p1_MouseClick;
@@ -208,7 +208,7 @@ namespace AgileStructure
             gbpP2.Controls.Add(p2);
             gbpP2.Location = new System.Drawing.Point(0, 75);
             gbpP2.Name = "gbpP2";
-            gbpP2.Size = new System.Drawing.Size(1135, 250);
+            gbpP2.Size = new System.Drawing.Size(1163, 249);
             gbpP2.TabIndex = 2;
             gbpP2.TabStop = false;
             // 
@@ -217,7 +217,7 @@ namespace AgileStructure
             p2.Dock = System.Windows.Forms.DockStyle.Fill;
             p2.Location = new System.Drawing.Point(3, 19);
             p2.Name = "p2";
-            p2.Size = new System.Drawing.Size(1129, 228);
+            p2.Size = new System.Drawing.Size(1157, 227);
             p2.TabIndex = 0;
             p2.TabStop = false;
             p2.MouseClick += p2_MouseClick;
@@ -236,7 +236,7 @@ namespace AgileStructure
             groupBox4.Controls.Add(btnSecondaryView);
             groupBox4.Location = new System.Drawing.Point(0, 3);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new System.Drawing.Size(1135, 65);
+            groupBox4.Size = new System.Drawing.Size(1163, 65);
             groupBox4.TabIndex = 3;
             groupBox4.TabStop = false;
             groupBox4.Text = "Secondary alignment region";
@@ -254,7 +254,7 @@ namespace AgileStructure
             // txtsEnd
             // 
             txtsEnd.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            txtsEnd.Location = new System.Drawing.Point(901, 24);
+            txtsEnd.Location = new System.Drawing.Point(929, 24);
             txtsEnd.Name = "txtsEnd";
             txtsEnd.Size = new System.Drawing.Size(132, 23);
             txtsEnd.TabIndex = 11;
@@ -266,7 +266,7 @@ namespace AgileStructure
             // txtsStart
             // 
             txtsStart.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            txtsStart.Location = new System.Drawing.Point(761, 24);
+            txtsStart.Location = new System.Drawing.Point(789, 24);
             txtsStart.Name = "txtsStart";
             txtsStart.Size = new System.Drawing.Size(132, 23);
             txtsStart.TabIndex = 10;
@@ -282,14 +282,14 @@ namespace AgileStructure
             cboSecondaries.FormattingEnabled = true;
             cboSecondaries.Location = new System.Drawing.Point(101, 24);
             cboSecondaries.Name = "cboSecondaries";
-            cboSecondaries.Size = new System.Drawing.Size(652, 23);
+            cboSecondaries.Size = new System.Drawing.Size(680, 23);
             cboSecondaries.TabIndex = 9;
             cboSecondaries.SelectedIndexChanged += cboSecondaries_SelectedIndexChanged;
             // 
             // btnSecondaryView
             // 
             btnSecondaryView.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnSecondaryView.Location = new System.Drawing.Point(1041, 22);
+            btnSecondaryView.Location = new System.Drawing.Point(1069, 22);
             btnSecondaryView.Name = "btnSecondaryView";
             btnSecondaryView.Size = new System.Drawing.Size(87, 27);
             btnSecondaryView.TabIndex = 12;
@@ -299,8 +299,8 @@ namespace AgileStructure
             // 
             // splitContainer1
             // 
-            splitContainer1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            splitContainer1.Location = new System.Drawing.Point(14, 31);
+            splitContainer1.Dock = System.Windows.Forms.DockStyle.Top;
+            splitContainer1.Location = new System.Drawing.Point(0, 24);
             splitContainer1.Name = "splitContainer1";
             splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -313,7 +313,7 @@ namespace AgileStructure
             // 
             splitContainer1.Panel2.Controls.Add(groupBox4);
             splitContainer1.Panel2.Controls.Add(gbpP2);
-            splitContainer1.Size = new System.Drawing.Size(1139, 662);
+            splitContainer1.Size = new System.Drawing.Size(1167, 662);
             splitContainer1.SplitterDistance = 329;
             splitContainer1.SplitterWidth = 5;
             splitContainer1.TabIndex = 7;
