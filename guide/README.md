@@ -55,7 +55,7 @@ Like Windows computers, AgileStructure doesn't require installation (just downlo
 
 ### Prior knowledge of the likely location of the breakpoint
 
- ```AgileStructure``` is designed to identify breakpoints with user assistance rather than scan the whole alignment for possible breakpoints, consequently it is expected that the user will have some prior knowledge as to where the breakpoint is such as a cytogenetics and/or karyotyping report, a list of known disease genes for the patients condition or a single pathogenic variant in a patient with a recessive disease for whom a second pathogenic variant cannot be found. 
+ ```AgileStructure``` is designed to identify breakpoints with user assistance rather than scan the whole alignment for possible breakpoints, consequently it is expected that the user will have some prior knowledge as to where the breakpoint is such as a cytogenetics and/or karyotyping report, a list of known disease genes for the patient's condition or a single pathogenic variant in a patient with a recessive disease for whom a second pathogenic variant cannot be found. 
 
 ### Aligned data format
 
@@ -73,7 +73,7 @@ Long reads that span a breakpoint will appear to consist of two regions of homol
 
 ### Optional data
 
-To aid the analysis, it is possible to view the putative breakpoints with reference to the  location of repeat and gene sequences. This data can be obtain from the USCS genome browser as described [here](downloadingOptionalFiles.md).
+To aid the analysis, it is possible to view the putative breakpoints with reference to the  location of genes and repetitive sequences. This data can be obtained from the USCS genome browser as described [here](downloadingOptionalFiles.md).
 
 ## Importing alignment data
 
