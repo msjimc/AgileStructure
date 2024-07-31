@@ -16,7 +16,7 @@
 - [Viewing read alignment information](#viewing-read-alignment-information)
 - [Selecting reads linked to a breakpoint](#selecting-reads-linked-to-a-break-point)
 - [Saving alignment information for selected reads](#saving-alignment-information-for-selected-reads)
-- [Annotating breakpoints using soft-clipped data](#annotating-break-points-using-soft-clipped-data)
+- [Annotating breakpoints using soft-clipped data](#annotating-breakpoints-using-soft-clipped-data)
   * [Deletion](#deletion)
   * [Duplication](#duplication)
   * [Insertion](#insertion)
@@ -236,7 +236,7 @@ Selecting the ```Analysis``` > ```Look for indels within a read``` menu option (
 
 Figure 15
 
-When redrawn using the CIGAR string to identify insertions and deletions, their presence becomes apparent. For example in Figure 16 the large deletion spanning 1,495,000 bp to 1,534,000 bp of chromosome 1 and the insertion at 1,586,000 bp (above the cursor) are easily identified.
+When redrawn using the CIGAR string to identify insertions and deletions, their presence becomes apparent. For example in Figure 16 the large 39 kb deletion spanning 1,495,000 bp to 1,534,000 bp of chromosome 1 and the insertion at 1,586,000 bp (above the cursor) are easily identified, as a series of broken read alignments linked by a pale grey line..
 
 ![Figure 16](images/figureB.jpg)
 
@@ -244,11 +244,11 @@ Figure 16
 
 ### Important note
 
-Since ONT data is very noisy the exact point of the breakpoint may appear to vary by a number of base pairs between different reads, while artefactual indels may also be present in the reads. Consequently ```AgileStructure``` scans the beginning and ends of the indels, sorts them by position and then reports the median values in the reported variant. Using the median value rather than the average reduces the chance an artifactual indel unduly influencing the annotation, but it is important to ensure that the individual indels are checked to make sure a 2nd, possibly artifactual, indel is not somehow disrupting the annotation.
+Since ONT data is very noisy, the exact point of the breakpoint may appear to vary by a number of base pairs between different reads, while artefactual indels may also be present in the reads. Consequently, ```AgileStructure``` scans the beginning and ends of the indels, sorts them by position, and then reports the median values for the reported variant. Using the median value rather than the average reduces the chance an artifactual indel unduly influencing the annotation, but it is important to ensure that the individual indels are checked to make sure a 2nd, possibly artifactual, indel is not somehow disrupting the annotation.
 
 ### Identifying insertions using the primary alignments CIGAR string
 
-To annotate an insertion, select the reads containing the variant of interest, then navigate to ```Variant determination``` > ```Use primary alignment's CIGAR string``` > ```Insertion``` menu option (see Figure 17a). A message box will appear, listing any insertions larger than 10 bp along with the corresponding read names and variant annotations. 
+To annotate an insertion, select the reads containing the variant of interest, then navigate to ```Variant determination``` > ```Use primary alignment's CIGAR string``` > ```Insertion``` menu option (see Figure 17a). A message box will appear, listing any insertions larger than 10 bp along with the names of the selected reads and the variant's annotations. 
 ***Note:*** Reads with multiple insertions may need to be deselected for accurate analysis. 
 
 ![Figure 17a](images/figureCa.jpg)
@@ -257,11 +257,11 @@ Figure 17
 
 ![Figure 17b](images/figureCb.jpg)
 
-Figure 17b: The order of the reads in the message box is determined by chromosomal position, which may differ from the display order of the reads.
+Figure 17b: The order of the reads in the message box is determined by chromosomal position, which may differ from the displayed order of the reads.
 
 ### Identifying deletions using the primary alignments CIGAR string  
 
-To annotate a deletion, select the reads containing the variant of interest and then select the  ```Variant determination``` > ```Use primary alignment's CIGAR string``` > ```Deletion``` menu option (Figure 18a). This will open a message box, listing the deletions over 10 bps followed by the reads and finally the variant's annotation (Figure 18b).
+To annotate a deletion, select the reads containing the variant of interest and then select the  ```Variant determination``` > ```Use primary alignment's CIGAR string``` > ```Deletion``` menu option (Figure 18a). This will open a message box, listing the deletions over 10 bp followed by the names of the reads and finally, the variant's annotation (Figure 18b).
 
 ![Figure 18a](images/figureDa.jpg)
 
@@ -287,7 +287,7 @@ In a similar manner to moving the region to the left or right, you can double or
 
 ### Changing the region by selecting a region with the mouse
 
-Using the mouse, a sub-region can be selected within either panel by clicking at the desired start point and dragging the cursor to the end point with the right mouse button held down (refer to Figure 19a). Upon releasing the button, the display updates to show the selected area (see Figure 19b). This feature enables detailed examination of specific regions. For example, Figure 19a shows four reads with a seemingly common insertion. However, closer inspection in Figure 19b reveals discrepancies in their locations, indicating they may not be authentic. To further investigate, selectinge ```Variant determination``` > ```Use primary alignment's CIGAR string``` > ```Insertion``` menu option, reveals that all reads share a 134 to 135 bp insertion. This uniformity suggests that the insertion’s position might be inaccurately represented, potentially due to sequencing errors or alignment issues with low complexity sequences (illustrated in Figure 19c).. 
+Using the mouse, a sub-region can be selected within either panel by clicking at the desired start point and dragging the cursor to the end point with the right mouse button held down (refer to Figure 19a). Upon releasing the button, the display updates to show the selected area (see Figure 19b). This feature enables detailed examination of specific regions. For example, Figure 19a shows four reads with a seemingly common insertion. However, closer inspection in Figure 19b reveals discrepancies in their locations, indicating they may not be authentic. To further investigate, selecting ```Variant determination``` > ```Use primary alignment's CIGAR string``` > ```Insertion``` menu option, reveals that all reads share a 134 to 135 bp insertion. This uniformity suggests that the insertion’s position might be inaccurately represented, potentially due to sequencing errors or alignment issues with low complexity sequences (illustrated in Figure 19c).. 
 
 ![Figure 19a](images/figureEa.jpg)
 
