@@ -109,7 +109,7 @@ namespace AgileStructure
             // 
             // groupBox1
             // 
-            groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             groupBox1.Controls.Add(txtEnd);
             groupBox1.Controls.Add(txtStart);
             groupBox1.Controls.Add(cboRef);
@@ -117,7 +117,7 @@ namespace AgileStructure
             groupBox1.Controls.Add(button2);
             groupBox1.Location = new System.Drawing.Point(6, 3);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(1157, 65);
+            groupBox1.Size = new System.Drawing.Size(1157, 72);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Region selection";
@@ -184,7 +184,7 @@ namespace AgileStructure
             gbpP1.Controls.Add(p1);
             gbpP1.Location = new System.Drawing.Point(6, 75);
             gbpP1.Name = "gbpP1";
-            gbpP1.Size = new System.Drawing.Size(1157, 250);
+            gbpP1.Size = new System.Drawing.Size(1157, 255);
             gbpP1.TabIndex = 6;
             gbpP1.TabStop = false;
             // 
@@ -193,7 +193,7 @@ namespace AgileStructure
             p1.Dock = System.Windows.Forms.DockStyle.Fill;
             p1.Location = new System.Drawing.Point(3, 19);
             p1.Name = "p1";
-            p1.Size = new System.Drawing.Size(1151, 228);
+            p1.Size = new System.Drawing.Size(1151, 233);
             p1.TabIndex = 0;
             p1.TabStop = false;
             p1.MouseClick += p1_MouseClick;
@@ -208,7 +208,7 @@ namespace AgileStructure
             gbpP2.Controls.Add(p2);
             gbpP2.Location = new System.Drawing.Point(6, 75);
             gbpP2.Name = "gbpP2";
-            gbpP2.Size = new System.Drawing.Size(1157, 248);
+            gbpP2.Size = new System.Drawing.Size(1157, 253);
             gbpP2.TabIndex = 2;
             gbpP2.TabStop = false;
             // 
@@ -217,7 +217,7 @@ namespace AgileStructure
             p2.Dock = System.Windows.Forms.DockStyle.Fill;
             p2.Location = new System.Drawing.Point(3, 19);
             p2.Name = "p2";
-            p2.Size = new System.Drawing.Size(1151, 226);
+            p2.Size = new System.Drawing.Size(1151, 231);
             p2.TabIndex = 0;
             p2.TabStop = false;
             p2.MouseClick += p2_MouseClick;
@@ -299,8 +299,8 @@ namespace AgileStructure
             // 
             // splitContainer1
             // 
-            splitContainer1.Dock = System.Windows.Forms.DockStyle.Top;
-            splitContainer1.Location = new System.Drawing.Point(0, 24);
+            splitContainer1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            splitContainer1.Location = new System.Drawing.Point(0, 20);
             splitContainer1.Name = "splitContainer1";
             splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -313,8 +313,8 @@ namespace AgileStructure
             // 
             splitContainer1.Panel2.Controls.Add(groupBox4);
             splitContainer1.Panel2.Controls.Add(gbpP2);
-            splitContainer1.Size = new System.Drawing.Size(1167, 662);
-            splitContainer1.SplitterDistance = 329;
+            splitContainer1.Size = new System.Drawing.Size(1167, 678);
+            splitContainer1.SplitterDistance = 335;
             splitContainer1.SplitterWidth = 5;
             splitContainer1.TabIndex = 7;
             // 
@@ -632,7 +632,7 @@ namespace AgileStructure
             Controls.Add(splitContainer1);
             Controls.Add(menuStrip1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
-            MinimumSize = new System.Drawing.Size(1183, 783);
+            MinimumSize = new System.Drawing.Size(1179, 766);
             Name = "Form1";
             Text = "Genomic rearrangements";
             Load += Form1_Load;

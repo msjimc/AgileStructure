@@ -1271,7 +1271,6 @@ namespace AgileStructure
 
                 drawPrimaryAlignments(true);
                 DrawGenes(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
-                //DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
                 drawSecondaryAlignments();
 
                 if (selectedIndex.Count > 0)
@@ -2481,7 +2480,7 @@ namespace AgileStructure
                     int breakPoint1 = 0;
                     int breakPoint2 = 0;
                     int breakPoint3 = 0;
-                    BreakPointData[] bestPlaces3rd;
+                    //BreakPointData[] bestPlaces3rd;
 
                     if (otherChromosome != cboRef.Text)
                     { return false; }
