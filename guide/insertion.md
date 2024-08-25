@@ -1,48 +1,8 @@
 # Identifying a Insertion
 
-## Case 1
+## Case 1: Identification of the lacZ-NeoR cassette
 
-__Prior information__  
-Due to a lack of patient data with a large insertion, a reference sequence was created in which 0.5 Mb of sequence was removed from chromosome 1 at 10,000,000 bp and inserted at 200,000,000 bp on chromosome 1. When reads from a healthy individual are aligned to this data, it would appear as if 500 Kb of DNA has been inserted at 10,000,000 bp on chromosome 1, which originated from 199,500,000 bp on chromosome 1.  
-
-### Analysis
-Import the data by clicking the ```Bam file``` button, then select the BAM file. Next, choose chromosome 1 from the upper dropdown list box. Enter the coordinates for the approximate position where you want to start searching for the first breakpoint in the two text boxes to the right of the dropdown list (in this case, approximately 9,500,000 to 10,500,000). Complete the import by selecting ```Analysis``` > ```Only show reads with secondary alignments``` from the menu options. (Figure 1).
-
-![Figure 1](images/examples/figure1ins.jpg)
-
-Figure 1
-
-Pressing the ```Get reads``` button displays data at the synthetic breakpoint at 10,000,000 bp on chromosome 1. Meanwhile, the lower dropdown list box identifies two possible breakpoints at approximately 199,500,000 bp and 199,999,936 bp (Figure 2).   
-
-![Figure 2](images/examples/figure2ins.jpg)
-
-Figure 2
-
-While the site of the insertion is seen as a single point, the origin of the inserted sequence is shown as two breakpoints flanking the inserted sequence. Consequently, the region containing the origin of the inserted sequence should be expanded to include both breakpoints. This can be done by selecting the first region in the lower dropdown list and copying the start of the location into the first lower text area (in this case, 199,449,999) (Figure 3). 
-
-![Figure 3](images/examples/figure3ins.jpg)
-
-Figure 3
-
-Then, select the next region in the dropdown list and paste the copied location into in the first text field in the lower panel. Once the region has been selected,  select the reads aligning to the second breakpoint (Figure 4)
-
-![Figure 4](images/examples/figure4ins.jpg)
-
-Figure 4
-
-When reads mapping to all three breakpoint sites have been selected, the variant can be annotated by selecting the ```Variant determination``` > ```Use soft clip data``` > ```Insertion``` menu option.
-
-![Figure 5](images/examples/figure5ins.jpg)
-
-Figure 5
-
-The annotated variant: ___chr1,10,00,000_10,000,001ins chr1.199,499,999_199,999,999___ is very close to the expected annotation of ___chr1,10,00,000_10,000,001ins chr1.199,500,000_200,000,000___. 
-
-[Return user guide](README.md#insertion)
-
-## Case 2: Identification of the lacZ-NeoR cassette
-
-The case study involves the Agmo knock out mouse discussed in Case 2 in the [Identification of duplications](duplication.md) read me file. 
+The case study involves the Agmo knock out mouse discussed in the [Identification of duplications](duplication.md) read me file. 
 
 This transgenic mouse was first described here:
 
@@ -81,3 +41,46 @@ The location of the transgene was then determined by selecting the ```Variant de
 ![Figure 8](images/examples/figure9dup2.jpg)
 
 Figure 8
+
+
+## Case 2
+
+__Prior information__  
+
+Due to a lack of data from a genome with a large insertion originating from the same chromosome, a reference sequence was created in which 0.5 Mb of sequence was removed from chromosome 1 at 10,000,000 bp and inserted at 200,000,000 bp on chromosome 1. When reads from a healthy individual are aligned to this data, it would appear as if 500 Kb of DNA has been inserted at 10,000,000 bp on chromosome 1, which originated from 199,500,000 bp on chromosome 1.  
+
+### Analysis
+Import the data by clicking the ```Bam file``` button, then select the BAM file. Next, choose chromosome 1 from the upper dropdown list box. Enter the coordinates for the approximate position where you want to start searching for the first breakpoint in the two text boxes to the right of the dropdown list (in this case, approximately 9,500,000 to 10,500,000). Complete the import by selecting ```Analysis``` > ```Only show reads with secondary alignments``` from the menu options. (Figure 1).
+
+![Figure 1](images/examples/figure1ins.jpg)
+
+Figure 1
+
+Pressing the ```Get reads``` button displays data at the synthetic breakpoint at 10,000,000 bp on chromosome 1. Meanwhile, the lower dropdown list box identifies two possible breakpoints at approximately 199,500,000 bp and 199,999,936 bp (Figure 2).   
+
+![Figure 2](images/examples/figure2ins.jpg)
+
+Figure 2
+
+While the site of the insertion is seen as a single point, the origin of the inserted sequence is shown as two breakpoints flanking the inserted sequence. Consequently, the region containing the origin of the inserted sequence should be expanded to include both breakpoints. This can be done by selecting the first region in the lower dropdown list and copying the start of the location into the first lower text area (in this case, 199,449,999) (Figure 3). 
+
+![Figure 3](images/examples/figure3ins.jpg)
+
+Figure 3
+
+Then, select the next region in the dropdown list and paste the copied location into in the first text field in the lower panel. Once the region has been selected,  select the reads aligning to the second breakpoint (Figure 4)
+
+![Figure 4](images/examples/figure4ins.jpg)
+
+Figure 4
+
+When reads mapping to all three breakpoint sites have been selected, the variant can be annotated by selecting the ```Variant determination``` > ```Use soft clip data``` > ```Insertion``` menu option.
+
+![Figure 5](images/examples/figure5ins.jpg)
+
+Figure 5
+
+The annotated variant: ___chr1,10,00,000_10,000,001ins chr1.199,499,999_199,999,999___ is very close to the expected annotation of ___chr1,10,00,000_10,000,001ins chr1.199,500,000_200,000,000___. 
+
+[Return user guide](README.md#insertion)
+
