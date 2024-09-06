@@ -109,7 +109,7 @@ namespace AgileStructure
             // 
             // groupBox1
             // 
-            groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             groupBox1.Controls.Add(txtEnd);
             groupBox1.Controls.Add(txtStart);
             groupBox1.Controls.Add(cboRef);
@@ -208,7 +208,7 @@ namespace AgileStructure
             gbpP2.Controls.Add(p2);
             gbpP2.Location = new System.Drawing.Point(6, 75);
             gbpP2.Name = "gbpP2";
-            gbpP2.Size = new System.Drawing.Size(1157, 253);
+            gbpP2.Size = new System.Drawing.Size(1157, 252);
             gbpP2.TabIndex = 2;
             gbpP2.TabStop = false;
             // 
@@ -217,7 +217,7 @@ namespace AgileStructure
             p2.Dock = System.Windows.Forms.DockStyle.Fill;
             p2.Location = new System.Drawing.Point(3, 19);
             p2.Name = "p2";
-            p2.Size = new System.Drawing.Size(1151, 231);
+            p2.Size = new System.Drawing.Size(1151, 230);
             p2.TabIndex = 0;
             p2.TabStop = false;
             p2.MouseClick += p2_MouseClick;
@@ -504,54 +504,54 @@ namespace AgileStructure
             // variantTypeToolStripMenuItem
             // 
             variantTypeToolStripMenuItem.Name = "variantTypeToolStripMenuItem";
-            variantTypeToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            variantTypeToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             variantTypeToolStripMenuItem.Text = "Variant type";
             variantTypeToolStripMenuItem.Click += variantTypeToolStripMenuItem_Click;
             // 
             // toolStripMenuItem2
             // 
             toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new System.Drawing.Size(207, 6);
+            toolStripMenuItem2.Size = new System.Drawing.Size(208, 6);
             // 
             // deletionsToolStripMenuItem
             // 
             deletionsToolStripMenuItem.Name = "deletionsToolStripMenuItem";
-            deletionsToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            deletionsToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             deletionsToolStripMenuItem.Text = "Deletion";
             deletionsToolStripMenuItem.Click += deletionsToolStripMenuItem_Click;
             // 
             // duplicationToolStripMenuItem
             // 
             duplicationToolStripMenuItem.Name = "duplicationToolStripMenuItem";
-            duplicationToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            duplicationToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             duplicationToolStripMenuItem.Text = "Duplication";
             duplicationToolStripMenuItem.Click += duplicationToolStripMenuItem_Click;
             // 
             // insertionToolStripMenuItem
             // 
             insertionToolStripMenuItem.Name = "insertionToolStripMenuItem";
-            insertionToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            insertionToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             insertionToolStripMenuItem.Text = "Insertion";
             insertionToolStripMenuItem.Click += insertionToolStripMenuItem_Click;
             // 
             // inversionToolStripMenuItem
             // 
             inversionToolStripMenuItem.Name = "inversionToolStripMenuItem";
-            inversionToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            inversionToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             inversionToolStripMenuItem.Text = "Inversion";
             inversionToolStripMenuItem.Click += inversionToolStripMenuItem_Click;
             // 
             // translocationToolStripMenuItem
             // 
             translocationToolStripMenuItem.Name = "translocationToolStripMenuItem";
-            translocationToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            translocationToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             translocationToolStripMenuItem.Text = "Translocation";
             translocationToolStripMenuItem.Click += translocationToolStripMenuItem_Click;
             // 
             // toolStripMenuItem11
             // 
             toolStripMenuItem11.Name = "toolStripMenuItem11";
-            toolStripMenuItem11.Size = new System.Drawing.Size(210, 22);
+            toolStripMenuItem11.Size = new System.Drawing.Size(211, 22);
             toolStripMenuItem11.Text = "Unbalanced Translocation";
             toolStripMenuItem11.Click += unbalancedTranslocationToolStripMenuItem_Click;
             // 
