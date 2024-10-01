@@ -1,7 +1,9 @@
 # Identifying an Inversion
 
 The patient was first described in:   
-> Watson CM, Crinnion LA, Harrison SM, Lascelles C, Antanaviciute A, Carr IM, Bonthron DT, Sheridan E. A Chromosome 7 Pericentric Inversion Defined at Single-Nucleotide Resolution Using Diagnostic Whole Genome Sequencing in a Patient with Hand-Foot-Genital Syndrome. PLoS One. 2016 Jun 7;11(6):e0157075. doi: 10.1371/journal.pone.0157075. PMID: 27272187; PMCID: PMC4896502.
+> Watson CM, Crinnion LA, Harrison SM, Lascelles C, Antanaviciute A, Carr IM, Bonthron DT, Sheridan E.   
+A Chromosome 7 Pericentric Inversion Defined at Single-Nucleotide Resolution Using Diagnostic Whole Genome Sequencing in a Patient with Hand-Foot-Genital Syndrome.   
+PLoS One. 2016 Jun 7;11(6):e0157075. doi: 10.1371/journal.pone.0157075. PMID: 27272187; PMCID: PMC4896502.
 
 
 __Prior information__  
@@ -38,7 +40,7 @@ Selecting this region identifies 4 reads with primary alignments at about 27,727
 
 Figure 5
 
-Selecting the four reads and then selecting the ```Variant determination``` > ```Use soft clip data``` > ```Inversion``` menu option annotates the inversion as chr7, 27,722,809_93,970,219inv (Figure 6).
+Selecting the four reads and then selecting the ```Variant determination``` > ```Use soft clip data``` > ```Inversion``` menu option annotates the inversion as chr7,27,762,427_93,599,532inv (Figure 6).
 
 ![Figure 6](images/examples/figure6inv.jpg)
 
@@ -50,19 +52,19 @@ This annotation depends solely on reads with primary alignments at the 27.7 MB s
 
 Figure 7
 
-This set of reads is not as clear as those at the first site, with one secondary alignment flanked by long soft clipped sequences. However, selecting the three reads and then the ```Variant determination``` > ```Use soft clip data``` > ```Inversion``` menu option annotates the inversion as chr7:27,722,805_93,970,218inv (Figure 8), which is very close to the first annotation of chr7: 27,722,809_93,970,219inv (Figure 6).
+This set of reads is not as clear as those at the first site, with one secondary alignment flanked by long soft clipped sequences. However, selecting the three reads and then the ```Variant determination``` > ```Use soft clip data``` > ```Inversion``` menu option annotates the inversion as chr7:27,762,424_93,599,530inv (Figure 8), which is very close to the first annotation of chr7,27,762,427_93,599,532inv (Figure 6).
 
 ![Figure 8](images/examples/figure8inv.jpg)
 
 Figure 8
 
-The published breakpoint was identified as chr7:27,762,423_93,599,530inv when aligned to the hg19 human reference sequence. When these coordinates are mapped to hg38 using the [Lift Genome Annotations](https://genome.ucsc.edu/cgi-bin/hgLiftOver) the published mutation becomes: chr7:27,722,804_93,970,219inv which is very close to the results found here:  chr7:27,722,809_93,970,219inv and chr7:27,722,809_93,970,218inv
+The published breakpoint was identified as chr7:27,762,423_93,599,530inv when aligned to the hg19 human reference sequence, which is very close to the results found here:  chr7:27,762,424_93,599,530inv and chr7:27,762,424_93,599,530inv
 
 |Origin|Variant|
 |-|-|
-|Published variant (transferred to hg38)|chr7<:>27,722,804_93,970,219inv|
-|Using primary alignments at 27 Mb|chr7:27,722,809_93,970,219inv|
-|Using primary alignments at 93 Mb|chr7:27,722,805_93,970,218inv|
+|Published variant |chr7.27,762,423_93,599,530inv|
+|Using primary alignments at 27 Mb|chr7.27,762,424_93,599,530inv|
+|Using primary alignments at 93 Mb|chr7.27,762,424_93,599,530inv|
 
 #### Table 1
 
