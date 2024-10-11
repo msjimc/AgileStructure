@@ -2700,75 +2700,75 @@ namespace AgileStructure
             }
         }
 
-        private void unbalancedTranslocationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                if (selectedIndex.Count > 0)
-                {
-                    BreakPointData[] bestPlaces = getBreakPointsOnUnbalancedTranslocation(cboRef.Text, cboSecondaries.Text);
-                    int breakPoint1 = bestPlaces[0].getAveragePlace;
-                    int breakPoint2 = bestPlaces[1].getAveragePlace;
+        //private void unbalancedTranslocationToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (id != null) { id.WindowState = FormWindowState.Minimized; }
+        //        if (selectedIndex.Count > 0)
+        //        {
+        //            BreakPointData[] bestPlaces = getBreakPointsOnUnbalancedTranslocation(cboRef.Text, cboSecondaries.Text);
+        //            int breakPoint1 = bestPlaces[0].getAveragePlace;
+        //            int breakPoint2 = bestPlaces[1].getAveragePlace;
                     
 
-                    if (bestPlaces[1] == null)
-                    {
-                        if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                        MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return; 
-                    }
+        //            if (bestPlaces[1] == null)
+        //            {
+        //                if (id != null) { id.WindowState = FormWindowState.Minimized; }
+        //                MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //                return; 
+        //            }
 
-                    string mutation = "The rearrangement could be an unbalanced translocation of.\n";
-                    string mutation1 = ""; 
+        //            string mutation = "The rearrangement could be an unbalanced translocation of.\n";
+        //            string mutation1 = ""; 
 
-                    int best1 = getChromosomeNumber(bestPlaces[0].getReferenceName);
-                    int best2 = getChromosomeNumber(bestPlaces[1].getReferenceName);
+        //            int best1 = getChromosomeNumber(bestPlaces[0].getReferenceName);
+        //            int best2 = getChromosomeNumber(bestPlaces[1].getReferenceName);
 
-                    if (best1 > best2)
-                    {
-                        mutation1 += "t(" + bestPlaces[1].getReferenceName + ";" + bestPlaces[0].getReferenceName + ") (g."
-                            + breakPoint2.ToString("N0") + ";g." + breakPoint1.ToString("N0") + ")";
-                    }
-                    else
-                    {
-                        mutation1 += "t(" + bestPlaces[0].getReferenceName + ";" + bestPlaces[1].getReferenceName + ") g."
-                            + breakPoint1.ToString("N0") + ";g." + breakPoint2.ToString("N0") + ")";
-                    }
+        //            if (best1 > best2)
+        //            {
+        //                mutation1 += "t(" + bestPlaces[1].getReferenceName + ";" + bestPlaces[0].getReferenceName + ") (g."
+        //                    + breakPoint2.ToString("N0") + ";g." + breakPoint1.ToString("N0") + ")";
+        //            }
+        //            else
+        //            {
+        //                mutation1 += "t(" + bestPlaces[0].getReferenceName + ";" + bestPlaces[1].getReferenceName + ") g."
+        //                    + breakPoint1.ToString("N0") + ";g." + breakPoint2.ToString("N0") + ")";
+        //            }
 
-                    string mutation2 = "";
-
-
-                    breakPoint1 = bestPlaces[2].getAveragePlace;
-                    breakPoint2 = bestPlaces[3].getAveragePlace;
-
-                    best1 = getChromosomeNumber(bestPlaces[0].getReferenceName);
-                    best2 = getChromosomeNumber(bestPlaces[1].getReferenceName);
-
-                    if (best1 > best2)
-                    {
-                        mutation2 = "t(" + bestPlaces[1].getReferenceName + ";" + bestPlaces[0].getReferenceName + ") (g."
-                            + breakPoint2.ToString("N0") + ";g." + breakPoint1.ToString("N0") +")";
-                    }
-                    else
-                    {
-                        mutation2 = "t(" + bestPlaces[0].getReferenceName + ";" + bestPlaces[1].getReferenceName + ") g."
-                            + breakPoint1.ToString("N0") + ";g." + breakPoint2.ToString("N0") + ")";
-                    }
+        //            string mutation2 = "";
 
 
-                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                    if (MessageBox.Show(mutation + "\n" + mutation1 + "\n"  + mutation2+ "\nSave with the selected read data?", "Unbalanced Translocation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                    { SaveToFile(mutation + "\n" + mutation1 + "\n" + mutation2); }
+        //            breakPoint1 = bestPlaces[2].getAveragePlace;
+        //            breakPoint2 = bestPlaces[3].getAveragePlace;
 
-                }
-            }
-            catch (Exception ex)
-            {
-                if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                MessageBox.Show("Could not identify the variant using the selected reads", "Error");
-            }
-        }
+        //            best1 = getChromosomeNumber(bestPlaces[0].getReferenceName);
+        //            best2 = getChromosomeNumber(bestPlaces[1].getReferenceName);
+
+        //            if (best1 > best2)
+        //            {
+        //                mutation2 = "t(" + bestPlaces[1].getReferenceName + ";" + bestPlaces[0].getReferenceName + ") (g."
+        //                    + breakPoint2.ToString("N0") + ";g." + breakPoint1.ToString("N0") +")";
+        //            }
+        //            else
+        //            {
+        //                mutation2 = "t(" + bestPlaces[0].getReferenceName + ";" + bestPlaces[1].getReferenceName + ") g."
+        //                    + breakPoint1.ToString("N0") + ";g." + breakPoint2.ToString("N0") + ")";
+        //            }
+
+
+        //            if (id != null) { id.WindowState = FormWindowState.Minimized; }
+        //            if (MessageBox.Show(mutation + "\n" + mutation1 + "\n"  + mutation2+ "\nSave with the selected read data?", "Unbalanced Translocation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+        //            { SaveToFile(mutation + "\n" + mutation1 + "\n" + mutation2); }
+
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (id != null) { id.WindowState = FormWindowState.Minimized; }
+        //        MessageBox.Show("Could not identify the variant using the selected reads", "Error");
+        //    }
+        //}
         private void SaveToFile(string mutation)
         {
             string file = FileString.SaveAs("Select the file to save the data in", "Text file (*.txt)|*.txt");
@@ -2901,113 +2901,113 @@ namespace AgileStructure
             return getBreakPoints(places, sameReferenceSequence, false);
         }
 
-        private BreakPointData[] getBreakPointsOnUnbalancedTranslocation(string referenceSequenceTarget, string secondaryReferenceSequenceTarget)
-        {
+        //private BreakPointData[] getBreakPointsOnUnbalancedTranslocation(string referenceSequenceTarget, string secondaryReferenceSequenceTarget)
+        //{
 
-            secondaryReferenceSequenceTarget = secondaryReferenceSequenceTarget.Substring(0, secondaryReferenceSequenceTarget.IndexOf(" "));
-            int indexSecondaryReference = getReferenceIndexFromName(secondaryReferenceSequenceTarget);
+        //    secondaryReferenceSequenceTarget = secondaryReferenceSequenceTarget.Substring(0, secondaryReferenceSequenceTarget.IndexOf(" "));
+        //    int indexSecondaryReference = getReferenceIndexFromName(secondaryReferenceSequenceTarget);
 
-            List<int[]> pairs = new List<int[]>();
-            Dictionary<string, List<int>> places = new Dictionary<string, List<int>>();
-            foreach (int index in selectedIndex)
-            {
-                if (DrawnARKeys.ContainsKey(index) == true)
-                {
-                    int fivePrimePrimary = -1;
-                    int threePrimePrimary = -1;
-                    int indexFivePrimary = -1;
-                    int indexThreePrimary = -1;
+        //    List<int[]> pairs = new List<int[]>();
+        //    Dictionary<string, List<int>> places = new Dictionary<string, List<int>>();
+        //    foreach (int index in selectedIndex)
+        //    {
+        //        if (DrawnARKeys.ContainsKey(index) == true)
+        //        {
+        //            int fivePrimePrimary = -1;
+        //            int threePrimePrimary = -1;
+        //            int indexFivePrimary = -1;
+        //            int indexThreePrimary = -1;
 
-                    AlignedRead ar = DrawnARKeys[index];
-                    if (ar.hasFivePrimeSoftClip == true)
-                    {
-                        fivePrimePrimary = ar.getPosition;
-                        indexFivePrimary = ar.getreferenceIndex;
-                    }
+        //            AlignedRead ar = DrawnARKeys[index];
+        //            if (ar.hasFivePrimeSoftClip == true)
+        //            {
+        //                fivePrimePrimary = ar.getPosition;
+        //                indexFivePrimary = ar.getreferenceIndex;
+        //            }
 
-                    if (ar.hasThreePrimeSoftClip == true)
-                    {
-                        threePrimePrimary = ar.getEndPosition;
-                        indexThreePrimary = ar.getreferenceIndex;
-                    }
+        //            if (ar.hasThreePrimeSoftClip == true)
+        //            {
+        //                threePrimePrimary = ar.getEndPosition;
+        //                indexThreePrimary = ar.getreferenceIndex;
+        //            }
 
-                    string secondaryCIGAR = ar.getSecondaryAlignmentTag;
-                    if (string.IsNullOrEmpty(secondaryCIGAR) == false)
-                    {
-                        string[] hits = secondaryCIGAR.Substring(2).Split(';');
-                        foreach (string h in hits)
-                        {
-                            if (string.IsNullOrEmpty(h) == false)
-                            {
-                                string[] items = h.Split(',');
-                                int startPoint = Convert.ToInt32(items[1]);
-                                if (secondaryReferenceSequenceTarget.Equals(items[0]))
-                                {
-                                    if (indexThreePrimary > -1 && getFivePrimeSoftClipLength(items[3]) > 50 && (startPoint >= selectSecondaryStart && startPoint <= selectSecondaryEnd))
-                                    {
-                                        if (places.ContainsKey(referenceSequenceNames[indexThreePrimary]) == false)
-                                        {
-                                            places.Add(referenceSequenceNames[indexThreePrimary], new List<int>());
-                                            places[referenceSequenceNames[indexThreePrimary]].Add(threePrimePrimary);
-                                        }
-                                        else
-                                        { places[referenceSequenceNames[indexThreePrimary]].Add(threePrimePrimary); }
+        //            string secondaryCIGAR = ar.getSecondaryAlignmentTag;
+        //            if (string.IsNullOrEmpty(secondaryCIGAR) == false)
+        //            {
+        //                string[] hits = secondaryCIGAR.Substring(2).Split(';');
+        //                foreach (string h in hits)
+        //                {
+        //                    if (string.IsNullOrEmpty(h) == false)
+        //                    {
+        //                        string[] items = h.Split(',');
+        //                        int startPoint = Convert.ToInt32(items[1]);
+        //                        if (secondaryReferenceSequenceTarget.Equals(items[0]))
+        //                        {
+        //                            if (indexThreePrimary > -1 && getFivePrimeSoftClipLength(items[3]) > 50 && (startPoint >= selectSecondaryStart && startPoint <= selectSecondaryEnd))
+        //                            {
+        //                                if (places.ContainsKey(referenceSequenceNames[indexThreePrimary]) == false)
+        //                                {
+        //                                    places.Add(referenceSequenceNames[indexThreePrimary], new List<int>());
+        //                                    places[referenceSequenceNames[indexThreePrimary]].Add(threePrimePrimary);
+        //                                }
+        //                                else
+        //                                { places[referenceSequenceNames[indexThreePrimary]].Add(threePrimePrimary); }
 
-                                        if (places.ContainsKey(items[0]) == false)
-                                        {
-                                            places.Add(items[0], new List<int>());
-                                            places[items[0]].Add(startPoint);
-                                        }
-                                        else
-                                        { places[items[0]].Add(startPoint); }
-                                        int[] pair = { threePrimePrimary, indexThreePrimary, startPoint, indexSecondaryReference };
-                                        pairs.Add(pair);
-                                    }
+        //                                if (places.ContainsKey(items[0]) == false)
+        //                                {
+        //                                    places.Add(items[0], new List<int>());
+        //                                    places[items[0]].Add(startPoint);
+        //                                }
+        //                                else
+        //                                { places[items[0]].Add(startPoint); }
+        //                                int[] pair = { threePrimePrimary, indexThreePrimary, startPoint, indexSecondaryReference };
+        //                                pairs.Add(pair);
+        //                            }
 
-                                    startPoint += getAlignedLength(items[3]);
-                                    if (indexFivePrimary > -1 && getThreePrimeSoftClipLength(items[3]) > 50 && (startPoint >= selectSecondaryStart && startPoint <= selectSecondaryEnd))
-                                    {
-                                        if (places.ContainsKey(referenceSequenceNames[indexFivePrimary]) == false)
-                                        {
-                                            places.Add(referenceSequenceNames[indexFivePrimary], new List<int>());
-                                            places[referenceSequenceNames[indexFivePrimary]].Add(fivePrimePrimary);
-                                        }
-                                        else
-                                        { places[referenceSequenceNames[indexFivePrimary]].Add(fivePrimePrimary); }
+        //                            startPoint += getAlignedLength(items[3]);
+        //                            if (indexFivePrimary > -1 && getThreePrimeSoftClipLength(items[3]) > 50 && (startPoint >= selectSecondaryStart && startPoint <= selectSecondaryEnd))
+        //                            {
+        //                                if (places.ContainsKey(referenceSequenceNames[indexFivePrimary]) == false)
+        //                                {
+        //                                    places.Add(referenceSequenceNames[indexFivePrimary], new List<int>());
+        //                                    places[referenceSequenceNames[indexFivePrimary]].Add(fivePrimePrimary);
+        //                                }
+        //                                else
+        //                                { places[referenceSequenceNames[indexFivePrimary]].Add(fivePrimePrimary); }
 
-                                        if (places.ContainsKey(items[0]) == false)
-                                        {
-                                            places.Add(items[0], new List<int>());
-                                            places[items[0]].Add(startPoint);
-                                        }
-                                        else
-                                        { places[items[0]].Add(startPoint); }
-                                        int[] pair = { fivePrimePrimary, indexFivePrimary, startPoint, indexSecondaryReference };
-                                        pairs.Add(pair);
+        //                                if (places.ContainsKey(items[0]) == false)
+        //                                {
+        //                                    places.Add(items[0], new List<int>());
+        //                                    places[items[0]].Add(startPoint);
+        //                                }
+        //                                else
+        //                                { places[items[0]].Add(startPoint); }
+        //                                int[] pair = { fivePrimePrimary, indexFivePrimary, startPoint, indexSecondaryReference };
+        //                                pairs.Add(pair);
 
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
 
-            foreach (List<int> points in places.Values)
-            { points.Sort(); }
+        //    foreach (List<int> points in places.Values)
+        //    { points.Sort(); }
 
-            BreakPointData[] bp = getBreakPoints(places, false, true);
-            BreakPointData[] different = getBreakPointsWithGapOnSameChromosome(bp);
-            BreakPointData[] matchedDifferent = new BreakPointData[2];
+        //    BreakPointData[] bp = getBreakPoints(places, false, true);
+        //    BreakPointData[] different = getBreakPointsWithGapOnSameChromosome(bp);
+        //    BreakPointData[] matchedDifferent = new BreakPointData[2];
                       
-            BreakPointData[] answer = new BreakPointData[4];
-            answer[0] = different[0];
-            answer[1] = getOtherSide(different[0], pairs);
-            answer[2] = different[1];
-            answer[3] = getOtherSide(different[1], pairs);
+        //    BreakPointData[] answer = new BreakPointData[4];
+        //    answer[0] = different[0];
+        //    answer[1] = getOtherSide(different[0], pairs);
+        //    answer[2] = different[1];
+        //    answer[3] = getOtherSide(different[1], pairs);
 
-            return answer;
-        }
+        //    return answer;
+        //}
 
         private BreakPointData getOtherSide(BreakPointData breakPoint, List<int[]> pairs)
         {
