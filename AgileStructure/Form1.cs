@@ -2607,10 +2607,16 @@ namespace AgileStructure
                                             else { key += "--"; }
                                         }
 
-                                        if ((startPoint < pEnd || startPoint >= qEnd) && (ar.getPosition < pEnd || ar.getPosition >= qEnd))
-                                        { key += "outSide"; }
-                                        else if ((startPoint >= pEnd || startPoint < qEnd) && (ar.getPosition >= pEnd || ar.getPosition < qEnd))
+                                        int middleOfSecondary= (startPoint + endPoint) / 2;
+                                        if (middleOfSecondary < qEnd && middleOfSecondary > pEnd)
                                         { key += "inSide"; }
+                                        else { key += "outSide"; }
+
+
+                                        //if ((startPoint < pEnd || startPoint >= qEnd) && (ar.getPosition < pEnd || ar.getPosition >= qEnd))
+                                        //{ key += "outSide"; }
+                                        //else if ((startPoint >= pEnd || startPoint < qEnd) && (ar.getPosition >= pEnd || ar.getPosition < qEnd))
+                                        //{ key += "inSide"; }
 
                                         if (orientations.ContainsKey(key) == false)
                                         { orientations.Add(key, 1); }
@@ -2632,6 +2638,7 @@ namespace AgileStructure
                 { strands[0] += orientations[k]; }
                 else
                 { strands[1] += orientations[k]; }
+
                 if (k.Contains("inSide") == true)
                 { inOut[0] += orientations[k]; }
                 else
