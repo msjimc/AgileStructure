@@ -10,7 +10,7 @@ namespace AgileStructure
         private int place = -1;
         private int[] places = null;
         private string referenceName = "";
-        
+        private int together = 0;
         public BreakPointData(int Place, int[] Places,string ReferenceName)
         {
             place = Place;
@@ -44,5 +44,11 @@ namespace AgileStructure
         public int Count
         { get { return places.Length; } }
 
+
+        public int Togehter
+        {
+            get { return together; }
+            set { together = value; }
+        }
     }
 }

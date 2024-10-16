@@ -207,7 +207,7 @@ namespace AgileStructure
             gbpP2.Controls.Add(p2);
             gbpP2.Location = new System.Drawing.Point(6, 75);
             gbpP2.Name = "gbpP2";
-            gbpP2.Size = new System.Drawing.Size(1157, 250);
+            gbpP2.Size = new System.Drawing.Size(1157, 249);
             gbpP2.TabIndex = 2;
             gbpP2.TabStop = false;
             // 
@@ -216,7 +216,7 @@ namespace AgileStructure
             p2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             p2.Location = new System.Drawing.Point(3, 19);
             p2.Name = "p2";
-            p2.Size = new System.Drawing.Size(1151, 229);
+            p2.Size = new System.Drawing.Size(1151, 228);
             p2.TabIndex = 0;
             p2.TabStop = false;
             p2.MouseClick += p2_MouseClick;
@@ -316,6 +316,7 @@ namespace AgileStructure
             splitContainer1.SplitterDistance = 335;
             splitContainer1.SplitterWidth = 5;
             splitContainer1.TabIndex = 7;
+            splitContainer1.SplitterMoved += splitContainer1_SplitterMoved;
             // 
             // timer1
             // 
