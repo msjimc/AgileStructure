@@ -3896,7 +3896,7 @@ namespace AgileStructure
         private void complexRearrangmentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (cR == null )
-            { cR = new ComplexRearrangement(this); }
+            { cR = new ComplexRearrangement(this, cboRef.Text); }
             if (cR.Visible == false)
             { cR.Show(this); }
         }
