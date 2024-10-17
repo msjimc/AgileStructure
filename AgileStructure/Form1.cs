@@ -13,6 +13,7 @@ using System.Drawing.Imaging;
 using System.Numerics;
 using System.Diagnostics.Eventing.Reader;
 using System.Threading;
+using System.Linq.Expressions;
 
 
 namespace AgileStructure
@@ -92,9 +93,10 @@ namespace AgileStructure
         bool drawGenes = true;
         RepeatData rd = null;
         string repeatFileName = "";
-        //bool drawRepeats = true;
+        
 
         Info id = null;
+        ComplexRearrangement cR = null;
 
         List<string> history = new List<string>();
         List<StringInt> historySecondary;
@@ -642,7 +644,6 @@ namespace AgileStructure
             {
                 makeBaseImage();
                 DrawGenes(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
-                //DrawRepeats(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
                 resetReadsDrawnStatus();
             }
             drawAlignments(AR);
@@ -2306,8 +2307,8 @@ namespace AgileStructure
                     if (bestPlaces[1] == null)
                     {
                         if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                        MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return result;
+                        //MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return result + "Could not find both sides of the breakpoint";
                     }
 
                     string mutation = "";
@@ -2320,8 +2321,6 @@ namespace AgileStructure
                     else
                     { mutation += cboRef.Text + "." + breakPoint1.ToString("N0") + "_" + breakPoint2.ToString("N0") + "del"; }
                     if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                    //if (MessageBox.Show(mutation + "\nSave with the selected read data?", "Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                    //{ SaveToFile(mutation); }
                     result = "o" + mutation;
                 }
                 else
@@ -2368,8 +2367,8 @@ namespace AgileStructure
                     if (bestPlaces[1] == null)
                     {
                         if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                        MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return result;
+                        //MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return result + "Could not find both sides of the breakpoint";
                     }
 
                     string mutation = "";
@@ -2397,7 +2396,7 @@ namespace AgileStructure
             catch (Exception ex)
             {
                 if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                MessageBox.Show("Could not identify the variant using the selected reads", "Error");
+                //MessageBox.Show("Could not identify the variant using the selected reads", "Error");
             }
             return result;
         }
@@ -2431,7 +2430,7 @@ namespace AgileStructure
                     {
                         if (id != null) { id.WindowState = FormWindowState.Minimized; }
                         MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return "e";
+                        return "e\"Could not find both sides of the breakpoint\"";
                     }
 
                     string mutation = "";
@@ -2547,12 +2546,12 @@ namespace AgileStructure
                     if (bestPlaces[1] == null)
                     {
                         if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                        MessageBox.Show("Could not find all the breakpoints", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return result;
+                        //MessageBox.Show("Could not find all the breakpoints", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return result + "Could not find all the breakpoints";
                     }
 
                     string mutation = "";
-                    if (bestPlaces3rd[1] == null)
+                    if (bestPlaces3rd.Length == 1 || bestPlaces3rd[1] == null)
                     { mutation = bestPlaces3rd[0].getReferenceName + "." + breakPoint3.ToString("N0") + "_" + (breakPoint3 + 1).ToString("N0") + "ins " + bestPlaces[0].getReferenceName + "."; }
                     else
                     {
@@ -2815,7 +2814,7 @@ namespace AgileStructure
                     {
                         if (id != null) { id.WindowState = FormWindowState.Minimized; }
                         MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return result;
+                        return result + "Have you selected any reads?";
                     }
 
                     string mutation = "";
@@ -3352,7 +3351,7 @@ namespace AgileStructure
             }
             return bestRegions;
         }
-
+              
         private bool AreTwoBreakPointsTheSame(BreakPointData bp1, BreakPointData bp2, int span)
         {
             if (bp1 != null && bp2 != null)
@@ -3866,5 +3865,100 @@ namespace AgileStructure
                 timer1.Enabled = true;
             }
         }
+
+        internal float PrimaryAlignment5PrimeOfbreakPoint(int place, string reference)
+        {
+            float answer = -1;
+            int primary5primeOfBreakpoint = 0;
+            int count = 0;
+
+            Dictionary<string, List<int>> places = new Dictionary<string, List<int>>();
+            foreach (int index in selectedIndex)
+            {
+                if (DrawnARKeys.ContainsKey(index) == true)
+                {
+                    AlignedRead ar = DrawnARKeys[index];
+                    if (ar.getPosition + 100 > place && ar.getPosition - 100 < place)
+                    { primary5primeOfBreakpoint++; }
+
+                    if (ar.getEndPosition + 100 > place && ar.getEndPosition - 100 < place)
+                    { primary5primeOfBreakpoint--; }
+                }
+                count++;
+            }
+
+            answer = (float)(primary5primeOfBreakpoint + count) / (float)(count * 2);
+
+            return answer;
+
+        }
+
+        private void complexRearrangmentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (cR == null )
+            { cR = new ComplexRearrangement(this); }
+            if (cR.Visible == false)
+            { cR.Show(this); }
+        }
+
+        internal void cR_Closing()
+        { cR = null; }
+
+        internal BreakPointData[] getTwobreakPoints()
+        {
+            BreakPointData[] bestPlaces = null;
+            try
+            {
+                if (selectedIndex.Count > 0)
+                {
+                    if (cboSecondaries.Text.StartsWith(cboRef.Text) == true)
+                    { bestPlaces = getBreakPoints(true, cboRef.Text); }
+                    else
+                    { bestPlaces = getBreakPoints(false, cboRef.Text); }
+                }
+                return bestPlaces;
+            }
+            catch { return null; }
+        }
+
+
+        internal string[] externalannotations()
+        {
+           string[] answer = new string[5];
+
+            try
+            {
+                if (cboSecondaries.Text.StartsWith(cboRef.Text) == true)
+                {
+                    answer[0] = inversion();
+                    answer[1] = "e";
+                    answer[2] = insertion();
+                    answer[3] = deletion();
+                    answer[4] = duplication();
+                }
+                else
+                {
+                    answer[0] = "e";
+                    answer[1] = translocation();
+                    answer[2] = insertion();
+                    answer[3] = "e";
+                    answer[4] = "e";
+                }
+                for (int index = 0; index < 5; index++)
+                {
+                    if (answer[index].StartsWith("e")== true || answer[index].Contains("\n") == true)
+                    {
+                        answer[index] = "e";
+                    }
+                }
+            }
+            catch { }
+            finally { }
+
+            return answer;
+
+        }
+
+        internal List<int> getSelected { get { return selectedIndex; } }
     }
 }
