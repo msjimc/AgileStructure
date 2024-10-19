@@ -101,171 +101,216 @@ namespace AgileStructure
 
         private void btnFind_Click(object sender, EventArgs e)
         {
-            //inversion = 0
-            txtAnswer.Clear();
-            int[] places = getUniquePlaces();
-            float[] alignment = setPrimaryAlignmentLocation(places);
-
-            if (places.Length == 3)
+            try
             {
+                //inversion = 0
+                txtAnswer.Clear();
+                int[] places = getUniquePlaces();
+                float[] alignment = setPrimaryAlignmentLocation(places);
 
-                if (alignment[0] > 0.4f && alignment[0] < 0.6f)
+                if (places.Length == 3)
                 {
-                    string[] items1 = processIAnnotationString(annotations1[0]);
-                    string[] items2 = processIAnnotationString(annotations2[0]);
-                    if (places[1] == average11 || places[1] == average12)
+
+                    if (alignment[0] > 0.4f && alignment[0] < 0.6f)
                     {
-                        if (alignment[1] > 0.8f)
+                        string[] items1 = processIAnnotationString(annotations1[0]);
+                        string[] items2 = processIAnnotationString(annotations2[0]);
+                        if (places[1] == average11 || places[1] == average12)
                         {
+                            if (alignment[1] > 0.8f)
+                            {//inversion
+                                txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[2];
+                            }
+                            else if (alignment[1] < 0.2f)
+                            {//inversion
+                                txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2];
+                            }
+                        }
+                    }
+                    else if (alignment[2] > 0.4f && alignment[2] < 0.6f)
+                    {
+                        string[] items1 = processIAnnotationString(annotations1[0]);
+                        string[] items2 = processIAnnotationString(annotations2[0]);
+                        if (alignment[1] < 0.2f)
+                        {//inversion
                             txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[2];
                         }
-                        else if (alignment[1] < 0.2f)
-                        {
+                        else if (alignment[1] > 0.8f)
+                        {//inversion
                             txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2];
                         }
                     }
                 }
-                else if (alignment[2] > 0.4f && alignment[2] < 0.6f)
+                else if (places.Length == 4)
                 {
-                    string[] items1 = processIAnnotationString(annotations1[0]);
-                    string[] items2 = processIAnnotationString(annotations2[0]);
-                    if (alignment[1] < 0.2f)
+
+                    string isOverlapping = IsOverlapping();
+
+                    if (alignment[1] < 0.2f && annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith("o") == true)
                     {
-                        txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[2];
+                        if (average11 < average12)
+                        {//inversion++++++++++++++wrong for insertion-chr7_60_43.6_43.75_RC_inserted_to_50_51_ONT_no_2nd.bam from 43
+                            string[] items1 = processIAnnotationString(annotations1[0]);
+                            string[] items2 = processIAnnotationString(annotations2[0]);
+                            txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[2];
+                        }
+                        else
+                        {
+                            string[] items1 = processIAnnotationString(annotations1[0]);
+                            string[] items2 = processIAnnotationString(annotations2[0]);
+                            txtAnswer.Text = items1[0] + "." + items2[2] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[1];
+                        }
                     }
-                    else if (alignment[1] > 0.8f)
-                    {
+                    else if (alignment[1] > 0.8f && annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith("o") == true)// && isOverlapping == "overlapping")
+                    {//inversion
+                        string[] items1 = processIAnnotationString(annotations1[0]);
+                        string[] items2 = processIAnnotationString(annotations2[0]);
                         txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2];
                     }
-                }
-            }
-            else if (places.Length == 4)
-            {
-
-                string isOverlapping = IsOverlapping();
-
-                if (alignment[1] < 0.2f && annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith("o") == true)
-                {
-                    if (average11 < average12)
+                    else if (annotations1[3].StartsWith("o") == true && annotations2[4].StartsWith('o') == true)
+                    {
+                        string[] items1 = processIAnnotationString(annotations1[3]);
+                        string[] items2 = processIAnnotationString(annotations2[4]);
+                        if (isOverlapping == "overlapping")
+                        { txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[1] + " is deleted and replaced by " + items1[0] + "." + items1[2] + "_" + items2[2]; }
+                        else if (isOverlapping == "threeprime")
+                        { txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[1] + " is deleted and replaced by " + items1[0] + "." + items2[2] + "_" + items1[2]; }
+                        else if (isOverlapping == "fiveprime")//insertion
+                        { txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[1] + " is deleted and replaced by " + items1[0] + "." + items1[2] + "_" + items2[2]; }
+                    }
+                    else if (annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith('o') == true)
                     {
                         string[] items1 = processIAnnotationString(annotations1[0]);
                         string[] items2 = processIAnnotationString(annotations2[0]);
-                        txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[2];
+                        if (Convert.ToInt32(items2[1].Replace(",", "")) < Convert.ToInt32(items1[1].Replace(",", "")))
+                        {//insertion-insertion-chr7_60_43.6_43.75_RC_inserted_to_50_51_ONT_no_2nd.bam from 50m+++++wrong for insert_chr7_43,600,000-43,750,000_RC_insert_chr7_20M_21M_ONT_no_2nd from 43
+                            txtAnswer.Text = items1[0] + "." + items1[2] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[1];
+                            //txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[2] + "_" + items2[2];
+                        }
+                        else
+                        { txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[2] + "_" + items1[2]; }
                     }
-                    else
+                    else if (annotations1[1].StartsWith("o") == true && annotations2[1].StartsWith('o') == true)
                     {
-                        string[] items1 = processIAnnotationString(annotations1[0]);
-                        string[] items2 = processIAnnotationString(annotations2[0]);
-                        txtAnswer.Text = items1[0] + "." + items2[2] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[1];
-                    }
-                }
-                else if (alignment[1] > 0.8f && annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith("o") == true)// && isOverlapping == "overlapping")
-                {
-                    string[] items1 = processIAnnotationString(annotations1[0]);
-                    string[] items2 = processIAnnotationString(annotations2[0]);
-                    txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2];
-                }
-                else if (annotations1[3].StartsWith("o") == true && annotations2[4].StartsWith('o') == true)
-                {
-                    string[] items1 = processIAnnotationString(annotations1[3]);
-                    string[] items2 = processIAnnotationString(annotations2[4]);
-                    if (isOverlapping == "overlapping")
-                    { txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[1] + " is deleted and replaced by " + items1[0] + "." + items1[2] + "_" + items2[2]; }
-                    else if (isOverlapping == "threeprime")
-                    { txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[1] + " is deleted and replaced by " + items1[0] + "." + items2[2] + "_" + items1[2]; }
-                    else if (isOverlapping == "fiveprime")
-                    { txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[1] + " is deleted and replaced by " + items1[0] + "." + items1[2] + "_" + items2[2]; }
-                }
-                else if (annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith('o') == true)
-                {
-                    string[] items1 = processIAnnotationString(annotations1[0]);
-                    string[] items2 = processIAnnotationString(annotations2[0]);
-                    if (Convert.ToInt32(items2[1].Replace(",", "")) < Convert.ToInt32(items1[1].Replace(",", "")))
-                    { txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[2] + "_" + items2[2]; }
-                    else
-                    { txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[2] + "_" + items1[2]; }
-                }
-                else if (annotations1[1].StartsWith("o") == true && annotations2[1].StartsWith('o') == true)
-                {
-                    List<string> items1 = new List<string>(processTranslocationString(annotations1[1]));
-                    List<string> items2 = new List<string>(processTranslocationString(annotations2[1]));
-                    List<int> lPlaces = new List<int>();
-                    lPlaces.AddRange(places);
-                    int index = lPlaces.IndexOf(average11);
-                    if (alignment[index] < 0.2f)
-                    {
-                        index = items1.IndexOf(average11.ToString("N0"));
-                        string[] fragments = new string[6];
-                        if (index > -1)
+                        List<string> items1 = new List<string>(processTranslocationString(annotations1[1]));
+                        List<string> items2 = new List<string>(processTranslocationString(annotations2[1]));
+                        List<int> lPlaces = new List<int>();
+                        lPlaces.AddRange(places);
+                        int index = lPlaces.IndexOf(average11);
+                        if (alignment[index] < 0.2f)
                         {
-                            fragments[0] = items1[index - 1];
-                            fragments[1] = items1[index];
-                            fragments[2] = average21.ToString("N0");
-                            index = items1.IndexOf(average12.ToString("N0"));
-                            fragments[3] = items1[index - 1];
-                            fragments[4] = items1[index];
-                            fragments[5] = average22.ToString("N0");
-                            if (average11 > average12)
+                            index = items1.IndexOf(average11.ToString("N0"));
+                            string[] fragments = new string[6];
+                            if (index > -1)
                             {
-                                if (fragments[3] == primaryReference)
+                                fragments[0] = items1[index - 1];
+                                fragments[1] = items1[index];
+                                fragments[2] = average21.ToString("N0");
+                                index = items1.IndexOf(average12.ToString("N0"));
+                                fragments[3] = items1[index - 1];
+                                fragments[4] = items1[index];
+                                fragments[5] = average22.ToString("N0");
+                                if (average11 > average12)
                                 {
-                                    if (average12 <= average22)
-                                    { txtAnswer.Text = fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                                    if (fragments[3] == primaryReference)
+                                    {
+                                        if (average12 <= average22)
+                                        { txtAnswer.Text = fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                                        else
+                                        { txtAnswer.Text = "The reverse complement of " + fragments[3] + ":" + fragments[5] + "_" + fragments[4] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                                    }
                                     else
-                                    { txtAnswer.Text = "The reverse complement of " + fragments[3] + ":" + fragments[5] + "_" + fragments[4] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                                    {
+                                        if (average12 <= average22)//Translocation
+                                        { txtAnswer.Text = fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                                        else//Translocation
+                                        { txtAnswer.Text = "The reverse complement of " + fragments[3] + ":" + fragments[5] + "_" + fragments[4] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                                    }
                                 }
                                 else
                                 {
-                                    if (average12 <= average22)
-                                    { txtAnswer.Text = fragments[0] + ":" + fragments[1] + "_" + fragments[2] + " has been inserted in to " + fragments[3] + ":" + fragments[4] + "_" + fragments[5]; }
+                                    if (fragments[3] == primaryReference)
+                                    {
+                                        if (average12 <= average22)//Translocation
+                                        { txtAnswer.Text = fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                                        else//Translocation
+                                        { txtAnswer.Text = "The reverse complement of " + fragments[3] + ":" + fragments[5] + "_" + fragments[4] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                                    }
                                     else
-                                    { txtAnswer.Text = "The reverse complement of " + fragments[0] + ":" + fragments[1] + "_" + fragments[2] + " has been inserted in to " + fragments[3] + ":" + fragments[5] + "_" + fragments[4]; }
+                                    {
+                                        if (average12 <= average22)
+                                        { txtAnswer.Text = fragments[0] + ":" + fragments[1] + "_" + fragments[2] + " has been inserted in to " + fragments[3] + ":" + fragments[4] + "_" + fragments[5]; }
+                                        else
+                                        { txtAnswer.Text = "The reverse complement of " + fragments[0] + ":" + fragments[1] + "_" + fragments[2] + " has been inserted in to " + fragments[3] + ":" + fragments[5] + "_" + fragments[4]; }
+                                    }
+                                }
+                            }
+                        }
+                        else if (alignment[index] > 0.8f)
+                        {
+                            index = items1.IndexOf(average11.ToString("N0"));
+                            string[] fragments = new string[6];
+                            if (index > -1)
+                            {
+                                fragments[3] = items1[index - 1];
+                                fragments[4] = items1[index];
+                                fragments[5] = average21.ToString("N0");
+                                index = items1.IndexOf(average12.ToString("N0"));
+                                fragments[0] = items1[index - 1];
+                                fragments[1] = items1[index];
+                                fragments[2] = average22.ToString("N0");
+
+                                if (average11 > average12)
+                                {
+                                    if (fragments[3] == primaryReference)
+                                    {
+                                        if (average12 <= average22)//Translocation
+                                        { txtAnswer.Text = fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                                        else//Translocation
+                                        { txtAnswer.Text = "The reverse complement of " + fragments[3] + ":" + fragments[5] + "_" + fragments[4] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                                    }
+                                    else
+                                    {
+                                        if (average12 <= average22)
+                                        { txtAnswer.Text = "The reverse complement of " + fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                                        else
+                                        { txtAnswer.Text = fragments[0] + ":" + fragments[2] + "_" + fragments[1] + " has been inserted in to " + fragments[3] + ":" + fragments[4] + "_" + fragments[5]; }
+                                    }
+                                }
+                                else
+                                {
+                                    if (fragments[3] == primaryReference)
+                                    {
+                                        if (average12 <= average22)
+                                        { txtAnswer.Text = fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                                        else
+                                        { txtAnswer.Text = "The reverse complement of " + fragments[3] + ":" + fragments[5] + "_" + fragments[4] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                                    }
+                                    else
+                                    {
+                                        if (average12 <= average22)//Translocation
+                                        { txtAnswer.Text = fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                                        else//Translocation
+                                        { txtAnswer.Text = "The reverse complement of " + fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[2] + "_" + fragments[1]; }
+                                    }
                                 }
                             }
                         }
                     }
-                    else if (alignment[index] > 0.8f)
+                    else if (annotations1[4].StartsWith("o") == true && annotations2[3].StartsWith('o') == true)
                     {
-                        index = items1.IndexOf(average11.ToString("N0"));
-                        string[] fragments = new string[6];
-                        if (index > -1)
-                        {
-                            fragments[3] = items1[index - 1];
-                            fragments[4] = items1[index];
-                            fragments[5] = average21.ToString("N0");
-                            index = items1.IndexOf(average12.ToString("N0"));
-                            fragments[0] = items1[index - 1];
-                            fragments[1] = items1[index];
-                            fragments[2] = average22.ToString("N0");
+                        string[] items1 = processIAnnotationString(annotations1[4]);
+                        string[] items2 = processIAnnotationString(annotations2[3]);
+                        if (Convert.ToInt32(items2[2].Replace(",", "")) < Convert.ToInt32(items1[2].Replace(",", "")))
+                        { txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[2] + "_" + items2[2]; }
+                        else//insertion
+                        { txtAnswer.Text = items1[0] + "." + items1[2] + "_" + items2[2] + " is deleted and replaced by " + items1[0] + "." + items2[1] + "_" + items1[1]; }
 
-                            if (fragments[3] == primaryReference)
-                            {
-                                if (average12 <= average22)
-                                { txtAnswer.Text = fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
-                                else
-                                { txtAnswer.Text = "The reverse complement of " + fragments[3] + ":" + fragments[5] + "_" + fragments[4] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
-                            }
-                            else
-                            {
-                                if (average12 <= average22)
-                                { txtAnswer.Text = fragments[0] + ":" + fragments[1] + "_" + fragments[2] + " has been inserted in to " + fragments[3] + ":" + fragments[4] + "_" + fragments[5]; }
-                                else
-                                { txtAnswer.Text = "The reverse complement of " + fragments[0] + ":" + fragments[2] + "_" + fragments[1] + " has been inserted in to " + fragments[3] + ":" + fragments[4] + "_" + fragments[5]; }
-                            }
-                        }
                     }
                 }
-                else if (annotations1[4].StartsWith("o") == true && annotations2[3].StartsWith('o') == true)
-                {
-                    string[] items1 = processIAnnotationString(annotations1[4]);
-                    string[] items2 = processIAnnotationString(annotations2[3]);
-                    if (Convert.ToInt32(items2[2].Replace(",", "")) < Convert.ToInt32(items1[2].Replace(",", "")))
-                    { txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[2] + "_" + items2[2]; }
-                    else
-                    { txtAnswer.Text = items1[0] + "." + items1[2] + "_" + items2[2] + " is deleted and replaced by " + items1[0] + "." + items2[1] + "_" + items1[1]; }
-
-                }
             }
+            catch(Exception ex)
+            { txtAnswer.Text = " Error"; }
         }
 
         private string[] processTranslocationString(string annotation)
@@ -339,18 +384,23 @@ namespace AgileStructure
 
         private string IsOverlapping()
         {
-
-            if (average11 - 50 < average22 && average21 + 50 > average22)
+            List<int> values = new List<int>();
+            values.Add(average11);
+            values.Add(average12);
+            values.Add(average21);
+            values.Add(average22);
+            values.Sort();
+            int index1 = values.IndexOf(average11);
+            int index2 = values.IndexOf(average21);
+            int index3 = values.IndexOf(average12);
+            int index4 = values.IndexOf(average22);
+            if (Math.Abs(index1-index2) > 1 || Math.Abs(index3 - index4) > 1)
             { return "overLapping"; }
-            else if (average11 - 50 < average12 && average21 + 50 > average12)
-            { return "overLapping"; }
-            else if (average11 - 50 < average22 && average21 + 50 > average22)
-            { return "overLapping"; }
-            else if (average11 < average12)
+            else if (index1 < index3)
             { return "fiveprime"; }
-            else if (average11 > average12)
+            else if (index1 > index3)
             { return "threeprime"; }
-            else { return "same"; }           
+            else { return "issue"; }                 
 
         }
     }
