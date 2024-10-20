@@ -111,16 +111,19 @@ namespace AgileStructure
 
                 if (places.Length == 3)
                 {
+                    System.Diagnostics.Debug.WriteLine(average11.ToString() + "\t" + average12.ToString() + "\t" + average21.ToString() + "\t" + average22.ToString() + "\t" + alignment[0].ToString() + "\t" + alignment[1].ToString() + "\t" + alignment[2].ToString() + "\t-" );
+
                     inversionWithCommonBraelPoint(alignment, places);                    
                 }
                 else if (places.Length == 4)
                 {
-                    string isOverlapping = IsOverlapping();
+                 System.Diagnostics.Debug.WriteLine(average11.ToString() + "\t" + average12.ToString() + "\t" + average21.ToString() + "\t" + average22.ToString() + "\t" + alignment[0].ToString() + "\t" + alignment[1].ToString() + "\t" + alignment[2].ToString() + "\t" + alignment[3].ToString());
+                   string isOverlapping = IsOverlapping();
 
                     if (alignment[1] < 0.2f && annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith("o") == true)
                     {
                         if (average11 < average12)
-                        {//inversion++++++++++++++wrong for insertion-chr7_60_43.6_43.75_RC_inserted_to_50_51_ONT_no_2nd.bam from 43
+                        {//126 //inversion++++++++++++++wrong for insertion-chr7_60_43.6_43.75_RC_inserted_to_50_51_ONT_no_2nd.bam from 43
                             string[] items1 = processIAnnotationString(annotations1[0]);
                             string[] items2 = processIAnnotationString(annotations2[0]);
                             txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[2];
@@ -133,7 +136,7 @@ namespace AgileStructure
                         }
                     }
                     else if (alignment[1] > 0.8f && annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith("o") == true)// && isOverlapping == "overlapping")
-                    {//inversion
+                    {//inversion 139
                         string[] items1 = processIAnnotationString(annotations1[0]);
                         string[] items2 = processIAnnotationString(annotations2[0]);
                         txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2];
@@ -146,7 +149,7 @@ namespace AgileStructure
                         { txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[1] + " is deleted and replaced by " + items1[0] + "." + items1[2] + "_" + items2[2]; }
                         else if (isOverlapping == "threeprime")
                         { txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[1] + " is deleted and replaced by " + items1[0] + "." + items2[2] + "_" + items1[2]; }
-                        else if (isOverlapping == "fiveprime")//insertion
+                        else if (isOverlapping == "fiveprime")//insertion 151
                         { txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[1] + " is deleted and replaced by " + items1[0] + "." + items1[2] + "_" + items2[2]; }
                     }
                     else if (annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith('o') == true)
@@ -154,9 +157,9 @@ namespace AgileStructure
                         string[] items1 = processIAnnotationString(annotations1[0]);
                         string[] items2 = processIAnnotationString(annotations2[0]);
                         if (Convert.ToInt32(items2[1].Replace(",", "")) < Convert.ToInt32(items1[1].Replace(",", "")))
-                        {//insertion-insertion-chr7_60_43.6_43.75_RC_inserted_to_50_51_ONT_no_2nd.bam from 50m+++++wrong for insert_chr7_43,600,000-43,750,000_RC_insert_chr7_20M_21M_ONT_no_2nd from 43
-                            txtAnswer.Text = items1[0] + "." + items1[2] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[1];
-                            //txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[2] + "_" + items2[2];
+                        {//158  insertion-insertion-chr7_60_43.6_43.75_RC_inserted_to_50_51_ONT_no_2nd.bam from 50m+++++wrong for insert_chr7_43,600,000-43,750,000_RC_insert_chr7_20M_21M_ONT_no_2nd from 43
+                            //txtAnswer.Text = items1[0] + "." + items1[2] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[1];
+                            txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[2] + "_" + items2[2];
                         }
                         else
                         { txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[2] + "_" + items1[2]; }
@@ -171,7 +174,7 @@ namespace AgileStructure
                         string[] items2 = processIAnnotationString(annotations2[3]);
                         if (Convert.ToInt32(items2[2].Replace(",", "")) < Convert.ToInt32(items1[2].Replace(",", "")))
                         { txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[2] + "_" + items2[2]; }
-                        else//insertion
+                        else//insertion176
                         { txtAnswer.Text = items1[0] + "." + items1[2] + "_" + items2[2] + " is deleted and replaced by " + items1[0] + "." + items2[1] + "_" + items1[1]; }
                     }
                 }
