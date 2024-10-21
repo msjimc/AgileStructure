@@ -3884,8 +3884,10 @@ namespace AgileStructure
                     if (ar.getEndPosition + 100 > place && ar.getEndPosition - 100 < place)
                     { primary5primeOfBreakpoint--; }
                 }
+
                 count++;
             }
+
 
             answer = (float)(primary5primeOfBreakpoint + count) / (float)(count * 2);
 
