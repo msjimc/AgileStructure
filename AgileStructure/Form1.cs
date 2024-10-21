@@ -3921,6 +3921,8 @@ namespace AgileStructure
             catch { return null; }
         }
 
+        internal void deleteSelectedList()
+        { clearSelectedReadsToolStripMenuItem.PerformClick(); }
 
         internal string[] externalannotations()
         {

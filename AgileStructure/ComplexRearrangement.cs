@@ -64,6 +64,7 @@ namespace AgileStructure
 
                 lblPrimary1.Text = "Break point 1: " + first[0].getReferenceName + ":" + average11.ToString("N0");
                 lblSecondary1.Text = "Break point 2: " + first[1].getReferenceName + ":" + average12.ToString("N0");
+                form.deleteSelectedList();
             }
             catch
             {
@@ -92,6 +93,7 @@ namespace AgileStructure
 
                 lblPrimary2.Text = "Break point 1: " + second[0].getReferenceName + ":" + average21.ToString("N0");
                 lblSecondary2.Text = "Break point 2: " + second[1].getReferenceName + ":" + average22.ToString("N0");
+                form.deleteSelectedList();
             }
             catch
             {
@@ -122,60 +124,62 @@ namespace AgileStructure
 
                     if (alignment[1] < 0.2f && annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith("o") == true)
                     {
-                        if (average11 < average12)
-                        {//126 //inversion++++++++++++++wrong for insertion-chr7_60_43.6_43.75_RC_inserted_to_50_51_ONT_no_2nd.bam from 43
-                            string[] items1 = processIAnnotationString(annotations1[0]);
-                            string[] items2 = processIAnnotationString(annotations2[0]);
-                            txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[2];
-                        }
-                        else
-                        {
-                            string[] items1 = processIAnnotationString(annotations1[0]);
-                            string[] items2 = processIAnnotationString(annotations2[0]);
-                            txtAnswer.Text = items1[0] + "." + items2[2] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[1];
-                        }
-                    }
-                    else if (alignment[1] > 0.8f && annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith("o") == true)// && isOverlapping == "overlapping")
-                    {//inversion 139
                         string[] items1 = processIAnnotationString(annotations1[0]);
                         string[] items2 = processIAnnotationString(annotations2[0]);
-                        txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2];
+                        if (average12 < average22)
+                        { txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[2]; }
+                        else
+                        { txtAnswer.Text = items1[0] + "." + items2[2] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[1]; }
+                    }
+                    else if (alignment[1] > 0.8f && annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith("o") == true)
+                    {
+                        string[] items1 = processIAnnotationString(annotations1[0]);
+                        string[] items2 = processIAnnotationString(annotations2[0]);
+                        if (average12 < average22)
+                        { txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2]; }
+                        else
+                        { txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[2] + "_" + items1[2]; }
                     }
                     else if (annotations1[3].StartsWith("o") == true && annotations2[4].StartsWith('o') == true)
                     {
                         string[] items1 = processIAnnotationString(annotations1[3]);
                         string[] items2 = processIAnnotationString(annotations2[4]);
-                        if (isOverlapping == "overlapping")
-                        { txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[1] + " is deleted and replaced by " + items1[0] + "." + items1[2] + "_" + items2[2]; }
-                        else if (isOverlapping == "threeprime")
-                        { txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[1] + " is deleted and replaced by " + items1[0] + "." + items2[2] + "_" + items1[2]; }
-                        else if (isOverlapping == "fiveprime")//insertion 151
-                        { txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[1] + " is deleted and replaced by " + items1[0] + "." + items1[2] + "_" + items2[2]; }
+                        if (alignment[1] > 0.8f)
+                        { txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[1] + " is deleted and replaced by " + items1[0] + "." + items1[2] + "_" + items2[2]; }//154
+                        else if (alignment[2] > 0.8f)
+                        { txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[1] + " is deleted and replaced by " + items1[0] + "." + items1[2] + "_" + items2[2]; }//156
+                        
                     }
-                    else if (annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith('o') == true)
+                    else if (alignment[2] > 0.8f && annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith('o') == true)
                     {
                         string[] items1 = processIAnnotationString(annotations1[0]);
                         string[] items2 = processIAnnotationString(annotations2[0]);
-                        if (Convert.ToInt32(items2[1].Replace(",", "")) < Convert.ToInt32(items1[1].Replace(",", "")))
-                        {//158  insertion-insertion-chr7_60_43.6_43.75_RC_inserted_to_50_51_ONT_no_2nd.bam from 50m+++++wrong for insert_chr7_43,600,000-43,750,000_RC_insert_chr7_20M_21M_ONT_no_2nd from 43
-                            //txtAnswer.Text = items1[0] + "." + items1[2] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[1];
-                            txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[2] + "_" + items2[2];
-                        }
+                        if (average12 < average22)
+                        { txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[2] + "_" + items2[2]; }
                         else
                         { txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[2] + "_" + items1[2]; }
                     }
-                    else if (annotations1[1].StartsWith("o") == true && annotations2[1].StartsWith('o') == true)
+                    else if (alignment[3] > 0.8f && annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith('o') == true)
                     {
-                        insertionOnOtherChromosome(alignment, places);                        
+                        string[] items1 = processIAnnotationString(annotations1[0]);
+                        string[] items2 = processIAnnotationString(annotations2[0]);
+                        if (average12 < average22)
+                        { txtAnswer.Text = items1[0] + "." + items1[2] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[1]; }
+                        else
+                        { txtAnswer.Text = items1[0] + "." + items1[1] + "_" + items2[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[2] + "_" + items1[2]; }
                     }
                     else if (annotations1[4].StartsWith("o") == true && annotations2[3].StartsWith('o') == true)
                     {
                         string[] items1 = processIAnnotationString(annotations1[4]);
                         string[] items2 = processIAnnotationString(annotations2[3]);
-                        if (Convert.ToInt32(items2[2].Replace(",", "")) < Convert.ToInt32(items1[2].Replace(",", "")))
-                        { txtAnswer.Text = items1[0] + "." + items2[1] + "_" + items1[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[2] + "_" + items2[2]; }
-                        else//insertion176
+                        if (alignment[3] > 0.8f)
+                        { txtAnswer.Text = items1[0] + "." + items1[2] + "_" + items2[2] + " is deleted and replaced by " + items1[0] + "." + items1[1] + "_" + items2[1]; }
+                        else
                         { txtAnswer.Text = items1[0] + "." + items1[2] + "_" + items2[2] + " is deleted and replaced by " + items1[0] + "." + items2[1] + "_" + items1[1]; }
+                    }
+                    else if (annotations1[1].StartsWith("o") == true && annotations2[1].StartsWith('o') == true)
+                    {
+                        insertionOnOtherChromosome(alignment, places);                        
                     }
                 }
             }
