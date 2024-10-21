@@ -106,7 +106,6 @@ namespace AgileStructure
         {
             try
             {
-                //inversion = 0
                 txtAnswer.Clear();
                 int[] places = getUniquePlaces();
                 float[] alignment = setPrimaryAlignmentLocation(places);
@@ -114,14 +113,12 @@ namespace AgileStructure
                 if (places.Length == 3)
                 {
                     System.Diagnostics.Debug.WriteLine(average11.ToString() + "\t" + average12.ToString() + "\t" + average21.ToString() + "\t" + average22.ToString() + "\t" + alignment[0].ToString() + "\t" + alignment[1].ToString() + "\t" + alignment[2].ToString() + "\t-" );
-
                     inversionWithCommonBraelPoint(alignment, places);                    
                 }
                 else if (places.Length == 4)
                 {
                  System.Diagnostics.Debug.WriteLine(average11.ToString() + "\t" + average12.ToString() + "\t" + average21.ToString() + "\t" + average22.ToString() + "\t" + alignment[0].ToString() + "\t" + alignment[1].ToString() + "\t" + alignment[2].ToString() + "\t" + alignment[3].ToString());
-                   string isOverlapping = IsOverlapping();
-
+                   
                     if (alignment[1] < 0.2f && annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith("o") == true)
                     {
                         string[] items1 = processIAnnotationString(annotations1[0]);
@@ -396,26 +393,5 @@ namespace AgileStructure
             form.cR_Closing();
         }
 
-        private string IsOverlapping()
-        {
-            List<int> values = new List<int>();
-            values.Add(average11);
-            values.Add(average12);
-            values.Add(average21);
-            values.Add(average22);
-            values.Sort();
-            int index1 = values.IndexOf(average11);
-            int index2 = values.IndexOf(average21);
-            int index3 = values.IndexOf(average12);
-            int index4 = values.IndexOf(average22);
-            if (Math.Abs(index1-index2) > 1 || Math.Abs(index3 - index4) > 1)
-            { return "overLapping"; }
-            else if (index1 < index3)
-            { return "fiveprime"; }
-            else if (index1 > index3)
-            { return "threeprime"; }
-            else { return "issue"; }                 
-
-        }
     }
 }
