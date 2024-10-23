@@ -93,11 +93,11 @@ namespace AgileStructure
         bool drawGenes = true;
         RepeatData rd = null;
         string repeatFileName = "";
-        
+
 
         Info id = null;
         ComplexRearrangement cR = null;
-
+        private bool secondRefSet = false;
         List<string> history = new List<string>();
         List<StringInt> historySecondary;
 
@@ -1391,6 +1391,7 @@ namespace AgileStructure
                     AddSecondaryHistory();
                     drawSecondaryAlignments();
                 }
+                secondRefSet = true;
             }
             else
             {
@@ -1407,6 +1408,7 @@ namespace AgileStructure
                 }
                 finally
                 { ignoreHistory = false; }
+                secondRefSet = false;
             }
         }
 
@@ -3274,8 +3276,7 @@ namespace AgileStructure
                             else
                             { counter++; }
                             index++;
-                        }
-                        System.Diagnostics.Debug.WriteLine("counter = " + counter.ToString() + " place " + regionStart.ToString());
+                        }                        
 
                         if (regionStart > best2Place - 200 && regionStart < best2Place + 200)
                         {
@@ -3290,7 +3291,6 @@ namespace AgileStructure
                                     { near2.Add(p); }
                                 }
                                 bestRegions[1] = new BreakPointData(regionStart, near2.ToArray<int>(), chr);
-                                System.Diagnostics.Debug.WriteLine("updated best 2 at " + bestRegions[1].getAveragePlace.ToString("N0"));
                             }
                         }
                         else if (counter > best2 && (regionStart < best2Place - 300 || regionStart > best2Place + 300))
@@ -3308,15 +3308,14 @@ namespace AgileStructure
                                 { near2.Add(p); }
                             }
                             bestRegions[1] = new BreakPointData(regionStart, near2.ToArray<int>(), chr);
-                            System.Diagnostics.Debug.WriteLine("New best 2 at " + bestRegions[1].getAveragePlace.ToString("N0"));
+                            
 
                             if (AreTwoBreakPointsTheSame(bestRegions[1], tempBestRegion, 200) == false)
                             {
                                 best3 = tempBest3;
                                 best3Place = tempBest3Place;
                                 bestRegions[2] = tempBestRegion;
-                                if (bestRegions[2] != null)
-                                { System.Diagnostics.Debug.WriteLine("New best 3 1 at " + bestRegions[2].getAveragePlace.ToString("N0")); }
+                                
                             }
                         }
                         else if (regionStart > best3Place - 300 && regionStart < best3Place + 300)
@@ -3330,7 +3329,6 @@ namespace AgileStructure
                                 { near3.Add(p); }
                             }
                             bestRegions[2] = new BreakPointData(regionStart, near3.ToArray<int>(), chr);
-                            System.Diagnostics.Debug.WriteLine("New best 3 2at " + bestRegions[2].getAveragePlace.ToString("N0"));
                         }
                         else if (counter > best3)
                         {
@@ -3343,15 +3341,13 @@ namespace AgileStructure
                                     near3.Add(p);
                             }
                             bestRegions[2] = new BreakPointData(regionStart, near3.ToArray<int>(), chr);
-                            System.Diagnostics.Debug.WriteLine("New best 3 3 at " + bestRegions[2].getAveragePlace.ToString("N0"));
-                        }
+                       }
                     }
-                    System.Diagnostics.Debug.WriteLine("best1 " + bestRegions[0].getAveragePlace.ToString("N0") + " best 2 " + best2Place.ToString("N0") + " best 3 " + best3Place.ToString("N0"));
                 }
             }
             return bestRegions;
         }
-              
+
         private bool AreTwoBreakPointsTheSame(BreakPointData bp1, BreakPointData bp2, int span)
         {
             if (bp1 != null && bp2 != null)
@@ -3897,7 +3893,7 @@ namespace AgileStructure
 
         private void complexRearrangmentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (cR == null )
+            if (cR == null)
             { cR = new ComplexRearrangement(this, cboRef.Text); }
             if (cR.Visible == false)
             { cR.Show(this); }
@@ -3928,7 +3924,7 @@ namespace AgileStructure
 
         internal string[] externalannotations()
         {
-           string[] answer = new string[5];
+            string[] answer = new string[5];
 
             try
             {
@@ -3950,7 +3946,7 @@ namespace AgileStructure
                 }
                 for (int index = 0; index < 5; index++)
                 {
-                    if (answer[index].StartsWith("e")== true || answer[index].Contains("\n") == true)
+                    if (answer[index].StartsWith("e") == true || answer[index].Contains("\n") == true)
                     {
                         answer[index] = "e";
                     }
@@ -3964,5 +3960,11 @@ namespace AgileStructure
         }
 
         internal List<int> getSelected { get { return selectedIndex; } }
+
+        internal bool isSecondRefSet()
+        {
+            return secondRefSet;
+        }
+
     }
 }
