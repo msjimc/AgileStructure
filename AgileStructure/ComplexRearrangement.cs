@@ -206,11 +206,11 @@ namespace AgileStructure
             if (chromosomes.Count == 1)
             { return Find(); }
             else
-            { return differentFind(); }
+            { return differentChromosomeFind(); }
           
         }
 
-        private string differentFind()
+        private string differentChromosomeFind()
         {
             try
             {
