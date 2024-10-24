@@ -2819,6 +2819,13 @@ namespace AgileStructure
                         return result + "Have you selected any reads?";
                     }
 
+                    float primary5primeOfPlace1 = PrimaryAlignment5PrimeOfbreakPoint(bestPlaces[0].getAveragePlace, bestPlaces[0].getReferenceName);
+                    float primary5primeOfPlace2 = PrimaryAlignment5PrimeOfbreakPoint(bestPlaces[1].getAveragePlace, bestPlaces[1].getReferenceName);//no
+                    float primeOfPlace1 = SecondaryAlignment5PrimeOfbreakPoint(bestPlaces[0].getAveragePlace, bestPlaces[0].getReferenceName);//no
+                    float primeOfPlace2 = SecondaryAlignment5PrimeOfbreakPoint(bestPlaces[1].getAveragePlace, bestPlaces[1].getReferenceName);
+
+                    System.Diagnostics.Debug.WriteLine(fileName.Substring(fileName.LastIndexOf("\\") + 1) + "\t" + primary5primeOfPlace1.ToString() + "\t" + primeOfPlace1.ToString() + "\t" + bestPlaces[0].getReferenceName + "\t" + primary5primeOfPlace2.ToString() + "\t" + primeOfPlace2.ToString() + "\t" + bestPlaces[1].getReferenceName);
+
                     string mutation = "";
                     MutationType answer = testMutationType(bestPlaces);
                     if (answer != MutationType.Deletion)
@@ -2839,15 +2846,12 @@ namespace AgileStructure
                     }
 
                     if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                    //if (MessageBox.Show(mutation + "\nSave with the selected read data?", "Translocation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                    //{ SaveToFile(mutation); }
                     result = "o" + mutation;
                 }
             }
             catch (Exception ex)
             {
                 if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                //MessageBox.Show("Could not identify the variant using the selected reads", "Error"); 
                 result = "eCould not identify the variant using the selected reads";
             }
             return result;
@@ -3888,7 +3892,53 @@ namespace AgileStructure
             answer = (float)(primary5primeOfBreakpoint + count) / (float)(count * 2);
 
             return answer;
+        }
 
+        internal float SecondaryAlignment5PrimeOfbreakPoint(int place, string reference)
+        {
+
+            float answer = -1;
+            int primary5primeOfBreakpoint = 0;
+            int count = 0;
+            
+            foreach (int index in selectedIndex)
+            {
+                if (DrawnARKeys.ContainsKey(index) == true)
+                {
+                    AlignedRead ar = DrawnARKeys[index];
+                    string secondaryCIGAR = ar.getSecondaryAlignmentTag;
+                    if (string.IsNullOrEmpty(secondaryCIGAR) == false)
+                    {
+                        string[] hits = secondaryCIGAR.Substring(2).Split(';');
+                        foreach (string h in hits)
+                        {
+                            if (string.IsNullOrEmpty(h) == false)
+                            {
+                                string[] items = h.Split(',');
+                                int startPoint = Convert.ToInt32(items[1]);
+                                if (reference == items[0])
+                                {
+                                    if (getFivePrimeSoftClipLength(items[3]) > 50)
+                                    {
+                                        if (startPoint + 100 > place && startPoint - 100 < place)
+                                        { primary5primeOfBreakpoint++; }                                     
+                                    }
+
+                                    if (getThreePrimeSoftClipLength(items[3]) > 50)
+                                    {
+                                        if (startPoint + getAlignedLength(items[3]) + 100 > place && startPoint + getAlignedLength(items[3])  - 100 < place)
+                                        { primary5primeOfBreakpoint--; }                                    
+                                    }                                   
+                                }
+                            }
+                        }
+                    }
+                    count++;
+                }
+            }
+            answer = (float)(primary5primeOfBreakpoint + count) / (float)(count * 2);
+
+            return answer;
         }
 
         private void complexRearrangmentToolStripMenuItem_Click(object sender, EventArgs e)
