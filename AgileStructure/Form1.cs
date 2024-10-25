@@ -2820,11 +2820,9 @@ namespace AgileStructure
                     }
 
                     float primary5primeOfPlace1 = PrimaryAlignment5PrimeOfbreakPoint(bestPlaces[0].getAveragePlace, bestPlaces[0].getReferenceName);
-                    float primary5primeOfPlace2 = PrimaryAlignment5PrimeOfbreakPoint(bestPlaces[1].getAveragePlace, bestPlaces[1].getReferenceName);//no
-                    float primeOfPlace1 = SecondaryAlignment5PrimeOfbreakPoint(bestPlaces[0].getAveragePlace, bestPlaces[0].getReferenceName);//no
                     float primeOfPlace2 = SecondaryAlignment5PrimeOfbreakPoint(bestPlaces[1].getAveragePlace, bestPlaces[1].getReferenceName);
 
-                    System.Diagnostics.Debug.WriteLine(fileName.Substring(fileName.LastIndexOf("\\") + 1) + "\t" + primary5primeOfPlace1.ToString() + "\t" + primeOfPlace1.ToString() + "\t" + bestPlaces[0].getReferenceName + "\t" + primary5primeOfPlace2.ToString() + "\t" + primeOfPlace2.ToString() + "\t" + bestPlaces[1].getReferenceName);
+                    System.Diagnostics.Debug.WriteLine(fileName.Substring(fileName.LastIndexOf("\\") + 1) + "\t" + cboRef.Text + "\t" + primary5primeOfPlace1.ToString() + "\t" + bestPlaces[0].getReferenceName + "\t" + primeOfPlace2.ToString() + "\t" + bestPlaces[1].getReferenceName);
 
                     string mutation = "";
                     MutationType answer = testMutationType(bestPlaces);
@@ -2857,6 +2855,27 @@ namespace AgileStructure
             return result;
         }
 
+        private string TranslationExtra(float leftright, float sLeftright,string chr1,string chr2)
+        {
+            string answer = "";
+            string selectedChr = cboRef.Text;
+            if (leftright == 0.0f && sLeftright == 0.0f)
+            {
+                if (selectedChr == chr1)
+                { answer = "p arm sequences of "; }
+                else
+                { }            
+            }
+            else if (leftright == 1.0f && sLeftright == 1.0f)
+            { }
+            else if (leftright == 0.0f && sLeftright == 1.0f)
+            { }
+            else if (leftright == 1.0f && sLeftright == 0.0f)
+            { }
+
+
+            return "";
+        }
         private void SaveToFile(string mutation)
         {
             string file = FileString.SaveAs("Select the file to save the data in", "Text file (*.txt)|*.txt");

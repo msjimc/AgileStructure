@@ -22,12 +22,16 @@ namespace AgileStructure
         private int average12;
         private float primary5primeOfPlace11;
         private float primary5primeOfPlace12;
+        private float secondary5primeOfPlace11;
+        private float secondary5primeOfPlace12;
         string[] annotations1;
 
         private int average21;
         private int average22;
         private float primary5primeOfPlace21;
         private float primary5primeOfPlace22;
+        private float secondary5primeOfPlace21;
+        private float secondary5primeOfPlace22;
         string[] annotations2;
 
         PointData pd1 = null;
@@ -73,7 +77,9 @@ namespace AgileStructure
                 int average1 = 0;
                 int average2 = 0;
                 float primary5primeOfPlace1 = form.PrimaryAlignment5PrimeOfbreakPoint(first[0].getAveragePlace, first[0].getReferenceName);
-                float primary5primeOfPlace2 = form.PrimaryAlignment5PrimeOfbreakPoint(first[1].getAveragePlace, first[1].getReferenceName);
+                float primary5primeOfPlace2 = form.PrimaryAlignment5PrimeOfbreakPoint(first[1].getAveragePlace, first[1].getReferenceName); 
+                float scondary5primeOfPlace1 = form.SecondaryAlignment5PrimeOfbreakPoint(first[0].getAveragePlace, first[0].getReferenceName);
+                float scondary5primeOfPlace2 = form.SecondaryAlignment5PrimeOfbreakPoint(first[1].getAveragePlace, first[1].getReferenceName);
 
                 chromosomes.Add(first[0].getReferenceName);
                 if (first[1].getReferenceName != first[0].getReferenceName)
@@ -93,11 +99,14 @@ namespace AgileStructure
                     float t = primary5primeOfPlace1;
                     primary5primeOfPlace1 = primary5primeOfPlace2;
                     primary5primeOfPlace2 = t;
+                    t = scondary5primeOfPlace1;
+                    scondary5primeOfPlace1 = scondary5primeOfPlace2;
+                    scondary5primeOfPlace2 = t;
                     lblPrimary1.Text = "Break point 1: " + first[1].getReferenceName + ":" + average1.ToString("N0");
                     lblSecondary1.Text = "Break point 2: " + first[0].getReferenceName + ":" + average2.ToString("N0");
                 }
 
-                pd1 = new PointData(average1, average2, primary5primeOfPlace1, primary5primeOfPlace2, annotations);
+                pd1 = new PointData(average1, average2, primary5primeOfPlace1, primary5primeOfPlace2, scondary5primeOfPlace1, scondary5primeOfPlace2, annotations);
 
                 form.deleteSelectedList();
 
@@ -136,6 +145,8 @@ namespace AgileStructure
                 int average2 = 0;
                 float primary5primeOfPlace1 = form.PrimaryAlignment5PrimeOfbreakPoint(first[0].getAveragePlace, first[0].getReferenceName);
                 float primary5primeOfPlace2 = form.PrimaryAlignment5PrimeOfbreakPoint(first[1].getAveragePlace, first[1].getReferenceName);
+                float scondary5primeOfPlace1 = form.SecondaryAlignment5PrimeOfbreakPoint(first[0].getAveragePlace, first[0].getReferenceName);
+                float scondary5primeOfPlace2 = form.SecondaryAlignment5PrimeOfbreakPoint(first[1].getAveragePlace, first[1].getReferenceName);
 
                 if (chromosomes.Contains(first[0].getReferenceName) == false) { chromosomes.Add(first[0].getReferenceName); }
                 if (chromosomes.Contains(first[1].getReferenceName) == false) { chromosomes.Add(first[1].getReferenceName); }
@@ -156,11 +167,14 @@ namespace AgileStructure
                     float t = primary5primeOfPlace1;
                     primary5primeOfPlace1 = primary5primeOfPlace2;
                     primary5primeOfPlace2 = t;
+                    t = scondary5primeOfPlace1;
+                    scondary5primeOfPlace1 = scondary5primeOfPlace2;
+                    scondary5primeOfPlace2 = t;
                     lblPrimary2.Text = "Break point 1: " + first[1].getReferenceName + ":" + average1.ToString("N0");
                     lblSecondary2.Text = "Break point 2: " + first[0].getReferenceName + ":" + average2.ToString("N0");
                 }
 
-                pd2 = new PointData(average1, average2, primary5primeOfPlace1, primary5primeOfPlace2, annotations);
+                pd2 = new PointData(average1, average2, primary5primeOfPlace1, primary5primeOfPlace2, scondary5primeOfPlace1, scondary5primeOfPlace2, annotations);
 
                 form.deleteSelectedList();
 
@@ -194,12 +208,16 @@ namespace AgileStructure
             average12 = pda.Average2;
             primary5primeOfPlace11 = pda.Primary5primeOfPlace1;
             primary5primeOfPlace12 = pda.Primary5primeOfPlace2;
+            secondary5primeOfPlace11 = pda.Secondary5primeOfPlace1;
+            secondary5primeOfPlace12 = pda.Primary5primeOfPlace2;
             annotations1 = pda.Annotations; 
 
             average21 = pdb.Average1; 
             average22 = pdb.Average2;
             primary5primeOfPlace21 = pdb.Primary5primeOfPlace1;
             primary5primeOfPlace22 = pdb.Primary5primeOfPlace2;
+            secondary5primeOfPlace21 = pdb.Secondary5primeOfPlace1;
+            secondary5primeOfPlace22 = pdb.Secondary5primeOfPlace2;
             annotations2 = pdb.Annotations;
 
             
