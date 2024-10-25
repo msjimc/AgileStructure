@@ -134,7 +134,7 @@ namespace AgileStructure
 
             makeBlankImage();
             makeBlankSecondaryBase();
-
+            if (cR != null) { cR.clean(); }
         }
 
         private void getBamHeader(string bamFileName)
@@ -1441,6 +1441,8 @@ namespace AgileStructure
 
         private void btnSecondaryView_Click(object sender, EventArgs e)
         {
+            txtsStart.Text = txtStart.Text;
+            txtsEnd.Text = txtEnd.Text;
             drawSecondaryAlignments();
         }
 
