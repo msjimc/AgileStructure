@@ -2580,7 +2580,7 @@ namespace AgileStructure
                 {
                     if (id != null) { id.WindowState = FormWindowState.Minimized; }
                     //MessageBox.Show("Please select the reads spanning the break point by clicking on them.", "No reads selected");
-                    result = "ePlease select the reads spanning the break point by clicking on them.";
+                    result = "ePlease select the reads spanning the break point by clicking on them and select a region in the lower panel.";
                 }
             }
             catch (Exception ex)
@@ -2791,7 +2791,7 @@ namespace AgileStructure
 
         private void translocationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string result = translocation();
+            string result = translocation(true);
             if (result[0] == 'e')
             {
                 MessageBox.Show(result.Substring(1), "Error");
@@ -2803,7 +2803,7 @@ namespace AgileStructure
             }
         }
 
-        private string translocation()
+        private string translocation(bool extradata)
         {
             string result = "e";
             try
@@ -2816,14 +2816,16 @@ namespace AgileStructure
 
                     if (bestPlaces[1] == null)
                     {
-                        if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                        MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                        //MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return result + "Have you selected any reads?";
                     }
 
                     float primary5primeOfPlace1 = PrimaryAlignment5PrimeOfbreakPoint(bestPlaces[0].getAveragePlace, bestPlaces[0].getReferenceName);
                     float primeOfPlace2 = SecondaryAlignment5PrimeOfbreakPoint(bestPlaces[1].getAveragePlace, bestPlaces[1].getReferenceName);
-
+                    string extraDataString = "";
+                    if (primary5primeOfPlace1 > 0.33f && primary5primeOfPlace1 < 0.66f && primeOfPlace2 > 0.33f && primeOfPlace2 < 0.66f)
+                    { extraDataString = "The translocation appears to be balanced."; }
                     System.Diagnostics.Debug.WriteLine(fileName.Substring(fileName.LastIndexOf("\\") + 1) + "\t" + cboRef.Text + "\t" + primary5primeOfPlace1.ToString() + "\t" + bestPlaces[0].getReferenceName + "\t" + primeOfPlace2.ToString() + "\t" + bestPlaces[1].getReferenceName);
 
                     string mutation = "";
@@ -2846,7 +2848,14 @@ namespace AgileStructure
                     }
 
                     if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                    if (extradata == true)
+                    { mutation += "\r\n" + extraDataString + "\r\n"; }
                     result = "o" + mutation;
+                }
+
+                else
+                {
+                    result += "Have you selected any reads?";
                 }
             }
             catch (Exception ex)
@@ -4010,7 +4019,7 @@ namespace AgileStructure
                 else
                 {
                     answer[0] = "e";
-                    answer[1] = translocation();
+                    answer[1] = translocation(false);
                     answer[2] = insertion();
                     answer[3] = "e";
                     answer[4] = "e";
