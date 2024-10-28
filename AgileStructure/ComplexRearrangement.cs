@@ -300,7 +300,7 @@ namespace AgileStructure
                         {
                             string answer = "Insertion-deletion: " + items1[0] + "." + items2[2] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[1] + "\r\nor\r\n" +
                             "Inversion: " + items1[0] + "." + items2[1] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[2];
-                            return answer;
+                            return answer; //9 line 1, 49 line 2
                         }
                     }
                     else if (alignment[1] > 0.8f && annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith("o") == true)
@@ -311,9 +311,9 @@ namespace AgileStructure
                         { return items1[0] + "." + items1[1] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2]; }
                         else
                         {
-                            string answer = "Insertion-deletion: " + items1[0] + "." + items1[1] + "_" + items2[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[2] + "_" + items1[2] + "\r\nor\r\n" +
-                                "Inversion: " + items1[0] + "." + items1[1] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2];
-                            return answer;
+                            string answer = "Insertion-deletion: " + items1[0] + "." + items1[1] + "_" + items2[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[2] + "_" + items1[2] + "\r\nor\r\n";// +
+                            answer =    "Inversion: " + items1[0] + "." + items1[1] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2];
+                            return answer; //41 line 1
                         }
                     }
                     else if (annotations1[3].StartsWith("o") == true && annotations2[4].StartsWith('o') == true)
@@ -335,7 +335,7 @@ namespace AgileStructure
                         {
                             string answer = "Insertion - deletion: " + items1[0] + "." + items2[1] + "_" + items1[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[2] + "_" + items2[2] + "\r\nor\r\n" +
                                 "Inversion: " + items1[0] + "." + items2[1] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[2];
-                            return answer;
+                            return answer;// 1 line 1, 41 line 2
                         }
                     }
                     else if (alignment[3] > 0.8f && annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith('o') == true)
@@ -346,8 +346,9 @@ namespace AgileStructure
                         { return items1[0] + "." + items1[1] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2]; }
                         else
                         {
-                            return "Insertion - deletion: " + items1[0] + "." + items1[2] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items2[0] + "." + items2[1] + "_" + items1[1] + "\r\nor\r\n" +
+                            string answer = "Insertion - deletion: " + items1[0] + "." + items1[2] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items2[0] + "." + items2[1] + "_" + items1[1] + "\r\nor\r\n" +
                                  "Inversion: " + items1[0] + "." + items1[1] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2];
+                            return answer;// 9 line 1, 50 line 2
                         }
                     }
                     else if (annotations1[4].StartsWith("o") == true && annotations2[3].StartsWith('o') == true)
@@ -435,7 +436,7 @@ namespace AgileStructure
                     {
                         if (alignment[1] > 0.8f)
                         {
-                            //return "Duplication: " + items1[0] + "." + items1[2] + "_" + items2[2] + " is inserted at " + items1[0] + "." + items2[1] + "_" + items1[1];
+                            return "Duplication: " + items1[0] + "." + items1[2] + "_" + items2[2] + " is inserted at " + items1[0] + "." + items2[1] + "_" + items1[1];
                         }
 
                         else if (alignment[1] < 0.2f)
@@ -459,7 +460,8 @@ namespace AgileStructure
                 else if (alignment[1] > 0.4f && alignment[1] < 0.6f)
                 {
                     string[] items1 = processIAnnotationString(annotations1[3]);
-                    string[] items2 = processIAnnotationString(annotations2[4]); if (alignment[0] < 0.2f)
+                    string[] items2 = processIAnnotationString(annotations2[4]);
+                    if (alignment[0] < 0.2f)
                     {
                         return "Duplication: " + items1[0] + "." + items1[2] + "_" + items2[2] + " is inserted at " + items1[0] + "." + items1[1] + "_" + items2[1];
                     }
@@ -588,7 +590,7 @@ namespace AgileStructure
                             string answer = "Duplication: the reverse complement of " + items1[0] + "." + items1[2] + "_" + items2[2] + " is inserted at " + items1[0] + "." + items1[1] + "_" + items2[1] + "\r\nor\r\n" +
                                  "Duplication: the reverse complement of " + items1[0] + "." + items2[1] + "_" + items2[2] + " is inserted at " + items1[0] + "." + items1[1] + "_" + items1[2] + "\r\nor\r\n" +
                                  "Inversion: " + items1[0] + "." + items2[1] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[2];
-                            return answer;
+                            return answer;//2 line 1, 5 line 2, 44 line 2 or 3
                         }
                         else if (alignment[1] < 0.2f)
                         {
@@ -603,15 +605,16 @@ namespace AgileStructure
                 else if (alignment[2] > 0.4f && alignment[2] < 0.6f)
                 {
                     string[] items1 = processIAnnotationString(annotations1[0]);
-                    string[] items2 = processIAnnotationString(annotations2[0]); if (alignment[1] < 0.2f)
+                    string[] items2 = processIAnnotationString(annotations2[0]); 
+                    if (alignment[1] < 0.2f)
                     {
                         string answer = "Duplication: the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[1] + " is inserted at " + items1[0] + "." + items1[2] + "_" + items2[2] + "\r\nor\r\n" +
                             "Inversion: " + items1[0] + "." + items2[1] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items1[2];
-                        return answer;
+                        return answer;// 8 line 1, 48 line 2
                     }
                     else if (alignment[1] > 0.8f)
                     {
-                        //return items1[0] + "." + items1[1] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2];
+                        return items1[0] + "." + items1[1] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2];
                     }
                     else if (alignment[0] < 0.2f)
                     {
@@ -651,9 +654,9 @@ namespace AgileStructure
                     {
                         if (alignment[1] > 0.8f)
                         {
-                            string answer = "Duplication: the reverse complement of " + items1[0] + "." + items1[2] + "_" + items2[2] + " is inserted at " + items1[0] + "." + items1[1] + "_" + items2[1] + "\r\nor\r\n" +
-                                "Duplication: the reverse complement of " + items1[0] + "." + items2[1] + "_" + items2[2] + " is inserted at " + items1[0] + "." + items1[1] + "_" + items1[2];
-                            return answer;
+                            //string answer = "Duplication: the reverse complement of " + items1[0] + "." + items1[2] + "_" + items2[2] + " is inserted at " + items1[0] + "." + items1[1] + "_" + items2[1] + "\r\nor\r\n" +
+                            //    "Duplication: the reverse complement of " + items1[0] + "." + items2[1] + "_" + items2[2] + " is inserted at " + items1[0] + "." + items1[1] + "_" + items1[2];
+                            //return answer;
                         }
                         else if (alignment[1] < 0.2f)
                         {
