@@ -30,6 +30,14 @@ namespace AgileStructure
         Translocation
     }
 
+    enum orientation
+    {
+        NotSet,
+        Same,
+        Different,
+        cannottell
+    }
+
     struct StringIntInt
     {
         public int interval;
@@ -2823,10 +2831,28 @@ namespace AgileStructure
 
                     float primary5primeOfPlace1 = PrimaryAlignment5PrimeOfbreakPoint(bestPlaces[0].getAveragePlace, bestPlaces[0].getReferenceName);
                     float primeOfPlace2 = SecondaryAlignment5PrimeOfbreakPoint(bestPlaces[1].getAveragePlace, bestPlaces[1].getReferenceName);
+                    orientation orientation = PrimarySecondaryAlignment5PrimeOfbreakPoint(bestPlaces[1].getAveragePlace, bestPlaces[0].getAveragePlace, bestPlaces[1].getReferenceName);
+
                     string extraDataString = "";
-                    if (primary5primeOfPlace1 > 0.33f && primary5primeOfPlace1 < 0.66f && primeOfPlace2 > 0.33f && primeOfPlace2 < 0.66f)
-                    { extraDataString = "The translocation appears to be balanced."; }
-                    System.Diagnostics.Debug.WriteLine(fileName.Substring(fileName.LastIndexOf("\\") + 1) + "\t" + cboRef.Text + "\t" + primary5primeOfPlace1.ToString() + "\t" + bestPlaces[0].getReferenceName + "\t" + primeOfPlace2.ToString() + "\t" + bestPlaces[1].getReferenceName);
+                    if (primary5primeOfPlace1 > 0.33f && primary5primeOfPlace1 < 0.66f && primeOfPlace2 > 0.33f && primeOfPlace2 < 0.66)
+                    { 
+                        extraDataString = "The translocation appears to be balanced.";                     
+                    }
+                    else if (primary5primeOfPlace1 > 0.1f && primary5primeOfPlace1 < 0.9f && primeOfPlace2 > 0.1f && primeOfPlace2 < 0.9)
+                    { 
+                        extraDataString = "The translocation may to be balanced, but read selection appears to be skewed to one variant.";                     
+                    }
+                    else { extraDataString = "The data suggest the translocation is not balance, is there a 2nd break point?"; }
+                    
+
+
+                    if (orientation == orientation.Same)
+                    { extraDataString += "\r\nThe resultant chromosome(s) contain a p telomere from one chromosme and the q telomere from the other."; }
+                    else if (orientation == orientation.Different)
+                    { extraDataString += "\r\nThe resultant chromosome(s) contain either the p telomeres from both chromosmes and the q telomere from both chromosomes."; }
+                    else
+                    { extraDataString += "\r\nIt was not possible to determine the orientation of the breakpoint."; }
+                   
 
                     string mutation = "";
                     MutationType answer = testMutationType(bestPlaces);
@@ -3918,7 +3944,6 @@ namespace AgileStructure
                 count++;
             }
 
-
             answer = (float)(primary5primeOfBreakpoint + count) / (float)(count * 2);
 
             return answer;
@@ -3970,6 +3995,74 @@ namespace AgileStructure
 
             return answer;
         }
+
+        internal orientation PrimarySecondaryAlignment5PrimeOfbreakPoint(int place, int secondaryplace, string reference)
+        {
+
+            orientation answer = orientation.NotSet;
+            
+            int fivefive = 0;
+            int fivethree = 0;
+            int threefive = 0;
+            int threethree = 0;
+            int count = 0;
+
+            foreach (int index in selectedIndex)
+            {
+                if (DrawnARKeys.ContainsKey(index) == true)
+                {
+                    AlignedRead ar = DrawnARKeys[index];
+                    string secondaryCIGAR = ar.getSecondaryAlignmentTag;
+                    if (string.IsNullOrEmpty(secondaryCIGAR) == false)
+                    {
+                        string[] hits = secondaryCIGAR.Substring(2).Split(';');
+                        foreach (string h in hits)
+                        {
+                            if (string.IsNullOrEmpty(h) == false)
+                            {
+                                string[] items = h.Split(',');
+                                int startPoint = Convert.ToInt32(items[1]);
+                                if (reference == items[0])
+                                {
+                                    if (getFivePrimeSoftClipLength(items[3]) > 50)
+                                    {
+                                        if (startPoint + 100 > place && startPoint - 100 < place)
+                                        {
+                                            if (ar.getPosition + 100 > secondaryplace && ar.getPosition - 100 < secondaryplace)
+                                            { fivethree++; }
+                                            if (ar.getEndPosition + 100 > secondaryplace && ar.getEndPosition - 100 < secondaryplace)
+                                            { fivefive++; }
+                                        }
+                                    }
+
+                                    if (getThreePrimeSoftClipLength(items[3]) > 50)
+                                    {
+                                        if (startPoint + getAlignedLength(items[3]) + 100 > place && startPoint + getAlignedLength(items[3]) - 100 < place)
+                                        {
+                                            if (ar.getPosition + 100 > secondaryplace && ar.getPosition - 100 < secondaryplace)
+                                            { threethree++; }
+                                            if (ar.getEndPosition + 100 > secondaryplace && ar.getEndPosition - 100 < secondaryplace)
+                                            { threefive++; }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    count++;
+                }
+            }
+
+            if (threethree + fivefive > threefive + fivethree)
+            { answer = orientation.Same; }
+            else if (threethree + fivefive < threefive + fivethree)
+            { answer = orientation.Different; }
+            else
+            { answer = orientation.cannottell; }
+
+                return answer;
+        }
+
 
         private void complexRearrangmentToolStripMenuItem_Click(object sender, EventArgs e)
         {
