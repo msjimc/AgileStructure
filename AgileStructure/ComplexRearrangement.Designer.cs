@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComplexRearrangement));
             groupBox1 = new System.Windows.Forms.GroupBox();
+            label2 = new System.Windows.Forms.Label();
+            btnDrawBP = new System.Windows.Forms.Button();
             txtAnswer = new System.Windows.Forms.TextBox();
             lblAnswer = new System.Windows.Forms.Label();
             btnFind = new System.Windows.Forms.Button();
@@ -47,6 +50,8 @@
             // groupBox1
             // 
             groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(btnDrawBP);
             groupBox1.Controls.Add(txtAnswer);
             groupBox1.Controls.Add(lblAnswer);
             groupBox1.Controls.Add(btnFind);
@@ -64,6 +69,27 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Break point selection";
+            // 
+            // label2
+            // 
+            label2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(577, 118);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(104, 15);
+            label2.TabIndex = 12;
+            label2.Text = "Show break points";
+            // 
+            // btnDrawBP
+            // 
+            btnDrawBP.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnDrawBP.Location = new System.Drawing.Point(687, 114);
+            btnDrawBP.Name = "btnDrawBP";
+            btnDrawBP.Size = new System.Drawing.Size(75, 23);
+            btnDrawBP.TabIndex = 11;
+            btnDrawBP.Text = "Show ";
+            btnDrawBP.UseVisualStyleBackColor = true;
+            btnDrawBP.Click += btnDrawBP_Click;
             // 
             // txtAnswer
             // 
@@ -191,6 +217,7 @@
             ClientSize = new System.Drawing.Size(792, 297);
             Controls.Add(btnClose);
             Controls.Add(groupBox1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "ComplexRearrangement";
             Text = "Complex rearrangement";
@@ -216,5 +243,7 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblAnswer;
         private System.Windows.Forms.TextBox txtAnswer;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnDrawBP;
     }
 }

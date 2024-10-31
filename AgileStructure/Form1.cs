@@ -14,6 +14,7 @@ using System.Numerics;
 using System.Diagnostics.Eventing.Reader;
 using System.Threading;
 using System.Linq.Expressions;
+using System.Net;
 
 
 namespace AgileStructure
@@ -4082,7 +4083,7 @@ namespace AgileStructure
             {
                 if (selectedIndex.Count > 0)
                 {
-                    if (cboSecondaries.Text.StartsWith(cboRef.Text) == true)
+                    if (cboSecondaries.Text.StartsWith(cboRef.Text + " ") == true)
                     { bestPlaces = getBreakPoints(true, cboRef.Text); }
                     else
                     { bestPlaces = getBreakPoints(false, cboRef.Text); }
@@ -4101,7 +4102,7 @@ namespace AgileStructure
 
             try
             {
-                if (cboSecondaries.Text.StartsWith(cboRef.Text) == true)
+                if (cboSecondaries.Text.StartsWith(cboRef.Text + " ") == true)
                 {
                     answer[0] = inversion();
                     answer[1] = "e";
@@ -4137,6 +4138,49 @@ namespace AgileStructure
         internal bool isSecondRefSet()
         {
             return secondRefSet;
+        }
+
+        internal void drawBreakpoints(string sequence1, int place1, string sequence2, int place2, string sequence3, int place3, string sequence4, int place4)
+        {
+            if (selectEnd - selectStart > 100)
+            {
+                try
+                {
+                    Bitmap modifiedP = (Bitmap)bmp.Clone();
+                    Graphics gModifiedP = Graphics.FromImage(modifiedP);
+                    Bitmap modifiedS = (Bitmap)bmp_soft.Clone();
+                    Graphics gModifiedS = Graphics.FromImage(modifiedS);
+                    drawBreakPointLine(gModifiedP, gModifiedS, sequence1, place1);
+                    drawBreakPointLine(gModifiedP, gModifiedS, sequence2, place2);
+                    drawBreakPointLine(gModifiedP, gModifiedS, sequence3, place3);
+                    drawBreakPointLine(gModifiedP, gModifiedS, sequence4, place4);
+
+                    p1.Image = modifiedP;
+                    p2.Image = modifiedS;
+                }
+                catch (Exception ex) { }
+            }
+        }
+
+        private void drawBreakPointLine(Graphics gModified1, Graphics gModified2, string sequence, int place)
+        {
+            try
+            {
+                if (sequence == cboRef.Text)
+                {
+                    double xScale = (p1.Width - 20) / (double)(selectEnd - selectStart);
+                    int imageplace = 10 + (int)((place - selectStart) * xScale);
+                    gModified1.DrawLine(Pens.Black,imageplace, 10, imageplace, p1.Height);
+                }
+
+                if (cboSecondaries.Text.StartsWith(sequence + " "))
+                {
+                    double xScale = (p1.Width - 20) / (double)(selectSecondaryEnd - selectSecondaryStart);
+                    int imageplace = 10 + (int)((place - selectSecondaryStart) * xScale);
+                    gModified2.DrawLine(Pens.Black, imageplace, 10, imageplace, p2.Height);
+                }
+            }
+            catch (Exception ex) { }
         }
 
     }

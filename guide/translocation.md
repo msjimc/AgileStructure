@@ -52,7 +52,7 @@ This is derived from a different set of reads and so could be considered an inde
 
 [Return user guide](README.md#translocation) 
 
-## Case 2
+  
 This patient was first described in:
 > Hu L, Liang F, Cheng D, Zhang Z, Yu G, Zha J, Wang Y, Xia Q, Yuan D, Tan Y, Wang D, Liang Y, Lin G. Location of Balanced Chromosome-Translocation Breakpoints by Long-Read Sequencing on the Oxford Nanopore Platform. Front Genet. 2020 Jan 14;10:1313. doi: 10.3389/fgene.2019.01313. PMID: 32010185; PMCID: PMC6972507.
 
