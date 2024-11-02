@@ -2825,8 +2825,6 @@ namespace AgileStructure
 
                     if (bestPlaces[1] == null)
                     {
-                        //if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                        //MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return result + "Have you selected any reads?";
                     }
 
@@ -2893,32 +2891,7 @@ namespace AgileStructure
             return result;
         }
 
-        private string TranslationExtra(float leftright, float sLeftright,string chr1,string chr2)
-        {
-            string answer = "";
-            string selectedChr = cboRef.Text;
-            if (leftright == 0.0f && sLeftright == 0.0f)
-            {
-                if (selectedChr == chr1)
-                { answer = "p arm sequences of "; }
-                else
-                { }
-            }
-            else if (leftright > 0.8f && sLeftright > 0.8f)//11
-            { answer = ""; }
-            else if (leftright < 0.2f && sLeftright > 0.8f)//01
-            { }
-            else if (leftright > 0.8f && sLeftright < 0.2f)//10
-            { }
-            else if (leftright < 0.2f && sLeftright < 0.2f)//00
-            { }
-            else if (leftright > 0.38f && leftright < 0.7f && sLeftright > 0.38f && sLeftright < 0.7f)//0.50.5
-            { }
-
-
-            return "";
-        }
-        private void SaveToFile(string mutation)
+                private void SaveToFile(string mutation)
         {
             string file = FileString.SaveAs("Select the file to save the data in", "Text file (*.txt)|*.txt");
             if (file.Equals("Cancel") == true) { return; }
