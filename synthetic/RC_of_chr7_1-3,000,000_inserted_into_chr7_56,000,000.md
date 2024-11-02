@@ -6,7 +6,7 @@ The reverse complement of **chr7 1-3,000,000** is insert in the the region **chr
 
 ### Primary region spanning: chr7 1-3,000,000 
 
-<hr />
+For this analysis the reads at chr7 3,000,000 were selected and analysed using the ___Variant determination___ > ___Use soft clip data___ > ___Translocation___ menu option.<hr />
 
 ![image](images/insert_chr7_60_1-3,000,000_RC_target_chr7_60_56,000,000-60,000,000_ONT_no_2nd_1.jpg)
 
@@ -32,9 +32,9 @@ Figure 3
 
 ### Primary region spanning: chr7 56,000,000 
 
-<hr />
+For this analysis the reads at chr7 56,000,000 were selected and analysed using the ___Variant determination___ > ___Use soft clip data___ > ___Translocation___ menu option.<hr />
 
-![image](images/insert_chr7_60_1-3,000,000_RC_target_chr7_60_56,000,000-60,000,000_ONT_no_2nd_1.jpg)
+![image](images/insert_chr7_60_1-3,000,000_RC_target_chr7_60_56,000,000-60,000,000_ONT_no_2nd_2.jpg)
 
 Figure 4
 
@@ -42,7 +42,7 @@ Figure 4
 
 <hr />
 
-![image](images/insert_chr7_60_1-3,000,000_RC_target_chr7_60_56,000,000-60,000,000_ONT_no_2nd_1_all.jpg)
+![image](images/insert_chr7_60_1-3,000,000_RC_target_chr7_60_56,000,000-60,000,000_ONT_no_2nd_2_all.jpg)
 
 Figure 5
 
@@ -50,7 +50,7 @@ Figure 5
 
 <hr />
 
-![image](images/insert_chr7_60_1-3,000,000_RC_target_chr7_60_56,000,000-60,000,000_ONT_no_2nd_1_result.jpg)
+![image](images/insert_chr7_60_1-3,000,000_RC_target_chr7_60_56,000,000-60,000,000_ONT_no_2nd_2_result.jpg)
 
 Figure 6
 
