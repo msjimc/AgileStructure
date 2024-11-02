@@ -2902,13 +2902,17 @@ namespace AgileStructure
                 if (selectedChr == chr1)
                 { answer = "p arm sequences of "; }
                 else
-                { }            
+                { }
             }
-            else if (leftright == 1.0f && sLeftright == 1.0f)
+            else if (leftright > 0.8f && sLeftright > 0.8f)//11
+            { answer = ""; }
+            else if (leftright < 0.2f && sLeftright > 0.8f)//01
             { }
-            else if (leftright == 0.0f && sLeftright == 1.0f)
+            else if (leftright > 0.8f && sLeftright < 0.2f)//10
             { }
-            else if (leftright == 1.0f && sLeftright == 0.0f)
+            else if (leftright < 0.2f && sLeftright < 0.2f)//00
+            { }
+            else if (leftright > 0.38f && leftright < 0.7f && sLeftright > 0.38f && sLeftright < 0.7f)//0.50.5
             { }
 
 
