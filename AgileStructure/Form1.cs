@@ -2848,7 +2848,7 @@ namespace AgileStructure
                     if (orientation == orientation.Same)
                     { extraDataString += "\r\nThe resultant chromosome(s) contain a p telomere from one chromosme and the q telomere from the other."; }
                     else if (orientation == orientation.Different)
-                    { extraDataString += "\r\nThe resultant chromosome(s) contain either the p telomeres from both chromosmes and the q telomere from both chromosomes."; }
+                    { extraDataString += "\r\nThe resultant chromosome(s) contain either the p telomeres from both chromosmes or the q telomere from both chromosomes."; }
                     else
                     { extraDataString += "\r\nIt was not possible to determine the orientation of the breakpoint."; }
                    
