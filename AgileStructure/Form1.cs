@@ -2841,7 +2841,7 @@ namespace AgileStructure
                     { 
                         extraDataString = "The translocation may to be balanced, but read selection appears to be skewed to one variant.";                     
                     }
-                    else { extraDataString = "The data suggest the translocation is not balance, is there a 2nd break point?"; }
+                    else { extraDataString = "The data suggest the translocation is not balanced, is there a 2nd break point?"; }
                     
 
 
