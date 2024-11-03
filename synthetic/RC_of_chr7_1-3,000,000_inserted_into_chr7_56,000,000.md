@@ -1,4 +1,4 @@
-# Chr7 1-3,000,000  inserted into Chr7 56,000,000
+# The reverse complement of Chr7 1-3,000,000  inserted into Chr7 56,000,000
 
 Analysis of the genome in which: 
 
@@ -14,13 +14,9 @@ Figure 1
 
 <hr />
 
-<hr />
-
 ![image](images/insert_chr7_60_1-3,000,000_RC_target_chr7_60_56,000,000-60,000,000_ONT_no_2nd_1_all.jpg)
 
 Figure 2
-
-<hr />
 
 <hr />
 
@@ -40,13 +36,9 @@ Figure 4
 
 <hr />
 
-<hr />
-
 ![image](images/insert_chr7_60_1-3,000,000_RC_target_chr7_60_56,000,000-60,000,000_ONT_no_2nd_2_all.jpg)
 
 Figure 5
-
-<hr />
 
 <hr />
 
