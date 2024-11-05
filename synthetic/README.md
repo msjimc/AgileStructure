@@ -8,6 +8,9 @@ Also, since the naming convention can result in arbitrary decisions been made wh
 
 The read data sets were created using [MakeSVgenome](https://github.com/msjimc/MakeSVGenome) with reads 10 kb long created each 1kb, with the orientation set as forward, reverse, forward, reverse, forward, reverse, etc. Where sequence data was moved from one chromosome to another, reads from source chromosome were also included. Each file describing the analysis was created using a script and so, on occasions the language may be awkward.  
 
+
+
+
 |ID|File|Description|Inserted sequence inverted|Function|Ambiguous|
 |-|-|-|-|-|-|
 |1|[chr7 43,600,000-43,750,000 deleted.md](synthetic\chr7_43,600,000-43,750,000_deleted.md)|Deletion|NA|Deletion|No|

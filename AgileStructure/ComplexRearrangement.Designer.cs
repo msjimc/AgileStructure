@@ -113,7 +113,6 @@
             // btnFind
             // 
             btnFind.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            btnFind.Enabled = false;
             btnFind.Location = new System.Drawing.Point(687, 213);
             btnFind.Name = "btnFind";
             btnFind.Size = new System.Drawing.Size(75, 23);
@@ -125,7 +124,6 @@
             // btnAccept2
             // 
             btnAccept2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnAccept2.Enabled = false;
             btnAccept2.Location = new System.Drawing.Point(687, 68);
             btnAccept2.Name = "btnAccept2";
             btnAccept2.Size = new System.Drawing.Size(75, 23);

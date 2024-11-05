@@ -22,6 +22,7 @@
   * [Insertion](#insertion)
   * [Inversion](#inversion)
   * [Translocation](#translocation)
+  * [Analysis of complex rearrangements using synthetic read datasets ](#analysis-of-synthetic-read-datasets)
 - [Identifying Indels using the primary alignments CIGAR string](#identifying-indels-using-the-primary-alignments-cigar-string)
   * [Important note](#important-note)
   * [Identifying insertions using the primary alignments CIGAR string](#identifying-insertions-using-the-primary-alignments-cigar-string)
@@ -206,6 +207,7 @@ Figure 14b
 
 Once the variant type is determined, it is then possible to annotate the breakpoint by selecting the appropriate option. The links below show examples of analysing each type of mutation.
 
+
 ### Deletion
 
 A worked example is [here](deletion.md).
@@ -222,10 +224,15 @@ A worked example is [here](insertion.md).
 
 A worked example is [here](inversion.md).
 
-
 ### Translocation
 
  A worked example is [here](translocation.md).
+
+## Analysis of synthetic read datasets
+
+The links above describe the analysis of real data using the functions for simple rearrangements. Since these only touch on a fraction of the possible rearrangement scenarios, the analysis of 57 different rearrangements is available [here](../synthetic/README.md). These analyses use synthetic read data to create the required variant data and allow the annotated result can be compared to the know variant.
+
+[Synthetic test data representing complex rearrangements](../synthetic/README.md)
 
 ## Identifying Indels using the primary alignments CIGAR string  
 

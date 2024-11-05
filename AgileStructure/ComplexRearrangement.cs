@@ -110,17 +110,11 @@ namespace AgileStructure
 
                 form.deleteSelectedList();
 
-                //btnAccept1.Enabled = false;
-                //btnAccept2.Enabled = true;
-                //btnFind.Enabled = false;
             }
             catch
             {
                 lblPrimary1.Text = "Error";
                 lblSecondary1.Text = "Error";
-                //btnAccept1.Enabled = true;
-                //btnAccept2.Enabled = false;
-                //btnFind.Enabled = false;
             }
         }
 
@@ -177,18 +171,11 @@ namespace AgileStructure
                 pd2 = new PointData(average1, average2, primary5primeOfPlace1, primary5primeOfPlace2, scondary5primeOfPlace1, scondary5primeOfPlace2, annotations);
 
                 form.deleteSelectedList();
-
-                //btnAccept1.Enabled = false;
-                //btnAccept2.Enabled = false;
-                //btnFind.Enabled = true;
             }
             catch
             {
                 lblPrimary2.Text = "Error";
                 lblSecondary2.Text = "Error";
-                //btnAccept1.Enabled = false;
-                //btnAccept2.Enabled = true;
-                //btnFind.Enabled = false;
             }
         }
 
@@ -220,11 +207,6 @@ namespace AgileStructure
         private void btnFind_Click(object sender, EventArgs e)
         {
             txtAnswer.Text = Find(pd1, pd2);
-
-            //btnAccept1.Enabled = true;
-            //btnAccept2.Enabled = false;
-            //btnFind.Enabled = false;
-
         }
 
         private string Find(PointData pda, PointData pdb)
@@ -246,10 +228,7 @@ namespace AgileStructure
             secondary5primeOfPlace21 = pdb.Secondary5primeOfPlace1;
             secondary5primeOfPlace22 = pdb.Secondary5primeOfPlace2;
             annotations2 = pdb.Annotations;
-
-
-            //System.Diagnostics.Debug.WriteLine("(" + secondary5primeOfPlace11.ToString() + "\t" + secondary5primeOfPlace12.ToString() + "\t" + secondary5primeOfPlace21.ToString() + "\t" + secondary5primeOfPlace22.ToString() + ")");
-
+                       
             if (chromosomes.Count == 1)
             { return Find(); }
             else
@@ -448,9 +427,10 @@ namespace AgileStructure
                 else if (alignment[2] > 0.4f && alignment[2] < 0.6f)
                 {
                     string[] items1 = processIAnnotationString(annotations1[3]);
-                    string[] items2 = processIAnnotationString(annotations2[4]); if (alignment[1] < 0.2f)
+                    string[] items2 = processIAnnotationString(annotations2[4]); 
+                    if (alignment[0] < 0.2f)
                     {
-                        //      return items1[0] + "." + items2[1] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[2];
+                        return items1[0] + "." + items2[1] + "_" + items1[1] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[2] + "_" + items2[2];
                     }
                     else if (alignment[1] > 0.8f)
                     {
@@ -504,7 +484,8 @@ namespace AgileStructure
                 else if (alignment[2] > 0.4f && alignment[2] < 0.6f)
                 {
                     string[] items1 = processIAnnotationString(annotations1[4]);
-                    string[] items2 = processIAnnotationString(annotations2[4]); if (alignment[1] < 0.2f)
+                    string[] items2 = processIAnnotationString(annotations2[4]); 
+                    if (alignment[1] < 0.2f)
                     {
                         //     return "Duplication: " + items1[0] + "." + items1[1] + "_" + items2[2] + " is inserted at " + items1[0] + "." + items1[2] + "_" + items2[1];
                     }
@@ -517,9 +498,10 @@ namespace AgileStructure
                 else if (alignment[0] > 0.4f && alignment[0] < 0.6f)
                 {
                     string[] items1 = processIAnnotationString(annotations1[4]);
-                    string[] items2 = processIAnnotationString(annotations2[4]); if (alignment[1] < 0.2f)
+                    string[] items2 = processIAnnotationString(annotations2[4]); 
+                    if (alignment[1] < 0.2f)
                     {
-                        //  return "Duplication: the reverse complement of " + items1[0] + "." + items1[2] + "_" + items2[1] + " is inserted at " + items1[0] + "." + items1[1] + "_" + items2[2];
+                         return "Duplication: " + items1[0] + "." + items1[1] + "_" + items2[2] + " is inserted at " + items1[0] + "." + items2[1] + "_" + items1[2];
                     }
                     else if (alignment[1] > 0.8f)
                     {
@@ -547,6 +529,13 @@ namespace AgileStructure
                         else if (alignment[0] > 0.8f)
                         {
                             return "Duplication: " + items1[0] + "." + items1[1] + "_" + items2[1] + " is inserted at " + items1[0] + "." + items1[2] + "_" + items2[2];
+                        }
+                    }
+                    else
+                    {
+                        if (alignment[2] < 0.2f)
+                        {
+                            return items1[0] + "." + items2[2] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[1];
                         }
                     }
                 }
@@ -599,6 +588,14 @@ namespace AgileStructure
                         else if (alignment[0] > 0.8f)
                         {
                             //return "Duplication: " + items1[0] + "." + items2[1] + "_" + items2[1] + " is inserted at " + items1[0] + "." + items1[1] + "_" + items2[2];
+                        }
+                        else if (alignment[2] < 0.2f)
+                        {
+                            return "Duplication: the reverse complement of " + items1[0] + "." + items2[1] + "_" + items2[2] + " is inserted at " + items1[0] + "." + items1[1] + "_" + items2[2];
+                        }
+                        else if (alignment[2] > 0.8f)
+                        {
+                            return "Inversion: " + items1[0] + "." + items2[1] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[2];
                         }
                     }
                 }
