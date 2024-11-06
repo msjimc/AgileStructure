@@ -591,12 +591,20 @@ namespace AgileStructure
                         }
                         else if (alignment[2] < 0.2f)
                         {
-                            return "Duplication: the reverse complement of " + items1[0] + "." + items2[1] + "_" + items2[2] + " is inserted at " + items1[0] + "." + items1[1] + "_" + items2[2];
+                            return "The reverse complement of " + items1[0] + "." + items2[1] + "_" + items2[2] + " is inserted at " + items1[0] + "." + items1[1] + "_" + items2[2];
                         }
                         else if (alignment[2] > 0.8f)
                         {
                             return "Inversion: " + items1[0] + "." + items2[1] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[2];
-                        }
+                        }                      
+                    }
+                    else if (alignment[1] > 0.8f)
+                    {
+                        return "Duplication: the reverse complement of " +items1[0] + "." + items1[1] + "_" + items2[2] + " is inserted at " +  items1[0] + "." + items2[1] + "_" + items1[2] ;
+                    }
+                    else if (alignment[1] < 0.2f)
+                    {
+                        return "The reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2] + " is inserted at " + items1[0] + "." + items2[2] + "_" + items1[1];
                     }
                 }
                 else if (alignment[2] > 0.4f && alignment[2] < 0.6f)
@@ -615,7 +623,7 @@ namespace AgileStructure
                     }
                     else if (alignment[0] < 0.2f)
                     {
-                        string answer = "Duplication: the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2] + " is inserted at " + items1[0] + "." + items2[1] + "_" + items2[2];// + "\r\nor\r\n" +
+                        string answer = "The reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2] + " is inserted at " + items1[0] + "." + items2[1] + "_" + items2[2];// + "\r\nor\r\n" +
                             //"Duplication: the reverse complement of " + items1[0] + "." + items2[2] + "_" + items1[2] + " is inserted at " + items1[0] + "." + items1[1] + "_" + items2[1];
 
                         return answer;
@@ -646,7 +654,7 @@ namespace AgileStructure
                 if (alignment[0] > 0.4f && alignment[0] < 0.6f)
                 {
                     string[] items1 = processIAnnotationString(annotations1[0]);
-                    string[] items2 = processIAnnotationString(annotations2[0]);
+
                     if (places[1] == average11 || places[1] == average12)
                     {
                         if (alignment[1] > 0.8f)
@@ -657,13 +665,20 @@ namespace AgileStructure
                         }
                         else if (alignment[1] < 0.2f)
                         {
+                            string[] items2 = processIAnnotationString(annotations2[0]);
                             return items1[0] + "." + items1[1] + "_" + items2[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2];
                         }
                         else if (alignment[0] > 0.8f)
                         {
+                            string[] items2 = processIAnnotationString(annotations2[0]);
                             return "Duplication: " + items1[0] + "." + items2[1] + "_" + items2[1] + " is inserted at " + items1[0] + "." + items1[1] + "_" + items2[2];
                         }
                     }
+                    else
+                    {
+                        return "Duplication: " + items1[0] + "." + average22.ToString() + "_" + items1[2] + " is inserted at " + items1[0] + "." + average12.ToString("N0") + "_" + average22.ToString();
+                    }
+                    
                 }
                 else if (alignment[2] > 0.4f && alignment[2] < 0.6f)
                 {
