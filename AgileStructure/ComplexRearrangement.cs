@@ -595,7 +595,7 @@ namespace AgileStructure
                         }
                         else if (alignment[2] > 0.8f)
                         {
-                            return "Inversion: " + items1[0] + "." + items2[1] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[2];
+                            return items1[0] + "." + items2[1] + "_" + items1[2] + " is deleted and replaced by the reverse complement of " + items1[0] + "." + items1[1] + "_" + items2[2];
                         }                      
                     }
                     else if (alignment[1] > 0.8f)
