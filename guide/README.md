@@ -22,6 +22,7 @@
   * [Insertion](#insertion)
   * [Inversion](#inversion)
   * [Translocation](#translocation)
+  * [Complex rearrangements](#complex-rearrangements-indels)
   * [Analysis of complex rearrangements using synthetic read datasets ](#analysis-of-synthetic-read-datasets)
 - [Identifying Indels using the primary alignments CIGAR string](#identifying-indels-using-the-primary-alignments-cigar-string)
   * [Important note](#important-note)
@@ -227,6 +228,10 @@ A worked example is [here](inversion.md).
 ### Translocation
 
  A worked example is [here](translocation.md).
+
+ ### Complex rearrangements (indels)
+
+A worked example is [here](complex.md).
 
 ## Analysis of synthetic read datasets
 
