@@ -2,7 +2,15 @@
 
 Typically, most rearrangements are simple, in that no sequence is lost at the point of insertion, but a significant number of structural variants do lose data at the point of insertion. Consequently, the ***Complex rearrangement*** function (___Variant determination___ > ___Use soft clip data___ > ___Complex rearrangement___ ) was created to aid their annotation.
 
-When processing a complex rearrangements, its apparent that they fall in two two main groups, those with a split reads occurring at 3 points in the genome and those with split reads grouping at 4 locations. The first group consist of duplications and insertions, where the inserted sequence is inserted at the within the original sequence, while the second group consists of insertions where the inserted sequence is place away from its origin sequence. 
+When processing a rearrangements, its apparent that they fall in three main groups, with 2, 3 or 4 distinct columns of split reads. Rearrangements with 2 columns (or insertions with 3 columns) are classed as simple and can be annotated using specific function, while those with 3 or 4 columns should be annotated with the ***Complex rearrangement*** window. Why a rearrangement as 2, 3 or 4 columns of split reads depends on if data is lost or inserted at the break points. Points 1 and 2 show an offset inversion with the size of the offset in Point 1 greater than point 2. This shows how as the size of the duplicated/deleted sequence decreases the distances between the two breakpoints decreases. In Point 3 the first 2 break points have merged as no sequences was deleted/duplicated at that side of the arrangement, however the right hand side still has two columns of split reads. In Point 4, no sequence is duplicated or deleted at either side of the rearrangement and so only two columns of split reads are present. While all the scenarios have various numbers of columns of split read, all the split read alignments demonstrate the same two patterns.   
+
+![Break points ](images/figurebreakPoints.jpg)
+
+Figure: 2, 3 or 4 Break points
+
+<hr />
+
+
 
 When describing a structural variant ***AgileStructure*** typically, only needs data on two sets of split reads which are either the first two columns or the last two. In the case of a duplication or inversion in which part of the sequence is deleted, two of the columns occur together. The selection of these columns is described below.
 
