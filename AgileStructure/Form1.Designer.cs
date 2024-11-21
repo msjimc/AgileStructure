@@ -89,12 +89,16 @@ namespace AgileStructure
             insertationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuItem8 = new System.Windows.Forms.ToolStripSeparator();
             switchRegionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            saveImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             historyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             primaryAlignmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             secondaryAlignmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             timer2 = new System.Windows.Forms.Timer(components);
             toolTip1 = new System.Windows.Forms.ToolTip(components);
             btnQuit = new System.Windows.Forms.Button();
+            colourCodeSelectedReadsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItem11 = new System.Windows.Forms.ToolStripSeparator();
             groupBox1.SuspendLayout();
             gbpP1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)p1).BeginInit();
@@ -209,7 +213,7 @@ namespace AgileStructure
             gbpP2.Controls.Add(p2);
             gbpP2.Location = new System.Drawing.Point(6, 75);
             gbpP2.Name = "gbpP2";
-            gbpP2.Size = new System.Drawing.Size(1157, 247);
+            gbpP2.Size = new System.Drawing.Size(1157, 244);
             gbpP2.TabIndex = 2;
             gbpP2.TabStop = false;
             // 
@@ -218,7 +222,7 @@ namespace AgileStructure
             p2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             p2.Location = new System.Drawing.Point(3, 19);
             p2.Name = "p2";
-            p2.Size = new System.Drawing.Size(1151, 226);
+            p2.Size = new System.Drawing.Size(1151, 223);
             p2.TabIndex = 0;
             p2.TabStop = false;
             p2.MouseClick += p2_MouseClick;
@@ -327,7 +331,7 @@ namespace AgileStructure
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem1, fileToolStripMenuItem, dataToolStripMenuItem, variantDeterminationToolStripMenuItem, historyToolStripMenuItem });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem1, fileToolStripMenuItem, dataToolStripMenuItem, variantDeterminationToolStripMenuItem, imageToolStripMenuItem, historyToolStripMenuItem });
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
@@ -595,6 +599,19 @@ namespace AgileStructure
             switchRegionToolStripMenuItem.Text = "Switch region";
             switchRegionToolStripMenuItem.Click += switchRegionToolStripMenuItem_Click;
             // 
+            // imageToolStripMenuItem
+            // 
+            imageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { colourCodeSelectedReadsToolStripMenuItem, toolStripMenuItem11, saveImageToolStripMenuItem });
+            imageToolStripMenuItem.Name = "imageToolStripMenuItem";
+            imageToolStripMenuItem.Size = new System.Drawing.Size(52, 22);
+            imageToolStripMenuItem.Text = "Image";
+            // 
+            // saveImageToolStripMenuItem
+            // 
+            saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
+            saveImageToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            saveImageToolStripMenuItem.Text = "Save image";
+            // 
             // historyToolStripMenuItem
             // 
             historyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { primaryAlignmentsToolStripMenuItem, secondaryAlignmentsToolStripMenuItem });
@@ -629,6 +646,17 @@ namespace AgileStructure
             btnQuit.Text = "Quit";
             btnQuit.UseVisualStyleBackColor = true;
             btnQuit.Click += btnQuit_Click;
+            // 
+            // colourCodeSelectedReadsToolStripMenuItem
+            // 
+            colourCodeSelectedReadsToolStripMenuItem.Name = "colourCodeSelectedReadsToolStripMenuItem";
+            colourCodeSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            colourCodeSelectedReadsToolStripMenuItem.Text = "Colour code selected reads";
+            // 
+            // toolStripMenuItem11
+            // 
+            toolStripMenuItem11.Name = "toolStripMenuItem11";
+            toolStripMenuItem11.Size = new System.Drawing.Size(213, 6);
             // 
             // Form1
             // 
@@ -729,6 +757,10 @@ namespace AgileStructure
         private System.Windows.Forms.ToolStripMenuItem unbalancedTranslocationToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem10;
         private System.Windows.Forms.ToolStripMenuItem complexRearrangmentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem imageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveImageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem colourCodeSelectedReadsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem11;
     }
 }
 

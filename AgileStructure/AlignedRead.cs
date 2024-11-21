@@ -46,6 +46,7 @@ namespace AgileStructure
         private bool drawn = false;
         private bool largeIndel = false;
         private bool isSelected = false;
+        private Color boxColour = Color.Blue;
 
         public AlignedRead(string line, int Index)
         {
@@ -192,7 +193,7 @@ namespace AgileStructure
             {
                 r.X =  10.0f + (float)(alignStart * XScale);
                 r.Width = alignEnd - r.X;
-                Pen box = new Pen(Color.Blue, 2);
+                Pen box = new Pen(boxColour, 2);
                 g.DrawRectangle(box, r.X, r.Y + 1, r.Width, r.Height - 1);isSelected = true;
             }
             else { isSelected = false; }
@@ -263,7 +264,7 @@ namespace AgileStructure
             {
                 r.X =  10.0f + (float)(alignStart * XScale);
                 r.Width = alignEnd - r.X;
-                Pen box = new Pen(Color.Blue, 2);
+                Pen box = new Pen(boxColour, 2);
                 g2.DrawRectangle(box, r.X, r.Y + 1, r.Width, r.Height - 1);
             }
            
@@ -456,5 +457,11 @@ namespace AgileStructure
         
          public bool IsSelected
         { get { return isSelected; } }
+
+        public Color BoxColour
+        {
+            get { return boxColour; }
+            set { boxColour = value; }
+        }
     }
 }

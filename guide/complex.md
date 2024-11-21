@@ -2,19 +2,18 @@
 
 Typically, most rearrangements are simple, in that no sequence is lost at the point of insertion, but a significant number of structural variants do lose data at the point of insertion. Consequently, the ***Complex rearrangement*** function (___Variant determination___ > ___Use soft clip data___ > ___Complex rearrangement___ ) was created to aid their annotation.
 
-When analysing rearrangements, its apparent that they fall in three main groups, with 2, 3 or 4 distinct columns of split reads. Rearrangements with 2 columns (or insertions with 3 columns) are classed as simple and can be annotated using specific function, while those with 3 or 4 columns should be annotated with the ***Complex rearrangement*** window. Why a rearrangement as 2, 3 or 4 columns of split reads depends on if data is lost or duplicated at the break points. Points 1 and 2 show an offset inversion with the size of the offset in Point 1 greater than Point 2. This shows how as the size of the duplicated/deleted sequence decreases the distances between the two breakpoints decreases. In Point 3 the first 2 break points have merged as no sequences was deleted/duplicated at that side of the arrangement, however the right hand side still has two columns of split reads. In Point 4, no sequence is duplicated or deleted at either side of the rearrangement and so only two columns of split reads are present. While all the scenarios have various numbers of columns of split read, all the split read alignments demonstrate the same two patterns.   
+When analysing rearrangements, its apparent that they fall in three main groups, which have 2, 3 or 4 distinct columns of split reads. Rearrangements with 2 columns (or insertions with 3 columns) are classed as simple and can be annotated by AgileStructure, using one of its specific functions. Those with 3 or 4 columns should be annotated with the ***Complex rearrangement*** window. 
+
+Why a rearrangement as 2, 3 or 4 columns of split reads depends on whether sequence is lost or duplicated at the break points. Figures 7a and 7b show an offset inversion with the size of the offset in Figures 7a greater than Figures 7b. It can be seen that as the size of the duplicated/deleted sequences decreases the distances between the two columns of split reads decreases. In Figures 7c no sequence was deleted/duplicated at 5’ side of the arrangement, consequently, the first two columns of split reads have merged to form a single column. It should be noted that the pattern of the read’s alignments has not changed.  In Figures 7d, no sequence is duplicated or deleted at either side of the rearrangement and so only two columns of split reads are present. Again, should be noted that the pattern of the read’s alignments has not changed. Finally. In Figure 7e the deleted sequence is shorter than the inserted sequences resulting in a duplication of sequences at the 3’ end of the inversion. This results in the end of the rearrangement been delimited by two columns of split reads, but unlike Figures 7a and 7b, the alignments lay between the columns. Yet again, should be noted that the pattern of each read’s alignments has not changed.
+  
 
 ![Break points ](images/figurebreakPoints.jpg)
 
-Figure: 2, 3 or 4 Break points
+Figure: Affect of deletions and sequence duplication at breakpoints on the arrangement of the split reads. The dark blue arrow marks the extent of the rearranged sequence, while the pale blue arrow marks the extent of the sequence replaced by the copied sequence. The green and red rectangles indicate the location of a read’s alignments, with the different colours only indicating the orientation of the alignment differs. The dotted line indicates how a read’s alignments are arranged within the read. The vertical bashed line marks the apparent breakpoint at each column of split reads.
 
 <hr />
 
-
-
-When describing a structural variant ***AgileStructure*** typically, only needs data on two sets of split reads which are either the first two columns or the last two. In the case of a duplication or inversion in which part of the sequence is deleted, two of the columns occur together. The selection of these columns is described below.
-
-While the break points in the examples below are close enough to be able to show them in the same window, it is possible to select on column of split reads and then move to another region on the same chromosome to select the second column. 
+When describing a structural variant ***AgileStructure*** only needs data on two sets of split reads which are either the first or last two pairs of split read columns. While the break points in the examples below are close enough to be able to show them in the same window, it is possible to select on column of split reads and then move to another region on the same chromosome to select the second column. The selection of these columns is described below.
 
 ## Annotating a duplication or inversion in which sequence is deleted
 
