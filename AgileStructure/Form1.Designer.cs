@@ -90,6 +90,8 @@ namespace AgileStructure
             toolStripMenuItem8 = new System.Windows.Forms.ToolStripSeparator();
             switchRegionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            colourCodeSelectedReadsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItem11 = new System.Windows.Forms.ToolStripSeparator();
             saveImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             historyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             primaryAlignmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -97,8 +99,6 @@ namespace AgileStructure
             timer2 = new System.Windows.Forms.Timer(components);
             toolTip1 = new System.Windows.Forms.ToolTip(components);
             btnQuit = new System.Windows.Forms.Button();
-            colourCodeSelectedReadsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripMenuItem11 = new System.Windows.Forms.ToolStripSeparator();
             groupBox1.SuspendLayout();
             gbpP1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)p1).BeginInit();
@@ -213,7 +213,7 @@ namespace AgileStructure
             gbpP2.Controls.Add(p2);
             gbpP2.Location = new System.Drawing.Point(6, 75);
             gbpP2.Name = "gbpP2";
-            gbpP2.Size = new System.Drawing.Size(1157, 244);
+            gbpP2.Size = new System.Drawing.Size(1157, 242);
             gbpP2.TabIndex = 2;
             gbpP2.TabStop = false;
             // 
@@ -222,7 +222,7 @@ namespace AgileStructure
             p2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             p2.Location = new System.Drawing.Point(3, 19);
             p2.Name = "p2";
-            p2.Size = new System.Drawing.Size(1151, 223);
+            p2.Size = new System.Drawing.Size(1151, 221);
             p2.TabIndex = 0;
             p2.TabStop = false;
             p2.MouseClick += p2_MouseClick;
@@ -510,59 +510,59 @@ namespace AgileStructure
             // variantTypeToolStripMenuItem
             // 
             variantTypeToolStripMenuItem.Name = "variantTypeToolStripMenuItem";
-            variantTypeToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            variantTypeToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             variantTypeToolStripMenuItem.Text = "Variant type";
             variantTypeToolStripMenuItem.Click += variantTypeToolStripMenuItem_Click;
             // 
             // toolStripMenuItem2
             // 
             toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new System.Drawing.Size(193, 6);
+            toolStripMenuItem2.Size = new System.Drawing.Size(194, 6);
             // 
             // deletionsToolStripMenuItem
             // 
             deletionsToolStripMenuItem.Name = "deletionsToolStripMenuItem";
-            deletionsToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            deletionsToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             deletionsToolStripMenuItem.Text = "Deletion";
             deletionsToolStripMenuItem.Click += deletionsToolStripMenuItem_Click;
             // 
             // duplicationToolStripMenuItem
             // 
             duplicationToolStripMenuItem.Name = "duplicationToolStripMenuItem";
-            duplicationToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            duplicationToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             duplicationToolStripMenuItem.Text = "Duplication";
             duplicationToolStripMenuItem.Click += duplicationToolStripMenuItem_Click;
             // 
             // insertionToolStripMenuItem
             // 
             insertionToolStripMenuItem.Name = "insertionToolStripMenuItem";
-            insertionToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            insertionToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             insertionToolStripMenuItem.Text = "Insertion";
             insertionToolStripMenuItem.Click += insertionToolStripMenuItem_Click;
             // 
             // inversionToolStripMenuItem
             // 
             inversionToolStripMenuItem.Name = "inversionToolStripMenuItem";
-            inversionToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            inversionToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             inversionToolStripMenuItem.Text = "Inversion";
             inversionToolStripMenuItem.Click += inversionToolStripMenuItem_Click;
             // 
             // translocationToolStripMenuItem
             // 
             translocationToolStripMenuItem.Name = "translocationToolStripMenuItem";
-            translocationToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            translocationToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             translocationToolStripMenuItem.Text = "Translocation";
             translocationToolStripMenuItem.Click += translocationToolStripMenuItem_Click;
             // 
             // toolStripMenuItem10
             // 
             toolStripMenuItem10.Name = "toolStripMenuItem10";
-            toolStripMenuItem10.Size = new System.Drawing.Size(193, 6);
+            toolStripMenuItem10.Size = new System.Drawing.Size(194, 6);
             // 
             // complexRearrangmentToolStripMenuItem
             // 
             complexRearrangmentToolStripMenuItem.Name = "complexRearrangmentToolStripMenuItem";
-            complexRearrangmentToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            complexRearrangmentToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             complexRearrangmentToolStripMenuItem.Text = "Complex rearrangment";
             complexRearrangmentToolStripMenuItem.Click += complexRearrangmentToolStripMenuItem_Click;
             // 
@@ -606,11 +606,24 @@ namespace AgileStructure
             imageToolStripMenuItem.Size = new System.Drawing.Size(52, 22);
             imageToolStripMenuItem.Text = "Image";
             // 
+            // colourCodeSelectedReadsToolStripMenuItem
+            // 
+            colourCodeSelectedReadsToolStripMenuItem.Name = "colourCodeSelectedReadsToolStripMenuItem";
+            colourCodeSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            colourCodeSelectedReadsToolStripMenuItem.Text = "Colour code selected reads";
+            colourCodeSelectedReadsToolStripMenuItem.Click += colourCodeSelectedReadsToolStripMenuItem_Click;
+            // 
+            // toolStripMenuItem11
+            // 
+            toolStripMenuItem11.Name = "toolStripMenuItem11";
+            toolStripMenuItem11.Size = new System.Drawing.Size(213, 6);
+            // 
             // saveImageToolStripMenuItem
             // 
             saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
             saveImageToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             saveImageToolStripMenuItem.Text = "Save image";
+            saveImageToolStripMenuItem.Click += saveImageToolStripMenuItem_Click;
             // 
             // historyToolStripMenuItem
             // 
@@ -646,17 +659,6 @@ namespace AgileStructure
             btnQuit.Text = "Quit";
             btnQuit.UseVisualStyleBackColor = true;
             btnQuit.Click += btnQuit_Click;
-            // 
-            // colourCodeSelectedReadsToolStripMenuItem
-            // 
-            colourCodeSelectedReadsToolStripMenuItem.Name = "colourCodeSelectedReadsToolStripMenuItem";
-            colourCodeSelectedReadsToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            colourCodeSelectedReadsToolStripMenuItem.Text = "Colour code selected reads";
-            // 
-            // toolStripMenuItem11
-            // 
-            toolStripMenuItem11.Name = "toolStripMenuItem11";
-            toolStripMenuItem11.Size = new System.Drawing.Size(213, 6);
             // 
             // Form1
             // 

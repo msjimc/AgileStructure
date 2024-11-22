@@ -106,6 +106,7 @@ namespace AgileStructure
 
         Info id = null;
         ComplexRearrangement cR = null;
+        colourCoder cC = null;
         private bool secondRefSet = false;
         List<string> history = new List<string>();
         List<StringInt> historySecondary;
@@ -144,6 +145,7 @@ namespace AgileStructure
             makeBlankImage();
             makeBlankSecondaryBase();
             if (cR != null) { cR.clean(); }
+            if (cC != null) { cC.clean(); }
         }
 
         private void getBamHeader(string bamFileName)
@@ -4158,7 +4160,7 @@ namespace AgileStructure
 
             Font f = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Regular);
             g.DrawString("Primary alignments", f, Brushes.Black, 2, 2);
-            g.DrawImage(p1.Image, 0, p1.Height + 40);
+            g.DrawImage(p2.Image, 0, p1.Height + 40);
             g.DrawString("Secondary alignments", f, Brushes.Black, 2, p1.Height + 22);
 
             string file = FileString.SaveAs("Enter the name of the image file", "Image file (*.jpg)|*.jpg");
@@ -4174,5 +4176,55 @@ namespace AgileStructure
 
         }
 
+        private void colourCodeSelectedReadsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (cC == null)
+            { cC = new colourCoder(this); }
+            if (cC.Visible == false)
+            { cC.Show(this); }            
+        }
+
+        internal void cC_Closing()
+        { cC = null; }
+
+        internal void SetSelectionColour(Color colour)
+        {
+            foreach (int indexS in selectedIndex)
+            {
+                if (DrawnARKeys.ContainsKey(indexS) == true)
+                {
+                    AlignedRead ar = DrawnARKeys[indexS];
+                    ar.BoxColour = colour;
+                }
+            }
+
+            if (cboSecondaries.Items.Count == 0)
+            {
+                makeBlankImage();
+                makeBlankSecondaryBase();
+                return;
+            }
+
+            int index = cboSecondaries.SelectedIndex;
+            int startPoint = (int)selectSecondaryStart;
+            int endPoint = (int)selectSecondaryEnd;
+            drawPrimaryAlignments(true);
+            DrawGenes(g, bmp.Height, cboRef.Text, selectStart, selectEnd);
+            DrawRepeats(g, bmp.Height, cboRef.Text.Trim(), selectStart, selectEnd);
+            drawSecondaryAlignments();
+            string chromosomeName = cboSecondaries.Text.Substring(0, cboSecondaries.Text.IndexOf(" ")).Trim();
+            if (rd != null)
+            {
+                DrawRepeats(g_soft, bmp_soft.Height, chromosomeName, selectSecondaryStart, selectSecondaryEnd);
+                p2.Image = bmp_soft;
+            }
+            try
+            {
+                cboSecondaries.SelectedIndex = index;
+                selectSecondaryStart = startPoint;
+                selectSecondaryEnd = endPoint;
+            }
+            catch { }
+        }
     }
 }
