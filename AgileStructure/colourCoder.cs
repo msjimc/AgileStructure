@@ -63,13 +63,37 @@ namespace AgileStructure
 
         private void btnOrchid_Click(object sender, EventArgs e)
         {
-            selectionColour = Color.Orchid;
+            selectionColour = Color.Purple;
             changeColour();
         }
 
         private void btnBlack_Click(object sender, EventArgs e)
         {
             selectionColour = Color.Black;
+            changeColour();
+        }
+
+        private void btnViolet_Click(object sender, EventArgs e)
+        {
+            selectionColour = Color.Violet;
+            changeColour();
+        }
+
+        private void btnIndigo_Click(object sender, EventArgs e)
+        {
+            selectionColour = Color.Indigo;
+            changeColour();
+        }
+
+        private void btnDarkgrey_Click(object sender, EventArgs e)
+        {
+            selectionColour = Color.DarkGray;
+            changeColour();
+        }
+
+        private void btnPaleGrey_Click(object sender, EventArgs e)
+        {
+            selectionColour = Color.LightGray;
             changeColour();
         }
 
@@ -103,5 +127,6 @@ namespace AgileStructure
         {
             form1.deleteSelectedList();
         }
+
     }
 }
