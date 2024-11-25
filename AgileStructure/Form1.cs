@@ -1028,7 +1028,7 @@ namespace AgileStructure
                     case 'M':
                     case '=':
                     case 'X':
-                        sum += Convert.ToInt32(number);
+                        //sum += Convert.ToInt32(number);
                         number = "";
                         break;
                     default:
