@@ -2416,9 +2416,23 @@ namespace AgileStructure
             return result;
         }
 
+        private void ringToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string result = duplication(false);
+            if (result[0] == 'e')
+            {
+                MessageBox.Show(result.Substring(1), "Error");
+            }
+            else
+            {
+                if (MessageBox.Show(result.Substring(1) + "\nSave with the selected read data?", "Ring", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                { SaveToFile(result.Substring(1)); }
+            }
+        }
+
         private void duplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string result = duplication();
+            string result = duplication(true);
             if (result[0] == 'e')
             {
                 MessageBox.Show(result.Substring(1), "Error");
@@ -2430,7 +2444,7 @@ namespace AgileStructure
             }
         }
 
-        private string duplication()
+        private string duplication(bool duplication)
         {
             string result = "e";
             try
@@ -2450,7 +2464,14 @@ namespace AgileStructure
 
                     string mutation = "";
                     MutationType answer = testMutationType(bestPlaces);
-                    if ((answer == MutationType.Duplication))
+                    if (duplication == false)
+                    {
+                        if (breakPoint1 > breakPoint2)
+                        { mutation += cboRef.Text + "." + breakPoint2.ToString("N0") + "_" + breakPoint1.ToString("N0") + "ring"; }
+                        else
+                        { mutation += cboRef.Text + "." + breakPoint1.ToString("N0") + "_" + breakPoint2.ToString("N0") + "ring"; }
+                    }
+                    else if (answer == MutationType.Duplication)
                     {
                         if (breakPoint1 > breakPoint2)
                         { mutation += cboRef.Text + "." + breakPoint2.ToString("N0") + "_" + breakPoint1.ToString("N0") + "dup"; }
@@ -2655,7 +2676,7 @@ namespace AgileStructure
                     mutation = "The rearrangement appears to be a deletion.\n";
                     break;
                 case (MutationType.Duplication):
-                    mutation = "The rearrangement appears to be a duplication.\n";
+                    mutation = "The rearrangement appears to be a duplication, but could be a ring chromosme.\n";
                     break;
                 case (MutationType.DuplicationRCStart):
                     mutation = "The rearrangement appears to be an inverted duplication.\n";
@@ -4074,7 +4095,7 @@ namespace AgileStructure
                     answer[1] = "e";
                     answer[2] = insertion();
                     answer[3] = deletion();
-                    answer[4] = duplication();
+                    answer[4] = duplication(true);
                 }
                 else
                 {
@@ -4181,7 +4202,7 @@ namespace AgileStructure
             if (cC == null)
             { cC = new colourCoder(this); }
             if (cC.Visible == false)
-            { cC.Show(this); }            
+            { cC.Show(this); }
         }
 
         internal void cC_Closing()
@@ -4226,5 +4247,6 @@ namespace AgileStructure
             }
             catch { }
         }
+
     }
 }

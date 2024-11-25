@@ -1,0 +1,53 @@
+# Chr7 43,600,000-43,750,000  inserted into Chr7 43,590,000
+
+### Analysis of the genome in which: 
+
+The region **chr7 43,600,000-43,750,000** is insert at **chr7 43,590,000**
+
+### Primary region spanning: chr7 43,600,000-43,750,000 
+
+For this analysis the split reads at chr7 43,600,000 and 43,750,000 were selected and analysed using the ___Variant determination___ > ___Use soft clip data___ > ___Complex rearrangement___ menu option.<hr />
+
+![image](images/insert_chr7_60_43,600,000-43,750,000_target_chr7_60_43,590,000-43,590,000_ONT_no_2nd_1.jpg)
+
+Figure 1
+
+
+<hr />
+
+![image](images/insert_chr7_60_43,600,000-43,750,000_target_chr7_60_43,590,000-43,590,000_ONT_no_2nd_1_all.jpg)
+
+Figure 2
+
+
+<hr />
+
+![image](images/insert_chr7_60_43,600,000-43,750,000_target_chr7_60_43,590,000-43,590,000_ONT_no_2nd_1_result.jpg)
+
+Figure 3
+
+<hr />
+
+### Primary region spanning: chr7 43,600,000-43,750,000 
+
+For this analysis the split reads at chr7 43,590,000 who's secondary alignments map to XX43,600,000 (blue line Figure 4) and who's secondary alignments map to 43,750,000 (black line Figure 4) were selected and analysed using the ___Variant determination___ > ___Use soft clip data___ > ___Complex rearrangement___ menu option.<hr />
+
+![image](images/insert_chr7_60_43,600,000-43,750,000_target_chr7_60_43,590,000-43,590,000_ONT_no_2nd_2.jpg)
+
+Figure 4
+
+
+<hr />
+
+![image](images/insert_chr7_60_43,600,000-43,750,000_target_chr7_60_43,590,000-43,590,000_ONT_no_2nd_2_all.jpg)
+
+Figure 5
+
+
+<hr />
+
+![image](images/insert_chr7_60_43,600,000-43,750,000_target_chr7_60_43,590,000-43,590,000_ONT_no_2nd_2_results.jpg)
+
+Figure 6
+
+<hr />
