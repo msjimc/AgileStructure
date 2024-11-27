@@ -44,12 +44,14 @@
             lblPrimary1 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             btnClose = new System.Windows.Forms.Button();
+            chkColour = new System.Windows.Forms.CheckBox();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
             groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBox1.Controls.Add(chkColour);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(btnDrawBP);
             groupBox1.Controls.Add(txtAnswer);
@@ -208,6 +210,18 @@
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click;
             // 
+            // chkColour
+            // 
+            chkColour.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            chkColour.AutoSize = true;
+            chkColour.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            chkColour.Location = new System.Drawing.Point(700, 142);
+            chkColour.Name = "chkColour";
+            chkColour.Size = new System.Drawing.Size(62, 19);
+            chkColour.TabIndex = 13;
+            chkColour.Text = "Colour";
+            chkColour.UseVisualStyleBackColor = true;
+            // 
             // ComplexRearrangement
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -243,5 +257,6 @@
         private System.Windows.Forms.TextBox txtAnswer;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnDrawBP;
+        private System.Windows.Forms.CheckBox chkColour;
     }
 }

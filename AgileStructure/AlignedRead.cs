@@ -203,9 +203,6 @@ namespace AgileStructure
 
         public void drawSoftClip(Graphics g2, float top, int featureHeight, int start, double XScale, string sCIGAR, int sPosition, bool isForward, List<int> selectedIndex)
         {
-            if (name == "xdeg2fAMQpELmr1wQuEYqgqfy")
-            { }
-
             List<fragment> sBlocks = new List<fragment>();
             int sLength = getSecondaryAlignedLengthAndMakeBlock(sCIGAR, ref sBlocks);
             float alignStart = -1;

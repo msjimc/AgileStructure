@@ -3921,18 +3921,27 @@ namespace AgileStructure
             {
                 if (DrawnARKeys.ContainsKey(index) == true)
                 {
+                    bool add = false;
                     AlignedRead ar = DrawnARKeys[index];
                     if (ar.getPosition + 100 > place && ar.getPosition - 100 < place)
-                    { primary5primeOfBreakpoint++; }
+                    { 
+                        primary5primeOfBreakpoint++;
+                        add = true;
+                    }
 
                     if (ar.getEndPosition + 100 > place && ar.getEndPosition - 100 < place)
-                    { primary5primeOfBreakpoint--; }
+                    { 
+                        primary5primeOfBreakpoint--;
+                        add = true;
+                    }
+                    if (add == true) {count++; }
                 }
 
-                count++;
+                
             }
 
-            answer = (float)(primary5primeOfBreakpoint + count) / (float)(count * 2);
+            if (count > 0)
+            { answer = (float)(primary5primeOfBreakpoint + count) / (float)(count * 2); }
 
             return answer;
         }
@@ -3961,25 +3970,33 @@ namespace AgileStructure
                                 int startPoint = Convert.ToInt32(items[1]);
                                 if (reference == items[0])
                                 {
+                                    bool add = false;
                                     if (getFivePrimeSoftClipLength(items[3]) > 50)
                                     {
                                         if (startPoint + 100 > place && startPoint - 100 < place)
-                                        { primary5primeOfBreakpoint++; }
+                                        { 
+                                            primary5primeOfBreakpoint++; 
+                                            add = true; 
+                                        }
                                     }
 
                                     if (getThreePrimeSoftClipLength(items[3]) > 50)
                                     {
                                         if (startPoint + getAlignedLength(items[3]) + 100 > place && startPoint + getAlignedLength(items[3]) - 100 < place)
-                                        { primary5primeOfBreakpoint--; }
+                                        { 
+                                            primary5primeOfBreakpoint--; 
+                                            add = true; 
+                                        }
                                     }
+                                    if (add == true) { count++; }
                                 }
                             }
                         }
                     }
-                    count++;
                 }
             }
-            answer = (float)(primary5primeOfBreakpoint + count) / (float)(count * 2);
+            if (count > 0)
+            { answer = (float)(primary5primeOfBreakpoint + count) / (float)(count * 2); }
 
             return answer;
         }
@@ -4127,7 +4144,7 @@ namespace AgileStructure
             return secondRefSet;
         }
 
-        internal void drawBreakpoints(string sequence1, int place1, string sequence2, int place2, string sequence3, int place3, string sequence4, int place4)
+        internal void drawBreakpoints(bool colour, string sequence1, int place1, string sequence2, int place2, string sequence3, int place3, string sequence4, int place4)
         {
             if (selectEnd - selectStart > 100)
             {
@@ -4137,10 +4154,18 @@ namespace AgileStructure
                     Graphics gModifiedP = Graphics.FromImage(modifiedP);
                     Bitmap modifiedS = (Bitmap)bmp_soft.Clone();
                     Graphics gModifiedS = Graphics.FromImage(modifiedS);
-                    drawBreakPointLine(gModifiedP, gModifiedS, sequence1, place1);
-                    drawBreakPointLine(gModifiedP, gModifiedS, sequence2, place2);
-                    drawBreakPointLine(gModifiedP, gModifiedS, sequence3, place3);
-                    drawBreakPointLine(gModifiedP, gModifiedS, sequence4, place4);
+
+
+                    Pen[] penArray = new Pen[] { new Pen(Color.Black,2), new Pen(Color.Black, 2), new Pen(Color.Black, 2), new Pen(Color.Black, 2) };
+                    if (colour)
+                    {
+                        penArray = new Pen[] { new Pen(Color.Black, 2), new Pen(Color.Blue, 2), new Pen(Color.Red, 2), new Pen(Color.Green, 2) };
+                    }
+
+                    drawBreakPointLine(gModifiedP, gModifiedS, sequence1, place1, penArray[0]);
+                    drawBreakPointLine(gModifiedP, gModifiedS, sequence2, place2, penArray[1]);
+                    drawBreakPointLine(gModifiedP, gModifiedS, sequence3, place3, penArray[2]);
+                    drawBreakPointLine(gModifiedP, gModifiedS, sequence4, place4, penArray[3]);
 
                     p1.Image = modifiedP;
                     p2.Image = modifiedS;
@@ -4149,7 +4174,7 @@ namespace AgileStructure
             }
         }
 
-        private void drawBreakPointLine(Graphics gModified1, Graphics gModified2, string sequence, int place)
+        private void drawBreakPointLine(Graphics gModified1, Graphics gModified2, string sequence, int place, Pen penColour)
         {
             try
             {
@@ -4157,14 +4182,14 @@ namespace AgileStructure
                 {
                     double xScale = (p1.Width - 20) / (double)(selectEnd - selectStart);
                     int imageplace = 10 + (int)((place - selectStart) * xScale);
-                    gModified1.DrawLine(Pens.Black, imageplace, 10, imageplace, p1.Height);
+                    gModified1.DrawLine(penColour, imageplace, 10, imageplace, p1.Height);
                 }
 
                 if (cboSecondaries.Text.StartsWith(sequence + " "))
                 {
                     double xScale = (p1.Width - 20) / (double)(selectSecondaryEnd - selectSecondaryStart);
                     int imageplace = 10 + (int)((place - selectSecondaryStart) * xScale);
-                    gModified2.DrawLine(Pens.Black, imageplace, 10, imageplace, p2.Height);
+                    gModified2.DrawLine(penColour, imageplace, 10, imageplace, p2.Height);
                 }
             }
             catch (Exception ex) { }

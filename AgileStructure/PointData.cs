@@ -36,7 +36,7 @@ namespace AgileStructure
 
         public float Primary5primeOfPlace2 { get { return primary5primeOfPlace2; } }
 
-        public float Secondary5primeOfPlace1 { get { return primary5primeOfPlace1; } }
+        public float Secondary5primeOfPlace1 { get { return secondary5primeOfPlace1; } }
 
         public float Secondary5primeOfPlace2 { get { return secondary5primeOfPlace2; } }
 

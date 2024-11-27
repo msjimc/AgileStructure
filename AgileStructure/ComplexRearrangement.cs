@@ -149,9 +149,7 @@ namespace AgileStructure
                 {
                     average1 = first[0].getAveragePlace;
                     average2 = first[1].getAveragePlace;
-
                     lblPrimary2.Text = "Break point 1: " + first[0].getReferenceName + ":" + average1.ToString("N0");
-
                     lblSecondary2.Text = "Break point 2: " + first[1].getReferenceName + ":" + average2.ToString("N0");
                 }
                 else if (primary5primeOfPlace2 > 0.8f || primary5primeOfPlace2 < 0.2f)
@@ -218,7 +216,7 @@ namespace AgileStructure
             primary5primeOfPlace11 = pda.Primary5primeOfPlace1;
             primary5primeOfPlace12 = pda.Primary5primeOfPlace2;
             secondary5primeOfPlace11 = pda.Secondary5primeOfPlace1;
-            secondary5primeOfPlace12 = pda.Primary5primeOfPlace2;
+            secondary5primeOfPlace12 = pda.Secondary5primeOfPlace2;
             annotations1 = pda.Annotations;
 
             average21 = pdb.Average1;
@@ -415,7 +413,7 @@ namespace AgileStructure
                     {
                         if (alignment[1] > 0.8f)
                         {
-                            return "Duplication: " + items1[0] + "." + items1[2] + "_" + items2[2] + " is inserted at " + items1[0] + "." + items2[1] + "_" + items1[1];
+                            return "Duplication: " + items1[0] + "." + items1[2] + "_" + items2[2] + " is inserted at " + items1[0] + "." + items1[1] + "_" + items2[1];
                         }
 
                         else if (alignment[1] < 0.2f)
@@ -623,7 +621,7 @@ namespace AgileStructure
                     }
                     else if (alignment[0] < 0.2f)
                     {
-                        string answer = "The reverse complement of " + items1[0] + "." + items2[1] + "_" + items1[2] + " is inserted at " + items1[0] + "." + items2[1] + "_" + items2[2];// + "\r\nor\r\n" +
+                        string answer = "The reverse complement of " + items1[0] + "." + items2[2] + "_" + items1[2] + " is inserted at " + items1[0] + "." + items1[1] + "_" + items2[1];// + "\r\nor\r\n" +
                             //"Duplication: the reverse complement of " + items1[0] + "." + items2[2] + "_" + items1[2] + " is inserted at " + items1[0] + "." + items1[1] + "_" + items2[1];
 
                         return answer;
@@ -853,13 +851,32 @@ namespace AgileStructure
             for (int index = 0; index < places.Length; index++)
             {
                 if (places[index] - 50 < average11 && places[index] + 50 > average11)
-                { ratio[index] = primary5primeOfPlace11; }
+                {  if (primary5primeOfPlace11 > -1)
+                    { ratio[index] = primary5primeOfPlace11; }
+                else
+                    { ratio[index] = secondary5primeOfPlace11; }
+                }
                 else if (places[index] - 50 < average12 && places[index] + 50 > average12)
-                { ratio[index] = primary5primeOfPlace12; }
+                {
+                    if (primary5primeOfPlace12 > 0)
+                    { ratio[index] = primary5primeOfPlace12; }
+                    else
+                    { ratio[index] = secondary5primeOfPlace12; }
+                }
                 else if (places[index] - 50 < average21 && places[index] + 50 > average21)
-                { ratio[index] = primary5primeOfPlace21; }
+                {
+                    if (primary5primeOfPlace21 > 0)
+                    { ratio[index] = primary5primeOfPlace21; }
+                    else
+                    { ratio[index] = secondary5primeOfPlace21; }
+                }
                 else if (places[index] - 50 < average22 && places[index] + 50 > average22)
-                { ratio[index] = primary5primeOfPlace22; }
+                {
+                    if (primary5primeOfPlace22 > 0)
+                    { ratio[index] = primary5primeOfPlace22; }
+                    else
+                    { ratio[index] = secondary5primeOfPlace22; }
+                }
             }
 
             return ratio;
@@ -884,7 +901,7 @@ namespace AgileStructure
                 string[] items3 = drawbreakPoint(lblSecondary1.Text);
                 string[] items4 = drawbreakPoint(lblSecondary2.Text);
 
-                form.drawBreakpoints(items1[0], Convert.ToInt32(items1[1]), items2[0], Convert.ToInt32(items2[1]), items3[0], Convert.ToInt32(items3[1]), items4[0], Convert.ToInt32(items4[1]));
+                form.drawBreakpoints(chkColour.Checked, items1[0], Convert.ToInt32(items1[1]), items2[0], Convert.ToInt32(items2[1]), items3[0], Convert.ToInt32(items3[1]), items4[0], Convert.ToInt32(items4[1]));
             }
             catch { }
         }
