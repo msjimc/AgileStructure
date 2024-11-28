@@ -11,60 +11,60 @@ The read data sets were created using [MakeSVgenome](https://github.com/msjimc/M
 
 |ID|File|Description|Inserted sequence inverted|Function|Ambiguous|
 |-|-|-|-|-|-|
-|1|chr7 43,600,000-43,750,000 deleted.md|Deletion|NA|Deletion|No|
-|2|chr7 43,600,000-43,750,000 inserted into chr7 43,600,000.md|Duplication (simple)|NO|Duplication|Yes|
-|3|chr7 43,600,000-43,750,000 inserted into chr7 43,750,000.md|Duplication (simple)|NO|Duplication|Yes|
-|4|RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,600,000.md|Duplication inverted|Yes|Duplication|No|
-|5|RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,750,000.md|Duplication inverted|Yes|Duplication|No|
-|6|chr7 43,600,000-43,750,000 inserted into chr7 43,740,000-43,750,000.md|Insertion within original sequence with deletion at insertion site - Duplication|NO|Duplication|No|
-|7|Chr7 Ring Chromosome.md|Ring chromosome with breakpoint at 10,000,000 and 149,000,000 resulting in loss of both telomeres|No|Ring|Yes|
-|8|RC of chr7 43,600,000-43,750,000 inserted into chr7 43,600,000-43,750,000.md|Inversion (simple)|Yes|Inversion|No|
-|9|balanced translocation p to p.md|Balanced translocation|NO|Translocation|No|
-|10|balanced translocation q to q.md|Balanced translocation|NO|Translocation|No|
-|11|balanced translocation p to q.md|Balanced translocation|Yes|Translocation|No|
-|12|balanced translocation q to p.md|Balanced translocation|Yes|Translocation|No|
-|13|chr7 1-3,000,000 inserted into chr8 1-4,000,000.md|Unbalanced translocation|NO|Translocation|No|
-|14|chr7 156,345,972-159,345,972 inserted into chr8 141,138,635-145,138,635.md|Unbalanced translocation|NO|Translocation|No|
-|15|chr8 1-4,000,000 inserted into chr7 1-3,000,000.md|Unbalanced translocation|NO|Translocation|No|
-|16|chr8 141,138,635-145,138,635 inserted into chr7 156,345,972-159,345,972.md|Unbalanced translocation|NO|Translocation|No|
-|17|RC of chr7 1-3,000,000 inserted into chr8 141,138,635-145,138,635.md|Unbalanced translocation|Yes|Translocation|No|
-|18|RC of chr7 156,345,972-159,345,972 inserted into chr8 1-4,000,000.md|Unbalanced translocation|Yes|Translocation|No|
-|19|RC of chr8 1-4,000,000 inserted into chr7 156,345,972-159,345,972.md|Unbalanced translocation|Yes|Translocation|No|
-|20|RC of chr8 141,138,635-145,138,635 inserted into chr7 1-3,000,000.md|Unbalanced translocation|Yes|Translocation|No|
-|21|chr7 43,600,000-43,750,000 inserted into chr7 20000000-21,000,000.md|Insertion in same chromosome with deletion|NO|Complex rearrangement|No|
-|22|chr7 43,600,000-43,750,000 inserted into chr7 50000000-51,000,000.md|Insertion in same chromosome with deletion|NO|Complex rearrangement|No|
-|23|chr7 43,600,000-43,750,000 inserted into chr7 43,590,000.md|Insertion near original sequence|NO|Complex rearrangement|No|
-|24|chr7 43,600,000-43,750,000 inserted into chr7 43,760,000.md|Insertion near original sequence|NO|Complex rearrangement|No|
-|25|RC of chr7 43,600,000-43,750,000 inserted into chr7 43,610,000.md|Insertion near original sequence - Inverted Duplication|Yes|Complex rearrangement|No|
-|26|chr7 43,600,000-43,750,000 inserted into chr7 43,590,000-43,600,000.md|Insertion near original sequence with deletion at insertion site - Duplication|NO|Complex rearrangement|No|
-|27|chr7 43,600,000-43,750,000 inserted into chr7 43,750,000-43,760,000.md|Insertion near original sequence with deletion at insertion site - Duplication|NO|Complex rearrangement|No|
-|28|RC of chr7 43,600,000-43,750,000 inserted into chr7 43,600,000-43,610,000.md|Insertion near original sequence with deletion at insertion site - Inverted Duplication|yes|Complex rearrangement|yes|
-|29|RC of chr7 43,600,000-43,750,000 inserted into chr7 20000000-21000000.md|Insertion of reverse complement on different chromosome|Yes|Complex rearrangement|yes|
-|30|RC of chr7 43,600,000-43,750,000 inserted into chr7 50000000-51000000.md|Insertion of reverse complement on different chromosome|Yes|Complex rearrangement|Yes|
-|31|RC of chr7 43,600,000-43,750,000 inserted into chr8 20000000-21000000.md|Insertion of reverse complement on different chromosome|Yes|Complex rearrangement|No|
-|32|RC of chr7 43,600,000-43,750,000 inserted into chr8 43,600,000-43,750,000.md|Insertion of reverse complement on different chromosome|Yes|Complex rearrangement|No|
-|33|RC of chr7 43,600,000-43,750,000 inserted into chr8 50000000-51000000.md|Insertion of reverse complement on different chromosome|Yes|Complex rearrangement|No|
-|34|RC of chr7 43,600,000-43,750,000 inserted into chr7 43,760,000.md|Insertion of reverse complement near original sequence - Duplication|Yes|Complex rearrangement|Yes|
-|35|RC of chr7 43,600,000-43,750,000 inserted into chr7 43,740,000.md|Insertion of reverse complement within original sequence - Duplication|Yes|Complex rearrangement|No|
-|36|chr7 43,600,000-43,750,000 inserted into chr8 20000000-21,000,000.md|Insertion on different chromosome|NO|Complex rearrangement|No|
-|37|chr7 43,600,000-43,750,000 inserted into chr8 43,600,000-43,750,000.md|Insertion on different chromosome|NO|Complex rearrangement|No|
-|38|chr7 43,600,000-43,750,000 inserted into chr8 50000000-51,000,000.md|Insertion on different chromosome|NO|Complex rearrangement|No|
-|39|chr8 43,600,000-43,750,000 inserted into chr7 20000000-21,000,000.md|Insertion on different chromosome|NO|Complex rearrangement|No|
-|40|chr8 43,600,000-43,750,000 inserted into chr7 43,600,000-43,750,000.md|Insertion on different chromosome|NO|Complex rearrangement|No|
-|41|chr8 43,600,000-43,750,000 inserted into chr7 50000000-51,000,000.md|Insertion on different chromosome|NO|Complex rearrangement|No|
-|42|RC of chr8 43,600,000-43,750,000 inserted into chr7 20000000-21000000.md|Insertion on different chromosome|Yes|Complex rearrangement|No|
-|43|RC of chr8 43,600,000-43,750,000 inserted into chr7 43,600,000-43,750,000.md|Insertion on different chromosome|Yes|Complex rearrangement|No|
-|44|RC of chr8 43,600,000-43,750,000 inserted into chr7 50000000-51000000.md|Insertion on different chromosome|Yes|Complex rearrangement|No|
-|45|chr7 43,600,000-43,750,000 inserted into chr7 43,610,000.md|Insertion within original sequence - Duplication|NO|Complex rearrangement|No|
-|46|chr7 43,600,000-43,750,000 inserted into chr7 43,740,000.md|Insertion within original sequence - Duplication|NO|Complex rearrangement|No|
-|47|chr7 43,600,000-43,750,000 inserted into chr7 43,600,000-43,610,000.md|Insertion within original sequence with deletion at insertion site - Duplication|NO|Complex rearrangement|No|
-|48|RC of chr7 43,600,000-43,750,000 inserted into chr7 43,590,000-43,600,000.md|Insertion within original sequence with deletion at insertion site - Inverted Duplication|Yes|Complex rearrangement|No|
-|49|RC of chr7 43,600,000-43,750,000 inserted into chr7 43,600,000-43,800,000.md|Inversion with 50 kb od extra 3' prime sequence deleted|Yes|Complex rearrangement|No|
-|50|RC of chr7 43,600,000-43,750,000 inserted into chr7 43,600,000-43,700,000.md|Inversion with 50 kb of 3' sequence retained|Yes|Complex rearrangement|yes|
-|51|RC of chr7 43,600,000-43,750,000 inserted into chr7 43,550,000-43,700,000.md|Inversion with 50 kb of sequence lost to the 5' side of the inversion and 50 kb retained on the 3' side|Yes|Complex rearrangement|yes|
-|52|RC of chr7 43,600,000-43,750,000 inserted into chr7 43,650,000-43,800,000.md|Inversion with 50 kb of sequence retained on the 5' side of the inversion and 50 kb lost on the 3' side|Yes|Complex rearrangement|Yes|
-|53|RC of chr7 43,600,000-43,750,000 inserted into chr7 43,650,000-43,750,000.md|Inversion with 50Kb of sequence retained at the 5' side of the inversion|yes|Complex rearrangement|yes|
-|54|RC of chr7 43,600,000-43,750,000 inserted into chr7 43,550,000-43,800,000.md|Inversion with deleted sequence larger than the inverted sequence|Yes|Complex rearrangement|No|
-|55|RC of chr7 43,600,000-43,750,000 inserted into chr7 43,650,000-43,700,000.md|Inversion with deleted sequence smaller than the inverted sequence|Yes|Complex rearrangement|No|
-|56|RC of chr7 43,600,000-43,750,000 inserted into chr7 43,550,000-43,800,000.md|Inversion with deletion|Yes|Complex rearrangement|No|
-|57|RC of chr7 43,600,000-43,750,000 inserted into chr7 43,550,000-43,750,000.md|Inversion with the deleted sequences extending 50 kb 5' prime of the insertion|Yes|Complex rearrangement|No|
+|1|[chr7 43,600,000-43,750,000 deleted.md](chr7_43,600,000-43,750,000_deleted.md)|Deletion|NA|Deletion|No|
+|2|[chr7 43,600,000-43,750,000 inserted into chr7 43,600,000.md](chr7_43,600,000-43,750,000_inserted_into_chr7_43,600,000.md)|Dupication (simple)|NO|Duplication|Yes|
+|3|[chr7 43,600,000-43,750,000 inserted into chr7 43,750,000.md](chr7_43,600,000-43,750,000_inserted_into_chr7_43,750,000.md)|Duplication (simple)|NO|Duplication|Yes|
+|4|[RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,600,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,600,000.md)|Duplication inverted|Yes|Duplication|No|
+|5|[RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,750,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,750,000.md)|Duplication inverted|Yes|Duplication|No|
+|6|[chr7 43,600,000-43,750,000 inserted into chr7 43,740,000-43,750,000.md](chr7_43,600,000-43,750,000_inserted_into_chr7_43,740,000-43,750,000.md)|Insertion within original sequence with deletion at insertion site - Duplication|NO|Duplication|No|
+|7|[Chr7 Ring Chromosome.md](Chr7_Ring_Chromosome.md)|Ring chromosome with breakpoint at 10,000,000 and 149,000,000 resulting in loss of both telomeres|No|Ring|Yes|
+|8|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,600,000-43,750,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,600,000-43,750,000.md)|Inversion (simple)|Yes|Inversion|No|
+|9|[balanced translocation p to p.md](balanced_translocation_p_to_p.md)|Balanced translocation|NO|Translocation|No|
+|10|[balanced translocation q to q.md](balanced_translocation_q_to_q.md)|Balanced translocation|NO|Translocation|No|
+|11|[balanced translocation p to q.md](balanced_translocation_p_to_q.md)|Balanced translocation|Yes|Translocation|No|
+|12|[balanced translocation q to p.md](balanced_translocation_q_to_p.md)|Balanced translocation|Yes|Translocation|No|
+|13|[chr7 1-3,000,000 inserted into chr8 1-4,000,000.md](chr7_1-3,000,000_inserted_into_chr8_1-4,000,000.md)|Unbalanced translocation|NO|Translocation|No|
+|14|[chr7 156,345,972-159,345,972 inserted into chr8 141,138,635-145,138,635.md](chr7_156,345,972-159,345,972_inserted_into_chr8_141,138,635-145,138,635.md)|Unbalanced translocation|NO|Translocation|No|
+|15|[chr8 1-4,000,000 inserted into chr7 1-3,000,000.md](chr8_1-4,000,000_inserted_into_chr7_1-3,000,000.md)|Unbalanced translocation|NO|Translocation|No|
+|16|[chr8 141,138,635-145,138,635 inserted into chr7 156,345,972-159,345,972.md](chr8_141,138,635-145,138,635_inserted_into_chr7_156,345,972-159,345,972.md)|Unbalanced translocation|NO|Translocation|No|
+|17|[RC of chr7 1-3,000,000 inserted into chr8 141,138,635-145,138,635.md](RC_of_chr7_1-3,000,000_inserted_into_chr8_141,138,635-145,138,635.md)|Unbalanced translocation|Yes|Translocation|No|
+|18|[RC of chr7 156,345,972-159,345,972 inserted into chr8 1-4,000,000.md](RC_of_chr7_156,345,972-159,345,972_inserted_into_chr8_1-4,000,000.md)|Unbalanced translocation|Yes|Translocation|No|
+|19|[RC of chr8 1-4,000,000 inserted into chr7 156,345,972-159,345,972.md](RC_of_chr8_1-4,000,000_inserted_into_chr7_156,345,972-159,345,972.md)|Unbalanced translocation|Yes|Translocation|No|
+|20|[RC of chr8 141,138,635-145,138,635 inserted into chr7 1-3,000,000.md](RC_of_chr8_141,138,635-145,138,635_inserted_into_chr7_1-3,000,000.md)|Unbalanced translocation|Yes|Translocation|No|
+|21|[chr7 43,600,000-43,750,000 inserted into chr7 20000000-21,000,000.md](chr7_43,600,000-43,750,000_inserted_into_chr7_20000000-21,000,000.md)|Insertion in same chromosome with deletion|NO|Complex rearrangement|No|
+|22|[chr7 43,600,000-43,750,000 inserted into chr7 50000000-51,000,000.md](chr7_43,600,000-43,750,000_inserted_into_chr7_50000000-51,000,000.md)|Insertion in same chromosome with deletion|NO|Complex rearrangement|No|
+|23|[chr7 43,600,000-43,750,000 inserted into chr7 43,590,000.md](chr7_43,600,000-43,750,000_inserted_into_chr7_43,590,000.md)|Insertion near original sequence|NO|Complex rearrangement|No|
+|24|[chr7 43,600,000-43,750,000 inserted into chr7 43,760,000.md](chr7_43,600,000-43,750,000_inserted_into_chr7_43,760,000.md)|Insertion near original sequence|NO|Complex rearrangement|No|
+|25|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,610,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,610,000.md)|Insertion near original sequence - Inverted Duplication|Yes|Complex rearrangement|No|
+|26|[chr7 43,600,000-43,750,000 inserted into chr7 43,590,000-43,600,000.md](chr7_43,600,000-43,750,000_inserted_into_chr7_43,590,000-43,600,000.md)|Insertion near original sequence with deletion at insertion site - Duplication|NO|Complex rearrangement|No|
+|27|[chr7 43,600,000-43,750,000 inserted into chr7 43,750,000-43,760,000.md](chr7_43,600,000-43,750,000_inserted_into_chr7_43,750,000-43,760,000.md)|Insertion near original sequence with deletion at insertion site - Duplication|NO|Complex rearrangement|No|
+|28|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,600,000-43,610,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,600,000-43,610,000.md)|Insertion near original sequence with deletion at insertion site - Inverted Duplication|yes|Complex rearrangement|yes|
+|29|[RC of chr7 43,600,000-43,750,000 inserted into chr7 20000000-21000000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_20000000-21000000.md)|Insertion of reverse complement on different chromosome|Yes|Complex rearrangement|yes|
+|30|[RC of chr7 43,600,000-43,750,000 inserted into chr7 50000000-51000000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_50000000-51000000.md)|Insertion of reverse complement on different chromosome|Yes|Complex rearrangement|Yes|
+|31|[RC of chr7 43,600,000-43,750,000 inserted into chr8 20000000-21000000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr8_20000000-21000000.md)|Insertion of reverse complement on different chromosome|Yes|Complex rearrangement|No|
+|32|[RC of chr7 43,600,000-43,750,000 inserted into chr8 43,600,000-43,750,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr8_43,600,000-43,750,000.md)|Insertion of reverse complement on different chromosome|Yes|Complex rearrangement|No|
+|33|[RC of chr7 43,600,000-43,750,000 inserted into chr8 50000000-51000000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr8_50000000-51000000.md)|Insertion of reverse complement on different chromosome|Yes|Complex rearrangement|No|
+|34|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,760,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,760,000.md)|Insertion of reverse complement near original sequence - Duplication|Yes|Complex rearrangement|Yes|
+|35|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,740,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,740,000.md)|Insertion of reverse complement within original sequence - Duplication|Yes|Complex rearrangement|No|
+|36|[chr7 43,600,000-43,750,000 inserted into chr8 20000000-21,000,000.md](chr7_43,600,000-43,750,000_inserted_into_chr8_20000000-21,000,000.md)|Insertion on different chromosome|NO|Complex rearrangement|No|
+|37|[chr7 43,600,000-43,750,000 inserted into chr8 43,600,000-43,750,000.md](chr7_43,600,000-43,750,000_inserted_into_chr8_43,600,000-43,750,000.md)|Insertion on different chromosome|NO|Complex rearrangement|No|
+|38|[chr7 43,600,000-43,750,000 inserted into chr8 50000000-51,000,000.md](chr7_43,600,000-43,750,000_inserted_into_chr8_50000000-51,000,000.md)|Insertion on different chromosome|NO|Complex rearrangement|No|
+|39|[chr8 43,600,000-43,750,000 inserted into chr7 20000000-21,000,000.md](chr8_43,600,000-43,750,000_inserted_into_chr7_20000000-21,000,000.md)|Insertion on different chromosome|NO|Complex rearrangement|No|
+|40|[chr8 43,600,000-43,750,000 inserted into chr7 43,600,000-43,750,000.md](chr8_43,600,000-43,750,000_inserted_into_chr7_43,600,000-43,750,000.md)|Insertion on different chromosome|NO|Complex rearrangement|No|
+|41|[chr8 43,600,000-43,750,000 inserted into chr7 50000000-51,000,000.md](chr8_43,600,000-43,750,000_inserted_into_chr7_50000000-51,000,000.md)|Insertion on different chromosome|NO|Complex rearrangement|No|
+|42|[RC of chr8 43,600,000-43,750,000 inserted into chr7 20000000-21000000.md](RC_of_chr8_43,600,000-43,750,000_inserted_into_chr7_20000000-21000000.md)|Insertion on different chromosome|Yes|Complex rearrangement|No|
+|43|[RC of chr8 43,600,000-43,750,000 inserted into chr7 43,600,000-43,750,000.md](RC_of_chr8_43,600,000-43,750,000_inserted_into_chr7_43,600,000-43,750,000.md)|Insertion on different chromosome|Yes|Complex rearrangement|No|
+|44|[RC of chr8 43,600,000-43,750,000 inserted into chr7 50000000-51000000.md](RC_of_chr8_43,600,000-43,750,000_inserted_into_chr7_50000000-51000000.md)|Insertion on different chromosome|Yes|Complex rearrangement|No|
+|45|[chr7 43,600,000-43,750,000 inserted into chr7 43,610,000.md](chr7_43,600,000-43,750,000_inserted_into_chr7_43,610,000.md)|Insertion within original sequence - Duplication|NO|Complex rearrangement|No|
+|46|[chr7 43,600,000-43,750,000 inserted into chr7 43,740,000.md](chr7_43,600,000-43,750,000_inserted_into_chr7_43,740,000.md)|Insertion within original sequence - Duplication|NO|Complex rearrangement|No|
+|47|[chr7 43,600,000-43,750,000 inserted into chr7 43,600,000-43,610,000.md](chr7_43,600,000-43,750,000_inserted_into_chr7_43,600,000-43,610,000.md)|Insertion within original sequence with deletion at insertion site - Duplication|NO|Complex rearrangement|No|
+|48|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,590,000-43,600,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,590,000-43,600,000.md)|Insertion within original sequence with deletion at insertion site - Inverted Duplication|Yes|Complex rearrangement|No|
+|49|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,600,000-43,800,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,600,000-43,800,000.md)|Inversion with 50 kb od extra 3' prime sequence deleted|Yes|Complex rearrangement|No|
+|50|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,600,000-43,700,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,600,000-43,700,000.md)|Inversion with 50 kb of 3' sequence retained|Yes|Complex rearrangement|yes|
+|51|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,550,000-43,700,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,550,000-43,700,000.md)|Inversion with 50 kb of sequence lost to the 5' side of the inversion and 50 kb retained on the 3' side|Yes|Complex rearrangement|yes|
+|52|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,650,000-43,800,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,650,000-43,800,000.md)|Inversion with 50 kb of sequence retained on the 5' side of the inversion and 50 kb lost on the 3' side|Yes|Complex rearrangement|Yes|
+|53|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,650,000-43,750,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,650,000-43,750,000.md)|Inversion with 50Kb of sequence retained at the 5' side of the inversion|yes|Complex rearrangement|yes|
+|54|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,550,000-43,800,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,550,000-43,800,000.md)|Inversion with deleted sequence larger than the inverted sequence|Yes|Complex rearrangement|No|
+|55|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,650,000-43,700,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,650,000-43,700,000.md)|Inversion with deleted sequence smaller than the inverted sequence|Yes|Complex rearrangement|No|
+|56|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,550,000-43,800,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,550,000-43,800,000.md)|Inversion with deletion|Yes|Complex rearrangement|No|
+|57|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,550,000-43,750,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,550,000-43,750,000.md)|Inversion with the deleted sequences extending 50 kb 5' prime of the insertion|Yes|Complex rearrangement|No|
