@@ -750,17 +750,17 @@ namespace AgileStructure
                         if (fragments[3] == primaryReference)
                         {
                             if (average12 <= average22)
-                            { return fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                            { return fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " is inserted into " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
                             else
-                            { return "The reverse complement of " + fragments[3] + ":" + fragments[5] + "_" + fragments[4] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                            { return "The reverse complement of " + fragments[3] + ":" + fragments[5] + "_" + fragments[4] + " is inserted into " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
                         }
                         else
                         {
                             if (average12 <= average22)
-                            { return fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                            { return fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " is inserted into " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
                             else
                             {
-                                return "The reverse complement of " + fragments[3] + ":" + fragments[5] + "_" + fragments[4] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; 
+                                return "The reverse complement of " + fragments[3] + ":" + fragments[5] + "_" + fragments[4] + " is inserted into " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; 
                             }
                         }
                     }
@@ -768,14 +768,17 @@ namespace AgileStructure
                     {
                         if (fragments[3] == primaryReference)
                         {
-                            if (average12 <= average22) { return fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; } else { return "The reverse complement of " + fragments[3] + ":" + fragments[5] + "_" + fragments[4] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                            if (average12 <= average22) 
+                            { return fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " is inserted into " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; } 
+                            else 
+                            { return "The reverse complement of " + fragments[3] + ":" + fragments[5] + "_" + fragments[4] + " is inserted into " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
                         }
                         else
                         {
                             if (average12 <= average22)
-                            { return fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                            { return fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " is inserted into " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
                             else
-                            { return "The reverse complement of " + fragments[3] + ":" + fragments[5] + "_" + fragments[4] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                            { return "The reverse complement of " + fragments[3] + ":" + fragments[5] + "_" + fragments[4] + " is inserted into " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
                         }
                     }
                 }
@@ -798,16 +801,16 @@ namespace AgileStructure
                     {
                         if (fragments[3] == primaryReference)
                         {
-                            if (average12 <= average22) { return fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                            if (average12 <= average22) { return fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " is inserted into " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
                             else
-                            { return "The reverse complement of " + fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[2] + "_" + fragments[1]; }
+                            { return "The reverse complement of " + fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " is inserted into " + fragments[0] + ":" + fragments[2] + "_" + fragments[1]; }
                         }
                         else
                         {
                             if (average12 <= average22)
-                            { return fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                            { return fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " is inserted into " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
                             else
-                            { return "The reverse complement of " + fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[2] + "_" + fragments[1]; }
+                            { return "The reverse complement of " + fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " is inserted into " + fragments[0] + ":" + fragments[2] + "_" + fragments[1]; }
                         }
                     }
                     else
@@ -815,13 +818,16 @@ namespace AgileStructure
                         if (fragments[3] == primaryReference)
                         {
                             if (average12 <= average22)
-                            { return fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
+                            { return fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " is inserted into " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; }
                             else
-                            { return "The reverse complement of " + fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[2] + "_" + fragments[1]; }
+                            { return "The reverse complement of " + fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " is inserted into " + fragments[0] + ":" + fragments[2] + "_" + fragments[1]; }
                         }
                         else
                         {
-                            if (average12 <= average22) { return fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; } else { return "The reverse complement of " + fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " has been inserted in to " + fragments[0] + ":" + fragments[2] + "_" + fragments[1]; }
+                            if (average12 <= average22) 
+                            { return fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " is inserted into " + fragments[0] + ":" + fragments[1] + "_" + fragments[2]; } 
+                            else 
+                            { return "The reverse complement of " + fragments[3] + ":" + fragments[4] + "_" + fragments[5] + " is inserted into " + fragments[0] + ":" + fragments[2] + "_" + fragments[1]; }
                         }
                     }
                 }
