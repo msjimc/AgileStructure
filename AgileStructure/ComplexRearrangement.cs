@@ -428,8 +428,7 @@ namespace AgileStructure
                                 return "The reverse complement of " + items1[0] + ":" + items1[1] + "-" + items2[1] + " is inserted into " + items1[0] + ":" + items2[2] + "-" + items1[2] + "\r\nor\r\n" +
                                 "The reverse complement of " + items1[0] + ":" + items1[1] + "-" + items2[2] + " is inserted into " + items1[0] + ":" + items2[1] + "-" + items1[2];
                                 //insert_chr7_60_43,600,000-43,750,000_RC_target_chr7_60_43,760,000-43,760,000_ONT_no_2nd 1 and 2
-                                //insert_chr7_60_43,600,000-43,750,000_RC_target_chr7_60_43,650,000-43,750,000_ONT_no_2nd 1 and 2
-                                //
+                                //insert_chr7_60_43,600,000-43,750,000_RC_target_chr7_60_43,650,000-43,750,000_ONT_no_2nd 1 and 2                                
                             }
                         }
                         else if (combination == "1100")
@@ -441,15 +440,8 @@ namespace AgileStructure
                             //insert_chr7_60_43,600,000-43,750,000_RC_target_chr7_60_50000000-51,000,000_ONT_no_2nd 1 and 2
                             //insert_chr7_60_43,600,000-43,750,000_RC_target_chr7_60_43,650,000-43,700,000_ONT_no_2nd 1 and 2
                             //insert_chr7_60_43,600,000-43,750,000_RC_target_chr7_60_43,650,000-43,800,000_ONT_no_2nd 1 and 2
-                        }
-                        else if (combination == "1100" && DownOverlapping() == 1)
-                        {
-                            return items1[0] + ":" + items1[1] + "-" + items2[2] + " is inserted into " + items1[0] + ":" + items2[1] + "-" + items1[2];
-                            //
-                        }                       
+                        }                                               
                     }
-                    else if (annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith("o") == true)
-                    { }
                     else if (annotations1[3].StartsWith("o") == true && annotations2[4].StartsWith('o') == true)
                     {
                         string[] items1 = processIAnnotationString(annotations1[3]);
@@ -462,10 +454,6 @@ namespace AgileStructure
                             //insert_chr7_60_43,600,000-43,750,000_target_chr7_60_20000000-21,000,000_ONT_no_2nd 1 and 2
                         }
                     }
-                    else if (annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith('o') == true)
-                    { }
-                    else if (annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith('o') == true)
-                    { }
                     else if (annotations1[4].StartsWith("o") == true && annotations2[3].StartsWith('o') == true)
                     {
                         string[] items1 = processIAnnotationString(annotations1[4]);
@@ -478,8 +466,6 @@ namespace AgileStructure
                             //insert_chr7_60_43,600,000-43,750,000_target_chr7_60_50000000-51,000,000_ONT_no_2nd 1 and 2
                         }
                     }
-                    else if (annotations1[1].StartsWith("o") == true && annotations2[1].StartsWith('o') == true)
-                    { }
                     else if (annotations1[4].StartsWith("o") == true && annotations2[4].StartsWith('o') == true)
                     {
                         string[] items1 = processIAnnotationString(annotations1[4]);

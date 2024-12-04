@@ -24,6 +24,8 @@ namespace AgileStructure
         NoSet,
         Deletion,
         Insertion,
+        InsertionNoInverted,
+        InsertionInverted,
         Inversion,
         Duplication,
         DuplicationRCStart,
@@ -2519,7 +2521,7 @@ namespace AgileStructure
 
         private void insertionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string result = insertion();
+            string result = insertion(true);
             if (result[0] == 'e')
             {
                 MessageBox.Show(result.Substring(1), "Error");
@@ -2531,7 +2533,7 @@ namespace AgileStructure
             }
         }
 
-        private string insertion()
+        private string insertion(bool stanalone)
         {
             string result = "e";
             try
@@ -2581,6 +2583,18 @@ namespace AgileStructure
                         return result + "Could not find all the breakpoints";
                     }
 
+                    string isInverted = "";
+                    if (stanalone == true)
+                    {
+                        int[] inverted = testReadOrientation(bestPlaces);
+                        if (inverted[0] * 2 < inverted[1])
+                        { isInverted = "The insert is inverted"; }
+                        else if (inverted[1] * 2 < inverted[0])
+                        { isInverted = "The nsert is not inverted"; }
+                        else { isInverted = "Could not tel if insert is inverted"; }
+                    }
+
+
                     string mutation = "";
                     if (bestPlaces3rd.Length == 1 || bestPlaces3rd[1] == null)
                     { mutation = bestPlaces3rd[0].getReferenceName + "." + breakPoint3.ToString("N0") + "_" + (breakPoint3 + 1).ToString("N0") + "ins " + bestPlaces[0].getReferenceName + "."; }
@@ -2600,6 +2614,8 @@ namespace AgileStructure
 
                     if (id != null) { id.WindowState = FormWindowState.Minimized; }
                     result = "o" + mutation;
+                    if (stanalone == true)
+                    { result += "\r\n" + isInverted; }
                 }
                 else
                 {
@@ -2690,8 +2706,14 @@ namespace AgileStructure
                 case (MutationType.Translocation):
                     mutation = "The rearrangement appears to be a translocation.\n";
                     break;
+                case MutationType.InsertionInverted:
+                    mutation = "The rearrangement appears to be an inverted insertion.\n";
+                    break;
+                case MutationType.InsertionNoInverted:
+                    mutation = "The rearrangement appears to be an insertion, the inserted sequence is not inverted .\n";
+                    break;
                 case MutationType.Insertion:
-                    mutation = "The rearrangement appears to be an insertion.\n";
+                    mutation = "The rearrangement appears to be an insertion, could not tell if sequences is inverted.\n";
                     break;
                 case (MutationType.NoSet):
                     mutation = "It was not possible to determine the type of rearrangement.\n";
@@ -2811,7 +2833,73 @@ namespace AgileStructure
             return answer;
         }
 
-        private void translocationToolStripMenuItem_Click(object sender, EventArgs e)
+        private int[] testReadOrientation(BreakPointData[] bestPlaces)
+        {
+            
+            int[] answer = { 0, 0 };            
+            int pEnd = 0;
+            int qEnd = 0;
+
+            if (bestPlaces[0].getAveragePlace > bestPlaces[1].getAveragePlace)
+            {
+                pEnd = bestPlaces[1].getAveragePlace;
+                qEnd = bestPlaces[0].getAveragePlace;
+            }
+            else
+            {
+                pEnd = bestPlaces[0].getAveragePlace;
+                qEnd = bestPlaces[1].getAveragePlace;
+            }
+
+            foreach (int index in selectedIndex)
+            {
+                if (DrawnARKeys.ContainsKey(index) == true)
+                {
+                    AlignedRead ar = DrawnARKeys[index];
+                    bool primaryStrand = ar.getForward;
+                    if (string.IsNullOrEmpty(ar.getSecondaryAlignmentTag) == false)
+                    {
+                        string[] hits = ar.getSecondaryAlignmentTag.Substring(2).Split(';');
+                        foreach (string hit in hits)
+                        {
+                            if (string.IsNullOrEmpty(hit) == false)
+                            {
+                                string[] items = hit.Split(',');
+                                if (items[0].ToLower().Equals(bestPlaces[0].getReferenceName.ToLower()) == true)                                {
+                                    
+                                    string secondaryStrandtrand = "";
+                                    int startPoint = Convert.ToInt32(items[1]);
+                                    int endPoint = startPoint + getAlignedLength(items[3]);
+                                    if (bestPlaces[0].inPlaces(startPoint) == true || bestPlaces[0].inPlaces(endPoint) == true || bestPlaces[1].inPlaces(startPoint) == true || bestPlaces[1].inPlaces(endPoint) == true)
+                                    {
+                                        secondaryStrandtrand = items[2];
+                                        if (primaryStrand == true)
+                                        {
+                                            if (secondaryStrandtrand == "+")
+                                            { answer[0]++; }
+                                            else { answer[1]++; }
+                                        }
+                                        else
+                                        {
+                                            if (secondaryStrandtrand == "+")
+                                            { answer[1]++; }
+                                            else { answer[0]++; }
+                                        }                                        
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return answer;
+            
+        } 
+    
+
+            private void translocationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string result = translocation(true);
             if (result[0] == 'e')
@@ -3535,8 +3623,12 @@ namespace AgileStructure
 
                     if (answer == MutationType.Deletion || answer == MutationType.DuplicationRCStart || answer == MutationType.DuplicationRCEnd || answer == MutationType.Inversion)
                     {
-                        if (couldItBeAnInsert() == true)
-                        { answer = MutationType.Insertion; }
+                        int[] orientation = testReadOrientation(bestPlaces);
+                        if (orientation[0] > orientation[1]*2)
+                        { answer = MutationType.InsertionNoInverted; }
+                        else if (orientation[0] * 2 < orientation[1] )
+                        { answer = MutationType.InsertionInverted; }
+                        else { answer = MutationType.Insertion; }                                       
                     }
                     else if (answer == MutationType.Translocation)
                     {
@@ -4110,7 +4202,7 @@ namespace AgileStructure
                 {
                     answer[0] = inversion();
                     answer[1] = "e";
-                    answer[2] = insertion();
+                    answer[2] = insertion(false);
                     answer[3] = deletion();
                     answer[4] = duplication(true);
                 }
@@ -4118,7 +4210,7 @@ namespace AgileStructure
                 {
                     answer[0] = "e";
                     answer[1] = translocation(false);
-                    answer[2] = insertion();
+                    answer[2] = insertion(false);
                     answer[3] = "e";
                     answer[4] = "e";
                 }
