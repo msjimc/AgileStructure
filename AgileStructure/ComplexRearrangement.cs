@@ -462,9 +462,9 @@ namespace AgileStructure
                             //insert_chr7_60_43,600,000-43,750,000_target_chr7_60_20000000-21,000,000_ONT_no_2nd 1 and 2
                         }
                     }
-                    else if (alignment[2] > 0.8f && annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith('o') == true)
+                    else if (annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith('o') == true)
                     { }
-                    else if (alignment[3] > 0.8f && annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith('o') == true)
+                    else if (annotations1[0].StartsWith("o") == true && annotations2[0].StartsWith('o') == true)
                     { }
                     else if (annotations1[4].StartsWith("o") == true && annotations2[3].StartsWith('o') == true)
                     {
@@ -497,6 +497,14 @@ namespace AgileStructure
                         if (combination == "1010")
                         { return items1[0] + ":" + items1[1] + "-" + items2[2] + " is inserted into " + items1[0] + ":" + items2[1] + "-" + items1[2]; }
                     }
+                    else if (annotations1[0].StartsWith("o") == true && annotations2[4].StartsWith("C") == true)
+                    {
+                        string[] items1 = processIAnnotationString(annotations1[0]);
+                        if (combination == "0011")
+                        { return "The reverse complement of " + items1[0] + ":" + average21 + "-" + items1[2] + " is inserted into " + items1[0] + ":" + items1[1] + "-" + average22; }
+                        //insert_chr7_60_43,600,000-43,750,000_RC_target_chr7_60_43,590,000-43,600,000_ONT_no_2nd
+                    }
+
 
                 }
             }
