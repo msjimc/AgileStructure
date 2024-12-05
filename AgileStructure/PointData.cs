@@ -14,10 +14,10 @@ namespace AgileStructure
         private float primary5primeOfPlace2;
         private float secondary5primeOfPlace1;
         private float secondary5primeOfPlace2;
-        string[] annotations;
+        private string[] annotations;
+        private AlignedRead[] selectedRead;
 
-
-        public PointData(int average1, int average2, float primary5primeOfPlace1, float primary5primeOfPlace2, float secondary5primeOfPlace1, float secondary5primeOfPlace2, string[] annotations)
+        public PointData(int average1, int average2, float primary5primeOfPlace1, float primary5primeOfPlace2, float secondary5primeOfPlace1, float secondary5primeOfPlace2, string[] annotations, AlignedRead[] SelectedRead)
         {
             this.average1 = average1;
             this.average2 = average2;
@@ -25,6 +25,7 @@ namespace AgileStructure
             this.primary5primeOfPlace2 = primary5primeOfPlace2;
             this.secondary5primeOfPlace1 = secondary5primeOfPlace1;
             this.secondary5primeOfPlace2 = secondary5primeOfPlace2;
+            this.selectedRead = SelectedRead;
 
             this.annotations = annotations;
         }
@@ -40,6 +41,8 @@ namespace AgileStructure
 
         public float Secondary5primeOfPlace2 { get { return secondary5primeOfPlace2; } }
 
-        public string[] Annotations { get { return annotations; } }       
+        public string[] Annotations { get { return annotations; } }    
+        
+        public AlignedRead[] SelectedRead { get { return selectedRead; } }
     }
 }

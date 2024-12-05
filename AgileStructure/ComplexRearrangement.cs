@@ -89,30 +89,8 @@ namespace AgileStructure
                 average2 = first[1].getAveragePlace;
                 lblPrimary1.Text = "Break point 1: " + first[0].getReferenceName + ":" + average1.ToString("N0");
                 lblSecondary1.Text = "Break point 2: " + first[1].getReferenceName + ":" + average2.ToString("N0");
-
-
-                //if (primary5primeOfPlace1 > 0.8f || primary5primeOfPlace1 < 0.2f)
-                //{
-                //    average1 = first[0].getAveragePlace;
-                //    average2 = first[1].getAveragePlace;
-                //    lblPrimary1.Text = "Break point 1: " + first[0].getReferenceName + ":" + average1.ToString("N0");
-                //    lblSecondary1.Text = "Break point 2: " + first[1].getReferenceName + ":" + average2.ToString("N0");
-                //}
-                //else if (primary5primeOfPlace2 > 0.8f || primary5primeOfPlace2 < 0.2f)
-                //{
-                //    average1 = first[1].getAveragePlace;
-                //    average2 = first[0].getAveragePlace;
-                //    float t = primary5primeOfPlace1;
-                //    primary5primeOfPlace1 = primary5primeOfPlace2;
-                //    primary5primeOfPlace2 = t;
-                //    t = scondary5primeOfPlace1;
-                //    scondary5primeOfPlace1 = scondary5primeOfPlace2;
-                //    scondary5primeOfPlace2 = t;
-                //    lblPrimary1.Text = "Break point 1: " + first[1].getReferenceName + ":" + average1.ToString("N0");
-                //    lblSecondary1.Text = "Break point 2: " + first[0].getReferenceName + ":" + average2.ToString("N0");
-                //}
-
-                pd1 = new PointData(average1, average2, primary5primeOfPlace1, primary5primeOfPlace2, scondary5primeOfPlace1, scondary5primeOfPlace2, annotations);
+                             
+                pd1 = new PointData(average1, average2, primary5primeOfPlace1, primary5primeOfPlace2, scondary5primeOfPlace1, scondary5primeOfPlace2, annotations, form.GetSelectedReads());
 
                 form.deleteSelectedList();
 
@@ -156,29 +134,7 @@ namespace AgileStructure
                 lblPrimary2.Text = "Break point 1: " + first[0].getReferenceName + ":" + average1.ToString("N0");
                 lblSecondary2.Text = "Break point 2: " + first[1].getReferenceName + ":" + average2.ToString("N0");
 
-
-                //if (primary5primeOfPlace1 > 0.8f || primary5primeOfPlace1 < 0.2f)
-                //{
-                //    average1 = first[0].getAveragePlace;
-                //    average2 = first[1].getAveragePlace;
-                //    lblPrimary2.Text = "Break point 1: " + first[0].getReferenceName + ":" + average1.ToString("N0");
-                //    lblSecondary2.Text = "Break point 2: " + first[1].getReferenceName + ":" + average2.ToString("N0");
-                //}
-                //else if (primary5primeOfPlace2 > 0.8f || primary5primeOfPlace2 < 0.2f)
-                //{
-                //    average1 = first[1].getAveragePlace;
-                //    average2 = first[0].getAveragePlace;
-                //    float t = primary5primeOfPlace1;
-                //    primary5primeOfPlace1 = primary5primeOfPlace2;
-                //    primary5primeOfPlace2 = t;
-                //    t = scondary5primeOfPlace1;
-                //    scondary5primeOfPlace1 = scondary5primeOfPlace2;
-                //    scondary5primeOfPlace2 = t;
-                //    lblPrimary2.Text = "Break point 1: " + first[1].getReferenceName + ":" + average1.ToString("N0");
-                //    lblSecondary2.Text = "Break point 2: " + first[0].getReferenceName + ":" + average2.ToString("N0");
-                //}
-
-                pd2 = new PointData(average1, average2, primary5primeOfPlace1, primary5primeOfPlace2, scondary5primeOfPlace1, scondary5primeOfPlace2, annotations);
+                pd2 = new PointData(average1, average2, primary5primeOfPlace1, primary5primeOfPlace2, scondary5primeOfPlace1, scondary5primeOfPlace2, annotations, form.GetSelectedReads());
 
                 form.deleteSelectedList();
             }

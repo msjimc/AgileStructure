@@ -109,6 +109,7 @@ namespace AgileStructure
         Info id = null;
         ComplexRearrangement cR = null;
         colourCoder cC = null;
+        DrawSelectedReads dSR = null;
         private bool secondRefSet = false;
         List<string> history = new List<string>();
         List<StringInt> historySecondary;
@@ -428,7 +429,7 @@ namespace AgileStructure
                                         { lastReadPosition = ar.getPosition; }
                                         else { lastReadPosition = 0; }
 
-                                        if (lastReadPosition <= selectEnd && lastReadPosition >= selectStart - 1 && currentChromosome == index)
+                                        if (lastReadPosition <= selectEnd && lastReadPosition >= selectStart - 16385 && currentChromosome == index)
                                         {
                                             if (ar.IsGood == true && ar.IsSupplementaryAlignment == false && ar.IsSecondaryAlignment == false)
                                             {
@@ -1564,7 +1565,7 @@ namespace AgileStructure
                         txtsEnd.Text = placeThen.ToString("N0");
                         txtsStart.Text = placeNow.ToString("N0");
                     }
-                    btnSecondaryView.PerformClick();
+                    drawSecondaryAlignments();
                 }
                 else
                 { p2.Image = bmp_soft; }
@@ -2835,8 +2836,8 @@ namespace AgileStructure
 
         private int[] testReadOrientation(BreakPointData[] bestPlaces)
         {
-            
-            int[] answer = { 0, 0 };            
+
+            int[] answer = { 0, 0 };
             int pEnd = 0;
             int qEnd = 0;
 
@@ -2865,8 +2866,9 @@ namespace AgileStructure
                             if (string.IsNullOrEmpty(hit) == false)
                             {
                                 string[] items = hit.Split(',');
-                                if (items[0].ToLower().Equals(bestPlaces[0].getReferenceName.ToLower()) == true)                                {
-                                    
+                                if (items[0].ToLower().Equals(bestPlaces[0].getReferenceName.ToLower()) == true)
+                                {
+
                                     string secondaryStrandtrand = "";
                                     int startPoint = Convert.ToInt32(items[1]);
                                     int endPoint = startPoint + getAlignedLength(items[3]);
@@ -2884,7 +2886,7 @@ namespace AgileStructure
                                             if (secondaryStrandtrand == "+")
                                             { answer[1]++; }
                                             else { answer[0]++; }
-                                        }                                        
+                                        }
 
                                     }
                                 }
@@ -2895,11 +2897,11 @@ namespace AgileStructure
             }
 
             return answer;
-            
-        } 
-    
 
-            private void translocationToolStripMenuItem_Click(object sender, EventArgs e)
+        }
+
+
+        private void translocationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string result = translocation(true);
             if (result[0] == 'e')
@@ -3624,11 +3626,11 @@ namespace AgileStructure
                     if (answer == MutationType.Deletion || answer == MutationType.DuplicationRCStart || answer == MutationType.DuplicationRCEnd || answer == MutationType.Inversion)
                     {
                         int[] orientation = testReadOrientation(bestPlaces);
-                        if (orientation[0] > orientation[1]*2)
+                        if (orientation[0] > orientation[1] * 2)
                         { answer = MutationType.InsertionNoInverted; }
-                        else if (orientation[0] * 2 < orientation[1] )
+                        else if (orientation[0] * 2 < orientation[1])
                         { answer = MutationType.InsertionInverted; }
-                        else { answer = MutationType.Insertion; }                                       
+                        else { answer = MutationType.Insertion; }
                     }
                     else if (answer == MutationType.Translocation)
                     {
@@ -4016,20 +4018,20 @@ namespace AgileStructure
                     bool add = false;
                     AlignedRead ar = DrawnARKeys[index];
                     if (ar.getPosition + 100 > place && ar.getPosition - 100 < place)
-                    { 
+                    {
                         primary5primeOfBreakpoint++;
                         add = true;
                     }
 
                     if (ar.getEndPosition + 100 > place && ar.getEndPosition - 100 < place)
-                    { 
+                    {
                         primary5primeOfBreakpoint--;
                         add = true;
                     }
-                    if (add == true) {count++; }
+                    if (add == true) { count++; }
                 }
 
-                
+
             }
 
             if (count > 0)
@@ -4066,18 +4068,18 @@ namespace AgileStructure
                                     if (getFivePrimeSoftClipLength(items[3]) > 50)
                                     {
                                         if (startPoint + 100 > place && startPoint - 100 < place)
-                                        { 
-                                            primary5primeOfBreakpoint++; 
-                                            add = true; 
+                                        {
+                                            primary5primeOfBreakpoint++;
+                                            add = true;
                                         }
                                     }
 
                                     if (getThreePrimeSoftClipLength(items[3]) > 50)
                                     {
                                         if (startPoint + getAlignedLength(items[3]) + 100 > place && startPoint + getAlignedLength(items[3]) - 100 < place)
-                                        { 
-                                            primary5primeOfBreakpoint--; 
-                                            add = true; 
+                                        {
+                                            primary5primeOfBreakpoint--;
+                                            add = true;
                                         }
                                     }
                                     if (add == true) { count++; }
@@ -4236,6 +4238,27 @@ namespace AgileStructure
             return secondRefSet;
         }
 
+        internal AlignedRead[] GetSelectedReads()
+        {
+            AlignedRead[] answer = null;
+
+            if (selectedIndex.Count > 0)
+            {
+                answer = new AlignedRead[selectedIndex.Count];
+                int counter = 0;
+                foreach (int index in selectedIndex)
+                {
+                    if (DrawnARKeys.ContainsKey(index))
+                    {
+                        answer[counter] = DrawnARKeys[index];
+                        counter++;
+                    }
+                }
+            }
+            return answer;
+        }
+
+
         internal void drawBreakpoints(bool colour, string sequence1, int place1, string sequence2, int place2, string sequence3, int place3, string sequence4, int place4)
         {
             if (selectEnd - selectStart > 100)
@@ -4248,7 +4271,7 @@ namespace AgileStructure
                     Graphics gModifiedS = Graphics.FromImage(modifiedS);
 
 
-                    Pen[] penArray = new Pen[] { new Pen(Color.Black,2), new Pen(Color.Black, 2), new Pen(Color.Black, 2), new Pen(Color.Black, 2) };
+                    Pen[] penArray = new Pen[] { new Pen(Color.Black, 2), new Pen(Color.Black, 2), new Pen(Color.Black, 2), new Pen(Color.Black, 2) };
                     if (colour)
                     {
                         penArray = new Pen[] { new Pen(Color.Black, 2), new Pen(Color.Blue, 2), new Pen(Color.Red, 2), new Pen(Color.Green, 2) };
@@ -4365,5 +4388,12 @@ namespace AgileStructure
             catch { }
         }
 
+        private void drawShematicImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dSR == null)
+            { dSR = new DrawSelectedReads(this, cboRef.Text); }
+            if (dSR.Visible == false)
+            { dSR.Show(this); }
+        }
     }
 }

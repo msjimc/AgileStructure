@@ -79,10 +79,10 @@ namespace AgileStructure
             toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             deletionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             duplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             insertionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             inversionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             translocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuItem10 = new System.Windows.Forms.ToolStripSeparator();
             complexRearrangmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             usePrimaryAlignmentsCIGARStringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,6 +100,8 @@ namespace AgileStructure
             timer2 = new System.Windows.Forms.Timer(components);
             toolTip1 = new System.Windows.Forms.ToolTip(components);
             btnQuit = new System.Windows.Forms.Button();
+            toolStripMenuItem12 = new System.Windows.Forms.ToolStripSeparator();
+            drawShematicImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             groupBox1.SuspendLayout();
             gbpP1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)p1).BeginInit();
@@ -214,7 +216,7 @@ namespace AgileStructure
             gbpP2.Controls.Add(p2);
             gbpP2.Location = new System.Drawing.Point(6, 75);
             gbpP2.Name = "gbpP2";
-            gbpP2.Size = new System.Drawing.Size(1157, 240);
+            gbpP2.Size = new System.Drawing.Size(1157, 239);
             gbpP2.TabIndex = 2;
             gbpP2.TabStop = false;
             // 
@@ -223,7 +225,7 @@ namespace AgileStructure
             p2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             p2.Location = new System.Drawing.Point(3, 19);
             p2.Name = "p2";
-            p2.Size = new System.Drawing.Size(1151, 219);
+            p2.Size = new System.Drawing.Size(1151, 218);
             p2.TabIndex = 0;
             p2.TabStop = false;
             p2.MouseClick += p2_MouseClick;
@@ -534,6 +536,13 @@ namespace AgileStructure
             duplicationToolStripMenuItem.Text = "Duplication";
             duplicationToolStripMenuItem.Click += duplicationToolStripMenuItem_Click;
             // 
+            // ringToolStripMenuItem
+            // 
+            ringToolStripMenuItem.Name = "ringToolStripMenuItem";
+            ringToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            ringToolStripMenuItem.Text = "Ring";
+            ringToolStripMenuItem.Click += ringToolStripMenuItem_Click;
+            // 
             // insertionToolStripMenuItem
             // 
             insertionToolStripMenuItem.Name = "insertionToolStripMenuItem";
@@ -554,13 +563,6 @@ namespace AgileStructure
             translocationToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             translocationToolStripMenuItem.Text = "Translocation";
             translocationToolStripMenuItem.Click += translocationToolStripMenuItem_Click;
-            // 
-            // ringToolStripMenuItem
-            // 
-            ringToolStripMenuItem.Name = "ringToolStripMenuItem";
-            ringToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            ringToolStripMenuItem.Text = "Ring";
-            ringToolStripMenuItem.Click += ringToolStripMenuItem_Click;
             // 
             // toolStripMenuItem10
             // 
@@ -584,14 +586,14 @@ namespace AgileStructure
             // deletionToolStripMenuItem
             // 
             deletionToolStripMenuItem.Name = "deletionToolStripMenuItem";
-            deletionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            deletionToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             deletionToolStripMenuItem.Text = "Deletion";
             deletionToolStripMenuItem.Click += deletionToolStripMenuItem_Click;
             // 
             // insertationToolStripMenuItem
             // 
             insertationToolStripMenuItem.Name = "insertationToolStripMenuItem";
-            insertationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            insertationToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             insertationToolStripMenuItem.Text = "Insertion";
             insertationToolStripMenuItem.Click += insertationToolStripMenuItem_Click;
             // 
@@ -609,7 +611,7 @@ namespace AgileStructure
             // 
             // imageToolStripMenuItem
             // 
-            imageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { colourCodeSelectedReadsToolStripMenuItem, toolStripMenuItem11, saveImageToolStripMenuItem });
+            imageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { colourCodeSelectedReadsToolStripMenuItem, toolStripMenuItem11, saveImageToolStripMenuItem, toolStripMenuItem12, drawShematicImageToolStripMenuItem });
             imageToolStripMenuItem.Name = "imageToolStripMenuItem";
             imageToolStripMenuItem.Size = new System.Drawing.Size(52, 22);
             imageToolStripMenuItem.Text = "Image";
@@ -630,7 +632,7 @@ namespace AgileStructure
             // 
             saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
             saveImageToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            saveImageToolStripMenuItem.Text = "Save image";
+            saveImageToolStripMenuItem.Text = "Save alignments image";
             saveImageToolStripMenuItem.Click += saveImageToolStripMenuItem_Click;
             // 
             // historyToolStripMenuItem
@@ -667,6 +669,18 @@ namespace AgileStructure
             btnQuit.Text = "Quit";
             btnQuit.UseVisualStyleBackColor = true;
             btnQuit.Click += btnQuit_Click;
+            // 
+            // toolStripMenuItem12
+            // 
+            toolStripMenuItem12.Name = "toolStripMenuItem12";
+            toolStripMenuItem12.Size = new System.Drawing.Size(213, 6);
+            // 
+            // drawShematicImageToolStripMenuItem
+            // 
+            drawShematicImageToolStripMenuItem.Name = "drawShematicImageToolStripMenuItem";
+            drawShematicImageToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            drawShematicImageToolStripMenuItem.Text = "Draw shematic image";
+            drawShematicImageToolStripMenuItem.Click += drawShematicImageToolStripMenuItem_Click;
             // 
             // Form1
             // 
@@ -772,6 +786,8 @@ namespace AgileStructure
         private System.Windows.Forms.ToolStripMenuItem colourCodeSelectedReadsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem11;
         private System.Windows.Forms.ToolStripMenuItem ringToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem12;
+        private System.Windows.Forms.ToolStripMenuItem drawShematicImageToolStripMenuItem;
     }
 }
 
