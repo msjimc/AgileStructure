@@ -16,6 +16,9 @@
   <PropertyGroup>
     <ApplicationIcon>AgileStructure.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <NoWarn>1701;1702;CA1416;</NoWarn>
+  </PropertyGroup>
   <ItemGroup>
     <Content Include="AgileStructure.ico" />
   </ItemGroup>

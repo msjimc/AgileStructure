@@ -327,6 +327,9 @@ namespace AgileStructure
 
         private void drawReferenceAndBreakpoints(int chromosomeCount, Rectangle area, Graphics g)
         {
+            breakpointBasic[] bpb = GetBreakpointBasicArray();
+
+
             int referencelength = area.Width - 20;
             int QuarterWidth = (area.Width - 80) / 4;
             int referencelineHieght = (int)((area.Height - 60) * 0.5) + 50;
@@ -339,6 +342,8 @@ namespace AgileStructure
 
             Pen referencePen = new Pen(Brushes.Black, 2);
             Pen verticalPen = new Pen(Brushes.Black, 1);
+            verticalPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+
             g.DrawLine(referencePen, first.X, referencelineHieght, first.Y, referencelineHieght);
             g.DrawLine(referencePen, second.X, referencelineHieght, second.Y, referencelineHieght);
             g.DrawLine(referencePen, third.X, referencelineHieght, third.Y, referencelineHieght);
@@ -353,42 +358,64 @@ namespace AgileStructure
 
             Font f = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Regular);
 
-            if (Math.Abs(average11 - average21) > 10000)
+            if (Math.Abs(bpb[0].Position - bpb[1].Position) > 10000)
             {
                 g.DrawLine(referencePen, first.Y + 5, referencelineHieght - 10, first.Y - 5, referencelineHieght + 10);
                 g.DrawLine(referencePen, second.X + 5, referencelineHieght - 10, second.X - 5, referencelineHieght + 10);                
                 
                 g.DrawLine(verticalPen, (first.Y /2) + first.X, area.Bottom - 10, (first.Y /2) + first.X, ThirdHieght);               
-                SizeF length = g.MeasureString(average11.ToString("N0"), f);
-                g.DrawString(average11.ToString("N0"), f, Brushes.Black, (first.Y / 2) + first.X - (length.Width / 2), 10);
+                SizeF length = g.MeasureString(bpb[0].Position.ToString("N0"), f);
+                g.DrawString(bpb[0].Position.ToString("N0"), f, Brushes.Black, (first.Y / 2) + first.X - (length.Width / 2), 10);
                 
                 
                 g.DrawLine(verticalPen, ((second.Y - second.X) /2) + second.X, area.Bottom - 10, ((second.Y - second.X) / 2) + second.X, ThirdHieght);
-                length = g.MeasureString(average21.ToString("N0"), f);
-                g.DrawString(average21.ToString("N0"), f, Brushes.Black, ((second.Y - second.X) / 2) + second.X - (length.Width / 2), 10);
+                length = g.MeasureString(bpb[1].Position.ToString("N0"), f);
+                g.DrawString(bpb[1].Position.ToString("N0"), f, Brushes.Black, ((second.Y - second.X) / 2) + second.X - (length.Width / 2), 10);
 
             }
             else
             { g.DrawLine(referencePen, first.Y, referencelineHieght, second.X, referencelineHieght); }
 
-            if (Math.Abs(average12 - average22) > 10000)
+            if (Math.Abs(bpb[2].Position - bpb[3].Position) > 10000)
             {
                 g.DrawLine(referencePen, third.Y + 5, referencelineHieght - 10, third.Y - 5, referencelineHieght + 10);
                 g.DrawLine(referencePen, fourth.X + 5, referencelineHieght - 10, fourth.X - 5, referencelineHieght + 10);
                
                 g.DrawLine(verticalPen, ((third.Y - third.X) /2) + third.X, area.Bottom - 10, ((third.Y - third.X) / 2) + third.X, ThirdHieght);
-                SizeF length = g.MeasureString(average12.ToString("N0"), f);
-                g.DrawString(average12.ToString("N0"), f, Brushes.Black, ((third.Y - third.X) / 2) + third.X - (length.Width / 2), 10);
+                SizeF length = g.MeasureString(bpb[2].Position.ToString("N0"), f);
+                g.DrawString(bpb[2].Position.ToString("N0"), f, Brushes.Black, ((third.Y - third.X) / 2) + third.X - (length.Width / 2), 10);
 
                 g.DrawLine(verticalPen, ((fourth.Y - fourth.X) /2) + fourth.X, area.Bottom - 10, ((fourth.Y - fourth.X) / 2) + fourth.X, ThirdHieght);
-                length = g.MeasureString(average22.ToString("N0"), f);
-                g.DrawString(average22.ToString("N0"), f, Brushes.Black, ((fourth.Y - fourth.X) / 2) + fourth.X - (length.Width / 2), 10);
+                length = g.MeasureString(bpb[3].Position.ToString("N0"), f);
+                g.DrawString(bpb[3].Position.ToString("N0"), f, Brushes.Black, ((fourth.Y - fourth.X) / 2) + fourth.X - (length.Width / 2), 10);
             }
             else
             { g.DrawLine(referencePen, third.Y, referencelineHieght, third.X, referencelineHieght); }
 
 
 
+        }
+
+        private breakpointBasic[] GetBreakpointBasicArray()
+        {
+            string[] items1 = drawbreakPoint(lblPrimary1.Text);
+            string[] items2 = drawbreakPoint(lblPrimary2.Text);
+            string[] items3 = drawbreakPoint(lblSecondary1.Text);
+            string[] items4 = drawbreakPoint(lblSecondary2.Text);
+
+            List<breakpointBasic> bpb = new List<breakpointBasic>();
+            if (items1[0] != "#")
+            { bpb.Add(new breakpointBasic(items1)); }
+            if (items2[0] != "#")
+            { bpb.Add(new breakpointBasic(items2)); }
+            if (items3[0] != "#")
+            { bpb.Add(new breakpointBasic(items3)); }
+            if (items4[0] != "#")
+            { bpb.Add(new breakpointBasic(items4)); }
+
+            bpb.Sort(new breakpointBasicSorter());
+
+            return bpb.ToArray();
         }
 
         private void btnShow_Click(object sender, EventArgs e)
@@ -422,5 +449,7 @@ namespace AgileStructure
             int[] uniquePlaces = { average11, average12, average21, average22 };
             return uniquePlaces;
         }
+
+
     }
 }

@@ -690,33 +690,7 @@ namespace AgileStructure
                 }
 
 
-                //if (places[index] - 50 < average11 && places[index] + 50 > average11)
-                //{  if (primary5primeOfPlace11 > -1)
-                //    { ratio[index] = primary5primeOfPlace11; }
-                //else
-                //    { ratio[index] = secondary5primeOfPlace11; }
-                //}
-                //else if (places[index] - 50 < average12 && places[index] + 50 > average12)
-                //{
-                //    if (primary5primeOfPlace12 > -1)
-                //    { ratio[index] = primary5primeOfPlace12; }
-                //    else
-                //    { ratio[index] = secondary5primeOfPlace12; }
-                //}
-                //else if (places[index] - 50 < average21 && places[index] + 50 > average21)
-                //{
-                //    if (primary5primeOfPlace21 > -1)
-                //    { ratio[index] = primary5primeOfPlace21; }
-                //    else
-                //    { ratio[index] = secondary5primeOfPlace21; }
-                //}
-                //else if (places[index] - 50 < average22 && places[index] + 50 > average22)
-                //{
-                //    if (primary5primeOfPlace22 > -1)
-                //    { ratio[index] = primary5primeOfPlace22; }
-                //    else
-                //    { ratio[index] = secondary5primeOfPlace22; }
-                //}
+            
             }
 
             return ratio;
