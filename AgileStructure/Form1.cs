@@ -4391,7 +4391,7 @@ namespace AgileStructure
         private void drawShematicImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (dSR == null)
-            { dSR = new DrawSelectedReads(this, cboRef.Text); }
+            { dSR = new DrawSelectedReads(this, cboRef.Text, referenceSequenceNames); }
             if (dSR.Visible == false)
             { dSR.Show(this); }
         }

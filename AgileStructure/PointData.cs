@@ -16,8 +16,9 @@ namespace AgileStructure
         private float secondary5primeOfPlace2;
         private string[] annotations;
         private AlignedRead[] selectedRead;
+        private BreakPointData[] breakPoints;
 
-        public PointData(int average1, int average2, float primary5primeOfPlace1, float primary5primeOfPlace2, float secondary5primeOfPlace1, float secondary5primeOfPlace2, string[] annotations, AlignedRead[] SelectedRead)
+        public PointData(int average1, int average2, float primary5primeOfPlace1, float primary5primeOfPlace2, float secondary5primeOfPlace1, float secondary5primeOfPlace2, string[] annotations, AlignedRead[] SelectedRead, BreakPointData[] BreakPoints)
         {
             this.average1 = average1;
             this.average2 = average2;
@@ -26,6 +27,7 @@ namespace AgileStructure
             this.secondary5primeOfPlace1 = secondary5primeOfPlace1;
             this.secondary5primeOfPlace2 = secondary5primeOfPlace2;
             this.selectedRead = SelectedRead;
+            this.breakPoints = BreakPoints;
 
             this.annotations = annotations;
         }
@@ -44,5 +46,7 @@ namespace AgileStructure
         public string[] Annotations { get { return annotations; } }    
         
         public AlignedRead[] SelectedRead { get { return selectedRead; } }
+        
+        public BreakPointData[] BreakPoints { get {return breakPoints; } }
     }
 }

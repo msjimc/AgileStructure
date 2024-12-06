@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DrawSelectedReads));
             groupBox1 = new System.Windows.Forms.GroupBox();
             label2 = new System.Windows.Forms.Label();
             btnShow = new System.Windows.Forms.Button();
@@ -66,6 +67,7 @@
             groupBox1.Size = new System.Drawing.Size(1176, 142);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
+            groupBox1.Text = "Break point selection";
             // 
             // label2
             // 
@@ -215,6 +217,7 @@
             Controls.Add(groupBox2);
             Controls.Add(button1);
             Controls.Add(groupBox1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "DrawSelectedReads";
             Text = "Draw schematic display";
             groupBox1.ResumeLayout(false);
