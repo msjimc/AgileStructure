@@ -73,11 +73,11 @@
             // 
             label2.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(964, 113);
+            label2.Location = new System.Drawing.Point(897, 113);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(104, 15);
+            label2.Size = new System.Drawing.Size(192, 15);
             label2.TabIndex = 22;
-            label2.Text = "Show break points";
+            label2.Text = "Show break points in main window";
             // 
             // btnShow
             // 
@@ -220,6 +220,7 @@
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "DrawSelectedReads";
             Text = "Draw schematic display";
+            FormClosing += DrawSelectedReads_FormClosing;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)p1).EndInit();

@@ -89,7 +89,7 @@ namespace AgileStructure
                 average2 = first[1].getAveragePlace;
                 lblPrimary1.Text = "Break point 1: " + first[0].getReferenceName + ":" + average1.ToString("N0");
                 lblSecondary1.Text = "Break point 2: " + first[1].getReferenceName + ":" + average2.ToString("N0");
-                             
+
                 pd1 = new PointData(average1, average2, primary5primeOfPlace1, primary5primeOfPlace2, scondary5primeOfPlace1, scondary5primeOfPlace2, annotations, form.GetSelectedReads(), first);
 
                 form.deleteSelectedList();
@@ -308,9 +308,9 @@ namespace AgileStructure
             Array.Copy(places, orderd, 4);
             Array.Sort(orderd);
 
-            for (int index = 1; index < orderd.Length;index++)
+            for (int index = 1; index < orderd.Length; index++)
             {
-                if (orderd[index] - orderd[index-1] < 50)
+                if (orderd[index] - orderd[index - 1] < 50)
                 { return index; }
             }
             return -1;
@@ -324,8 +324,8 @@ namespace AgileStructure
             int a = average22;
             if (average11 < average22 && average21 < average12)
             { return -1; }
-            else 
-            return 1;
+            else
+                return 1;
         }
 
         private string Find()
@@ -350,7 +350,7 @@ namespace AgileStructure
                         string[] items2 = processIAnnotationString(annotations2[0]);
                         if (combination == "0011" && placeCount == 3)
                         {
-                            return "The reverse complement of " + items1[0] + ":" + items2[1] + "-" + items1[2] + " is inserted into " + items1[0] + ":" + items1[1] + "-" + items2[2]; 
+                            return "The reverse complement of " + items1[0] + ":" + items2[1] + "-" + items1[2] + " is inserted into " + items1[0] + ":" + items1[1] + "-" + items2[2];
                             //insert_chr7_60_43,600,000-43,750,000_RC_target_chr7_60_43,600,000-43,800,000_ONT_no_2nd 1 and 2
                             //insert_chr7_60_43,600,000-43,750,000_RC_target_chr7_60_43,550,000-43,750,000_ONT_no_2nd 1 and 2
                         }
@@ -391,19 +391,19 @@ namespace AgileStructure
                         {
                             string answer = "The reverse complement of " + items1[0] + ":" + items1[1] + "-" + items2[2] + " is inserted into " + items1[0] + ":" + items2[1] + "-" + items1[2];
                             if (Difference(items2[1], items1[2]) < 50)
-                            {answer = "The reverse complement of " + items1[0] + ":" + items1[1] + "-" + items2[1] + " is inserted into " + items1[0] + ":" + items2[2] + "-" + items1[2] + "\r\nor\r\n" + answer; }
+                            { answer = "The reverse complement of " + items1[0] + ":" + items1[1] + "-" + items2[1] + " is inserted into " + items1[0] + ":" + items2[2] + "-" + items1[2] + "\r\nor\r\n" + answer; }
                             return answer;
                             //insert_chr7_60_43,600,000-43,750,000_RC_target_chr7_60_50000000-51,000,000_ONT_no_2nd 1 and 2
                             //insert_chr7_60_43,600,000-43,750,000_RC_target_chr7_60_43,650,000-43,700,000_ONT_no_2nd 1 and 2
                             //insert_chr7_60_43,600,000-43,750,000_RC_target_chr7_60_43,650,000-43,800,000_ONT_no_2nd 1 and 2
-                        }                                               
+                        }
                     }
                     else if (annotations1[3].StartsWith("o") == true && annotations2[4].StartsWith('o') == true)
                     {
                         string[] items1 = processIAnnotationString(annotations1[3]);
                         string[] items2 = processIAnnotationString(annotations2[4]);
                         if (combination == "0110")
-                        { 
+                        {
                             return items1[0] + ":" + items1[2] + "-" + items2[2] + " is inserted into " + items1[0] + ":" + items1[1] + "-" + items2[1];
                             //insert_chr7_60_43,600,000-43,750,000_target_chr7_60_43,590,000-43,600,000_ONT_no_2nd_1 and 2
                             //insert_chr7_60_43,600,000-43,750,000_target_chr7_60_43,590,000-43,590,000_ONT_no_2nd 1 and 2
@@ -415,7 +415,7 @@ namespace AgileStructure
                         string[] items1 = processIAnnotationString(annotations1[4]);
                         string[] items2 = processIAnnotationString(annotations2[3]);
                         if (combination == "1001")
-                        { 
+                        {
                             return items1[0] + ":" + items1[1] + "-" + items2[1] + " is inserted into " + items1[0] + ":" + items1[2] + "-" + items2[2];
                             //insert_chr7_60_43,600,000-43,750,000_target_chr7_60_43,750,000-43,760,000_ONT_no_2nd 1 and 2 
                             //insert_chr7_60_43,600,000-43,750,000_target_chr7_60_43,760,000-43,760,000_ONT_no_2nd 1 and 2
@@ -454,7 +454,7 @@ namespace AgileStructure
             { return "Error: an error occured please check read selections"; }
             return "AgileStructure is unable to annotate this rearrangement";
         }
-          
+
         private string[] processTranslocationString(string annotation)
         {
             string modified = annotation.Substring(3, annotation.Length - 4).Replace(") (", ";").Replace("g.", "");
@@ -475,7 +475,7 @@ namespace AgileStructure
             answer[3] = annotation.Substring(annotation.Length - 3);
             return answer;
         }
-          
+
         private string getAlignmentCombination(float[] alignment)
         {
             string combination = "";
@@ -488,7 +488,7 @@ namespace AgileStructure
             }
             return combination;
         }
-              
+
         private string insertionOnOtherChromosome(float[] alignment, int[] places)
         {
             List<string> items1 = new List<string>(processTranslocationString(annotations1[1]));
@@ -660,28 +660,28 @@ namespace AgileStructure
 
             for (int index = 0; index < places.Length; index++)
             {
-                if (index ==0)
+                if (index == 0)
                 {
                     if (primary5primeOfPlace11 > -1)
                     { ratio[index] = primary5primeOfPlace11; }
                     else
                     { ratio[index] = secondary5primeOfPlace11; }
                 }
-                else if (index==1)
+                else if (index == 1)
                 {
                     if (primary5primeOfPlace12 > -1)
                     { ratio[index] = primary5primeOfPlace12; }
                     else
                     { ratio[index] = secondary5primeOfPlace12; }
                 }
-                else if (index==2)
+                else if (index == 2)
                 {
                     if (primary5primeOfPlace21 > -1)
                     { ratio[index] = primary5primeOfPlace21; }
                     else
                     { ratio[index] = secondary5primeOfPlace21; }
                 }
-                else if (index==3)
+                else if (index == 3)
                 {
                     if (primary5primeOfPlace22 > -1)
                     { ratio[index] = primary5primeOfPlace22; }
@@ -690,7 +690,7 @@ namespace AgileStructure
                 }
 
 
-            
+
             }
 
             return ratio;
@@ -722,7 +722,7 @@ namespace AgileStructure
 
         private string[] drawbreakPoint(string data)
         {
-            string[] answer = { "#", "-1"}; ;
+            string[] answer = { "#", "-1" }; ;
             string[] items = data.Split(":");
             if (items.Length == 3)
             {
@@ -731,5 +731,6 @@ namespace AgileStructure
             }
             return answer;
         }
+
     }
 }

@@ -4395,5 +4395,10 @@ namespace AgileStructure
             if (dSR.Visible == false)
             { dSR.Show(this); }
         }
+
+        internal void dSR_Closing()
+        {
+            cC = null;
+        }
     }
 }

@@ -88,11 +88,11 @@
             // 
             label2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(577, 118);
+            label2.Location = new System.Drawing.Point(489, 118);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(104, 15);
+            label2.Size = new System.Drawing.Size(192, 15);
             label2.TabIndex = 12;
-            label2.Text = "Show break points";
+            label2.Text = "Show break points in main window";
             // 
             // btnDrawBP
             // 
