@@ -149,6 +149,7 @@ namespace AgileStructure
             makeBlankSecondaryBase();
             if (cR != null) { cR.clean(); }
             if (cC != null) { cC.clean(); }
+            if (dSR != null) { dSR.clean(); }
         }
 
         private void getBamHeader(string bamFileName)

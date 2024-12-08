@@ -358,18 +358,14 @@ namespace AgileStructure
             if (chromosomeCount == 1)
             {
                 g.DrawLine(referencePen, first.X, referencelineHieght, fourth.Y, referencelineHieght);
-                drawReferenceAndBreakpointsSingleChromosome(area, g, bpb, first, second, third, fourth, referencelineHieght);
             }
             else
             {
                 g.DrawLine(referencePen, first.X, referencelineHieght, second.Y, referencelineHieght);
                 g.DrawLine(referencePen, third.X, referencelineHieght, fourth.Y, referencelineHieght);
-                drawReferenceAndBreakpointsSingleChromosome(area, g, bpb, first, second, third, fourth, referencelineHieght);
             }
-        }
-
-        private void drawReferenceAndBreakpointsDualChromosome(Rectangle area, Graphics g, breakpointBasic[] bpb, Point first, Point second, Point third, Point fourth, int ReferenceHeight)
-        { }
+            drawReferenceAndBreakpointsSingleChromosome(area, g, bpb, first, second, third, fourth, referencelineHieght);
+                    }
 
         private void drawReferenceAndBreakpointsSingleChromosome(Rectangle area, Graphics g, breakpointBasic[] bpb, Point first, Point second, Point third, Point fourth, int ReferenceHeight)
         {
@@ -396,8 +392,8 @@ namespace AgileStructure
         {
             // primary(orientation  chr breackpoint side) sec(ori   chr breakpoint  side)
             int counter = 1;
-            Rectangle r1 = new Rectangle(0, 0, 0, 0); ;
-            Rectangle r2 = new Rectangle(0, 0, 0, 0); ;
+            Rectangle r1 = new Rectangle(0, 0, 0, 0);
+            Rectangle r2 = new Rectangle(0, 0, 0, 0);
 
             foreach (string data in orientations.Keys)
             {
@@ -414,7 +410,10 @@ namespace AgileStructure
                         if (items[3] == "r") { r1.X = place.ImagePlace; }
                         else { r1.X = place.ImagePlace - 100; }
 
-                        g.FillRectangle(Brushes.Green, r1);
+                        if (items[0] == "+")
+                        { g.FillRectangle(Brushes.Green, r1); }
+                        else
+                        { g.FillRectangle(Brushes.Red, r1); }
                         g.DrawRectangle(Pens.Black, r1);
                         break;
                     }
@@ -426,7 +425,10 @@ namespace AgileStructure
                         r2 = new Rectangle(0, ReferenceHeight - (3 * counter * itemHeight), 100, itemHeight);
                         if (items[7] == "r") { r2.X = place.ImagePlace; }
                         else { r2.X = place.ImagePlace - 100; }
-                        if (items[0] == items[4])
+
+                        
+
+                        if (items[0] == "+")
                         { g.FillRectangle(Brushes.Green, r2); }
                         else { g.FillRectangle(Brushes.Red, r2); }
                         g.DrawRectangle(Pens.Black, r2);
@@ -441,32 +443,40 @@ namespace AgileStructure
                 {
                     int left = 0;
                     int right = 0;
-                    if (items[3] == "l")
-                    {
-                        left = r1.Right + 15;
-                        g.DrawLine(connector, r1.Right, (r1.Top + r1.Bottom) / 2, left, (r1.Top + r1.Bottom) / 2);
-                        g.DrawLine(connector, left, (r1.Top + r1.Bottom) / 2, left, ((r1.Top + r1.Bottom) / 2) - (1.5f * itemHeight));
-                    }
-                    else
-                    {
-                        left = r1.Left - 15;
-                        g.DrawLine(connector, r1.Left, (r1.Top + r1.Bottom) / 2, left, (r1.Top + r1.Bottom) / 2);
-                        g.DrawLine(connector, left, (r1.Top + r1.Bottom) / 2, left, ((r1.Top + r1.Bottom) / 2) - (1.5f * itemHeight));
-                    }
 
-                    if (items[7] == "l")
+                    if (items[3] == "l" && items[7] == "r")
                     {
-                        right = r2.Right + 15;
-                        g.DrawLine(connector, r2.Right, (r2.Top + r2.Bottom) / 2, right, (r2.Top + r2.Bottom) / 2);
-                        g.DrawLine(connector, right, (r2.Top + r2.Bottom) / 2, right, ((r2.Top + r2.Bottom) / 2) - (1.5f * itemHeight));
+                        g.DrawLine(connector, r1.Right, ((r1.Top + r1.Bottom) / 2) , r2.Left, ((r2.Top + r2.Bottom) / 2));
                     }
                     else
-                    {
-                        right = r2.Left - 15;
-                        g.DrawLine(connector, r2.Left, (r2.Top + r2.Bottom) / 2, right, (r2.Top + r2.Bottom) / 2);
-                        g.DrawLine(connector, right, (r2.Top + r2.Bottom) / 2, right, ((r2.Top + r2.Bottom) / 2) - (1.5f * itemHeight));
-                    }
-                    g.DrawLine(connector, left, ((r1.Top + r1.Bottom) / 2) - (1.5f * itemHeight), right, ((r2.Top + r2.Bottom) / 2) - (1.5f * itemHeight));
+                            { if (items[3] == "l")
+                                {
+                                    left = r1.Right + 15;
+                                    g.DrawLine(connector, r1.Right, (r1.Top + r1.Bottom) / 2, left, (r1.Top + r1.Bottom) / 2);
+                                    g.DrawLine(connector, left, (r1.Top + r1.Bottom) / 2, left, ((r1.Top + r1.Bottom) / 2) - (1.5f * itemHeight));
+                                }
+                                else
+                                {
+                                    left = r1.Left - 15;
+                                    g.DrawLine(connector, r1.Left, (r1.Top + r1.Bottom) / 2, left, (r1.Top + r1.Bottom) / 2);
+                                    g.DrawLine(connector, left, (r1.Top + r1.Bottom) / 2, left, ((r1.Top + r1.Bottom) / 2) - (1.5f * itemHeight));
+                                }
+
+                                if (items[7] == "l")
+                                {
+                                    right = r2.Right + 15;
+                                    g.DrawLine(connector, r2.Right, (r2.Top + r2.Bottom) / 2, right, (r2.Top + r2.Bottom) / 2);
+                                    g.DrawLine(connector, right, (r2.Top + r2.Bottom) / 2, right, ((r2.Top + r2.Bottom) / 2) - (1.5f * itemHeight));
+                                }
+                                else
+                                {
+                                    right = r2.Left - 15;
+                                    g.DrawLine(connector, r2.Left, (r2.Top + r2.Bottom) / 2, right, (r2.Top + r2.Bottom) / 2);
+                                    g.DrawLine(connector, right, (r2.Top + r2.Bottom) / 2, right, ((r2.Top + r2.Bottom) / 2) - (1.5f * itemHeight));
+                                }
+                                g.DrawLine(connector, left, ((r1.Top + r1.Bottom) / 2) - (1.5f * itemHeight), right, ((r2.Top + r2.Bottom) / 2) - (1.5f * itemHeight));
+                            }
+                    
                 }
 
             }
@@ -517,49 +527,49 @@ namespace AgileStructure
 
             bpb.Sort(new breakpointBasicSorter());
 
-            if (bpb.Count >3 && bpb[0].Chromosme == bpb[3].Chromosme && Math.Abs(bpb[0].Position - bpb[3].Position) < 10)
+            if (bpb.Count > 3 && bpb[0].Chromosme == bpb[3].Chromosme && Math.Abs(bpb[0].Position - bpb[3].Position) < 10)
             {
                 int place = (first.X + Fourth.Y) / 2;
-                bpb[0].ImagePlace = place;
-                bpb[1].ImagePlace = place;
-                bpb[2].ImagePlace = place;
-                bpb[3].ImagePlace = place;
+                bpb[0].ImagePlace = place - 6;
+                bpb[1].ImagePlace = place - 2;
+                bpb[2].ImagePlace = place + 2;
+                bpb[3].ImagePlace = place + 6;
             }
             else
             {
                 if (bpb.Count > 2 && bpb[0].Chromosme == bpb[2].Chromosme && Math.Abs(bpb[0].Position - bpb[2].Position) < 10)
                 {
                     int place = (first.X + third.Y) / 2;
-                    bpb[0].ImagePlace = place;
+                    bpb[0].ImagePlace = place - 4;
                     bpb[1].ImagePlace = place;
-                    bpb[2].ImagePlace = place;
+                    bpb[2].ImagePlace = place + 4;
                 }
                 else if (bpb.Count > 3 && bpb[1].Chromosme == bpb[3].Chromosme && Math.Abs(bpb[1].Position - bpb[3].Position) < 10)
                 {
                     int place = (second.X + Fourth.Y) / 2;
-                    bpb[1].ImagePlace = place;
+                    bpb[1].ImagePlace = place - 4;
                     bpb[2].ImagePlace = place;
-                    bpb[3].ImagePlace = place;
+                    bpb[3].ImagePlace = place + 4;
                 }
                 else
                 {
                     if (bpb.Count > 1 && bpb[0].Chromosme == bpb[1].Chromosme && Math.Abs(bpb[0].Position - bpb[1].Position) < 10)
                     {
                         int place = (first.X + second.Y) / 2;
-                        bpb[0].ImagePlace = place;
-                        bpb[1].ImagePlace = place;
+                        bpb[0].ImagePlace = place -   2;
+                        bpb[1].ImagePlace = place + 2;
                     }
-                    else if (bpb.Count > 2 && bpb[1].Chromosme == bpb[2].Chromosme && Math.Abs(bpb[1].Position - bpb[2].Position) < 10)
+                    if (bpb.Count > 2 && bpb[1].Chromosme == bpb[2].Chromosme && Math.Abs(bpb[1].Position - bpb[2].Position) < 10)
                     {
                         int place = (second.X + third.Y) / 2;
-                        bpb[1].ImagePlace = place;
-                        bpb[2].ImagePlace = place;
+                        bpb[1].ImagePlace = place - 2;
+                        bpb[2].ImagePlace = place + 2;
                     }
-                    else if (bpb.Count > 3 && bpb[2].Chromosme == bpb[3].Chromosme && Math.Abs(bpb[2].Position - bpb[3].Position) < 10)
+                    if (bpb.Count > 3 && bpb[2].Chromosme == bpb[3].Chromosme && Math.Abs(bpb[2].Position - bpb[3].Position) < 10)
                     {
                         int place = (third.X + Fourth.Y) / 2;
-                        bpb[2].ImagePlace = place;
-                        bpb[3].ImagePlace = place;
+                        bpb[2].ImagePlace = place - 2;
+                        bpb[3].ImagePlace = place + 2;
                     }
                 }
             }
@@ -623,16 +633,16 @@ namespace AgileStructure
                 int arStart = ar.getPosition;
                 int arEnd = ar.getEndPosition;
 
-                string arDescription = primaryStrand + ":";
-
+                string arDescription = "";
+                int pStart = -1;
                 if (bestPlaces[0].inPlaces(arStart) == true)
-                { arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "r:"; }
+                { arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "r"; pStart = bestPlaces[0].getAveragePlace;  }
                 else if (bestPlaces[0].inPlaces(arEnd) == true)
-                { arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "l:"; }
+                { arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "l"; pStart = bestPlaces[0].getAveragePlace; }
                 else if (bestPlaces[1].inPlaces(arStart) == true)
-                { arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "r:"; }
+                { arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "r"; pStart = bestPlaces[1].getAveragePlace; }
                 else if (bestPlaces[1].inPlaces(arEnd) == true)
-                { arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "l:"; }
+                { arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "l"; pStart = bestPlaces[1].getAveragePlace; }
 
                 if (string.IsNullOrEmpty(ar.getSecondaryAlignmentTag) == false)
                 {
@@ -650,15 +660,26 @@ namespace AgileStructure
                                 secondaryStrandtrand = items[2];
                                 bool found = true;
 
+                                string arDescriptionSec = "";
+                                int sStart = -1;
                                 if (bestPlaces[0].inPlaces(startPoint) == true)
-                                { arDescription += secondaryStrandtrand + ":" + items[0] + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "r"; }
+                                { arDescriptionSec +=  ":" + items[0] + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "r"; sStart = bestPlaces[0].getAveragePlace; }
                                 else if (bestPlaces[0].inPlaces(endPoint) == true)
-                                { arDescription += secondaryStrandtrand + ":" + items[0] + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "l"; }
+                                { arDescriptionSec +=  ":" + items[0] + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "l"; sStart = bestPlaces[0].getAveragePlace; }
                                 else if (bestPlaces[1].inPlaces(startPoint) == true)
-                                { arDescription += secondaryStrandtrand + ":" + items[0] + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "r"; }
+                                { arDescriptionSec +=  ":" + items[0] + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "r"; sStart = bestPlaces[1].getAveragePlace; }
                                 else if (bestPlaces[1].inPlaces(endPoint) == true)
-                                { arDescription += secondaryStrandtrand + ":" + items[0] + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "l"; }
+                                { arDescriptionSec +=  ":" + items[0] + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "l"; sStart = bestPlaces[1].getAveragePlace; }
                                 else { found = false; }
+
+                                string alignments = "";
+                                if (secondaryStrandtrand == primaryStrand)
+                                { alignments = "+"; }
+                                else { alignments = "-"; }
+                                if (pStart > sStart)
+                                { arDescription = "+" + arDescriptionSec + ":" + alignments + ":" + arDescription; }
+                                else
+                                { arDescription = "+:" + arDescription + ":" + alignments +  arDescriptionSec; }
 
                                 if (found == true)
                                 {
