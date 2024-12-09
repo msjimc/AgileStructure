@@ -222,7 +222,7 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new System.Drawing.Point(350, 259);
+            btnClose.Location = new System.Drawing.Point(18, 261);
             btnClose.Name = "btnClose";
             btnClose.Size = new System.Drawing.Size(75, 23);
             btnClose.TabIndex = 14;
@@ -253,7 +253,7 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btn;
+        //private System.Windows.Forms.Button btn;
         private System.Windows.Forms.Button btnYellow;
         private System.Windows.Forms.Button btnOrange;
         private System.Windows.Forms.Button btnGrey;

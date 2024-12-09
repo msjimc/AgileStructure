@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComplexRearrangement));
             groupBox1 = new System.Windows.Forms.GroupBox();
+            btnDraw = new System.Windows.Forms.Button();
             chkColour = new System.Windows.Forms.CheckBox();
             label2 = new System.Windows.Forms.Label();
             btnDrawBP = new System.Windows.Forms.Button();
@@ -51,6 +52,7 @@
             // groupBox1
             // 
             groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBox1.Controls.Add(btnDraw);
             groupBox1.Controls.Add(chkColour);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(btnDrawBP);
@@ -72,11 +74,24 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Break point selection";
             // 
+            // btnDraw
+            // 
+            btnDraw.Enabled = false;
+            btnDraw.Location = new System.Drawing.Point(687, 184);
+            btnDraw.Name = "btnDraw";
+            btnDraw.Size = new System.Drawing.Size(75, 23);
+            btnDraw.TabIndex = 14;
+            btnDraw.Text = "Draw";
+            btnDraw.UseVisualStyleBackColor = true;
+            btnDraw.Click += btnDraw_Click;
+            // 
             // chkColour
             // 
             chkColour.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             chkColour.AutoSize = true;
             chkColour.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            chkColour.Checked = true;
+            chkColour.CheckState = System.Windows.Forms.CheckState.Checked;
             chkColour.Location = new System.Drawing.Point(700, 143);
             chkColour.Name = "chkColour";
             chkColour.Size = new System.Drawing.Size(62, 19);
@@ -258,5 +273,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnDrawBP;
         private System.Windows.Forms.CheckBox chkColour;
+        private System.Windows.Forms.Button btnDraw;
     }
 }

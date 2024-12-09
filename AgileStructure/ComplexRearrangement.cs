@@ -167,8 +167,22 @@ namespace AgileStructure
             lblPrimary2.Text = "not set";
             lblSecondary1.Text = "not set";
             lblSecondary2.Text = "not set";
-            txtAnswer.Text = "";
+            txtAnswer.Text = "";           
         }
+
+        internal void AnnotateFromSchematic(PointData pdA, PointData pdB, string[] labels, List<string> Chromosomes)
+        {
+            clean();
+            pd1 = pdA;
+            pd2 = pdB;
+            lblPrimary1.Text = labels[0];
+            lblPrimary2.Text = labels[1];
+            lblSecondary1.Text = labels[2];
+            lblSecondary2.Text = labels[3];
+            chromosomes = Chromosomes;
+            btnFind.PerformClick();
+        }
+
 
         private void btnFind_Click(object sender, EventArgs e)
         {
@@ -177,7 +191,9 @@ namespace AgileStructure
 
         private string Find(PointData pda, PointData pdb)
         {
+            btnDraw.Enabled = false;
             if (pda == null || pdb == null) { return "Please set both break points"; }
+            btnDraw.Enabled = true;
 
             if (chromosomes.Count == 1)
             {
@@ -732,5 +748,11 @@ namespace AgileStructure
             return answer;
         }
 
+        private void btnDraw_Click(object sender, EventArgs e)
+        {
+            string[] labels = { lblPrimary1.Text, lblPrimary2.Text, lblSecondary1.Text, lblSecondary2.Text };
+
+            form.DrawfromAnnotating(pd1, pd2, labels, chromosomes);
+        }
     }
 }

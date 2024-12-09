@@ -778,7 +778,7 @@ namespace AgileStructure
         private System.Windows.Forms.Button btnQuit;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem onlyShowReadsWithALargeIndelToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem unbalancedTranslocationToolStripMenuItem;
+        //private System.Windows.Forms.ToolStripMenuItem unbalancedTranslocationToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem10;
         private System.Windows.Forms.ToolStripMenuItem complexRearrangmentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem imageToolStripMenuItem;

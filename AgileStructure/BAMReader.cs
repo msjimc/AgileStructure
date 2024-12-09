@@ -28,8 +28,8 @@ namespace AgileStructure
 		private string seq;
 		private string qual;
 		private string tags;
-		private string chr;
-		private string otherChr;
+		//private string chr;
+		//private string otherChr;
 
 		public BAMReader()
 		{ pos = int.MaxValue; }

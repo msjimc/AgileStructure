@@ -4399,7 +4399,19 @@ namespace AgileStructure
 
         internal void dSR_Closing()
         {
-            cC = null;
+            dSR = null;
+        }
+
+        internal void AnnotateFromDrawing(PointData pd1, PointData pd2, string[] labels, List<string> chromosomes)
+        {
+            complexRearrangmentToolStripMenuItem.PerformClick();
+            cR.AnnotateFromSchematic(pd1, pd2, labels, chromosomes);
+        }
+
+        internal void DrawfromAnnotating(PointData pd1, PointData pd2, string[] labels, List<string> chromosomes)
+        {
+            drawShematicImageToolStripMenuItem.PerformClick();
+            dSR.SchematicfromAnnotation(pd1, pd2, labels, chromosomes);
         }
     }
 }

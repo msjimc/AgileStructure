@@ -28,8 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DrawSelectedReads));
             groupBox1 = new System.Windows.Forms.GroupBox();
+            btnAnnotate = new System.Windows.Forms.Button();
+            label5 = new System.Windows.Forms.Label();
+            numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            label3 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             btnShow = new System.Windows.Forms.Button();
             btnAccept2 = new System.Windows.Forms.Button();
@@ -44,7 +49,9 @@
             btnDraw = new System.Windows.Forms.Button();
             button1 = new System.Windows.Forms.Button();
             groupBox2 = new System.Windows.Forms.GroupBox();
+            timer1 = new System.Windows.Forms.Timer(components);
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)p1).BeginInit();
             groupBox2.SuspendLayout();
             SuspendLayout();
@@ -52,6 +59,10 @@
             // groupBox1
             // 
             groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBox1.Controls.Add(btnAnnotate);
+            groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(numericUpDown1);
+            groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(btnShow);
             groupBox1.Controls.Add(btnAccept2);
@@ -64,16 +75,58 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new System.Drawing.Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(1176, 142);
+            groupBox1.Size = new System.Drawing.Size(689, 184);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Break point selection";
+            // 
+            // btnAnnotate
+            // 
+            btnAnnotate.Enabled = false;
+            btnAnnotate.Location = new System.Drawing.Point(255, 151);
+            btnAnnotate.Name = "btnAnnotate";
+            btnAnnotate.Size = new System.Drawing.Size(75, 23);
+            btnAnnotate.TabIndex = 26;
+            btnAnnotate.Text = "Annotate";
+            btnAnnotate.UseVisualStyleBackColor = true;
+            btnAnnotate.Click += btnAnnotate_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(6, 155);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(167, 15);
+            label5.TabIndex = 25;
+            label5.Text = "Annotate selected breakpoints";
+            // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            numericUpDown1.Location = new System.Drawing.Point(608, 122);
+            numericUpDown1.Maximum = new decimal(new int[] { 101, 0, 0, 0 });
+            numericUpDown1.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new System.Drawing.Size(75, 23);
+            numericUpDown1.TabIndex = 24;
+            numericUpDown1.Value = new decimal(new int[] { 10, 0, 0, 0 });
+            numericUpDown1.ValueChanged += numericUpDown1_ValueChanged;
+            // 
+            // label3
+            // 
+            label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(410, 124);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(173, 15);
+            label3.TabIndex = 23;
+            label3.Text = "Merge breakpints if closer than:";
             // 
             // label2
             // 
             label2.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(897, 113);
+            label2.Location = new System.Drawing.Point(410, 155);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(192, 15);
             label2.TabIndex = 22;
@@ -82,7 +135,7 @@
             // btnShow
             // 
             btnShow.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            btnShow.Location = new System.Drawing.Point(1095, 109);
+            btnShow.Location = new System.Drawing.Point(608, 151);
             btnShow.Name = "btnShow";
             btnShow.Size = new System.Drawing.Size(75, 23);
             btnShow.TabIndex = 21;
@@ -93,7 +146,7 @@
             // btnAccept2
             // 
             btnAccept2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnAccept2.Location = new System.Drawing.Point(1095, 64);
+            btnAccept2.Location = new System.Drawing.Point(608, 64);
             btnAccept2.Name = "btnAccept2";
             btnAccept2.Size = new System.Drawing.Size(75, 23);
             btnAccept2.TabIndex = 20;
@@ -131,7 +184,7 @@
             // btnAccept1
             // 
             btnAccept1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            btnAccept1.Location = new System.Drawing.Point(1095, 15);
+            btnAccept1.Location = new System.Drawing.Point(608, 15);
             btnAccept1.Name = "btnAccept1";
             btnAccept1.Size = new System.Drawing.Size(75, 23);
             btnAccept1.TabIndex = 16;
@@ -171,18 +224,18 @@
             p1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             p1.Location = new System.Drawing.Point(6, 22);
             p1.Name = "p1";
-            p1.Size = new System.Drawing.Size(1164, 306);
+            p1.Size = new System.Drawing.Size(677, 264);
             p1.TabIndex = 23;
             p1.TabStop = false;
             // 
             // btnDraw
             // 
             btnDraw.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            btnDraw.Location = new System.Drawing.Point(1095, 334);
+            btnDraw.Location = new System.Drawing.Point(608, 292);
             btnDraw.Name = "btnDraw";
             btnDraw.Size = new System.Drawing.Size(75, 23);
             btnDraw.TabIndex = 21;
-            btnDraw.Text = "Draw";
+            btnDraw.Text = "Save";
             btnDraw.UseVisualStyleBackColor = true;
             btnDraw.Click += btnDraw_Click;
             // 
@@ -202,27 +255,35 @@
             groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             groupBox2.Controls.Add(p1);
             groupBox2.Controls.Add(btnDraw);
-            groupBox2.Location = new System.Drawing.Point(12, 160);
+            groupBox2.Location = new System.Drawing.Point(12, 202);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new System.Drawing.Size(1176, 363);
+            groupBox2.Size = new System.Drawing.Size(689, 321);
             groupBox2.TabIndex = 22;
             groupBox2.TabStop = false;
             groupBox2.Text = "Schematic";
+            // 
+            // timer1
+            // 
+            timer1.Interval = 200;
+            timer1.Tick += timer1_Tick;
             // 
             // DrawSelectedReads
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1200, 570);
+            ClientSize = new System.Drawing.Size(713, 570);
             Controls.Add(groupBox2);
             Controls.Add(button1);
             Controls.Add(groupBox1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            MinimumSize = new System.Drawing.Size(729, 609);
             Name = "DrawSelectedReads";
             Text = "Draw schematic display";
             FormClosing += DrawSelectedReads_FormClosing;
+            Resize += DrawSelectedReads_Resize;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ((System.ComponentModel.ISupportInitialize)p1).EndInit();
             groupBox2.ResumeLayout(false);
             ResumeLayout(false);
@@ -245,5 +306,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnShow;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnAnnotate;
+        private System.Windows.Forms.Label label5;
     }
 }

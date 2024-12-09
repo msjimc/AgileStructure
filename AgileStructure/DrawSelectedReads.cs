@@ -5,6 +5,7 @@ using System.Data;
 using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -65,11 +66,17 @@ namespace AgileStructure
             bp2 = null;
             breakPoints2 = null;
 
+            pd1 = null;
+            pd2 = null;
+
             lblPrimary1.Text = "not set";
             lblPrimary2.Text = "not set";
             lblSecondary1.Text = "not set";
             lblSecondary2.Text = "not set";
             blankImage();
+
+            btnAnnotate.Enabled = false;
+
         }
 
         private void btnAccept1_Click(object sender, EventArgs e)
@@ -89,7 +96,7 @@ namespace AgileStructure
 
                 chromosomes = new List<string>();
 
-                string[] annotations = null;// form.externalannotations();
+                string[] annotations = form.externalannotations();
 
                 BreakPointData[] first = form.getTwobreakPoints();
                 if (first[1] == null)
@@ -114,7 +121,7 @@ namespace AgileStructure
                 pd1 = new PointData(average1, average2, primary5primeOfPlace1, primary5primeOfPlace2, scondary5primeOfPlace1, scondary5primeOfPlace2, annotations, form.GetSelectedReads(), first);
 
                 form.deleteSelectedList();
-
+                p1.Image = Draw();
             }
             catch
             {
@@ -134,12 +141,13 @@ namespace AgileStructure
                 if (form == null) { return; }
                 blankImage();
 
-                string[] annotations = null; // form.externalannotations();
+                string[] annotations = form.externalannotations();
 
                 BreakPointData[] first = form.getTwobreakPoints();
                 if (first[1] == null)
                 { first[1] = first[0]; }
 
+                chromosomes = new List<string>();
 
                 int average1 = 0;
                 int average2 = 0;
@@ -147,6 +155,10 @@ namespace AgileStructure
                 float primary5primeOfPlace2 = form.PrimaryAlignment5PrimeOfbreakPoint(first[1].getAveragePlace, first[1].getReferenceName);
                 float scondary5primeOfPlace1 = form.SecondaryAlignment5PrimeOfbreakPoint(first[0].getAveragePlace, first[0].getReferenceName);
                 float scondary5primeOfPlace2 = form.SecondaryAlignment5PrimeOfbreakPoint(first[1].getAveragePlace, first[1].getReferenceName);
+
+                chromosomes.Add(first[0].getReferenceName);
+                if (first[1].getReferenceName != first[0].getReferenceName)
+                { chromosomes.Add(first[1].getReferenceName); }
 
                 if (chromosomes.Contains(first[0].getReferenceName) == false) { chromosomes.Add(first[0].getReferenceName); }
                 if (chromosomes.Contains(first[1].getReferenceName) == false) { chromosomes.Add(first[1].getReferenceName); }
@@ -159,6 +171,7 @@ namespace AgileStructure
                 pd2 = new PointData(average1, average2, primary5primeOfPlace1, primary5primeOfPlace2, scondary5primeOfPlace1, scondary5primeOfPlace2, annotations, form.GetSelectedReads(), first);
 
                 form.deleteSelectedList();
+                p1.Image = Draw();
             }
             catch
             {
@@ -170,11 +183,12 @@ namespace AgileStructure
 
         private void Find(PointData pda, PointData pdb)
         {
-
+            btnAnnotate.Enabled = false;
             if (pda == null && pdb == null)
             { MessageBox.Show("Please set the break point(s)", "No break points selected"); }
             else if (pda != null && pdb != null)
             {
+                btnAnnotate.Enabled = true;
                 if (chromosomes.Count == 1)
                 {
                     if (pda.Average1 + 50 < pdb.Average1)
@@ -315,8 +329,6 @@ namespace AgileStructure
             p1.Image = bmp; ;
         }
 
-
-
         private void button1_Click(object sender, EventArgs e)
         {
             Close();
@@ -324,6 +336,21 @@ namespace AgileStructure
 
         private void btnDraw_Click(object sender, EventArgs e)
         {
+            string filenme = FileString.SaveAs("Enter image file name", "Image file (*.png;*.jpg;*.tiff;*.bmp)|*.png;*.jpg;*.tiff;*.bmp");
+            if (filenme == "Cancel") { return; }
+            try
+            {
+                Bitmap bmp = Draw();
+                bmp.Save(filenme);
+            }
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message, "Error"); }
+        }
+
+        private Bitmap Draw()
+        {
+            if (WindowState == FormWindowState.Minimized) { return null; }
+            if (pd1 == null && pd2 == null) { return null; }
             Find(pd1, pd2);
 
             Bitmap bmp = new Bitmap(p1.Width, p1.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
@@ -332,18 +359,16 @@ namespace AgileStructure
 
             try
             {
-
                 drawReferenceAndBreakpoints(chromosomes.Count, new Rectangle(0, 0, bmp.Width, bmp.Height), g);
-
             }
-            finally
-            { p1.Image = bmp; }
+            catch { }
+            return bmp;
         }
 
         private void drawReferenceAndBreakpoints(int chromosomeCount, Rectangle area, Graphics g)
         {
 
-            int referencelength = area.Width - 20;
+            int referencelength = area.Width - 50;
             int QuarterWidth = (area.Width - 80) / 4;
             int referencelineHieght = (area.Height - 30);
 
@@ -353,6 +378,8 @@ namespace AgileStructure
             Point fourth = new Point((3 * QuarterWidth) + 70, referencelength + 10);
 
             breakpointBasic[] bpb = GetBreakpointBasicArray(first, second, third, fourth);
+
+            referencelineHieght = drawReferenceAndBreakpointsSingleChromosome(area, g, bpb, first, second, third, fourth, 50);
 
             Pen referencePen = new Pen(Brushes.Black, 2);
             if (chromosomeCount == 1)
@@ -364,33 +391,36 @@ namespace AgileStructure
                 g.DrawLine(referencePen, first.X, referencelineHieght, second.Y, referencelineHieght);
                 g.DrawLine(referencePen, third.X, referencelineHieght, fourth.Y, referencelineHieght);
             }
-            drawReferenceAndBreakpointsSingleChromosome(area, g, bpb, first, second, third, fourth, referencelineHieght);
-                    }
+        }
 
-        private void drawReferenceAndBreakpointsSingleChromosome(Rectangle area, Graphics g, breakpointBasic[] bpb, Point first, Point second, Point third, Point fourth, int ReferenceHeight)
+        private int drawReferenceAndBreakpointsSingleChromosome(Rectangle area, Graphics g, breakpointBasic[] bpb, Point first, Point second, Point third, Point fourth, int ReferenceHeight)
         {
 
             Pen verticalPen = new Pen(Brushes.Black, 1);
             verticalPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
             Font f = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Regular);
 
-            Writelables(g, f, first, ref bpb[0], verticalPen);
-            Writelables(g, f, second, ref bpb[1], verticalPen);
-            Writelables(g, f, third, ref bpb[2], verticalPen);
-            Writelables(g, f, fourth, ref bpb[3], verticalPen);
-
+            g.TranslateTransform(p1.Width - 15, 10);
+            g.RotateTransform(90);
+            g.DrawString("Counts", f, Brushes.Black, 0, 0);
+            g.ResetTransform();
 
             Dictionary<string, int> orientations = new Dictionary<string, int>();
             orientations = GetAligmnentSets(breakPoints1, bp1, orientations);
             orientations = GetAligmnentSets(breakPoints2, bp2, orientations);
 
-            DrawBlocks(g, f, orientations, bpb, area, ReferenceHeight, 10);
+            int lineheight = DrawBlocks(g, f, orientations, bpb, area, ReferenceHeight, 10);
 
+            Writelables(g, f, first, ref bpb[0], verticalPen, lineheight);
+            Writelables(g, f, second, ref bpb[1], verticalPen, lineheight);
+            if (bpb.Length > 2) { Writelables(g, f, third, ref bpb[2], verticalPen, lineheight); }
+            if (bpb.Length > 2) { Writelables(g, f, fourth, ref bpb[3], verticalPen, lineheight); }
+
+            return lineheight;
         }
 
-        private void DrawBlocks(Graphics g, Font f, Dictionary<string, int> orientations, breakpointBasic[] bpb, Rectangle area, int ReferenceHeight, int itemHeight)
+        private int DrawBlocks(Graphics g, Font f, Dictionary<string, int> orientations, breakpointBasic[] bpb, Rectangle area, int ReferenceHeight, int itemHeight)
         {
-            // primary(orientation  chr breackpoint side) sec(ori   chr breakpoint  side)
             int counter = 1;
             Rectangle r1 = new Rectangle(0, 0, 0, 0);
             Rectangle r2 = new Rectangle(0, 0, 0, 0);
@@ -401,14 +431,13 @@ namespace AgileStructure
                 int primaryBreakPoint = Convert.ToInt32(items[2]);
                 int secondaryBreakPoint = Convert.ToInt32(items[6]);
 
-
                 foreach (breakpointBasic place in bpb)
                 {
                     if (place.Position == primaryBreakPoint && place.Chromosme == items[1])
                     {
-                        r1 = new Rectangle(0, ReferenceHeight - (3 * counter * itemHeight), 100, itemHeight);
+                        r1 = new Rectangle(0, ReferenceHeight + (3 * counter * itemHeight), 60, itemHeight);
                         if (items[3] == "r") { r1.X = place.ImagePlace; }
-                        else { r1.X = place.ImagePlace - 100; }
+                        else { r1.X = place.ImagePlace - 60; }
 
                         if (items[0] == "+")
                         { g.FillRectangle(Brushes.Green, r1); }
@@ -422,13 +451,17 @@ namespace AgileStructure
                 {
                     if (place.Position == secondaryBreakPoint && place.Chromosme == items[5])
                     {
-                        r2 = new Rectangle(0, ReferenceHeight - (3 * counter * itemHeight), 100, itemHeight);
+                        r2 = new Rectangle(0, ReferenceHeight + (3 * counter * itemHeight), 60, itemHeight);
                         if (items[7] == "r") { r2.X = place.ImagePlace; }
-                        else { r2.X = place.ImagePlace - 100; }
+                        else { r2.X = place.ImagePlace - 60; }
 
-                        
+                        if (OverlappingRectangles(r1, r2) == true)
+                        {
+                            counter++;
+                            r2.Y = ReferenceHeight + (3 * counter * itemHeight);
+                        }
 
-                        if (items[0] == "+")
+                        if (items[4] == "+")
                         { g.FillRectangle(Brushes.Green, r2); }
                         else { g.FillRectangle(Brushes.Red, r2); }
                         g.DrawRectangle(Pens.Black, r2);
@@ -437,57 +470,88 @@ namespace AgileStructure
                 }
                 counter++;
 
+                g.DrawString(orientations[data].ToString(), f, Brushes.Black, area.Right - 30, ((r1.Top + r2.Top) / 2) - 2);
+
                 Pen connector = new Pen(Brushes.Black, 1.5f);
-                connector.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+                connector.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
                 if (r1.X > 0 && r2.X > 0)
                 {
                     int left = 0;
                     int right = 0;
 
-                    if (items[3] == "l" && items[7] == "r")
+
+                    if (r1.Y != r2.Y)
                     {
-                        g.DrawLine(connector, r1.Right, ((r1.Top + r1.Bottom) / 2) , r2.Left, ((r2.Top + r2.Bottom) / 2));
+                        if (items[3] == "r" && items[7] == "r")
+                        {
+                            left = r1.Left - 15;
+                            g.DrawLine(connector, r1.Left, (r1.Top + r1.Bottom) / 2, left, (r1.Top + r1.Bottom) / 2);
+                            g.DrawLine(connector, r2.Left, (r2.Top + r2.Bottom) / 2, left, (r2.Top + r2.Bottom) / 2);
+                            g.DrawLine(connector, left, (r1.Top + r1.Bottom) / 2, left, ((r2.Top + r2.Bottom) / 2));
+                        }
+                        else
+                        {
+                            right = r1.Right + 15;
+                            g.DrawLine(connector, r1.Right, (r1.Top + r1.Bottom) / 2, right, (r1.Top + r1.Bottom) / 2);
+                            g.DrawLine(connector, r2.Right, (r2.Top + r2.Bottom) / 2, right, (r2.Top + r2.Bottom) / 2);
+                            g.DrawLine(connector, right, (r1.Top + r1.Bottom) / 2, right, ((r2.Top + r2.Bottom) / 2));
+                        }
+                    }
+                    else if (items[3] == "l" && items[7] == "r")
+                    {
+                        g.DrawLine(connector, r1.Right, ((r1.Top + r1.Bottom) / 2), r2.Left, ((r2.Top + r2.Bottom) / 2));
                     }
                     else
-                            { if (items[3] == "l")
-                                {
-                                    left = r1.Right + 15;
-                                    g.DrawLine(connector, r1.Right, (r1.Top + r1.Bottom) / 2, left, (r1.Top + r1.Bottom) / 2);
-                                    g.DrawLine(connector, left, (r1.Top + r1.Bottom) / 2, left, ((r1.Top + r1.Bottom) / 2) - (1.5f * itemHeight));
-                                }
-                                else
-                                {
-                                    left = r1.Left - 15;
-                                    g.DrawLine(connector, r1.Left, (r1.Top + r1.Bottom) / 2, left, (r1.Top + r1.Bottom) / 2);
-                                    g.DrawLine(connector, left, (r1.Top + r1.Bottom) / 2, left, ((r1.Top + r1.Bottom) / 2) - (1.5f * itemHeight));
-                                }
+                    {
+                        if (items[3] == "l")
+                        {
+                            left = r1.Right + 15;
+                            g.DrawLine(connector, r1.Right, (r1.Top + r1.Bottom) / 2, left, (r1.Top + r1.Bottom) / 2);
+                            g.DrawLine(connector, left, (r1.Top + r1.Bottom) / 2, left, ((r1.Top + r1.Bottom) / 2) - (1.5f * itemHeight));
+                        }
+                        else
+                        {
+                            left = r1.Left - 15;
+                            g.DrawLine(connector, r1.Left, (r1.Top + r1.Bottom) / 2, left, (r1.Top + r1.Bottom) / 2);
+                            g.DrawLine(connector, left, (r1.Top + r1.Bottom) / 2, left, ((r1.Top + r1.Bottom) / 2) - (1.5f * itemHeight));
+                        }
 
-                                if (items[7] == "l")
-                                {
-                                    right = r2.Right + 15;
-                                    g.DrawLine(connector, r2.Right, (r2.Top + r2.Bottom) / 2, right, (r2.Top + r2.Bottom) / 2);
-                                    g.DrawLine(connector, right, (r2.Top + r2.Bottom) / 2, right, ((r2.Top + r2.Bottom) / 2) - (1.5f * itemHeight));
-                                }
-                                else
-                                {
-                                    right = r2.Left - 15;
-                                    g.DrawLine(connector, r2.Left, (r2.Top + r2.Bottom) / 2, right, (r2.Top + r2.Bottom) / 2);
-                                    g.DrawLine(connector, right, (r2.Top + r2.Bottom) / 2, right, ((r2.Top + r2.Bottom) / 2) - (1.5f * itemHeight));
-                                }
-                                g.DrawLine(connector, left, ((r1.Top + r1.Bottom) / 2) - (1.5f * itemHeight), right, ((r2.Top + r2.Bottom) / 2) - (1.5f * itemHeight));
-                            }
-                    
+                        if (items[7] == "l")
+                        {
+                            right = r2.Right + 15;
+                            g.DrawLine(connector, r2.Right, (r2.Top + r2.Bottom) / 2, right, (r2.Top + r2.Bottom) / 2);
+                            g.DrawLine(connector, right, (r2.Top + r2.Bottom) / 2, right, ((r2.Top + r2.Bottom) / 2) - (1.5f * itemHeight));
+                        }
+                        else
+                        {
+                            right = r2.Left - 15;
+                            g.DrawLine(connector, r2.Left, (r2.Top + r2.Bottom) / 2, right, (r2.Top + r2.Bottom) / 2);
+                            g.DrawLine(connector, right, (r2.Top + r2.Bottom) / 2, right, ((r2.Top + r2.Bottom) / 2) - (1.5f * itemHeight));
+                        }
+                        g.DrawLine(connector, left, ((r1.Top + r1.Bottom) / 2) - (1.5f * itemHeight), right, ((r2.Top + r2.Bottom) / 2) - (1.5f * itemHeight));
+                    }
                 }
-
             }
+
+            return ReferenceHeight + (3 * counter * itemHeight);
 
         }
 
-        private void Writelables(Graphics g, Font f, Point region, ref breakpointBasic data, Pen verticalPen)
+        private bool OverlappingRectangles(Rectangle r1, Rectangle r2)
+        {
+            bool answer = false;
+
+            if (Math.Abs(r1.X - r2.X) < 15)
+            { answer = true; }
+
+            return answer;
+        }
+
+        private void Writelables(Graphics g, Font f, Point region, ref breakpointBasic data, Pen verticalPen, int lineHeight)
         {
             int ThirdHieght = 60;
 
-            g.DrawLine(verticalPen, data.ImagePlace, p1.Bottom - 10, data.ImagePlace, ThirdHieght);
+            g.DrawLine(verticalPen, data.ImagePlace, lineHeight, data.ImagePlace, ThirdHieght);
             SizeF length1 = g.MeasureString(data.Chromosme, f);
             int point1 = ((region.Y - region.X) / 2) + region.X;
             g.DrawString(data.Chromosme, f, Brushes.Black, point1 - ((length1.Width - 8) / 2), 10);
@@ -500,16 +564,17 @@ namespace AgileStructure
             g.DrawLine(Pens.Black, point1 - (length / 2), ThirdHieght - 15, point1 + (length / 2), ThirdHieght - 15);
 
             if (point1 - (length / 2) > data.ImagePlace)
-            { g.DrawLine(Pens.Black, point1 - (length / 2), ThirdHieght - 15, data.ImagePlace, ThirdHieght); }
+            { g.DrawLine(verticalPen, point1 - (length / 2), ThirdHieght - 15, data.ImagePlace, ThirdHieght); }
             else if (point1 + (length / 2) < data.ImagePlace)
-            { g.DrawLine(Pens.Black, point1 + (length / 2), ThirdHieght - 15, data.ImagePlace, ThirdHieght); }
+            { g.DrawLine(verticalPen, point1 + (length / 2), ThirdHieght - 15, data.ImagePlace, ThirdHieght); }
             else
-            { g.DrawLine(Pens.Black, point1, ThirdHieght - 15, data.ImagePlace, ThirdHieght); }
-
+            { g.DrawLine(verticalPen, point1, ThirdHieght - 15, data.ImagePlace, ThirdHieght); }
         }
 
         private breakpointBasic[] GetBreakpointBasicArray(Point first, Point second, Point third, Point Fourth)
         {
+            int mergeOn = (int)numericUpDown1.Value;
+
             string[] items1 = drawbreakPoint(lblPrimary1.Text);
             string[] items2 = drawbreakPoint(lblPrimary2.Text);
             string[] items3 = drawbreakPoint(lblSecondary1.Text);
@@ -525,9 +590,17 @@ namespace AgileStructure
             if (items4[0] != "#")
             { bpb.Add(new breakpointBasic(items4)); }
 
+            if (bpb.Count == 2)
+            {
+                breakpointBasic bpb1 = bpb[0];
+                breakpointBasic bpb2 = bpb[1];
+                bpb.Add(bpb1);
+                bpb.Add(bpb2);
+            }
+
             bpb.Sort(new breakpointBasicSorter());
 
-            if (bpb.Count > 3 && bpb[0].Chromosme == bpb[3].Chromosme && Math.Abs(bpb[0].Position - bpb[3].Position) < 10)
+            if (bpb.Count > 3 && bpb[0].Chromosme == bpb[3].Chromosme && Math.Abs(bpb[0].Position - bpb[3].Position) < mergeOn)
             {
                 int place = (first.X + Fourth.Y) / 2;
                 bpb[0].ImagePlace = place - 6;
@@ -537,14 +610,14 @@ namespace AgileStructure
             }
             else
             {
-                if (bpb.Count > 2 && bpb[0].Chromosme == bpb[2].Chromosme && Math.Abs(bpb[0].Position - bpb[2].Position) < 10)
+                if (bpb.Count > 2 && bpb[0].Chromosme == bpb[2].Chromosme && Math.Abs(bpb[0].Position - bpb[2].Position) < mergeOn)
                 {
                     int place = (first.X + third.Y) / 2;
                     bpb[0].ImagePlace = place - 4;
                     bpb[1].ImagePlace = place;
                     bpb[2].ImagePlace = place + 4;
                 }
-                else if (bpb.Count > 3 && bpb[1].Chromosme == bpb[3].Chromosme && Math.Abs(bpb[1].Position - bpb[3].Position) < 10)
+                else if (bpb.Count > 3 && bpb[1].Chromosme == bpb[3].Chromosme && Math.Abs(bpb[1].Position - bpb[3].Position) < mergeOn)
                 {
                     int place = (second.X + Fourth.Y) / 2;
                     bpb[1].ImagePlace = place - 4;
@@ -553,23 +626,29 @@ namespace AgileStructure
                 }
                 else
                 {
-                    if (bpb.Count > 1 && bpb[0].Chromosme == bpb[1].Chromosme && Math.Abs(bpb[0].Position - bpb[1].Position) < 10)
+                    if (bpb.Count > 1 && bpb[0].Chromosme == bpb[1].Chromosme && Math.Abs(bpb[0].Position - bpb[1].Position) < mergeOn)
                     {
                         int place = (first.X + second.Y) / 2;
-                        bpb[0].ImagePlace = place -   2;
-                        bpb[1].ImagePlace = place + 2;
+                        int gap = 0;
+                        if (bpb[0].Position != bpb[1].Position) { gap = 2; }
+                        bpb[0].ImagePlace = place - gap;
+                        bpb[1].ImagePlace = place + gap;
                     }
-                    if (bpb.Count > 2 && bpb[1].Chromosme == bpb[2].Chromosme && Math.Abs(bpb[1].Position - bpb[2].Position) < 10)
+                    if (bpb.Count > 2 && bpb[1].Chromosme == bpb[2].Chromosme && Math.Abs(bpb[1].Position - bpb[2].Position) < mergeOn)
                     {
                         int place = (second.X + third.Y) / 2;
-                        bpb[1].ImagePlace = place - 2;
-                        bpb[2].ImagePlace = place + 2;
+                        int gap = 0;
+                        if (bpb[1].Position != bpb[2].Position) { gap = 2; }
+                        bpb[1].ImagePlace = place - gap;
+                        bpb[2].ImagePlace = place + gap;
                     }
-                    if (bpb.Count > 3 && bpb[2].Chromosme == bpb[3].Chromosme && Math.Abs(bpb[2].Position - bpb[3].Position) < 10)
+                    if (bpb.Count > 3 && bpb[2].Chromosme == bpb[3].Chromosme && Math.Abs(bpb[2].Position - bpb[3].Position) < mergeOn)
                     {
                         int place = (third.X + Fourth.Y) / 2;
-                        bpb[2].ImagePlace = place - 2;
-                        bpb[3].ImagePlace = place + 2;
+                        int gap = 0;
+                        if (bpb[2].Position != bpb[3].Position) { gap = 2; }
+                        bpb[2].ImagePlace = place - gap;
+                        bpb[3].ImagePlace = place + gap;
                     }
                 }
             }
@@ -579,10 +658,10 @@ namespace AgileStructure
             if (bpb[1].ImagePlace == -1)
             { bpb[1].ImagePlace = (second.Y + second.X) / 2; }
 
-            if (bpb[2].ImagePlace == -1)
+            if (bpb.Count > 2 && bpb[2].ImagePlace == -1)
             { bpb[2].ImagePlace = (third.Y + third.X) / 2; }
 
-            if (bpb[3].ImagePlace == -1)
+            if (bpb.Count > 2 && bpb[3].ImagePlace == -1)
             { bpb[3].ImagePlace = (Fourth.Y + Fourth.X) / 2; }
 
             return bpb.ToArray();
@@ -624,25 +703,40 @@ namespace AgileStructure
         {
             if (bestPlaces == null || ARs == null) { return orientations; }
 
-
             foreach (AlignedRead ar in ARs)
             {
-
                 string primaryStrand = "+";
                 if (ar.getForward == false) { primaryStrand = "-"; }
+                string primaryChromosome = "";
                 int arStart = ar.getPosition;
                 int arEnd = ar.getEndPosition;
 
                 string arDescription = "";
                 int pStart = -1;
                 if (bestPlaces[0].inPlaces(arStart) == true)
-                { arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "r"; pStart = bestPlaces[0].getAveragePlace;  }
+                { 
+                    arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "r"; 
+                    pStart = bestPlaces[0].getAveragePlace;
+                    primaryChromosome = bestPlaces[0].getReferenceName;
+                }
                 else if (bestPlaces[0].inPlaces(arEnd) == true)
-                { arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "l"; pStart = bestPlaces[0].getAveragePlace; }
+                { 
+                    arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "l"; 
+                    pStart = bestPlaces[0].getAveragePlace;
+                    primaryChromosome = bestPlaces[0].getReferenceName;
+                }
                 else if (bestPlaces[1].inPlaces(arStart) == true)
-                { arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "r"; pStart = bestPlaces[1].getAveragePlace; }
+                { 
+                    arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "r"; 
+                    pStart = bestPlaces[1].getAveragePlace;
+                    primaryChromosome = bestPlaces[0].getReferenceName;
+                }
                 else if (bestPlaces[1].inPlaces(arEnd) == true)
-                { arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "l"; pStart = bestPlaces[1].getAveragePlace; }
+                { 
+                    arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "l"; 
+                    pStart = bestPlaces[1].getAveragePlace;
+                    primaryChromosome = bestPlaces[0].getReferenceName;
+                }
 
                 if (string.IsNullOrEmpty(ar.getSecondaryAlignmentTag) == false)
                 {
@@ -653,7 +747,7 @@ namespace AgileStructure
                         {
                             string[] items = hit.Split(',');
                             if (items[0].ToLower().Equals(bestPlaces[0].getReferenceName.ToLower()) == true || items[0].ToLower().Equals(bestPlaces[1].getReferenceName.ToLower()))
-                            {                                
+                            {
                                 string secondaryStrandtrand = "";
                                 int startPoint = Convert.ToInt32(items[1]);
                                 int endPoint = startPoint + getAlignedLength(items[3]);
@@ -663,23 +757,27 @@ namespace AgileStructure
                                 string arDescriptionSec = "";
                                 int sStart = -1;
                                 if (bestPlaces[0].inPlaces(startPoint) == true)
-                                { arDescriptionSec +=  ":" + items[0] + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "r"; sStart = bestPlaces[0].getAveragePlace; }
+                                { arDescriptionSec += ":" + items[0] + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "r"; sStart = bestPlaces[0].getAveragePlace; }
                                 else if (bestPlaces[0].inPlaces(endPoint) == true)
-                                { arDescriptionSec +=  ":" + items[0] + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "l"; sStart = bestPlaces[0].getAveragePlace; }
+                                { arDescriptionSec += ":" + items[0] + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "l"; sStart = bestPlaces[0].getAveragePlace; }
                                 else if (bestPlaces[1].inPlaces(startPoint) == true)
-                                { arDescriptionSec +=  ":" + items[0] + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "r"; sStart = bestPlaces[1].getAveragePlace; }
+                                { arDescriptionSec += ":" + items[0] + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "r"; sStart = bestPlaces[1].getAveragePlace; }
                                 else if (bestPlaces[1].inPlaces(endPoint) == true)
-                                { arDescriptionSec +=  ":" + items[0] + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "l"; sStart = bestPlaces[1].getAveragePlace; }
+                                { arDescriptionSec += ":" + items[0] + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "l"; sStart = bestPlaces[1].getAveragePlace; }
                                 else { found = false; }
 
                                 string alignments = "";
                                 if (secondaryStrandtrand == primaryStrand)
                                 { alignments = "+"; }
                                 else { alignments = "-"; }
-                                if (pStart > sStart)
+
+                                int diff = primaryChromosome.CompareTo(items[0]);
+
+                                
+                                if (pStart > sStart && diff > -1)
                                 { arDescription = "+" + arDescriptionSec + ":" + alignments + ":" + arDescription; }
                                 else
-                                { arDescription = "+:" + arDescription + ":" + alignments +  arDescriptionSec; }
+                                { arDescription = "+:" + arDescription + ":" + alignments + arDescriptionSec; }
 
                                 if (found == true)
                                 {
@@ -738,6 +836,49 @@ namespace AgileStructure
         private void DrawSelectedReads_FormClosing(object sender, FormClosingEventArgs e)
         {
             form.dSR_Closing();
+        }
+
+        private bool resizing = false;
+        private void DrawSelectedReads_Resize(object sender, EventArgs e)
+        {
+            resizing = true;
+            timer1.Interval = 100;
+            timer1.Enabled = true;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (resizing == true) { resizing = false; }
+            else
+            {
+                timer1.Enabled = false;
+                p1.Image = Draw();
+            }
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            p1.Image = Draw();
+        }
+
+        private void btnAnnotate_Click(object sender, EventArgs e)
+        {
+            string[] labels = { lblPrimary1.Text, lblPrimary2.Text,lblSecondary1.Text,lblSecondary2.Text};
+
+            form.AnnotateFromDrawing(pd1, pd2, labels, chromosomes);
+        }
+
+        internal void SchematicfromAnnotation(PointData pdA, PointData pdB, string[] labels, List<string> Chromosomes)
+        {
+            clean();
+            pd1 = pdA;
+            pd2 = pdB;
+            lblPrimary1.Text = labels[0];
+            lblPrimary2.Text = labels[1];
+            lblSecondary1.Text = labels[2];
+            lblSecondary2.Text = labels[3];
+            chromosomes = Chromosomes;
+            p1.Image = Draw();
         }
     }
 }
