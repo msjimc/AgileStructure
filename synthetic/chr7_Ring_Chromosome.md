@@ -54,3 +54,13 @@ Figure 5
 Figure 6
 
 <hr />
+
+## Schematic drawing of read alignments
+
+The orientations of the alignments across the rearrangement is shown in Figure 7. Alignments shown in red indicate the orientation of the primary and secondary alignments differ.
+
+<hr />
+
+![image](images/chr7_ring_hetero.jpg)
+
+Figure 7

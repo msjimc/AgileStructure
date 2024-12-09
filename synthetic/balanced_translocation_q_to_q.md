@@ -44,3 +44,12 @@ Figure 5
 
 Figure 6
 
+## Schematic drawing of read alignments
+
+The orientations of the alignments across the rearrangement is shown in Figure 7. Alignments shown in red indicate the orientation of the primary and secondary alignments differ.
+
+<hr />
+
+![image](images/balanced_qToq_schematic.jpg)
+
+Figure 7
