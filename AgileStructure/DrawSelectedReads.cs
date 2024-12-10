@@ -497,7 +497,7 @@ namespace AgileStructure
                             g.DrawLine(connector, right, (r1.Top + r1.Bottom) / 2, right, ((r2.Top + r2.Bottom) / 2));
                         }
                     }
-                    else if (items[3] == "l" && items[7] == "r")
+                    else if (items[3] == "l" && items[7] == "r" && r1.Right < r2.Right)
                     {
                         g.DrawLine(connector, r1.Right, ((r1.Top + r1.Bottom) / 2), r2.Left, ((r2.Top + r2.Bottom) / 2));
                     }
@@ -773,11 +773,17 @@ namespace AgileStructure
 
                                 int diff = primaryChromosome.CompareTo(items[0]);
 
-                                
-                                if (pStart > sStart && diff > -1)
+                                if (diff < 0)
+                                { arDescription = "+:" + arDescription + ":" + alignments + arDescriptionSec; }
+                                else if (diff > 0)
                                 { arDescription = "+" + arDescriptionSec + ":" + alignments + ":" + arDescription; }
                                 else
-                                { arDescription = "+:" + arDescription + ":" + alignments + arDescriptionSec; }
+                                {
+                                    if (pStart > sStart )
+                                    { arDescription = "+" + arDescriptionSec + ":" + alignments + ":" + arDescription; }
+                                    else
+                                    { arDescription = "+:" + arDescription + ":" + alignments + arDescriptionSec; }
+                                }
 
                                 if (found == true)
                                 {
