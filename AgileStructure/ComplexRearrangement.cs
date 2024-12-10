@@ -406,8 +406,7 @@ namespace AgileStructure
                         else if (combination == "1100")
                         {
                             string answer = "The reverse complement of " + items1[0] + ":" + items1[1] + "-" + items2[2] + " is inserted into " + items1[0] + ":" + items2[1] + "-" + items1[2];
-                            if (Difference(items2[1], items1[2]) < 50)
-                            { answer = "The reverse complement of " + items1[0] + ":" + items1[1] + "-" + items2[1] + " is inserted into " + items1[0] + ":" + items2[2] + "-" + items1[2] + "\r\nor\r\n" + answer; }
+                            answer = "The reverse complement of " + items1[0] + ":" + items1[1] + "-" + items2[1] + " is inserted into " + items1[0] + ":" + items2[2] + "-" + items1[2] + "\r\nor\r\n" + answer;
                             return answer;
                             //insert_chr7_60_43,600,000-43,750,000_RC_target_chr7_60_50000000-51,000,000_ONT_no_2nd 1 and 2
                             //insert_chr7_60_43,600,000-43,750,000_RC_target_chr7_60_43,650,000-43,700,000_ONT_no_2nd 1 and 2
