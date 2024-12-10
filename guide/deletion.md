@@ -5,9 +5,6 @@ The patient was first described in:
 
 Sanger sequencing of the individual identified the variant to be: __chr7:146,534,699_146,611,541del__  with reference to the hg19 human reference sequence 
 
-__Data__  
-The aligned data is in the ```AgileStructure```_dta_sorted.bam file.
-
 __Prior information__  
 Using clinical phenotype data an individual was believed to have a mutation in the CNTNAP2 gene.  
 
@@ -28,7 +25,7 @@ The file will take a couple of seconds to load before you can select the ```Anno
 
 Figure 2 The coordinates for CNTNAP2 in human genome (hg19)
 
-Pressing the ```Accept``` button will then close the window and the gene's coordinates will appear in the upper panel's dropdown list and text areas, while pressing the ```Get reads``` will display reads mapping to CNTNAP2. Since a RefSeq annotation file was entered, the exons of any gene in the region will be displayed (Figure 3). 
+Pressing the ```Accept``` button will then close the window and the gene's coordinates will appear in the upper panel's dropdown list and text areas, while pressing the ```Get reads``` will display reads mapping to the CNTNAP2 locus. Since a RefSeq annotation file was entered, the exons of any gene in the region will be displayed (Figure 3). 
 
 ![Figure 3](images/examples/figure3del.jpg)
 
@@ -46,19 +43,21 @@ To view the region in more detail, place the mouse cursor just before the start 
 
 Figure 5
 
-However, while you don't need to use the lower panel to identify the deletion's break points, for ```AgileStructure``` to annotate a break point it does require a region to be selected in the lower dropdown list. Selecting the ```chr7 146,611,542 bp (7)``` option from the dropdown list above the secondary alignment display will only display one side of the deletion, to view both sides copy and paste the locations from the upper text areas to the lower text areas (Figure 6). This aligns the positions of the primary alignments to the mapping of the secondary alignments. Selecting primary alignments mapping to one side of the deletion will highlight their secondary alignments at the other side of the deletion (Figure 6).
+While you don't need to use the lower panel to identify the deletion's break points, for ```AgileStructure``` to annotate a break point it does require a region to be selected in the lower dropdown list. Selecting the ```chr7 146,611,542 bp (7)``` option from the dropdown list above the secondary alignment display will only display one side of the deletion, to view both sides press the ```Copy region``` button, which will copy the values from the upper text areas to the lower text areas (Figure 6). This aligns the positions of the primary alignments to the those of the secondary alignments. Selecting primary alignments mapping to one side of the deletion will highlight their secondary alignments at the other side of the deletion (Figure 6).
 
 ![Figure 6](images/examples/figure6del.jpg)
 
 Figure 6
 
-After selecting all the reads spanning the deletion, pressing the ```Variant determination``` > ```Use soft clip data``` > ```Deletion``` menu option prompts ```AgileStructure``` to analyse the selected reads and annotate the break point has:  
-__chr7.146,837,611_146,914,450del__ (Figure 7).  
-
+After selecting all the reads spanning the deletion, pressing the ```Variant determination``` > ```Use soft clip data``` > ```Deletion``` menu option (Figure 7) prompts ```AgileStructure``` to analyse the selected reads and annotate the break point has: __chr7.146,837,611_146,914,450del__ (Figure 8).  
 
 ![Figure 7](images/examples/figure7del.jpg)
 
 Figure 7
+
+![Figure 8](images/examples/figure8del.jpg)
+
+Figure 8
 
 As stated above, the variant had perviously been identified as:  
  __chr7:146,534,699_146,611,541del__   
