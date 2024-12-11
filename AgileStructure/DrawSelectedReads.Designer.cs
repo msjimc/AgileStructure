@@ -49,6 +49,7 @@
             btnDraw = new System.Windows.Forms.Button();
             button1 = new System.Windows.Forms.Button();
             groupBox2 = new System.Windows.Forms.GroupBox();
+            btnClear = new System.Windows.Forms.Button();
             timer1 = new System.Windows.Forms.Timer(components);
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
@@ -253,6 +254,7 @@
             // groupBox2
             // 
             groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBox2.Controls.Add(btnClear);
             groupBox2.Controls.Add(p1);
             groupBox2.Controls.Add(btnDraw);
             groupBox2.Location = new System.Drawing.Point(12, 202);
@@ -261,6 +263,16 @@
             groupBox2.TabIndex = 22;
             groupBox2.TabStop = false;
             groupBox2.Text = "Schematic";
+            // 
+            // btnClear
+            // 
+            btnClear.Location = new System.Drawing.Point(527, 292);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new System.Drawing.Size(75, 23);
+            btnClear.TabIndex = 24;
+            btnClear.Text = "Clear";
+            btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
             // 
             // timer1
             // 
@@ -311,5 +323,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnAnnotate;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnClear;
     }
 }

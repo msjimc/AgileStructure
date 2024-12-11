@@ -2592,7 +2592,7 @@ namespace AgileStructure
                         if (inverted[0] * 2 < inverted[1])
                         { isInverted = "The insert is inverted"; }
                         else if (inverted[1] * 2 < inverted[0])
-                        { isInverted = "The nsert is not inverted"; }
+                        { isInverted = "The insert is not inverted"; }
                         else { isInverted = "Could not tel if insert is inverted"; }
                     }
 
@@ -2932,10 +2932,22 @@ namespace AgileStructure
                         return result + "Have you selected any reads?";
                     }
 
-                    float primary5primeOfPlace1 = PrimaryAlignment5PrimeOfbreakPoint(bestPlaces[0].getAveragePlace, bestPlaces[0].getReferenceName);
-                    float primeOfPlace2 = SecondaryAlignment5PrimeOfbreakPoint(bestPlaces[1].getAveragePlace, bestPlaces[1].getReferenceName);
-                    orientation orientation = PrimarySecondaryAlignment5PrimeOfbreakPoint(bestPlaces[1].getAveragePlace, bestPlaces[0].getAveragePlace, bestPlaces[1].getReferenceName);
+                    float primary5primeOfPlace1 = -1;
+                    float primeOfPlace2 = -1;
+                    orientation orientation = orientation.NotSet;
 
+                    if (cboRef.Text == bestPlaces[0].getReferenceName)
+                    {
+                        primary5primeOfPlace1 = PrimaryAlignment5PrimeOfbreakPoint(bestPlaces[0].getAveragePlace, bestPlaces[0].getReferenceName);
+                        primeOfPlace2 = SecondaryAlignment5PrimeOfbreakPoint(bestPlaces[1].getAveragePlace, bestPlaces[1].getReferenceName);
+                        orientation = PrimarySecondaryAlignment5PrimeOfbreakPoint(bestPlaces[1].getAveragePlace, bestPlaces[0].getAveragePlace, bestPlaces[1].getReferenceName);
+                    }
+                    else
+                    {
+                        primary5primeOfPlace1 = PrimaryAlignment5PrimeOfbreakPoint(bestPlaces[1].getAveragePlace, bestPlaces[1].getReferenceName);
+                        primeOfPlace2 = SecondaryAlignment5PrimeOfbreakPoint(bestPlaces[0].getAveragePlace, bestPlaces[0].getReferenceName);
+                        orientation = PrimarySecondaryAlignment5PrimeOfbreakPoint(bestPlaces[0].getAveragePlace, bestPlaces[1].getAveragePlace, bestPlaces[0].getReferenceName);
+                    }                   
                     string extraDataString = "";
                     if (primary5primeOfPlace1 > 0.33f && primary5primeOfPlace1 < 0.66f && primeOfPlace2 > 0.33f && primeOfPlace2 < 0.66)
                     {

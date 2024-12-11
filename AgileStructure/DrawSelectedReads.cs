@@ -705,91 +705,94 @@ namespace AgileStructure
 
             foreach (AlignedRead ar in ARs)
             {
-                string primaryStrand = "+";
-                if (ar.getForward == false) { primaryStrand = "-"; }
-                string primaryChromosome = "";
-                int arStart = ar.getPosition;
-                int arEnd = ar.getEndPosition;
-
-                string arDescription = "";
-                int pStart = -1;
-                if (bestPlaces[0].inPlaces(arStart) == true)
-                { 
-                    arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "r"; 
-                    pStart = bestPlaces[0].getAveragePlace;
-                    primaryChromosome = bestPlaces[0].getReferenceName;
-                }
-                else if (bestPlaces[0].inPlaces(arEnd) == true)
-                { 
-                    arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "l"; 
-                    pStart = bestPlaces[0].getAveragePlace;
-                    primaryChromosome = bestPlaces[0].getReferenceName;
-                }
-                else if (bestPlaces[1].inPlaces(arStart) == true)
-                { 
-                    arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "r"; 
-                    pStart = bestPlaces[1].getAveragePlace;
-                    primaryChromosome = bestPlaces[0].getReferenceName;
-                }
-                else if (bestPlaces[1].inPlaces(arEnd) == true)
-                { 
-                    arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "l"; 
-                    pStart = bestPlaces[1].getAveragePlace;
-                    primaryChromosome = bestPlaces[0].getReferenceName;
-                }
-
-                if (string.IsNullOrEmpty(ar.getSecondaryAlignmentTag) == false)
+                if (ar != null)
                 {
-                    string[] hits = ar.getSecondaryAlignmentTag.Substring(2).Split(';');
-                    foreach (string hit in hits)
+                    string primaryStrand = "+";
+                    if (ar.getForward == false) { primaryStrand = "-"; }
+                    string primaryChromosome = "";
+                    int arStart = ar.getPosition;
+                    int arEnd = ar.getEndPosition;
+
+                    string arDescription = "";
+                    int pStart = -1;
+                    if (bestPlaces[0].inPlaces(arStart) == true)
                     {
-                        if (string.IsNullOrEmpty(hit) == false)
+                        arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "r";
+                        pStart = bestPlaces[0].getAveragePlace;
+                        primaryChromosome = bestPlaces[0].getReferenceName;
+                    }
+                    else if (bestPlaces[0].inPlaces(arEnd) == true)
+                    {
+                        arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "l";
+                        pStart = bestPlaces[0].getAveragePlace;
+                        primaryChromosome = bestPlaces[0].getReferenceName;
+                    }
+                    else if (bestPlaces[1].inPlaces(arStart) == true)
+                    {
+                        arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "r";
+                        pStart = bestPlaces[1].getAveragePlace;
+                        primaryChromosome = bestPlaces[0].getReferenceName;
+                    }
+                    else if (bestPlaces[1].inPlaces(arEnd) == true)
+                    {
+                        arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "l";
+                        pStart = bestPlaces[1].getAveragePlace;
+                        primaryChromosome = bestPlaces[0].getReferenceName;
+                    }
+
+                    if (string.IsNullOrEmpty(ar.getSecondaryAlignmentTag) == false)
+                    {
+                        string[] hits = ar.getSecondaryAlignmentTag.Substring(2).Split(';');
+                        foreach (string hit in hits)
                         {
-                            string[] items = hit.Split(',');
-                            if (items[0].ToLower().Equals(bestPlaces[0].getReferenceName.ToLower()) == true || items[0].ToLower().Equals(bestPlaces[1].getReferenceName.ToLower()))
+                            if (string.IsNullOrEmpty(hit) == false)
                             {
-                                string secondaryStrandtrand = "";
-                                int startPoint = Convert.ToInt32(items[1]);
-                                int endPoint = startPoint + getAlignedLength(items[3]);
-                                secondaryStrandtrand = items[2];
-                                bool found = true;
-
-                                string arDescriptionSec = "";
-                                int sStart = -1;
-                                if (bestPlaces[0].inPlaces(startPoint) == true)
-                                { arDescriptionSec += ":" + items[0] + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "r"; sStart = bestPlaces[0].getAveragePlace; }
-                                else if (bestPlaces[0].inPlaces(endPoint) == true)
-                                { arDescriptionSec += ":" + items[0] + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "l"; sStart = bestPlaces[0].getAveragePlace; }
-                                else if (bestPlaces[1].inPlaces(startPoint) == true)
-                                { arDescriptionSec += ":" + items[0] + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "r"; sStart = bestPlaces[1].getAveragePlace; }
-                                else if (bestPlaces[1].inPlaces(endPoint) == true)
-                                { arDescriptionSec += ":" + items[0] + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "l"; sStart = bestPlaces[1].getAveragePlace; }
-                                else { found = false; }
-
-                                string alignments = "";
-                                if (secondaryStrandtrand == primaryStrand)
-                                { alignments = "+"; }
-                                else { alignments = "-"; }
-
-                                int diff = primaryChromosome.CompareTo(items[0]);
-
-                                if (diff < 0)
-                                { arDescription = "+:" + arDescription + ":" + alignments + arDescriptionSec; }
-                                else if (diff > 0)
-                                { arDescription = "+" + arDescriptionSec + ":" + alignments + ":" + arDescription; }
-                                else
+                                string[] items = hit.Split(',');
+                                if (items[0].ToLower().Equals(bestPlaces[0].getReferenceName.ToLower()) == true || items[0].ToLower().Equals(bestPlaces[1].getReferenceName.ToLower()))
                                 {
-                                    if (pStart > sStart )
+                                    string secondaryStrandtrand = "";
+                                    int startPoint = Convert.ToInt32(items[1]);
+                                    int endPoint = startPoint + getAlignedLength(items[3]);
+                                    secondaryStrandtrand = items[2];
+                                    bool found = true;
+
+                                    string arDescriptionSec = "";
+                                    int sStart = -1;
+                                    if (bestPlaces[0].inPlaces(startPoint) == true)
+                                    { arDescriptionSec += ":" + items[0] + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "r"; sStart = bestPlaces[0].getAveragePlace; }
+                                    else if (bestPlaces[0].inPlaces(endPoint) == true)
+                                    { arDescriptionSec += ":" + items[0] + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "l"; sStart = bestPlaces[0].getAveragePlace; }
+                                    else if (bestPlaces[1].inPlaces(startPoint) == true)
+                                    { arDescriptionSec += ":" + items[0] + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "r"; sStart = bestPlaces[1].getAveragePlace; }
+                                    else if (bestPlaces[1].inPlaces(endPoint) == true)
+                                    { arDescriptionSec += ":" + items[0] + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "l"; sStart = bestPlaces[1].getAveragePlace; }
+                                    else { found = false; }
+
+                                    string alignments = "";
+                                    if (secondaryStrandtrand == primaryStrand)
+                                    { alignments = "+"; }
+                                    else { alignments = "-"; }
+
+                                    int diff = primaryChromosome.CompareTo(items[0]);
+
+                                    if (diff < 0)
+                                    { arDescription = "+:" + arDescription + ":" + alignments + arDescriptionSec; }
+                                    else if (diff > 0)
                                     { arDescription = "+" + arDescriptionSec + ":" + alignments + ":" + arDescription; }
                                     else
-                                    { arDescription = "+:" + arDescription + ":" + alignments + arDescriptionSec; }
-                                }
+                                    {
+                                        if (pStart > sStart)
+                                        { arDescription = "+" + arDescriptionSec + ":" + alignments + ":" + arDescription; }
+                                        else
+                                        { arDescription = "+:" + arDescription + ":" + alignments + arDescriptionSec; }
+                                    }
 
-                                if (found == true)
-                                {
-                                    if (orientations.ContainsKey(arDescription) == false)
-                                    { orientations.Add(arDescription, 1); }
-                                    else { orientations[arDescription]++; }
+                                    if (found == true)
+                                    {
+                                        if (orientations.ContainsKey(arDescription) == false)
+                                        { orientations.Add(arDescription, 1); }
+                                        else { orientations[arDescription]++; }
+                                    }
                                 }
                             }
                         }
@@ -869,7 +872,7 @@ namespace AgileStructure
 
         private void btnAnnotate_Click(object sender, EventArgs e)
         {
-            string[] labels = { lblPrimary1.Text, lblPrimary2.Text,lblSecondary1.Text,lblSecondary2.Text};
+            string[] labels = { lblPrimary1.Text, lblPrimary2.Text, lblSecondary1.Text, lblSecondary2.Text };
 
             form.AnnotateFromDrawing(pd1, pd2, labels, chromosomes);
         }
@@ -885,6 +888,12 @@ namespace AgileStructure
             lblSecondary2.Text = labels[3];
             chromosomes = Chromosomes;
             p1.Image = Draw();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            clean();
+            blankImage();
         }
     }
 }

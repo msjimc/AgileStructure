@@ -1,6 +1,6 @@
 # Identifying a Duplication
 
-The case study involves the ___Agmo___ knock out mouse also discussed in Case 2 in the [Identification of insertions](insertion.md) read me file.
+This case study involves the ___Agmo___ knock out mouse that is lso discussed in Case 2 in the [Identification of insertions](insertion.md) read me file.
 
 This transgenic mouse is described here:
 
@@ -8,11 +8,11 @@ This transgenic mouse is described here:
 
 __Background__
 
-A transgenic ___Agmo___ knockout mouse was created by inserting a lacZ-neoR cassette close to exon 2 of the ___Agmo___ gene. However, difficulties in genotyping ___Agmo___-deficient mice led to the sequencing of the mouse and the identification of a 94 Kb tandem duplication of the 5' end of the ___Agmo___ gene.  
+A transgenic Agmo knockout mouse was engineered by inserting a lacZ-neoR cassette near exon 2 of the Agmo gene. However, challenges in genotyping these Agmo-deficient mice prompted further sequencing, revealing a 94 Kb tandem duplication at the 5' end of the Agmo gene.  
 
 The data for this experiment is hosted on the NCBI SRA site as [SRR12783028](https://www.ncbi.nlm.nih.gov/sra/?term=SRR12783028).  
 
-Reads which mapped to the start of the ___Agmo___ gene and contained extended unaligned data were used to search the NCBI blast database to obtain sequences homologous to the lacZ-NeoR cassette. This identified the sequence [JN960306.1](https://www.ncbi.nlm.nih.gov/nucleotide/JN960306.1?report=genbank&log$=nuclalign&blast_rank=3&RID=TWZMA063013) from which the sequence for the lacZ-NeoR cassette was extracted (15041 to 22164 bp) and added to mm10 mouse genome reference sequence as a separate reference sequence called transgene. The long read sequencing data was then aligned to this extended reference sequence and used in this guide.
+Reads that mapped to the start of the ___Agmo___ gene and contained extended unaligned sequence were used to search the NCBI blast database to obtain sequences homologous to the lacZ-NeoR cassette. This identified the sequence [JN960306.1](https://www.ncbi.nlm.nih.gov/nucleotide/JN960306.1?report=genbank&log$=nuclalign&blast_rank=3&RID=TWZMA063013) from which the sequence for the lacZ-NeoR cassette was extracted (15041 to 22164 bp) and added to the mm10 mouse genome reference sequence as a separate reference sequence called transgene. The long read sequencing data was then aligned to this extended reference sequence and used in this guide.
 
 While the detection of the cassette is separate from the detection of the duplication, its identification is shown below and in the [insertion walk through](insertion.md).  
 
@@ -20,7 +20,7 @@ The RefSeq gene data for the mm10 genome reference was downloaded from the Genom
 
 ### Analysis
 
-Import the aligned data by pressing the ```BAM file``` button. While it's possible to determine the location of the ___Agmo___ gene from a number of sources, in this example we'll get ```AgileStructure``` to identify the region using the RefSeq gene data set. First, download the data set as described [here](downloadingOptionalFiles.md). Then, select the ```Annotation``` > ```Gene annotation file``` menu option and choose the downloades file (Figure 11). The annotation file must correspond to the reference build used to align the data.
+Import the aligned data by pressing the ```BAM file``` button. While it's possible to determine the location of the ___Agmo___ gene from a number of sources, in this example we'll use ```AgileStructure``` to identify the region using the RefSeq gene data set. First, download the data set as described [here](downloadingOptionalFiles.md). Then, select the ```Annotation``` > ```Gene annotation file``` menu option and choose the downloades file (Figure 11). The annotation file must correspond to the reference build used to align the data.
 
 ![Figure 11](images/examples/figure1dup2.jpg)
 
@@ -38,7 +38,7 @@ Pressing the ```Accept``` button will then cause the gene's coordinates to appea
 
 Figure 13
 
-To view the secondary alignments in the upper panel, select a region on chromosome 12 from the dropdown list in the lower panel. Adjust the display limits to match the upper panel, then choose the reads that span the breakpoints (Figure 14).
+To view the secondary alignments in the upper panel, select a region on chromosome 12 from the dropdown list in the lower panel and press the Copy region button to show the same region in the upper and lower panels and then choose the reads that span the breakpoints (Figure 14).
 
 
 ![Figure 14](images/examples/figure4dup2.jpg)
@@ -51,30 +51,5 @@ Selecting the ```Variant determination``` > ```Use soft clip data``` > ```Duplic
 
 Figure 15
 
-The variant __chr12.37,206,133_37,300,424dup__ closely matches the region published duplicated region: __chr12:37,206,133–37,300,425__.
+The annotation __chr12.37,206,133_37,300,424dup__ closely matches the region published duplicated region: __chr12:37,206,133–37,300,425__.
 
-### Identification of the lacZ-NeoR cassette
-
-As stated above the transgenic mouse also included a lacZ-NeoR cassette. This sequence has been added to the mouse mm10 reference sequence and called 'transgene'.
-
-Following on from the detection of the duplication, all selected reads were deselected by using the ```Data``` > ```Clear selected reads``` menu option (Figure 16)
-
-![Figure 16](images/examples/figure6dup2.jpg)
-
-Figure 16
-
-From the lower dropdown list, select the region linked to the 'transgene' references sequence. Then, in the lower panel select the two reads mapping to the transgene sequence by clicking on them (Figure 17)
-
-![Figure 17](images/examples/figure7dup2.jpg)
-
-Figure 17
-
-The primary alignment for these reads can be seen at approximately  37,243,000 bp on chromosome 12 in intron 1 of the ___Agmo___ gene as expected (Figure 18). To annotate the insertion, go to **Variant determination** > **Use soft clip data** > **Insertion**. AgileStructure will then identify the insertion as `chr12:37,243,310ins transgene.4,567,7126` (Figure 19), which is near exon 2, the known location of the cassette.
-
-![Figure 18](images/examples/figure8dup2.jpg)
-
-Figure 18
-
-![Figure 19](images/examples/figure9dup2.jpg)
-
-Figure 19
