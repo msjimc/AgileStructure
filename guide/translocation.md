@@ -10,13 +10,13 @@ Import the data by pressing the ```BAM file``` button and then selecting chromos
 
 Figure 1
 
-This will populate the upper panel with reads that have unaligned sequences that may span the breakpoint. The lower dropdown list box will now contain a list of regions to which more than two unaligned sequences have been mapped. In the list, there is a position at 50.28 Mb on chromosome 22, which is close to the suggested site of the second breakpoint. Select this region to visualize the secondary alignments (Figure 2).
+This will populate the upper panel with reads that have unaligned sequences that may span the breakpoint. The lower panel's dropdown list box will now contain a list of regions to which more than two unaligned sequences have been mapped. In the list, there is a position at 50.28 Mb on chromosome 22, which is close to the suggested site of the second breakpoint. Select this region to visualize the secondary alignments (Figure 2).
 
 ![Figure 2](images/examples/figure2tran.jpg)
 
 Figure 2
 
-Once displayed, you can select the reads by clicking on them in the lower panel to see where they are located on chromosome 4. The three reads can be seen to map to approximately 6.7 Mb on chromosome 4. Select this region by moving the cursor to about 6.675 Mb, pressing the right mouse button, and moving the mouse to about 6.725 Mb before releasing the button. This will expand the upper panel, showing the reads in greater detail. Since the data has been re-read from the BAM alignment file, it is necessary to select the reads again and the region in the lower dropdown list (Figure 3).  
+Once displayed, you can select the reads by clicking on them in the lower panel to see where they are located on chromosome 4. The three reads can be seen to map to approximately 6.7 Mb on chromosome 4. Select this region by moving the cursor to about 6.675 Mb, pressing the right mouse button, and moving the mouse to about 6.725 Mb before releasing the button. This will expand the region in the upper panel, showing the reads in greater detail. Since the data has been re-read from the BAM alignment file, it is necessary to select the reads again and the region in the lower dropdown list (Figure 3).  
 
 ![Figure 3](images/examples/figure3tran.jpg)
 
@@ -24,7 +24,8 @@ Figure 3
 
 While other reads with secondary alignments have mapped near the breakpoint, it is now evident that they do not span the translocation breakpoint. Selecting the ```Variant determination``` > ```Use soft clip data``` > ```Translocation``` menu option prompts ```AgileStructure``` to analyse the selected reads and annotate the breakpoint, which it states as:  
  __t(chr4;chr22)g.6,713,999:g.50,283,263__ (Figure 4).  
-Pressing the ```Yes``` button will save the data to a text file.
+
+Analysis of the alignments of reads spanning the breakpoint suggest that the transloction is not balanced and that the derivative chromosomes have either two p telomeres or two q telomeres. Pressing the ```Yes``` button will save the data to a text file.
 
 ![Figure 4](images/examples/figure4tran.jpg)
 
@@ -48,7 +49,7 @@ Figure 7
 
 The breakpoint identified in the 2nd analysis was  
 __t(chr4;chr22)(g.6,713,998:g.50,283,262)__  
-This is derived from a different set of reads and so could be considered an independent test. While the base pair position of the two breakpoints are slightly different, it should be close enough to design a diagnostic PCR test.
+This is derived from a different set of reads and so could be considered an independent test. While the base pair position of the two breakpoints are slightly different, it should be close enough to design a diagnostic PCR test. As before AgileStructure reports that the translocation is not balanced and that the resultant chromosomes have either two q telomeres or two p telomeres.
 
 [Return user guide](README.md#translocation) 
 
@@ -67,7 +68,7 @@ Import the data by pressing the ```BAM file``` button and selecting the appropri
 
 Figure 1
 
-This will populate the upper panel with reads that have unaligned sequences that may span the breakpoint. The lower dropdown list box will now contain a region where more than two unaligned sequences have been mapped. This region is at 167.28 Mb on chromosome 6, which is close to the suggested site of the second breakpoint. Select the chromosome 6 region to visualise the secondary alignments of the reads on chromosome 8 (Figure 2).
+This will populate the upper panel with reads that have unaligned sequences that may span the breakpoint. The lower dropdown list box will now contain a region where more than two unaligned sequences have been mapped to the same location. This region is at 167.28 Mb on chromosome 6, which is close to the suggested site of the second breakpoint. Select the chromosome 6 region to visualise the secondary alignments of the reads on chromosome 8 (Figure 2).
 
 ![Figure 2](images/examples/figure2tran2.jpg)
 
@@ -80,7 +81,7 @@ Once displayed, you can select the reads in the lower panel by clicking on them 
 Figure 3
 
 Selecting the ```Variant determination``` > ```Use soft clip data``` > ```Translocation``` menu option prompts ```AgileStructure``` to analyse the selected reads and annotate the breakpoint as: 
-__t(chr6;chr8)(g.167,281,719;g.113,696,098)__ (Figure 4).  
+__t(chr6;chr8)(g.167,281,719;g.113,696,098)__ (Figure 4). Since ```AgileStucture``` identified alignments mapping to both sides of the breakpoint, it reports the translocation is balanced, but nots the number of alignments either side of the breakpoint is skewed (in this case 4 to 1). 
 Pressing the ```Yes``` button will save the data to a text file. 
 
 ![Figure 4](images/examples/figure4tran2.jpg)
@@ -106,6 +107,8 @@ Figure 7
 The breakpoint identified in the 2nd analysis:  
 __t(chr6;chr8)(g.167,281,716;g.113,696,100)__  
 is derived from a different set of reads and could be considered an independent test. While the base pair positions of the two breakpoints are slightly different from each other (Table 1) and the published position (less than 3 bp), it should be close enough to design a diagnostic PCR test.
+
+Since this side of the translocation has more reads spanning it, ```AgileStructure``` is able state the translocation is balanced. It also suggests the derivative chromosomes have a p telomere and a q telomere from the original chromosomes.
 
 |Origin|Variant|
 |-|-|

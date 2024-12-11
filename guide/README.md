@@ -47,11 +47,11 @@
 ## Installation
 
 ### WIndows computers
-```AgileStructure``` can be run simply by downloading [AgileStructure.exe](../program/AgileStructure.exe), [AgileStructure.dll](../program/AgileStructure.dll) and [AgileStructure.runtimeconfig.json](../program/AgileStructure.runtimeconfig.json) files to the same folder and then double clicking on the agileAgileStructure.exe file. The program requires the .NET 6.0 (or later) framework to be install which can be obtained from here: [version 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) or [version 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) and selecting the appropriate ***.NET Desktop Runtime \*.\*.\****  
+```AgileStructure``` can be run simply by downloading AgileStructure.exe,[AgileStructure.dll, AgileStructure.deps.json and AgileStructure.runtimeconfig.json files from either the [64 bit](../program/AgileStructure_64/) or [32 bit](../program/AgileStructure_32/) folders to the same folder and then double clicking on the agileAgileStructure.exe file. The program requires the .NET 6.0 (or later) framework to be install which can be obtained from here: [version 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) or [version 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) and selecting the appropriate ***.NET Desktop Runtime \*.\*.\****  
 
 ### Linux, macOS and BSD
 
-Like Windows computers, AgileStructure doesn't require installation (just download the [3 files](../program/) to the same folder), but does require ___Wine___ to be installed on the computer. A number of short guides covering the installation of ___Wine___ on appropriatlye 20 versions of Linux, BSD and macOS can be found [here](https://github.com/msjimc/RunningWindowsProgramsOnLinux).  ```AgileStructure``` also requires the installation of the .NET frameworks usually achieved via ___Winetricks___.
+Like on Windows computers, AgileStructure doesn't require installation (just download the [4 files](../program/) to the same folder), but does require ___Wine___ to be installed on the computer. A number of short guides covering the installation of ___Wine___ on appropriatlye 20 versions of Linux, BSD and macOS can be found [here](https://github.com/msjimc/RunningWindowsProgramsOnLinux).  ```AgileStructure``` also requires the installation of the .NET frameworks usually achieved via ___Winetricks___.
 
 ## Data requirements
 
@@ -61,7 +61,7 @@ Like Windows computers, AgileStructure doesn't require installation (just downlo
 
 ### Aligned data format
 
-```AgileStructure``` is designed to visualise aligned long read data formatted as indexed ```BAM``` files. It's expected that the index file will have the same name as the ```BAM``` file with the ```*.bai``` extension appended to the BAM file's name. For instance, the BAM file:  
+```AgileStructure``` is designed to visualise aligned, long read data formatted as indexed ```BAM``` files. It's expected that the index file will have the same name as the ```BAM``` file with the ```*.bai``` extension appended to the BAM file's name. For instance, the BAM file:  
 ```CNTNAP2.srt.mm2.bam```  
 will have an index file named:  
 ```CNTNAP2.srt.mm2.bam.bai```  
@@ -70,12 +70,12 @@ The ```BAM``` file must contain the header section, which lists the name and siz
 
 ### Preferred long read sequence aligners
 
-Long reads that span a breakpoint will appear to consist of two regions of homology, mapping to different locations in the genome. How these chimeric alignments are reported is aligner-specific. Some aligners, such as Minimap2 ([github](https://github.com/lh3/minimap2), [paper](https://academic.oup.com/bioinformatics/article/34/18/3094/4994778)), treat the two regions as different alignments but will report the secondary alignment as a condensed CIGAR string in the primary alignments tag section, while others report the read as two separate alignments but not directly reference the other alignment's position and CIGAR string. However, for shorter indels, both types of aligners may report them in the CIGAR string ([see this section](#identifying-indels-using-the-primary-alignments-cigar-string)).  
+Long reads that span a breakpoint will appear to consist of two regions of homology, mapping to different locations in the genome. How these chimeric alignments are reported is aligner-specific. Some aligners, such as Minimap2 ([github](https://github.com/lh3/minimap2), [paper](https://academic.oup.com/bioinformatics/article/34/18/3094/4994778)), treat the two regions as different alignments but will report the secondary alignment as a condensed CIGAR string in the primary alignments tag section, while other aligners may report the read as two separate alignments that are not directly referenced in the other alignment's position and CIGAR string. However, for shorter indels, both types of aligners may report them in the CIGAR string ([see this section](#identifying-indels-using-the-primary-alignments-cigar-string)).  
 ```AgileStructure``` is only able to analyse reads in which the indel is reported in the primary alignment's CIGAR string or the secondary alignment is reported in the tag section: The reporting of the secondary alignment in the tag section is the most flexible method and will allow more complex breakpoints to be processed. Consequently, it is recommended to align data using an aligner such as minimap2. 
 
 ### Optional data
 
-To aid the analysis, it is possible to view the putative breakpoints with reference to the  location of genes and repetitive sequences. This data can be obtained from the USCS genome browser as described [here](downloadingOptionalFiles.md).
+To aid the analysis, it is possible to view the putative breakpoints with reference to the location of genes and repetitive sequences. This data can be obtained from the USCS genome browser as described [here](downloadingOptionalFiles.md).
 
 ## Importing alignment data
 
@@ -98,11 +98,12 @@ Figure 2
 ### How indexed BAM files are processed
 
 Before indexing a BAM file, reads are ordered with reference to the read's genomic coordinates with the data then compressed with the qzip algorithm to form discrete chunks of compressed data containing reads that start in a small region. For example the first chunk in a file may contain reads with alignments starting on chr 1 between 1 bp and 16,000 bp with the next chunk containing reads whose alignment starts on chr 1 between 16,000 bp and 32,000 bp. The indexing of a file creates a 2nd file (.bam.bai) that lists the start point of each chunk in the BAM file and the start position of the first read in that chunk.   
-When a program has to find reads mapping to a certain region, it looks in the bam.bai files to find the chunks that contain the start positions of the reads mapped to the region. Once it's found the chunks mapping to the data, it looks up in the index file where that data starts in the BAM file and then reads the data at that point in the BAM file until it comes to the end of the compressed chunk. It repeats the process until it has read all the data for the region of interest. This works fine for short read data since all the reads in a chunk start between two well defined points (the genomic start site of the chunk and the end of the chunk plus the length of the read i.e. 16,000 bp to 32,000 bp plus 150 bp). However, with long read data, a read may be longer than the size of a chunk's region, so a read 20 kb long may start in  one chunk while its end may be in the next or the next but one chunk. This causes an issue when you select a small region, as reads that over lap the region may be listed in a chunk much further upstream and so may not be found when reading the BAM file.  Consequently, ```AgileStructure``` reads the chunk that ends just before the start of the region of interest, but if a read is particularly long it may be missed as it starts even further upstream. Therefore when selecting regions, initially select a slightly larger (16 kb added to each side) region than required and note if a long read spanning the breakpoint disappears when you shrink the region.      
+When a program has to find reads mapping to a certain region, it looks in the bam.bai files to find the chunks that contain the start positions of the reads mapped to the region. Once it's found the chunks mapping to the data, it looks up in the index file where that data starts in the BAM file and then reads the data at that point in the BAM file until it comes to the end of the compressed chunk. It repeats the process until it has read all the data for the region of interest.  
+This works fine for short read data since all the reads in a chunk start between two well defined points (the genomic start site of the chunk and the end of the chunk plus the length of the read i.e. 16,000 bp to 32,000 bp plus 150 bp). However, with long read data, a read may be longer than the size of a chunk's region, so a read 20 kb long may start in  one chunk while its end may be in the next or the next but one chunk. This causes an issue when you select a small region, as reads that over lap the region may be listed in a chunk much further upstream and so may not be found when reading the BAM file.  Consequently, ```AgileStructure``` reads the chunk that ends just before the start of the region of interest, but if a read is particularly long it may be missed as it starts even further upstream. Therefore when selecting regions, initially select a slightly larger (16 kb added to each side) region than required and note if a long read spanning the breakpoint disappear when you shrink the region.      
 
 ## Selecting the region to view
 
-Select the required chromosome (reference sequence) from the upper dropdown list box and enter the region's coordinates in the two text boxes to the right of this drop down list box and press the ```Get reads``` button (Figure 3). The coordinates are checked to make sure they are not greater than the chromosomes length as reported in the ```BAM``` file. If no chromosome has been selected these values will be limited to '1'.    
+Select the required chromosome (reference sequence) from the upper dropdown list box and enter the region's coordinates in the two text boxes to the right of this drop down list box and press the ```Get reads``` button (Figure 3). The coordinates are first checked to make sure they are not greater than the chromosomes length as reported in the ```BAM``` file. If no chromosome has been selected these values will be limited to '1'. If the region is valid, reads aligned in the region will be displayed in the upper panel.   
 
 ![Figure 3](images/figure3.jpg)
 
@@ -110,7 +111,7 @@ Figure 3
 
 The positions of reads mapping to the region are depicted as green rectangles (aligned to the forward strand) and red rectangles (aligned to the reverse strand), scaled according to the length of the read. Soft-clipped sequences are represented as pale green or pale red extensions adjacent to the darker green/red aligned data. The size of these pale rectangles is proportional to the length of the unaligned sequence, and their placement merely indicates whether they are on the 5’ or 3’ end of the aligned sequence.  
 It is important to note that in the default view, reads are represented as a solid box spanning the length of the alignment, if a read has a large deletion this will not be shown, however they can be visualised by selecting the ```Analysis``` > ```Look for indels within a read``` menu option (see section [Identifying Indels using the primary alignments CIGAR string](#identifying-indels-using-the-primary-alignments-cigar-string)).  
-```AgileStructure``` does not have an upper limit on the size of the region or number of reads it will process and will attempt to read the requested data until it has processed the region or the computer runs out of memory. While there is no upper limit, you should try to limit the amount of data it reads because reading the underlying BAM file can be a slow process due to its size.
+```AgileStructure``` does not have an upper limit on the size of the region or number of reads it will process and will attempt to read the requested data until it has processed the region or the computer runs out of memory. While there is no upper limit, you should try to limit the amount of data that is read because reading the underlying BAM file can be a slow process due to its size.
 
 ## Hiding reads without a soft-clipped segment
 
@@ -128,13 +129,13 @@ Figure 5: When reads with no secondary alignment are removed the breakpoint is m
 
 ## Looking for putative breakpoints in the selected region.
 
-It may be possible to simply identify the breakpoint at this point, especially for large homozygous deletions, but in many situations, particularly for heterozygous breakpoints, they may not stand out. Consequently, ```AgileStructure``` scans the displayed reads, looking for 250 bp regions in which multiple read alignments prematurely terminate and the remaining soft clipped sequences all map to the same secondary location. These regions are then noted and entered into the lower drop-down list box (Figure 6).
+It may be possible to simply identify the breakpoint at this point, especially for large homozygous deletions, but in many situations, particularly for heterozygous breakpoints, they may not stand out. Consequently, ```AgileStructure``` scans the displayed reads, looking for 250 bp regions in which multiple read alignments prematurely terminate and the remaining soft clipped sequences all map to the same secondary location. These regions are then noted and entered into the lower dropdown list box (Figure 6).
 
 ![Figure 6](images/figure6.jpg)
 
 Figure 6
 
-For extended regions and/or alignments with a high read depth, this list may contain a large number of entries. To filter these regions, press the ```Filter``` button to the left of the lower drop-down list box. This will open the ```Filter possible breakpoints``` window (Figure 7a and 7b). The upper drop-down list box allows the breakpoints to be filtered by the chromosome that the secondary alignments are mapped to (Figure 7a), while the lower number select box will filter the results by the number of reads linked to each putative breakpoint. 
+For extended regions and/or alignments with a high read depth, this list may contain a large number of entries. To filter these regions, press the ```Filter``` button to the left of the lower dropdown list box. This will open the ```Filter possible breakpoints``` window (Figure 7a and 7b). The upper dropdown list box allows the breakpoints to be filtered by the chromosome that the secondary alignments are mapped to (Figure 7a), while the lower number select box will filter the results by the number of reads linked to each putative breakpoint. 
 
 ![Figure 7a](images/figure7a.jpg)
 
@@ -173,7 +174,7 @@ In addition to the sequence and quality string, this information contains the pr
 
 ## Selecting reads linked to a breakpoint
 
-When the upper image contains a large number of reads, it may not be possible to identify the reads associated with the selected breakpoint. However, clicking on a read in either image will cause it to be selected and outlined with a blue border. Clicking on all the reads linked to a breakpoint in the lower image will help to identify the location of the breakpoint in the upper image (Figure 11).
+When the upper image contains a large number of reads, it may not be possible to identify the reads associated with the selected breakpoint. However, clicking on a read in either panel's image will cause it to be selected and outlined with a blue border. Clicking on all the reads linked to a breakpoint in the lower image will help to identify the location of the breakpoint in the upper image (Figure 11).
 
 ![Figure 11](images/figure11.jpg)
 
@@ -235,14 +236,15 @@ A worked example is [here](complex.md).
 
 ## Analysis of synthetic read datasets
 
-The links above describe the analysis of real data using the functions for simple rearrangements. Since these only touch on a fraction of the possible rearrangement scenarios, the analysis of 57 different rearrangements is available [here](../synthetic/README.md). These analyses use synthetic read data to create the required variant data and allow the annotated result can be compared to the know variant.
+The links above describe the analysis of real data using the functions for simple rearrangements. Since these only touch on a fraction of the possible rearrangement scenarios, the analysis of a large number of different rearrangements is available [here](../synthetic/README.md). These analyses use synthetic read data to create the required variant read data and allow the annotated result to be compared to the know variant.
 
 [Synthetic test data representing complex rearrangements](../synthetic/README.md)
 
 ## Identifying Indels using the primary alignments CIGAR string  
 
 ```AgileStructure``` is primarily designed to identify chromosomal breakpoints by looking for sets of reads whose alignment is broken in two, such that their primary alignment aligns at one location and their secondary alignments are all located to a more distant common region possibly on a different chromosome. However, it is also able to identify insertions and deletions that do not cause the alignment to be fragmented, but whose presence is noted in the primary alignment's CIGAR string.  
-Selecting the ```Analysis``` > ```Look for indels within a read``` menu option (Figure 15) causes the reads to be redrawn with deletions shown as a horizontal black line linking two blocks of aligned sequences while an insertion is shown as a vertical line projecting above and below the aligned sequence. Since ONT data contains numerous short indels, only insertions/deletions longer than 10 bp are shown.
+Selecting the ```Analysis``` > ```Look for indels within a read``` menu option (Figure 15) causes the reads to be redrawn with deletions shown as a horizontal black line linking two blocks of aligned sequences while an insertion is shown as a vertical line projecting above and below the aligned sequence. Since ONT data contains numerous short indels, only insertions/deletions longer than 10 bp are shown.  
+The data can be filtered for reads with large insettions and deletion within them by the ```Analysis``` > ```Only show reads with a indel``` menu option.
 
 ![Figure 15](images/figureA.jpg)
 
@@ -265,7 +267,7 @@ To annotate an insertion, select the reads containing the variant of interest, t
 
 ![Figure 17a](images/figureCa.jpg)
 
-Figure 17
+Figure 17a
 
 ![Figure 17b](images/figureCb.jpg)
 
