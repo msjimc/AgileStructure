@@ -1,6 +1,6 @@
 # Identifying a Duplication
 
-This case study involves the ___Agmo___ knock out mouse that is lso discussed in Case 2 in the [Identification of insertions](insertion.md) read me file.
+This case study involves the ___Agmo___ knockout mouse that is also discussed in in the ["Annotation of insertions"](insertion.md) read me file.
 
 This transgenic mouse is described here:
 
@@ -12,15 +12,15 @@ A transgenic Agmo knockout mouse was engineered by inserting a lacZ-neoR cassett
 
 The data for this experiment is hosted on the NCBI SRA site as [SRR12783028](https://www.ncbi.nlm.nih.gov/sra/?term=SRR12783028).  
 
-Reads that mapped to the start of the ___Agmo___ gene and contained extended unaligned sequence were used to search the NCBI blast database to obtain sequences homologous to the lacZ-NeoR cassette. This identified the sequence [JN960306.1](https://www.ncbi.nlm.nih.gov/nucleotide/JN960306.1?report=genbank&log$=nuclalign&blast_rank=3&RID=TWZMA063013) from which the sequence for the lacZ-NeoR cassette was extracted (15041 to 22164 bp) and added to the mm10 mouse genome reference sequence as a separate reference sequence called transgene. The long read sequencing data was then aligned to this extended reference sequence and used in this guide.
+Reads that mapped to the start of the ___Agmo___ gene and contained extended unaligned sequence were used to search the NCBI BLAST database to obtain sequences homologous to the lacZ-NeoR cassette. This identified the sequence [JN960306.1](https://www.ncbi.nlm.nih.gov/nucleotide/JN960306.1?report=genbank&log$=nuclalign&blast_rank=3&RID=TWZMA063013) from which the sequence for the lacZ-NeoR cassette was extracted (15041 to 22164 bp) and added to the mm10 mouse genome reference sequence as a separate reference sequence called transgene. The long-read sequencing data was then aligned to this extended reference sequence and used in this guide.
 
-While the detection of the cassette is separate from the detection of the duplication, its identification is shown below and in the [insertion walk through](insertion.md).  
+While the detection of the cassette is separate from the detection of the duplication, its identification is shown below and in the [insertion walkthrough](insertion.md).  
 
-The RefSeq gene data for the mm10 genome reference was downloaded from the Genome Browser's Table Browser as describe [here](downloadingOptionalFiles.md).
+The RefSeq gene data for the mm10 genome reference was downloaded from the Genome Browser's Table Browser as described [here](downloadingOptionalFiles.md).
 
 ### Analysis
 
-Import the aligned data by pressing the ```BAM file``` button. While it's possible to determine the location of the ___Agmo___ gene from a number of sources, in this example we'll use ```AgileStructure``` to identify the region using the RefSeq gene data set. First, download the data set as described [here](downloadingOptionalFiles.md). Then, select the ```Annotation``` > ```Gene annotation file``` menu option and choose the downloades file (Figure 11). The annotation file must correspond to the reference build used to align the data.
+Import the aligned data by pressing the ```BAM file``` button. While it's possible to determine the location of the ___Agmo___ gene from a number of sources, in this example we'll use ```AgileStructure``` to identify the region using the RefSeq gene data set. First, download the data set as described [here](downloadingOptionalFiles.md). Then, select the ```Annotation``` > ```Gene annotation file``` menu option and choose the downloaded file (Figure 11). The annotation file must correspond to the reference build used to align the data.
 
 ![Figure 11](images/examples/figure1dup2.jpg)
 
@@ -45,11 +45,12 @@ To view the secondary alignments in the upper panel, select a region on chromoso
 
 Figure 14
 
-Selecting the ```Variant determination``` > ```Use soft clip data``` > ```Duplication``` menu option, prompts ```AgileStructure``` to annotate the variant (Figure 15)
+Selecting the ```Variant determination``` > ```Use soft clip data``` > ```Duplication``` menu option prompts ```AgileStructure``` to annotate the variant (Figure 15).
 
 ![Figure 15](images/examples/figure5dup2.jpg)
 
 Figure 15
 
-The annotation __chr12.37,206,133_37,300,424dup__ closely matches the region published duplicated region: __chr12:37,206,133–37,300,425__.
+The annotation __chr12.37,206,133_37,300,424dup__ closely matches the published duplicated region: __chr12:37,206,133–37,300,425__.
 
+[Return user guide](README.md#duplication)

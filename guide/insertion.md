@@ -1,38 +1,36 @@
-# Identifying a Insertion
-
-### Note: The analysis of numerous synthetic insertion - deletion datasets are described in the [Synthetic](../synthetic/README.md) section.
+# Annotation of Insertions
 
 # Case 1: Identification of the lacZ-NeoR cassette
 
-The case study involves the Agmo knock out mouse discussed in the [Identification of duplications](duplication.md) read me file. 
+The case study involves the Agmo knockout mouse discussed in the [Annotation of duplications](duplication.md) read me file. 
 
 This transgenic mouse was first described here:
 
 > Sailer S, Coassin S, Lackner K, Fischer C, McNeill E, Streiter G, Kremser C, Maglione M, Green CM, Moralli D, Moschen AR, Keller MA, Golderer G, Werner-Felmayer G, Tegeder I, Channon KM, Davies B, Werner ER, Watschinger K. When the genome bluffs: a tandem duplication event during generation of a novel ___Agmo___ knockout mouse model fools routine genotyping. Cell Biosci. 2021 Mar 16;11(1):54. doi: 10.1186/s13578-021-00566-9. PMID: 33726865; PMCID: PMC7962373.
 
-__Backgroud__
+__Background__
 
 A transgenic ___Agmo___ knockout mouse was created by inserting a lacZ-neoR cassette near exon 2 of the ___Agmo___ gene. However, difficulties genotyping the ___Agmo___ deficient mice led to the sequencing of the mouse and the identification of a 94 Kb tandem duplication of the 5' end of the ___Agmo___ gene.  
 
 The data for this experiment is hosted on the NCBI SRA site as [SRR12783028](https://www.ncbi.nlm.nih.gov/sra/?term=SRR12783028).  
 
-Reads that mapped to the start of the ___Agmo___ gene and contained extended unaligned data were used to search the NCBI blast database to identify sequences homologous to the lacZ-NeoR cassette. This identified the [JN960306.1](https://www.ncbi.nlm.nih.gov/nucleotide/JN960306.1?report=genbank&log$=nuclalign&blast_rank=3&RID=TWZMA063013) sequence, from which the sequence for the lacZ-NeoR cassette (15041 to 22164 bp) was extracted and added to the mm10 mouse genome reference sequence as a separate reference sequence called transgene. The long read sequencing data was then aligned to this extended reference genome and used in this guide.  
+Reads that mapped to the start of the ___Agmo___ gene and contained extended unaligned data were used to search the NCBI blast database to identify sequences homologous to the lacZ-NeoR cassette. This identified the [JN960306.1](https://www.ncbi.nlm.nih.gov/nucleotide/JN960306.1?report=genbank&log$=nuclalign&blast_rank=3&RID=TWZMA063013) sequence, from which the sequence for the lacZ-NeoR cassette (15041 to 22164 bp) was extracted and added to the mm10 mouse genome reference sequence as a separate reference sequence called transgene. The long-read sequencing data was then aligned to this extended reference genome and used in this guide.  
 
-The detection of the transgene is discussed in the [duplication walk through](duplication.md).
+The detection of the transgene is discussed in the [duplication walkthrough](duplication.md).
 
-The RefSeq gene data for the mm10 reference genome  was downloaded from the Genome Browser's Table Browser as describe [here](downloadingOptionalFiles.md).
+The RefSeq gene data for the mm10 reference genome  was downloaded from the Genome Browser's Table Browser as described [here](downloadingOptionalFiles.md).
 
 ### Analysis
 
-Import the aligned data by clicking ```BAM file``` button. While it's possible to determine the location of the ___Agmo___ gene from a number of sources, in this example we'll get ```AgileStructure``` to identify the region using the RefSeq gene data set. To do this first download the data set as described [here](downloadingOptionalFiles.md). Then select the ```Annotation``` > ```Gene annotation file``` menu option to import this file (Figure 6). The annotation file must correspond to the reference sequences used to align the read data too.
+Import the aligned data by clicking the ```BAM file``` button. While it's possible to determine the location of the ___Agmo___ gene from a number of sources, in this example we'll get ```AgileStructure``` to identify the region using the RefSeq gene data set. To do this, first download the data set as described [here](downloadingOptionalFiles.md). Then select the ```Annotation``` > ```Gene annotation file``` menu option to import this file (Figure 6). The annotation file must correspond to the reference sequences used to align the read data too.
 
 ![Figure 6](images/examples/figure1dup2.jpg)
 
 Figure 6
 
-The transgene cassette was designed to integrate into the 5' end of the ___Agmo___ gene. Since ___Agmo___ is on chromosome 12, at 37,100,000 to 37,500,000, this region was select in the upper panels data fields and pressing the ```Get reads``` button displayed the reads mapping to this area.
+The transgene cassette was designed to integrate into the 5' end of the ___Agmo___ gene. Since ___Agmo___ is on chromosome 12, at 37,100,000 to 37,500,000, this region was selected in the upper panel's data fields, and pressing the ```Get reads``` button displayed the reads mapping to this area.
 
-The region linked to the transgene reference sequence was selected from the lower dropdown list (Figure 7) and the two reads in the lower panel selected using the mouse. 
+The region linked to the transgene reference sequence was selected from the lower dropdown list (Figure 7), and the two reads in the lower panel were selected using the mouse. 
 
 ![Figure 7](images/examples/figure8dup2.jpg)
 
@@ -64,20 +62,20 @@ Pressing the ```Get reads``` button displays data at the synthetic breakpoint at
 
 Figure 2
 
-While the site of the insertion is seen as a single column of alignments, the origin of the inserted sequence is shown as two breakpoints flanking the inserted sequence. Consequently, the region in the lower panel containing the copied  sequence should be expanded to include both breakpoints. This can be done by selecting the first region in the lower dropdown list and selecting all the reads displayed in the lower panel. This should allow you to identify the insertion point in upper panel. (Figure 3). 
+While the site of the insertion is seen as a single column of alignments, the origin of the inserted sequence is shown as two breakpoints flanking the inserted sequence. Consequently, the region in the lower panel containing the copied  sequence should be expanded to include both breakpoints. This can be done by selecting the first region in the lower dropdown list and selecting all the reads displayed in the lower panel. This should allow you to identify the insertion point in the upper panel. (Figure 3). 
 
 ![Figure 3](images/examples/figure3ins.jpg)
 
 Figure 3
 
-Next, select all the reads at the insertion point in the upper panel and then deselect the reads in the lower panel. This should result in the selection of reads that map to the unidentified breakpoint of the insert. Next, cycle through the regions in the lower panels dropdown list until the select read's secondary alignments appear and then select the region with the most reads linked to it that also contains the selected reads (Figure 4).
+Next, select all the reads at the insertion point in the upper panel and then deselect the reads in the lower panel. This should result in the selection of reads that map to the unidentified breakpoint of the insert. Next, cycle through the regions in the lower panel's dropdown list until the selected read's secondary alignments appear and then select the region with the most reads linked to it that also contains the selected reads (Figure 4).
 
 
 ![Figure 4](images/examples/figure4ins.jpg)
 
 Figure 4
 
-Once the positions of the breakpoints flanking the copied sequence are found, enter their coordinates in the lower panel's data fields such that both columns of secondary alignments are visible and then select all the reads(Figure 5). 
+Once the positions of the breakpoints flanking the copied sequence are found, enter their coordinates in the lower panel's data fields such that both columns of secondary alignments are visible and then select all the reads (Figure 5). 
 
 ![Figure 5](images/examples/figure5ins.jpg)
 
