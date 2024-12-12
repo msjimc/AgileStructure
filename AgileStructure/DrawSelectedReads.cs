@@ -427,110 +427,114 @@ namespace AgileStructure
 
             foreach (string data in orientations.Keys)
             {
-                string[] items = data.Split(':');
-                int primaryBreakPoint = Convert.ToInt32(items[2]);
-                int secondaryBreakPoint = Convert.ToInt32(items[6]);
-
-                foreach (breakpointBasic place in bpb)
+                try
                 {
-                    if (place.Position == primaryBreakPoint && place.Chromosme == items[1])
-                    {
-                        r1 = new Rectangle(0, ReferenceHeight + (3 * counter * itemHeight), 60, itemHeight);
-                        if (items[3] == "r") { r1.X = place.ImagePlace; }
-                        else { r1.X = place.ImagePlace - 60; }
+                    string[] items = data.Split(':');
+                    int primaryBreakPoint = Convert.ToInt32(items[2]);
+                    int secondaryBreakPoint = Convert.ToInt32(items[6]);
 
-                        if (items[0] == "+")
-                        { g.FillRectangle(Brushes.Green, r1); }
+                    foreach (breakpointBasic place in bpb)
+                    {
+                        if (place.Position == primaryBreakPoint && place.Chromosme == items[1])
+                        {
+                            r1 = new Rectangle(0, ReferenceHeight + (3 * counter * itemHeight), 60, itemHeight);
+                            if (items[3] == "r") { r1.X = place.ImagePlace; }
+                            else { r1.X = place.ImagePlace - 60; }
+
+                            if (items[0] == "+")
+                            { g.FillRectangle(Brushes.Green, r1); }
+                            else
+                            { g.FillRectangle(Brushes.Red, r1); }
+                            g.DrawRectangle(Pens.Black, r1);
+                            break;
+                        }
+                    }
+                    foreach (breakpointBasic place in bpb)
+                    {
+                        if (place.Position == secondaryBreakPoint && place.Chromosme == items[5])
+                        {
+                            r2 = new Rectangle(0, ReferenceHeight + (3 * counter * itemHeight), 60, itemHeight);
+                            if (items[7] == "r") { r2.X = place.ImagePlace; }
+                            else { r2.X = place.ImagePlace - 60; }
+
+                            if (OverlappingRectangles(r1, r2) == true)
+                            {
+                                counter++;
+                                r2.Y = ReferenceHeight + (3 * counter * itemHeight);
+                            }
+
+                            if (items[4] == "+")
+                            { g.FillRectangle(Brushes.Green, r2); }
+                            else { g.FillRectangle(Brushes.Red, r2); }
+                            g.DrawRectangle(Pens.Black, r2);
+                            break;
+                        }
+                    }
+                    counter++;
+
+                    g.DrawString(orientations[data].ToString(), f, Brushes.Black, area.Right - 30, ((r1.Top + r2.Top) / 2) - 2);
+
+                    Pen connector = new Pen(Brushes.Black, 1.5f);
+                    connector.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                    if (r1.X > 0 && r2.X > 0)
+                    {
+                        int left = 0;
+                        int right = 0;
+
+
+                        if (r1.Y != r2.Y)
+                        {
+                            if (items[3] == "r" && items[7] == "r")
+                            {
+                                left = r1.Left - 15;
+                                g.DrawLine(connector, r1.Left, (r1.Top + r1.Bottom) / 2, left, (r1.Top + r1.Bottom) / 2);
+                                g.DrawLine(connector, r2.Left, (r2.Top + r2.Bottom) / 2, left, (r2.Top + r2.Bottom) / 2);
+                                g.DrawLine(connector, left, (r1.Top + r1.Bottom) / 2, left, ((r2.Top + r2.Bottom) / 2));
+                            }
+                            else
+                            {
+                                right = r1.Right + 15;
+                                g.DrawLine(connector, r1.Right, (r1.Top + r1.Bottom) / 2, right, (r1.Top + r1.Bottom) / 2);
+                                g.DrawLine(connector, r2.Right, (r2.Top + r2.Bottom) / 2, right, (r2.Top + r2.Bottom) / 2);
+                                g.DrawLine(connector, right, (r1.Top + r1.Bottom) / 2, right, ((r2.Top + r2.Bottom) / 2));
+                            }
+                        }
+                        else if (items[3] == "l" && items[7] == "r" && r1.Right < r2.Right)
+                        {
+                            g.DrawLine(connector, r1.Right, ((r1.Top + r1.Bottom) / 2), r2.Left, ((r2.Top + r2.Bottom) / 2));
+                        }
                         else
-                        { g.FillRectangle(Brushes.Red, r1); }
-                        g.DrawRectangle(Pens.Black, r1);
-                        break;
+                        {
+                            if (items[3] == "l")
+                            {
+                                left = r1.Right + 15;
+                                g.DrawLine(connector, r1.Right, (r1.Top + r1.Bottom) / 2, left, (r1.Top + r1.Bottom) / 2);
+                                g.DrawLine(connector, left, (r1.Top + r1.Bottom) / 2, left, ((r1.Top + r1.Bottom) / 2) - (1.5f * itemHeight));
+                            }
+                            else
+                            {
+                                left = r1.Left - 15;
+                                g.DrawLine(connector, r1.Left, (r1.Top + r1.Bottom) / 2, left, (r1.Top + r1.Bottom) / 2);
+                                g.DrawLine(connector, left, (r1.Top + r1.Bottom) / 2, left, ((r1.Top + r1.Bottom) / 2) - (1.5f * itemHeight));
+                            }
+
+                            if (items[7] == "l")
+                            {
+                                right = r2.Right + 15;
+                                g.DrawLine(connector, r2.Right, (r2.Top + r2.Bottom) / 2, right, (r2.Top + r2.Bottom) / 2);
+                                g.DrawLine(connector, right, (r2.Top + r2.Bottom) / 2, right, ((r2.Top + r2.Bottom) / 2) - (1.5f * itemHeight));
+                            }
+                            else
+                            {
+                                right = r2.Left - 15;
+                                g.DrawLine(connector, r2.Left, (r2.Top + r2.Bottom) / 2, right, (r2.Top + r2.Bottom) / 2);
+                                g.DrawLine(connector, right, (r2.Top + r2.Bottom) / 2, right, ((r2.Top + r2.Bottom) / 2) - (1.5f * itemHeight));
+                            }
+                            g.DrawLine(connector, left, ((r1.Top + r1.Bottom) / 2) - (1.5f * itemHeight), right, ((r2.Top + r2.Bottom) / 2) - (1.5f * itemHeight));
+                        }
                     }
                 }
-                foreach (breakpointBasic place in bpb)
-                {
-                    if (place.Position == secondaryBreakPoint && place.Chromosme == items[5])
-                    {
-                        r2 = new Rectangle(0, ReferenceHeight + (3 * counter * itemHeight), 60, itemHeight);
-                        if (items[7] == "r") { r2.X = place.ImagePlace; }
-                        else { r2.X = place.ImagePlace - 60; }
-
-                        if (OverlappingRectangles(r1, r2) == true)
-                        {
-                            counter++;
-                            r2.Y = ReferenceHeight + (3 * counter * itemHeight);
-                        }
-
-                        if (items[4] == "+")
-                        { g.FillRectangle(Brushes.Green, r2); }
-                        else { g.FillRectangle(Brushes.Red, r2); }
-                        g.DrawRectangle(Pens.Black, r2);
-                        break;
-                    }
-                }
-                counter++;
-
-                g.DrawString(orientations[data].ToString(), f, Brushes.Black, area.Right - 30, ((r1.Top + r2.Top) / 2) - 2);
-
-                Pen connector = new Pen(Brushes.Black, 1.5f);
-                connector.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-                if (r1.X > 0 && r2.X > 0)
-                {
-                    int left = 0;
-                    int right = 0;
-
-
-                    if (r1.Y != r2.Y)
-                    {
-                        if (items[3] == "r" && items[7] == "r")
-                        {
-                            left = r1.Left - 15;
-                            g.DrawLine(connector, r1.Left, (r1.Top + r1.Bottom) / 2, left, (r1.Top + r1.Bottom) / 2);
-                            g.DrawLine(connector, r2.Left, (r2.Top + r2.Bottom) / 2, left, (r2.Top + r2.Bottom) / 2);
-                            g.DrawLine(connector, left, (r1.Top + r1.Bottom) / 2, left, ((r2.Top + r2.Bottom) / 2));
-                        }
-                        else
-                        {
-                            right = r1.Right + 15;
-                            g.DrawLine(connector, r1.Right, (r1.Top + r1.Bottom) / 2, right, (r1.Top + r1.Bottom) / 2);
-                            g.DrawLine(connector, r2.Right, (r2.Top + r2.Bottom) / 2, right, (r2.Top + r2.Bottom) / 2);
-                            g.DrawLine(connector, right, (r1.Top + r1.Bottom) / 2, right, ((r2.Top + r2.Bottom) / 2));
-                        }
-                    }
-                    else if (items[3] == "l" && items[7] == "r" && r1.Right < r2.Right)
-                    {
-                        g.DrawLine(connector, r1.Right, ((r1.Top + r1.Bottom) / 2), r2.Left, ((r2.Top + r2.Bottom) / 2));
-                    }
-                    else
-                    {
-                        if (items[3] == "l")
-                        {
-                            left = r1.Right + 15;
-                            g.DrawLine(connector, r1.Right, (r1.Top + r1.Bottom) / 2, left, (r1.Top + r1.Bottom) / 2);
-                            g.DrawLine(connector, left, (r1.Top + r1.Bottom) / 2, left, ((r1.Top + r1.Bottom) / 2) - (1.5f * itemHeight));
-                        }
-                        else
-                        {
-                            left = r1.Left - 15;
-                            g.DrawLine(connector, r1.Left, (r1.Top + r1.Bottom) / 2, left, (r1.Top + r1.Bottom) / 2);
-                            g.DrawLine(connector, left, (r1.Top + r1.Bottom) / 2, left, ((r1.Top + r1.Bottom) / 2) - (1.5f * itemHeight));
-                        }
-
-                        if (items[7] == "l")
-                        {
-                            right = r2.Right + 15;
-                            g.DrawLine(connector, r2.Right, (r2.Top + r2.Bottom) / 2, right, (r2.Top + r2.Bottom) / 2);
-                            g.DrawLine(connector, right, (r2.Top + r2.Bottom) / 2, right, ((r2.Top + r2.Bottom) / 2) - (1.5f * itemHeight));
-                        }
-                        else
-                        {
-                            right = r2.Left - 15;
-                            g.DrawLine(connector, r2.Left, (r2.Top + r2.Bottom) / 2, right, (r2.Top + r2.Bottom) / 2);
-                            g.DrawLine(connector, right, (r2.Top + r2.Bottom) / 2, right, ((r2.Top + r2.Bottom) / 2) - (1.5f * itemHeight));
-                        }
-                        g.DrawLine(connector, left, ((r1.Top + r1.Bottom) / 2) - (1.5f * itemHeight), right, ((r2.Top + r2.Bottom) / 2) - (1.5f * itemHeight));
-                    }
-                }
+                catch { }
             }
 
             return ReferenceHeight + (3 * counter * itemHeight);
@@ -664,7 +668,61 @@ namespace AgileStructure
             if (bpb.Count > 2 && bpb[3].ImagePlace == -1)
             { bpb[3].ImagePlace = (Fourth.Y + Fourth.X) / 2; }
 
+            columnPlaces(bpb);
+
             return bpb.ToArray();
+        }
+
+        private void columnPlaces(List<breakpointBasic> bpb)
+        {
+
+            if (bpb.Count > 3 && bpb[0].Chromosme == bpb[3].Chromosme && bpb[0].Position == bpb[3].Position )
+            {
+                int place = (bpb[0].ImagePlace + bpb[3].ImagePlace) / 2;
+                bpb[0].ImagePlace = place ;
+                bpb[1].ImagePlace = place ;
+                bpb[2].ImagePlace = place ;
+                bpb[3].ImagePlace = place ;
+            }
+            else
+            {
+                if (bpb.Count > 2 && bpb[0].Chromosme == bpb[2].Chromosme && bpb[0].Position == bpb[2].Position)
+                {
+                    int place = (bpb[0].ImagePlace + bpb[2].ImagePlace) / 2;
+                    bpb[0].ImagePlace = place ;
+                    bpb[1].ImagePlace = place;
+                    bpb[2].ImagePlace = place ;
+                }
+                else if (bpb.Count > 3 && bpb[1].Chromosme == bpb[3].Chromosme && bpb[1].Position == bpb[3].Position)
+                {
+                    int place = (bpb[1].ImagePlace + bpb[3].ImagePlace) / 2;
+                    bpb[1].ImagePlace = place - 4;
+                    bpb[2].ImagePlace = place;
+                    bpb[3].ImagePlace = place + 4;
+                }
+                else
+                {
+                    if (bpb.Count > 1 && bpb[0].Chromosme == bpb[1].Chromosme && bpb[0].Position == bpb[1].Position) 
+                    {
+                        int place = (bpb[0].ImagePlace + bpb[1].ImagePlace) / 2;
+                        bpb[0].ImagePlace = place ;
+                        bpb[1].ImagePlace = place ;
+                    }
+                    if (bpb.Count > 2 && bpb[1].Chromosme == bpb[2].Chromosme && bpb[1].Position == bpb[2].Position) 
+                    {
+                        int place = (bpb[1].ImagePlace + bpb[2].ImagePlace) / 2;
+                       bpb[1].ImagePlace = place ;
+                        bpb[2].ImagePlace = place ;
+                    }
+                    if (bpb.Count > 3 && bpb[2].Chromosme == bpb[3].Chromosme && bpb[2].Position == bpb[3].Position) 
+                    {
+                        int place = (bpb[2].ImagePlace + bpb[3].ImagePlace) / 2;
+                        bpb[2].ImagePlace = place ;
+                        bpb[3].ImagePlace = place ;
+                    }
+                }
+            }
+
         }
 
         private void btnShow_Click(object sender, EventArgs e)
