@@ -38,6 +38,9 @@
 - [Viewing data with reference to genomic features](#viewing-data-with-reference-to-genomic-features)
   * [Displaying gene positions](#displaying-gene-positions)
   * [Displaying repeat positions](#displaying-repeat-positions)
+- [Images](#images)
+  * [Save alignment display images](#save-alignment-display-images)
+  * [Draw schematic diagram of alignment patterns](#draw-schematic-diagram-of-alignment-patterns)
 - [Miscellaneous functions](#miscellaneous-functions)
   * [Cursor location](#cursor-location)
   * [Aligner string](#aligner-string)
@@ -386,6 +389,28 @@ The repeats are drawn as black rectangles filled in pale blue (forward strand) o
 ![Figure 26K](images/figureK.jpg)
 
 Figure 26
+
+## Images
+
+### Save alignment display images
+
+While ```AgileStructure```'s displays are primarily caused with read selection, they can be saved as images, which could be used in a report or lab book. To save the display pictures select the ```image``` > ```Save alignment images``` menu item (Figure 27a). This will prompt you for the image's file name and location before saving it (Figure 27b).
+
+![Figure 27a](images/figureOa.jpg)
+
+Figure 27a
+
+![Figure 27b](images/figureOb.jpg)
+
+Figure 27b: The resultant image is a direct copy of the current displays
+
+### Draw schematic diagram of alignment patterns
+
+The organisation of each read's primary and secondary alignments can be difficult to understand. Consequently, ```AgileStructure``` is able to create a schematic representation of selected reads that span a rearrangement's breakpoints. All rearrangements annotated by ```AgileStructure``` consist of 2, 3 or 4 columns of alignments, therefore, the schematic diagram is typically drawn as 4 evenly spaced positions that represent a set of alignments. However, if two are more columns are very close to each other their positions will be drawn closer together.   
+
+To draw a schematic diagram, enter the data and select the appropriate region; Figure 28a shows the sedata for an individual with a duplication at the FAM20A gene
+
+
 
 ## Miscellaneous functions
 
