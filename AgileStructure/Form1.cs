@@ -4309,15 +4309,15 @@ namespace AgileStructure
                 if (sequence == cboRef.Text)
                 {
                     double xScale = (p1.Width - 20) / (double)(selectEnd - selectStart);
-                    int imageplace = 10 + (int)((place - selectStart) * xScale);
-                    gModified1.DrawLine(penColour, imageplace, 10, imageplace, p1.Height);
+                    int imagePlace = 10 + (int)((place - selectStart) * xScale);
+                    gModified1.DrawLine(penColour, imagePlace, 10, imagePlace, p1.Height);
                 }
 
                 if (cboSecondaries.Text.StartsWith(sequence + " "))
                 {
                     double xScale = (p1.Width - 20) / (double)(selectSecondaryEnd - selectSecondaryStart);
-                    int imageplace = 10 + (int)((place - selectSecondaryStart) * xScale);
-                    gModified2.DrawLine(penColour, imageplace, 10, imageplace, p2.Height);
+                    int imagePlace = 10 + (int)((place - selectSecondaryStart) * xScale);
+                    gModified2.DrawLine(penColour, imagePlace, 10, imagePlace, p2.Height);
                 }
             }
             catch (Exception ex) { }
@@ -4326,16 +4326,21 @@ namespace AgileStructure
         private void saveImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int width = p1.Width;
-            int height = p1.Height + 40 + p2.Height;
+            int height = p1.Height + 60 + p2.Height;
             Bitmap bmpSave = new Bitmap(width, height, PixelFormat.Format32bppArgb);
             Graphics g = Graphics.FromImage(bmpSave);
             g.Clear(Color.White);
-            g.DrawImage(p1.Image, 0, 20);
+            g.DrawImage(p1.Image, 0, 40);
+            g.DrawRectangle(Pens.Black, new Rectangle(0, 40, bmpSave.Width-1, p1.Height));
 
             Font f = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Regular);
-            g.DrawString("Primary alignments", f, Brushes.Black, 2, 2);
-            g.DrawImage(p2.Image, 0, p1.Height + 40);
-            g.DrawString("Secondary alignments", f, Brushes.Black, 2, p1.Height + 22);
+            g.DrawString(Text, f, Brushes.Black, 2, 2);
+            string textToSave = "Primary alignments\t" +cboRef.Text + ":" + txtStart.Text + "-" + txtEnd.Text; 
+            g.DrawString(textToSave, f, Brushes.Black, 2, 20);
+            g.DrawImage(p2.Image, 0, p1.Height + 60);
+            g.DrawRectangle(Pens.Black, new Rectangle(0, p1.Height + 60, bmpSave.Width-1, p2.Height-1));
+            textToSave = "Secondary alignments\t" + cboSecondaries.Text.Substring(0, cboSecondaries.Text.IndexOf(" ")) + ":" + txtsStart.Text + "-" + txtsEnd.Text;
+            g.DrawString(textToSave, f, Brushes.Black, 2, p1.Height + 42);
 
             string file = FileString.SaveAs("Enter the name of the image file", "Image file (*.jpg)|*.jpg");
             if (file == "Cancel") { return; }

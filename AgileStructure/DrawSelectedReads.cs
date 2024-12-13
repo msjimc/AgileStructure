@@ -6,6 +6,7 @@ using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -106,8 +107,8 @@ namespace AgileStructure
                 int average2 = 0;
                 float primary5primeOfPlace1 = form.PrimaryAlignment5PrimeOfbreakPoint(first[0].getAveragePlace, first[0].getReferenceName);
                 float primary5primeOfPlace2 = form.PrimaryAlignment5PrimeOfbreakPoint(first[1].getAveragePlace, first[1].getReferenceName);
-                float scondary5primeOfPlace1 = form.SecondaryAlignment5PrimeOfbreakPoint(first[0].getAveragePlace, first[0].getReferenceName);
-                float scondary5primeOfPlace2 = form.SecondaryAlignment5PrimeOfbreakPoint(first[1].getAveragePlace, first[1].getReferenceName);
+                float secondary5primeOfPlace1 = form.SecondaryAlignment5PrimeOfbreakPoint(first[0].getAveragePlace, first[0].getReferenceName);
+                float secondary5primeOfPlace2 = form.SecondaryAlignment5PrimeOfbreakPoint(first[1].getAveragePlace, first[1].getReferenceName);
 
                 chromosomes.Add(first[0].getReferenceName);
                 if (first[1].getReferenceName != first[0].getReferenceName)
@@ -118,7 +119,7 @@ namespace AgileStructure
                 lblPrimary1.Text = "Break point 1: " + first[0].getReferenceName + ":" + average1.ToString("N0");
                 lblSecondary1.Text = "Break point 2: " + first[1].getReferenceName + ":" + average2.ToString("N0");
 
-                pd1 = new PointData(average1, average2, primary5primeOfPlace1, primary5primeOfPlace2, scondary5primeOfPlace1, scondary5primeOfPlace2, annotations, form.GetSelectedReads(), first);
+                pd1 = new PointData(average1, average2, primary5primeOfPlace1, primary5primeOfPlace2, secondary5primeOfPlace1, secondary5primeOfPlace2, annotations, form.GetSelectedReads(), first);
 
                 form.deleteSelectedList();
                 p1.Image = Draw();
@@ -153,8 +154,8 @@ namespace AgileStructure
                 int average2 = 0;
                 float primary5primeOfPlace1 = form.PrimaryAlignment5PrimeOfbreakPoint(first[0].getAveragePlace, first[0].getReferenceName);
                 float primary5primeOfPlace2 = form.PrimaryAlignment5PrimeOfbreakPoint(first[1].getAveragePlace, first[1].getReferenceName);
-                float scondary5primeOfPlace1 = form.SecondaryAlignment5PrimeOfbreakPoint(first[0].getAveragePlace, first[0].getReferenceName);
-                float scondary5primeOfPlace2 = form.SecondaryAlignment5PrimeOfbreakPoint(first[1].getAveragePlace, first[1].getReferenceName);
+                float secondary5primeOfPlace1 = form.SecondaryAlignment5PrimeOfbreakPoint(first[0].getAveragePlace, first[0].getReferenceName);
+                float secondary5primeOfPlace2 = form.SecondaryAlignment5PrimeOfbreakPoint(first[1].getAveragePlace, first[1].getReferenceName);
 
                 chromosomes.Add(first[0].getReferenceName);
                 if (first[1].getReferenceName != first[0].getReferenceName)
@@ -168,7 +169,7 @@ namespace AgileStructure
                 lblPrimary2.Text = "Break point 1: " + first[0].getReferenceName + ":" + average1.ToString("N0");
                 lblSecondary2.Text = "Break point 2: " + first[1].getReferenceName + ":" + average2.ToString("N0");
 
-                pd2 = new PointData(average1, average2, primary5primeOfPlace1, primary5primeOfPlace2, scondary5primeOfPlace1, scondary5primeOfPlace2, annotations, form.GetSelectedReads(), first);
+                pd2 = new PointData(average1, average2, primary5primeOfPlace1, primary5primeOfPlace2, secondary5primeOfPlace1, secondary5primeOfPlace2, annotations, form.GetSelectedReads(), first);
 
                 form.deleteSelectedList();
                 p1.Image = Draw();
@@ -336,12 +337,12 @@ namespace AgileStructure
 
         private void btnDraw_Click(object sender, EventArgs e)
         {
-            string filenme = FileString.SaveAs("Enter image file name", "Image file (*.png;*.jpg;*.tiff;*.bmp)|*.png;*.jpg;*.tiff;*.bmp");
-            if (filenme == "Cancel") { return; }
+            string filename = FileString.SaveAs("Enter image file name", "Image file (*.png;*.jpg;*.tiff;*.bmp)|*.png;*.jpg;*.tiff;*.bmp");
+            if (filename == "Cancel") { return; }
             try
             {
                 Bitmap bmp = Draw();
-                bmp.Save(filenme);
+                bmp.Save(filename);
             }
             catch (Exception ex)
             { MessageBox.Show(ex.Message, "Error"); }
@@ -368,28 +369,28 @@ namespace AgileStructure
         private void drawReferenceAndBreakpoints(int chromosomeCount, Rectangle area, Graphics g)
         {
 
-            int referencelength = area.Width - 50;
+            int referenceLength = area.Width - 50;
             int QuarterWidth = (area.Width - 80) / 4;
-            int referencelineHieght = (area.Height - 30);
+            int referenceLineHeight = (area.Height - 30);
 
             Point first = new Point(10, QuarterWidth + 10);
             Point second = new Point(QuarterWidth + 30, (2 * QuarterWidth) + 30);
             Point third = new Point((2 * QuarterWidth) + 50, (3 * QuarterWidth) + 50);
-            Point fourth = new Point((3 * QuarterWidth) + 70, referencelength + 10);
+            Point fourth = new Point((3 * QuarterWidth) + 70, referenceLength + 10);
 
             breakpointBasic[] bpb = GetBreakpointBasicArray(first, second, third, fourth);
 
-            referencelineHieght = drawReferenceAndBreakpointsSingleChromosome(area, g, bpb, first, second, third, fourth, 50);
+            referenceLineHeight = drawReferenceAndBreakpointsSingleChromosome(area, g, bpb, first, second, third, fourth, 50);
 
             Pen referencePen = new Pen(Brushes.Black, 2);
             if (chromosomeCount == 1)
             {
-                g.DrawLine(referencePen, first.X, referencelineHieght, fourth.Y, referencelineHieght);
+                g.DrawLine(referencePen, first.X, referenceLineHeight, fourth.Y, referenceLineHeight);
             }
             else
             {
-                g.DrawLine(referencePen, first.X, referencelineHieght, second.Y, referencelineHieght);
-                g.DrawLine(referencePen, third.X, referencelineHieght, fourth.Y, referencelineHieght);
+                g.DrawLine(referencePen, first.X, referenceLineHeight, second.Y, referenceLineHeight);
+                g.DrawLine(referencePen, third.X, referenceLineHeight, fourth.Y, referenceLineHeight);
             }
         }
 
@@ -409,14 +410,14 @@ namespace AgileStructure
             orientations = GetAligmnentSets(breakPoints1, bp1, orientations);
             orientations = GetAligmnentSets(breakPoints2, bp2, orientations);
 
-            int lineheight = DrawBlocks(g, f, orientations, bpb, area, ReferenceHeight, 10);
+            int lineHeight = DrawBlocks(g, f, orientations, bpb, area, ReferenceHeight, 10);
 
-            Writelables(g, f, first, ref bpb[0], verticalPen, lineheight);
-            Writelables(g, f, second, ref bpb[1], verticalPen, lineheight);
-            if (bpb.Length > 2) { Writelables(g, f, third, ref bpb[2], verticalPen, lineheight); }
-            if (bpb.Length > 2) { Writelables(g, f, fourth, ref bpb[3], verticalPen, lineheight); }
+            Writelables(g, f, first, ref bpb[0], verticalPen, lineHeight);
+            Writelables(g, f, second, ref bpb[1], verticalPen, lineHeight);
+            if (bpb.Length > 2) { Writelables(g, f, third, ref bpb[2], verticalPen, lineHeight); }
+            if (bpb.Length > 2) { Writelables(g, f, fourth, ref bpb[3], verticalPen, lineHeight); }
 
-            return lineheight;
+            return lineHeight;
         }
 
         private int DrawBlocks(Graphics g, Font f, Dictionary<string, int> orientations, breakpointBasic[] bpb, Rectangle area, int ReferenceHeight, int itemHeight)
@@ -770,9 +771,10 @@ namespace AgileStructure
                     string primaryChromosome = "";
                     int arStart = ar.getPosition;
                     int arEnd = ar.getEndPosition;
-
+                    bool skip = false;
                     string arDescription = "";
                     int pStart = -1;
+
                     if (bestPlaces[0].inPlaces(arStart) == true)
                     {
                         arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[0].getAveragePlace.ToString() + ":" + "r";
@@ -787,18 +789,20 @@ namespace AgileStructure
                     }
                     else if (bestPlaces[1].inPlaces(arStart) == true)
                     {
-                        arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "r";
+                        arDescription += bestPlaces[1].getReferenceName + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "r";
                         pStart = bestPlaces[1].getAveragePlace;
-                        primaryChromosome = bestPlaces[0].getReferenceName;
+                        primaryChromosome = bestPlaces[1].getReferenceName;
                     }
                     else if (bestPlaces[1].inPlaces(arEnd) == true)
                     {
-                        arDescription += bestPlaces[0].getReferenceName + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "l";
+                        arDescription += bestPlaces[1].getReferenceName + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "l";
                         pStart = bestPlaces[1].getAveragePlace;
-                        primaryChromosome = bestPlaces[0].getReferenceName;
+                        primaryChromosome = bestPlaces[1].getReferenceName;
                     }
+                    else { skip = true; }
 
-                    if (string.IsNullOrEmpty(ar.getSecondaryAlignmentTag) == false)
+
+                    if (skip == false && string.IsNullOrEmpty(ar.getSecondaryAlignmentTag) == false)
                     {
                         string[] hits = ar.getSecondaryAlignmentTag.Substring(2).Split(';');
                         foreach (string hit in hits)
@@ -808,10 +812,10 @@ namespace AgileStructure
                                 string[] items = hit.Split(',');
                                 if (items[0].ToLower().Equals(bestPlaces[0].getReferenceName.ToLower()) == true || items[0].ToLower().Equals(bestPlaces[1].getReferenceName.ToLower()))
                                 {
-                                    string secondaryStrandtrand = "";
+                                    string secondaryStrandStrand = "";
                                     int startPoint = Convert.ToInt32(items[1]);
                                     int endPoint = startPoint + getAlignedLength(items[3]);
-                                    secondaryStrandtrand = items[2];
+                                    secondaryStrandStrand = items[2];
                                     bool found = true;
 
                                     string arDescriptionSec = "";
@@ -826,30 +830,33 @@ namespace AgileStructure
                                     { arDescriptionSec += ":" + items[0] + ":" + bestPlaces[1].getAveragePlace.ToString() + ":" + "l"; sStart = bestPlaces[1].getAveragePlace; }
                                     else { found = false; }
 
-                                    string alignments = "";
-                                    if (secondaryStrandtrand == primaryStrand)
-                                    { alignments = "+"; }
-                                    else { alignments = "-"; }
-
-                                    int diff = primaryChromosome.CompareTo(items[0]);
-
-                                    if (diff < 0)
-                                    { arDescription = "+:" + arDescription + ":" + alignments + arDescriptionSec; }
-                                    else if (diff > 0)
-                                    { arDescription = "+" + arDescriptionSec + ":" + alignments + ":" + arDescription; }
-                                    else
-                                    {
-                                        if (pStart > sStart)
-                                        { arDescription = "+" + arDescriptionSec + ":" + alignments + ":" + arDescription; }
-                                        else
-                                        { arDescription = "+:" + arDescription + ":" + alignments + arDescriptionSec; }
-                                    }
-
                                     if (found == true)
                                     {
-                                        if (orientations.ContainsKey(arDescription) == false)
-                                        { orientations.Add(arDescription, 1); }
-                                        else { orientations[arDescription]++; }
+                                        string alignments = "";
+                                        if (secondaryStrandStrand == primaryStrand)
+                                        { alignments = "+"; }
+                                        else { alignments = "-"; }
+
+                                        int diff = orderOfChromosomes(primaryChromosome, items[0]);
+
+                                        string key = "";
+
+                                        if (diff < 0)
+                                        { key = "+:" + arDescription + ":" + alignments + arDescriptionSec; }
+                                        else if (diff > 0)
+                                        { key = "+" + arDescriptionSec + ":" + alignments + ":" + arDescription; }
+                                        else
+                                        {
+                                            if (pStart > sStart)
+                                            { key = "+" + arDescriptionSec + ":" + alignments + ":" + arDescription; }
+                                            else
+                                            { key = "+:" + arDescription + ":" + alignments + arDescriptionSec; }
+                                        }
+
+
+                                        if (orientations.ContainsKey(key) == false)
+                                        { orientations.Add(key, 1); }
+                                        else { orientations[key]++; }
                                     }
                                 }
                             }
@@ -860,6 +867,41 @@ namespace AgileStructure
 
             return orientations;
 
+        }
+
+        private int orderOfChromosomes(string one, string two)
+        {
+            int iOne = getNumber(one);
+            int iTwo = getNumber(two);
+
+            if (iOne == -1 || iTwo == -1)
+            { return one.CompareTo(two); }
+            else
+            { return iOne - iTwo; }
+
+        }
+
+        private int getNumber(string value)
+        {
+            value = value.ToLower();
+            if (value.StartsWith("chr")) { value = value.Substring(3); }
+
+            int ia = -1;
+            int counter = 0;
+
+            for (int index = 0; index < value.Length; index++)
+            {
+                if (value.Length > index && char.IsDigit(value[index]) == true)
+                {
+                    counter++;
+                }
+                else { break; }
+            }
+
+            if (counter > 0)
+            { ia = int.Parse(value.Substring(0, counter)); }
+
+            return ia;
         }
 
         private int getAlignedLength(string CIGAR)
