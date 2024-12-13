@@ -406,10 +406,41 @@ Figure 27b: The resultant image is a direct copy of the current displays
 
 ### Draw schematic diagram of alignment patterns
 
-The organisation of each read's primary and secondary alignments can be difficult to understand. Consequently, ```AgileStructure``` is able to create a schematic representation of selected reads that span a rearrangement's breakpoints. All rearrangements annotated by ```AgileStructure``` consist of 2, 3 or 4 columns of alignments, therefore, the schematic diagram is typically drawn as 4 evenly spaced positions that represent a set of alignments. However, if two are more columns are very close to each other their positions will be drawn closer together.   
+The organisation of each read's primary and secondary alignments can be difficult to decern. Consequently, ```AgileStructure``` is able to create a schematic representation of selected reads that span a rearrangement's breakpoints. All rearrangements annotated by ```AgileStructure``` consist of 2, 3 or 4 columns of split read alignments, therefore, the schematic diagram is typically drawn as 4 evenly spaced positions (not drawn to scale) that represent each of the columns. While the diagram isn't drawn to scale, if two are more columns are very close to each other their positions will be drawn closer together.   
 
-To draw a schematic diagram, enter the data and select the appropriate region; Figure 28a shows the sedata for an individual with a duplication at the FAM20A gene
+To draw a schematic diagram, select the ```Image``` > ```Draw schematic image``` menu option, which should open the ```Draw schematic display``` window (Figure 28a).
 
+![Figure 28](images/figurePa.jpg)
+
+Figure 28
+
+While the ```Draw schematic display``` window is open, it is still possible to interact with the main window, allowing you to select the split-reads of interest from one of the columns of split-reads and then press the upper ```Accept``` button on the ```Draw schematic display``` window. This will clear the selection and draw the reads in the lower panel of the ```Draw schematic display``` window (Figure 29).
+
+![Figure 29](images/figurePb.jpg)
+
+Figure 29
+
+The schematic diagram consists of four labels across the top of the diagram that represent the four possible columns of split-read alignments. To the right of the labels is a fifth column that indicates the number of split reads that demonstrate the alignment pattern drawn below the labels.
+
+The alignment is drawn as a two rectangles, if both rectangles are green, both alignments are in the same orientation. If one is red and the other green, this indicates the orientation is different between the two alignments. 
+
+#### Adding a second breakpoint
+
+In this case the rearrangement is a translocation and by selecting ```Variant determination``` > ```Switch region``` menu option of the main window, you can view the complementary breakpoint. After selecting a region for the secondary alignments in the lower panel of the main window and then selecting the relevant split-read alignments, you can add these to the schematic diagram by pressing the lower ```Accept``` button (Figure 30).
+
+![Figure 30](images/figurePc.jpg)
+
+Figure 30
+
+The split-reads from both breakpoints suggest the same location on chromosome 22 (50,721,690 or 50,721,691); however, the chromosome 4 split-reads suggest two break points slightly more distant at 6,715,708 and 6,715,726. It is possible that this is due to issues aligning the reads to the genome or is result of a genuine lose of sequence.
+
+#### Linking split read columns
+
+In figure 30, the locations on chromosome 4 are seen as two distinct positions as they are 18 base pairs apart; however, by increasing the value in the numeric field below the lower ```Accept``` button, the two positions will be drawn closer together (Figure 31). Even though the columns are linked the labelling is unchanged.
+
+![Figure 31](images/figurePd.jpg)
+
+Figure 31
 
 
 ## Miscellaneous functions
