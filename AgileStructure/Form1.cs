@@ -123,6 +123,14 @@ namespace AgileStructure
             makeBlankSecondaryBase();
         }
 
+        private void messageboxShow()
+        {
+            if (id != null) { id.WindowState = FormWindowState.Minimized; }
+            if (cR != null) { cR.WindowState = FormWindowState.Minimized; }
+            if (cC != null) { cC.WindowState = FormWindowState.Minimized; }
+            if (dSR != null) { dSR.WindowState = FormWindowState.Minimized; }
+        }
+
         private void button2_Click_1(object sender, EventArgs e)
         {
             string file = FileString.OpenAs("Select the bam file", "*.bam|*.bam");
@@ -137,7 +145,7 @@ namespace AgileStructure
             }
             catch (Exception ex)
             {
-                if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                messageboxShow();
                 MessageBox.Show(ex.Message, "Error");
             }
             history = new List<string>();
@@ -1587,9 +1595,18 @@ namespace AgileStructure
 
             int index = Array.BinarySearch(gd.Genes, here, new GeneBinarySearcherPoint());
             if (index > -1)
-            {
-                Gene transcript = gd.Genes[index];
-                return transcript.getName;
+            {                
+                string answer = "";
+                for (int index2 = index - 10; index2 < index + 10; index2++)
+                {
+                    if (index2 > -1 && index2 < rd.Repeats.Length)
+                    {
+                        if (gd.Genes[index2].getChromosome == here.Name && gd.Genes[index2].GetLocation.GetRegionStart <= here.Base && gd.Genes[index2].GetLocation.GetRegionEnd >= here.Base)
+                        { answer += " or " + gd.Genes[index2].getName; }
+                    }
+                }
+                if (answer.Length> 1) { answer = answer.Substring(4); }
+                return answer;
             }
             else
             {
@@ -1623,8 +1640,17 @@ namespace AgileStructure
             int index = Array.BinarySearch(rd.Repeats, here, new RepeatBinarySearchPoint());
             if (index > -1)
             {
-                Repeat repeat = rd.Repeats[index];
-                return repeat.getLongName;
+                string answer = "";
+                for (int index2 = index - 10; index2 < index + 10; index2++)
+                {
+                    if (index2 > -1 && index2 < rd.Repeats.Length)
+                    {
+                        if (rd.Repeats[index2].getChromosome == here.Name && rd.Repeats[index2].GetLocation.GetRegionStart <= here.Base && rd.Repeats[index2].GetLocation.GetRegionEnd >= here.Base)
+                        { answer += " or " + rd.Repeats[index2].getName; }
+                    }
+                }
+                if (answer.Length > 1) { answer = answer.Substring(4); }                
+                return answer;
             }
             else
             {
@@ -1758,7 +1784,7 @@ namespace AgileStructure
             catch //(Exception ex)
             {
                 e.Cancel = true;
-                if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                messageboxShow();
                 MessageBox.Show("Must be a whole number", "Not a whole number", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally { ignoreValidation = false; }
@@ -2217,7 +2243,7 @@ namespace AgileStructure
                 }
                 catch (Exception ex)
                 {
-                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                    messageboxShow();
                     MessageBox.Show("Could save data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
@@ -2238,7 +2264,7 @@ namespace AgileStructure
                 }
                 catch (Exception ex)
                 {
-                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                    messageboxShow();
                     MessageBox.Show("Could save data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
@@ -2283,7 +2309,7 @@ namespace AgileStructure
                 }
                 catch (Exception ex)
                 {
-                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                    messageboxShow();
                     MessageBox.Show("Could save data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
@@ -2304,10 +2330,12 @@ namespace AgileStructure
             string result = deletion();
             if (result[0] == 'e')
             {
+                messageboxShow();
                 MessageBox.Show(result.Substring(1), "Error");
             }
             else
             {
+                messageboxShow();
                 if (MessageBox.Show(result.Substring(1) + "\nSave with the selected read data?", "Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 { SaveToFile(result.Substring(1)); }
             }
@@ -2325,8 +2353,6 @@ namespace AgileStructure
                     int breakPoint2 = bestPlaces[1].getAveragePlace;
                     if (bestPlaces[1] == null)
                     {
-                        if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                        //MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return result + "Could not find both sides of the breakpoint";
                     }
 
@@ -2344,15 +2370,11 @@ namespace AgileStructure
                 }
                 else
                 {
-                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                    //MessageBox.Show("Please select the reads spanning the break point by clicking on them.", "No reads selected"); 
                     result = "elease select the reads spanning the break point by clicking on them.";
                 }
             }
             catch (Exception ex)
             {
-                if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                //MessageBox.Show("Could not identify the variant using the selected reads", "Error");
                 result = "eCould not identify the variant using the selected reads";
             }
             return result;
@@ -2363,10 +2385,12 @@ namespace AgileStructure
             string result = inversion();
             if (result[0] == 'e')
             {
+                messageboxShow();
                 MessageBox.Show(result.Substring(1), "Error");
             }
             else
             {
+                messageboxShow();
                 if (MessageBox.Show(result.Substring(1) + "\nSave with the selected read data?", "Inversion", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 { SaveToFile(result.Substring(1)); }
             }
@@ -2385,8 +2409,6 @@ namespace AgileStructure
 
                     if (bestPlaces[1] == null)
                     {
-                        if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                        //MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return result + "Could not find both sides of the breakpoint";
                     }
 
@@ -2400,22 +2422,16 @@ namespace AgileStructure
                     else
                     { mutation += cboRef.Text + "." + breakPoint1.ToString("N0") + "_" + breakPoint2.ToString("N0") + "inv"; }
 
-                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                    //if (MessageBox.Show(mutation + "\nSave with the selected read data?", "Inversion", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                    //{ SaveToFile(mutation); }
                     result = "o" + mutation;
                 }
                 else
                 {
-                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                    //MessageBox.Show("Please select the reads spanning the break point by clicking on them.", "No reads selected");
-                    result = "ePlease select the reads spanning the break point by clicking on them.";
+                     result = "ePlease select the reads spanning the break point by clicking on them.";
                 }
             }
             catch (Exception ex)
             {
-                if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                //MessageBox.Show("Could not identify the variant using the selected reads", "Error");
+                
             }
             return result;
         }
@@ -2425,10 +2441,12 @@ namespace AgileStructure
             string result = duplication(false);
             if (result[0] == 'e')
             {
+                messageboxShow();
                 MessageBox.Show(result.Substring(1), "Error");
             }
             else
             {
+                messageboxShow();
                 if (MessageBox.Show(result.Substring(1) + "\nSave with the selected read data?", "Ring", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 { SaveToFile(result.Substring(1)); }
             }
@@ -2439,10 +2457,12 @@ namespace AgileStructure
             string result = duplication(true);
             if (result[0] == 'e')
             {
+                messageboxShow();
                 MessageBox.Show(result.Substring(1), "Error");
             }
             else
             {
+                messageboxShow();
                 if (MessageBox.Show(result.Substring(1) + "\nSave with the selected read data?", "Duplication", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 { SaveToFile(result.Substring(1)); }
             }
@@ -2461,7 +2481,7 @@ namespace AgileStructure
 
                     if (bestPlaces[1] == null)
                     {
-                        if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                        messageboxShow();
                         MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return "e\"Could not find both sides of the breakpoint\"";
                     }
@@ -2526,10 +2546,12 @@ namespace AgileStructure
             string result = insertion(true);
             if (result[0] == 'e')
             {
+                messageboxShow();
                 MessageBox.Show(result.Substring(1), "Error");
             }
             else
             {
+                messageboxShow();
                 if (MessageBox.Show(result.Substring(1) + "\nSave with the selected read data?", "Insertion", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 { SaveToFile(result.Substring(1)); }
             }
@@ -2907,10 +2929,12 @@ namespace AgileStructure
             string result = translocation(true);
             if (result[0] == 'e')
             {
+                messageboxShow();
                 MessageBox.Show(result.Substring(1), "Error");
             }
             else
             {
+                messageboxShow();
                 if (MessageBox.Show(result.Substring(1) + "\nSave with the selected read data?", "Translocation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 { SaveToFile(result.Substring(1)); }
             }
@@ -3608,7 +3632,7 @@ namespace AgileStructure
         {
             if (cboSecondaries.SelectedIndex == 0)
             {
-                if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                messageboxShow();
                 MessageBox.Show("You must select a region containing the secondary alignments.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -3625,7 +3649,7 @@ namespace AgileStructure
                     BreakPointData[] bestPlaces = getBreakPoints(sameSequence, cboRef.Text);
                     if (bestPlaces[1] == null)
                     {
-                        if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                        messageboxShow();
                         MessageBox.Show("Could not find both sides of the breakpoint", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
@@ -3653,20 +3677,20 @@ namespace AgileStructure
                         if (set1[1] != null || set2[1] != null)
                         { answer = MutationType.Insertion; }
                     }
-
-                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                    
                     mutation = setMutationPrefix(answer);
+                    messageboxShow();
                     MessageBox.Show(mutation, "Rearrangement type", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                    messageboxShow();
                     MessageBox.Show("Please select the reads spanning the break point by clicking on them.", "No reads selected");
                 }
             }
             catch
             {
-                if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                messageboxShow();
                 MessageBox.Show("Something went wrong does the alignments contian softclipped cigar strings!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -3797,7 +3821,7 @@ namespace AgileStructure
 
         private void alignerStringToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (id != null) { id.WindowState = FormWindowState.Minimized; }
+            messageboxShow();
             if (string.IsNullOrEmpty(alignerString) == true)
             { MessageBox.Show("No data", "Aligner command string", MessageBoxButtons.OK, MessageBoxIcon.Information); }
             else
@@ -3877,7 +3901,7 @@ namespace AgileStructure
 
                     sb.Append("\nMedian values\n" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + (mediumStart + 1).ToString("N0") + "ins" + (mediumStart - mediumEnd).ToString("N0") + "bp\n\nDo you want to save the inserts annotation?");
 
-                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                    messageboxShow();
                     if (MessageBox.Show(sb.ToString(), "Inserts", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         sb = new StringBuilder();
@@ -3889,7 +3913,7 @@ namespace AgileStructure
                 }
                 else if (inserts.Count == 1)
                 {
-                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                    messageboxShow();
                     if (MessageBox.Show("Only one insert\n" + inserts[0] + "\n\nDo you want to save the inserts annotation ? ", "Insertions", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     { SaveToFile(inserts[0]); }
                 }
@@ -3961,7 +3985,7 @@ namespace AgileStructure
 
 
                     sb.Append("\nMedian breakpoints\n" + cboRef.Text + ":" + mediumStart.ToString("N0") + "-" + mediumEnd.ToString("N0") + "del\n\nDo you want to save the data?");
-                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                    messageboxShow();
                     if (MessageBox.Show(sb.ToString(), "Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         foreach (string s in deletions)
@@ -3973,7 +3997,7 @@ namespace AgileStructure
                 }
                 else if (deletions.Count == 1)
                 {
-                    if (id != null) { id.WindowState = FormWindowState.Minimized; }
+                    messageboxShow();
                     if (MessageBox.Show("Only one insert\n" + deletions[0] + "\n\nDo you want to save the inserts annotation ? ", "Insertions", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     { SaveToFile(deletions[0]); }
                 }
@@ -4350,7 +4374,10 @@ namespace AgileStructure
                 bmpSave.Save(file);
             }
             catch (Exception ex)
-            { MessageBox.Show(ex.Message, "Error"); }
+            {
+                messageboxShow();
+                MessageBox.Show(ex.Message, "Error"); 
+            }
 
 
         }

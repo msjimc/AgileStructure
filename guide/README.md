@@ -394,7 +394,7 @@ Figure 26
 
 ### Save alignment display images
 
-While ```AgileStructure```'s displays are primarily caused with read selection, they can be saved as images, which could be used in a report or lab book. To save the display pictures select the ```image``` > ```Save alignment images``` menu item (Figure 27a). This will prompt you for the image's file name and location before saving it (Figure 27b).
+While ```AgileStructure```'s display is primarily concerned with read selection, they can be saved as images, which could be used in a report or lab book. To save the display pictures, select the ```image``` > ```Save alignment images``` menu item (Figure 27a). This will prompt you for the image's file name and location before saving it (Figure 27b).
 
 ![Figure 27a](images/figureOa.jpg)
 
@@ -402,11 +402,11 @@ Figure 27a
 
 ![Figure 27b](images/figureOb.jpg)
 
-Figure 27b: The resultant image is a direct copy of the current displays
+Figure 27b: The resultant image is a direct copy of the current displays.
 
-### Draw schematic diagram of alignment patterns
+### Draw a schematic diagram of alignment patterns
 
-The organisation of each read's primary and secondary alignments can be difficult to decern. Consequently, ```AgileStructure``` is able to create a schematic representation of selected reads that span a rearrangement's breakpoints. All rearrangements annotated by ```AgileStructure``` consist of 2, 3 or 4 columns of split read alignments, therefore, the schematic diagram is typically drawn as 4 evenly spaced positions (not drawn to scale) that represent each of the columns. While the diagram isn't drawn to scale, if two are more columns are very close to each other their positions will be drawn closer together.   
+The organisation of each read's primary and secondary alignments can be difficult to decern. Consequently, ```AgileStructure``` is able to create a schematic representation of selected reads that span a rearrangement's breakpoints. All rearrangements annotated by ```AgileStructure``` consist of 2, 3, or 4 columns of split read alignments; therefore, the schematic diagram is typically drawn as 4 evenly spaced positions (not drawn to scale) that represent each of the columns. While the diagram isn't drawn to scale, if two or more columns are very close to each other, their positions will be drawn closer together.   
 
 To draw a schematic diagram, select the ```Image``` > ```Draw schematic image``` menu option, which should open the ```Draw schematic display``` window (Figure 28a).
 
@@ -422,49 +422,81 @@ Figure 29
 
 The schematic diagram consists of four labels across the top of the diagram that represent the four possible columns of split-read alignments. To the right of the labels is a fifth column that indicates the number of split reads that demonstrate the alignment pattern drawn below the labels.
 
-The alignment is drawn as a two rectangles, if both rectangles are green, both alignments are in the same orientation. If one is red and the other green, this indicates the orientation is different between the two alignments. 
+The alignment is drawn as two rectangles, if both rectangles are green, both alignments are in the same orientation. If one is red and the other green, this indicates the orientation is different between the two alignments. 
 
 #### Adding a second breakpoint
 
-In this case the rearrangement is a translocation and by selecting ```Variant determination``` > ```Switch region``` menu option of the main window, you can view the complementary breakpoint. After selecting a region for the secondary alignments in the lower panel of the main window and then selecting the relevant split-read alignments, you can add these to the schematic diagram by pressing the lower ```Accept``` button (Figure 30).
+In this case the rearrangement is a translocation, and by selecting the ```Variant determination``` > ```Switch region``` menu option of the main window, you can view the complementary breakpoint. After selecting a region for the secondary alignments in the lower panel of the main window and then selecting the relevant split-read alignments, you can add these to the schematic diagram by pressing the lower ```Accept``` button (Figure 30). If split-reads from both breakpoints have the same alignment pattern and base pair location, the reads are combined; however, if the locations differ at all, they will be displayed as two independent features. 
 
 ![Figure 30](images/figurePc.jpg)
 
 Figure 30
 
-The split-reads from both breakpoints suggest the same location on chromosome 22 (50,721,690 or 50,721,691); however, the chromosome 4 split-reads suggest two break points slightly more distant at 6,715,708 and 6,715,726. It is possible that this is due to issues aligning the reads to the genome or is result of a genuine lose of sequence.
+The split-reads from both breakpoints suggest the same location on chromosome 22 (50,721,690 or 50,721,691); however, the chromosome 4 split-reads suggest two breakpoints slightly more distant at 6,715,708 and 6,715,726. It is possible that this is due to issues aligning the reads to the genome or is result of a genuine lose of sequence.
 
 #### Linking split read columns
 
-In figure 30, the locations on chromosome 4 are seen as two distinct positions as they are 18 base pairs apart; however, by increasing the value in the numeric field below the lower ```Accept``` button, the two positions will be drawn closer together (Figure 31). Even though the columns are linked the labelling is unchanged.
+In figure 30, the locations on chromosome 4 are seen as two distinct positions as they are 18 base pairs apart; however, by increasing the value in the numeric field below the lower ```Accept``` button, the two positions will be drawn closer together (Figure 31). Even though the columns are linked, the labelling is unchanged.
 
 ![Figure 31](images/figurePd.jpg)
 
 Figure 31
 
-
 ## Miscellaneous functions
+
+### Changing a read's selection colour
+
+When a read has been selected, by default it is highlighted by a blue border. However, when saving an image of the split-read alignments, it may be desirable to change the colour code the split-reads. This can be done by selecting the ```Image``` > ```Colour code selected reads``` menu option. This will open the ```Colour selection``` window (Figure 33).
+
+![Figure 32](images/figureQa.jpg)
+
+Figure 32
+
+To colour code the split reads, first select the reads you wish to be the same colour and then press the button on the window that is the desired colour (Figure 33). In Figure 33, the split-reads with primary alignments mapping to the 5 prime side of a duplication have been selected, and the ```black``` button on the ```Colour selection``` window pressed. The alignments are now highlighted with black borders. 
+
+![Figure 33](images/figureQb.jpg)
+
+Figure 33
+
+It can be seen that a selected split read has two secondary alignments in the selected region. The ```Clear``` button was pressed to deselect the reads, and the split-read with two secondary alignments was selected and the ```Dark Green``` button was pressed (Figure 34).  
+
+![Figure 34](images/figureQc.jpg)
+
+Figure 34
+
+Finally, the ```Colour selection``` window was closed, and all the split-reads spanning the breakpoint were selected. Those with primary alignments at the 5' end of the duplication have a black border, while those on the 3' side have a blue border. The read with two secondary alignments in the region is identifiable as it has a green border.
+
+![Figure 35](images/figureQd.jpg)
+
+Figure 35
+
+The colours are selected as they are spread across the spectrum. However, pressing the ```Custom```  button allows a user-defined colour to be selected using the colour selection dialogue box (Figure 35).
+
+
+![Figure 36](images/figureQe.jpg)
+
+Figure 36
 
 ### Cursor location
 
-The ```Annotation``` > ```Show position of cursor``` menu option reveals the genomic coordinates of the cursor's position (Figure 27b). It’s important to note that this representation is approximate. For instance, a 1 Mb region depicted on an 860-pixel-wide image results in approximately 1,162.8 bps per pixel. Therefore, this feature should be used as a general guide to understand the region rather than a precise tool.
+The ```Annotation``` > ```Show position of cursor``` menu option reveals the genomic coordinates of the cursor's position (Figure 37a and 37b). It’s important to note that this representation is approximate. For instance, a 1 Mb region depicted on an 860-pixel-wide image results in approximately 1,162.8 bps per pixel. Therefore, this feature should be used as a general guide to understand the region rather than a precise tool.
 
-![Figure 27a](images/figureNa.jpg)
+![Figure 37a](images/figureNa.jpg)
 
-Figure 27a
+Figure 37a
 
-![Figure 27b](images/figureNb.jpg)
+![Figure 37b](images/figureNb.jpg)
 
-Figure 27b
+Figure 37b
 
 ### Aligner string
 
-Typically, the aligner used to map reads to the reference genome includes the command line arguments in the BAM file’s header section. This information can be accessed by selecting the ```Data``` > ```Aligner string``` menu option (see Figures 28a and 28b). This feature is particularly useful when, for instance, you need to verify which reference genome was used for the alignment.
+Typically, the aligner used to map reads to the reference genome includes the command line arguments in the BAM file’s header section. This information can be accessed by selecting the ```Data``` > ```Aligner string``` menu option (see Figures 38a and 38b). This feature is particularly useful when, for instance, you need to verify which reference genome was used for the alignment.
 
-![Figure 28a](images/figureMa.jpg)
+![Figure 38a](images/figureMa.jpg)
 
-Figure 28a
+Figure 38a
 
-![Figure 28b](images/figureMb.jpg)
+![Figure 38b](images/figureMb.jpg)
 
-Figure 28b: The command string identifies that the data in the '16.03193_Rpt.fastq.gz' file was aligned to the 'ucsc.hg19.fasta' reference genome by Minimap2 using the map-ont alignment options.
+Figure 38b: The command string identifies that the data in the '16.03193_Rpt.fastq.gz' file was aligned to the 'ucsc.hg19.fasta' reference genome by Minimap2 using the map-ont alignment options.
