@@ -213,55 +213,6 @@ namespace AgileStructure
 				startIndex += l_seq;
 				tags = getTag(c, startIndex, blockSize);
 
-				//List<string> bits1 = new List<string>();
-				//if (redID > -1 && referencenames.Count() > 0)
-				//{
-				//	string test = referencenames[redID];
-				//	bits1.AddRange(test.Split('\t'));
-				//	chr = bits1[0];
-				//}
-				//else if (redID > -1)
-				//{
-				//	chr = redID.ToString();
-				//	bits1.Add(chr);
-				//}
-				//else
-				//{
-				//	bits1.Add("*");
-				//	chr = "*";
-				//}
-
-				//if (next_refID > -1 && referencenames.Count() > 0)
-				//{
-				//	List<string> bits2 = new List<string>();
-				//	string test = referencenames[next_refID];
-				//	bits2.AddRange(test.Split('\t'));
-				//	otherChr = "";
-				//	if (bits1[0].CompareTo(bits2[0]) == 0)
-				//	{
-				//		otherChr = "=";
-				//	}
-				//	else
-				//	{
-				//		otherChr = bits2[0];
-				//	}
-				//}
-				//else if (next_refID > -1)
-				//{
-				//	if (redID == next_refID)
-				//	{
-				//		otherChr = "=";
-				//	}
-				//	else
-				//	{
-				//		otherChr = next_refID.ToString();
-				//	}
-				//}
-				//else
-				//{
-				//	otherChr = "*";
-				//}
-
 				answer = read_Name + "\t" + flag.ToString() + "\t" + redID.ToString() + "\t"
 					+pos.ToString() + "\t" + maq.ToString() + "\t" + cigar + "\t" + next_refID.ToString() + "\t"
 					+ next_pos.ToString() + "\t" + tlen.ToString() + "\t" + seq + "\t" + qual + "\t" + tags + "\n";
@@ -370,7 +321,6 @@ namespace AgileStructure
 			int length = 0;
 			for (int index = 0; index < cycles; index++)
 			{
-				//length = getunInt32();
 				length = getInt32(c, startIndex);
 				startIndex += 4;
 				int a1 = length >> 4;
@@ -583,7 +533,6 @@ namespace AgileStructure
 			byte[] c = new byte[1];
 			decom.read(c, 1);
 
-			//int answer = c[0] + (c[1] << 8);
 			int answer = c[0] ;
 
 			return answer;
