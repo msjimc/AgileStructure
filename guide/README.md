@@ -40,7 +40,7 @@
   * [Displaying repeat positions](#displaying-repeat-positions)
 - [Images](#images)
   * [Save alignment display images](#save-alignment-display-images)
-  * [Draw schematic diagram of alignment patterns](#draw-schematic-diagram-of-alignment-patterns)
+  * [Draw schematic diagram of alignment patterns](#draw-a-schematic-diagram-of-alignment-patterns)
 - [Miscellaneous functions](#miscellaneous-functions)
   * [Cursor location](#cursor-location)
   * [Aligner string](#aligner-string)
