@@ -2536,7 +2536,7 @@ namespace AgileStructure
             catch (Exception ex)
             {
                 if (id != null) { id.WindowState = FormWindowState.Minimized; }
-                result = "Could not identify the variant using the selected reads";
+                result = "eCould not identify the variant using the selected reads";
             }
             return result;
         }
