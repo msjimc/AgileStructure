@@ -2557,13 +2557,14 @@ namespace AgileStructure
             }
         }
 
-        private string insertion(bool stanalone)
+        private string insertion(bool standalone)
         {
             string result = "e";
             try
             {
                 if (selectedIndex.Count > 0 && cboSecondaries.SelectedIndex > 0)
                 {
+                    string isInverted = "";
                     string otherChromosome = cboSecondaries.Text.Substring(0, cboSecondaries.Text.IndexOf(" "));
                     BreakPointData[] bestPlaces = new BreakPointData[2];
                     int breakPoint1 = 0;
@@ -2573,6 +2574,7 @@ namespace AgileStructure
 
                     if (otherChromosome != cboRef.Text)
                     {
+                        BreakPointData third = null;
                         bestPlaces = getBreakPointsOnSetChromosome(otherChromosome, false);
                         if (bestPlaces[1] != null)
                         {
@@ -2581,6 +2583,7 @@ namespace AgileStructure
 
                             bestPlaces3rd = getBreakPointsOnSetChromosome(cboRef.Text, false);
                             breakPoint3 = bestPlaces3rd[0].getAveragePlace;
+                            third = bestPlaces3rd[0];
                         }
                         else
                         {
@@ -2590,7 +2593,19 @@ namespace AgileStructure
 
                             bestPlaces3rd = getBreakPointsOnSetChromosome(otherChromosome, false);
                             breakPoint3 = bestPlaces3rd[0].getAveragePlace;
+                            third = bestPlaces3rd[0];
                         }
+
+                        if (standalone == true)
+                        {
+                            int[] inverted = testReadOrientation(bestPlaces,third);
+                            if (inverted[0] * 2 < inverted[1])
+                            { isInverted = "The insert is inverted"; }
+                            else if (inverted[1] * 2 < inverted[0])
+                            { isInverted = "The insert is not inverted"; }
+                            else { isInverted = "Could not tel if insert is inverted"; }
+                        }
+
                     }
                     else
                     {
@@ -2599,6 +2614,16 @@ namespace AgileStructure
                         breakPoint2 = bestPlaces[2].getAveragePlace;
                         breakPoint3 = bestPlaces[0].getAveragePlace;
                         bestPlaces3rd = new BreakPointData[1] { bestPlaces[0] };
+
+                        if (standalone == true)
+                        {
+                            int[] inverted = testReadOrientation(bestPlaces);
+                            if (inverted[0] * 2 < inverted[1])
+                            { isInverted = "The insert is inverted"; }
+                            else if (inverted[1] * 2 < inverted[0])
+                            { isInverted = "The insert is not inverted"; }
+                            else { isInverted = "Could not tel if insert is inverted"; }
+                        }
                     }
 
                     if (bestPlaces[1] == null)
@@ -2607,16 +2632,8 @@ namespace AgileStructure
                         return result + "Could not find all the breakpoints";
                     }
 
-                    string isInverted = "";
-                    if (stanalone == true)
-                    {
-                        int[] inverted = testReadOrientation(bestPlaces);
-                        if (inverted[0] * 2 < inverted[1])
-                        { isInverted = "The insert is inverted"; }
-                        else if (inverted[1] * 2 < inverted[0])
-                        { isInverted = "The insert is not inverted"; }
-                        else { isInverted = "Could not tel if insert is inverted"; }
-                    }
+                    
+                    
 
 
                     string mutation = "";
@@ -2638,7 +2655,7 @@ namespace AgileStructure
 
                     if (id != null) { id.WindowState = FormWindowState.Minimized; }
                     result = "o" + mutation;
-                    if (stanalone == true)
+                    if (standalone == true)
                     { result += "\r\n" + isInverted; }
                 }
                 else
@@ -2716,7 +2733,7 @@ namespace AgileStructure
                     mutation = "The rearrangement appears to be a deletion.\n";
                     break;
                 case (MutationType.Duplication):
-                    mutation = "The rearrangement appears to be a duplication, but could be a ring chromosme.\n";
+                    mutation = "The rearrangement appears to be a duplication, but could be a ring chromosome.\n";
                     break;
                 case (MutationType.DuplicationRCStart):
                     mutation = "The rearrangement appears to be an inverted duplication.\n";
@@ -2737,7 +2754,7 @@ namespace AgileStructure
                     mutation = "The rearrangement appears to be an insertion, the inserted sequence is not inverted .\n";
                     break;
                 case MutationType.Insertion:
-                    mutation = "The rearrangement appears to be an insertion, could not tell if sequences is inverted.\n";
+                    mutation = "The rearrangement appears to be an insertion.\n";
                     break;
                 case (MutationType.NoSet):
                     mutation = "It was not possible to determine the type of rearrangement.\n";
@@ -2889,24 +2906,24 @@ namespace AgileStructure
                             if (string.IsNullOrEmpty(hit) == false)
                             {
                                 string[] items = hit.Split(',');
-                                if (items[0].ToLower().Equals(bestPlaces[0].getReferenceName.ToLower()) == true)
+                               if (items[0].ToLower().Equals(bestPlaces[0].getReferenceName.ToLower()) == true)
                                 {
 
-                                    string secondaryStrandtrand = "";
+                                    string secondaryStrand = "";
                                     int startPoint = Convert.ToInt32(items[1]);
                                     int endPoint = startPoint + getAlignedLength(items[3]);
                                     if (bestPlaces[0].inPlaces(startPoint) == true || bestPlaces[0].inPlaces(endPoint) == true || bestPlaces[1].inPlaces(startPoint) == true || bestPlaces[1].inPlaces(endPoint) == true)
                                     {
-                                        secondaryStrandtrand = items[2];
+                                        secondaryStrand = items[2];
                                         if (primaryStrand == true)
                                         {
-                                            if (secondaryStrandtrand == "+")
+                                            if (secondaryStrand == "+")
                                             { answer[0]++; }
                                             else { answer[1]++; }
                                         }
                                         else
                                         {
-                                            if (secondaryStrandtrand == "+")
+                                            if (secondaryStrand == "+")
                                             { answer[1]++; }
                                             else { answer[0]++; }
                                         }
@@ -2922,6 +2939,88 @@ namespace AgileStructure
             return answer;
 
         }
+
+        private int[] testReadOrientation(BreakPointData[] bestPlaces, BreakPointData third)
+        {
+
+            int[] answer = { 0, 0 };
+            int pEnd = 0;
+            int qEnd = 0;
+
+            if (bestPlaces[0].getAveragePlace > bestPlaces[1].getAveragePlace)
+            {
+                pEnd = bestPlaces[1].getAveragePlace;
+                qEnd = bestPlaces[0].getAveragePlace;
+            }
+            else
+            {
+                pEnd = bestPlaces[0].getAveragePlace;
+                qEnd = bestPlaces[1].getAveragePlace;
+            }
+
+            foreach (int index in selectedIndex)
+            {
+                if (DrawnARKeys.ContainsKey(index) == true)
+                {
+                    AlignedRead ar = DrawnARKeys[index];
+                    bool primaryStrand = ar.getForward;
+                    if (string.IsNullOrEmpty(ar.getSecondaryAlignmentTag) == false)
+                    {
+                        string[] hits = ar.getSecondaryAlignmentTag.Substring(2).Split(';');
+                        foreach (string hit in hits)
+                        {
+                            if (string.IsNullOrEmpty(hit) == false)
+                            {
+                                string[] items = hit.Split(',');
+                                //if (items[0].ToLower().Equals(bestPlaces[0].getReferenceName.ToLower()) == true)
+                                {
+
+                                    string secondaryStrand = "";
+                                    int startPoint = Convert.ToInt32(items[1]);
+                                    int endPoint = startPoint + getAlignedLength(items[3]);
+                                    if (bestPlaces[0].inPlaces(startPoint) == true || bestPlaces[0].inPlaces(endPoint) == true || bestPlaces[1].inPlaces(startPoint) == true || bestPlaces[1].inPlaces(endPoint) == true)
+                                    {
+                                        secondaryStrand = items[2];
+                                        if (primaryStrand == true)
+                                        {
+                                            if (secondaryStrand == "+")
+                                            { answer[0]++; }
+                                            else { answer[1]++; }
+                                        }
+                                        else
+                                        {
+                                            if (secondaryStrand == "+")
+                                            { answer[1]++; }
+                                            else { answer[0]++; }
+                                        }
+                                    }
+                                    else if (third != null && (third.inPlaces(startPoint) == true || third.inPlaces(endPoint) == true))
+                                    {
+                                        secondaryStrand = items[2];
+                                        if (primaryStrand == true)
+                                        {
+                                            if (secondaryStrand == "+")
+                                            { answer[0]++; }
+                                            else { answer[1]++; }
+                                        }
+                                        else
+                                        {
+                                            if (secondaryStrand == "+")
+                                            { answer[1]++; }
+                                            else { answer[0]++; }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return answer;
+
+        }
+
 
 
         private void translocationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3660,7 +3759,7 @@ namespace AgileStructure
                     string mutation = "";
                     MutationType answer = testMutationType(bestPlaces);
 
-                    if (answer == MutationType.Deletion || answer == MutationType.DuplicationRCStart || answer == MutationType.DuplicationRCEnd || answer == MutationType.Inversion)
+                    if (answer == MutationType.Deletion || answer == MutationType.DuplicationRCStart || answer == MutationType.DuplicationRCEnd)
                     {
                         int[] orientation = testReadOrientation(bestPlaces);
                         if (orientation[0] > orientation[1] * 2)
