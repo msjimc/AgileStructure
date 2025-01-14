@@ -68,3 +68,16 @@ The read data sets were created using [MakeSVgenome](https://github.com/msjimc/M
 |55|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,650,000-43,700,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,650,000-43,700,000.md)|Inversion with deleted sequence smaller than the inverted sequence|Yes|Complex rearrangement|Yes|
 |56|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,550,000-43,800,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,550,000-43,800,000.md)|Inversion with deletion|Yes|Complex rearrangement|No|
 |57|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,550,000-43,750,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,550,000-43,750,000.md)|Inversion with the deleted sequences extending 50 kb 5' prime of the insertion|Yes|Complex rearrangement|No|
+|59|[RC of chr7 43,600,000-43,750,000 inserted into chr7 43,550,000-43,750,000.md](RC_of_chr7_43,600,000-43,750,000_inserted_into_chr7_43,550,000-43,750,000.md)|Inversion with the deleted sequences extending 50 kb 5' prime of the insertion|Yes|Complex rearrangement|No|
+|58|[](insert_chr7_60_43,600,000-43,750,000_RC_target_chr7_60_20,000,000-20,000,000_ONT_no_2nd_pair.bam)|Insertion of reverse complement in same chromosome|Yes|Insertion|No |
+|59|[](insert_chr7_60_43,600,000-43,750,000_RC_target_chr7_60_50,000,000-50,000,000_ONT_no_2nd_pair.bam)|Insertion of reverse complement in same chromosome|Yes|Insertion|No |
+|60|[](insert_chr7_60_43,600,000-43,750,000_RC_target_chr8_60_20,000,000-20,000,000_ONT_no_2nd_pair.bam)|Insertion of reverse complement in different chromosome|Yes|Insertion|No |
+|61|[](insert_chr7_60_43,600,000-43,750,000_RC_target_chr8_60_50,000,000-50,000,000_ONT_no_2nd_pair.bam)|Insertion in different chromosome|Yes|Insertion|No |
+|62|[](insert_chr7_60_43,600,000-43,750,000_target_chr8_60_20,000,000-20,000,000_ONT_no_2nd_pair.bam)|Insertion in different chromosome|No|Insertion|No |
+|63|[](insert_chr7_60_43,600,000-43,750,000_target_chr8_60_50,000,000-50,000,000_ONT_no_2nd_pair.bam)|Insertion in same chromosome|No|Insertion|No |
+|64|[](insert_chr8_60_43,600,000-43,750,000_RC_target_chr7_60_20,000,000-20,000,000_ONT_no_2nd_pair.bam)|Insertion of reverse complement in different chromosome|Yes|Insertion|No |
+|65|[](insert_chr8_60_43,600,000-43,750,000_RC_target_chr7_60_43,600,000-43,600,000_ONT_no_2nd_pair.bam)|Insertion of reverse complement in different chromosome|Yes|Insertion|No |
+|66|[](insert_chr8_60_43,600,000-43,750,000_RC_target_chr7_60_50,000,000-50,000,000_ONT_no_2nd_pair.bam)|Insertion of reverse complement in different chromosome|Yes|Insertion|No |
+|67|[](insert_chr8_60_43,600,000-43,750,000_target_chr7_60_20,000,000-20,000,000_ONT_no_2nd_pair.bam)|Insertion in different chromosome|No|Insertion|No |
+|68|[](insert_chr8_60_43,600,000-43,750,000_target_chr7_60_43,600,000-43,600,000_ONT_no_2nd_pair.bam)|Insertion in different chromosome|No|Insertion|No |
+|69|[](insert_chr8_60_43,600,000-43,750,000_target_chr7_60_50,000,000-50,000,000_ONT_no_2nd_pair.bam)|Insertion in different chromosome|No|Insertion|No |
