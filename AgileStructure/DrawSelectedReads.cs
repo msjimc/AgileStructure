@@ -323,12 +323,16 @@ namespace AgileStructure
 
         private void blankImage()
         {
-            Bitmap bmp = new Bitmap(p1.Width, p1.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            Graphics g = Graphics.FromImage(bmp);
+            try
+            {
+                Bitmap bmp = new Bitmap(p1.Width, p1.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                Graphics g = Graphics.FromImage(bmp);
 
-            g.Clear(Color.White);
-            p1.Image = bmp; ;
-        }
+                g.Clear(Color.White);
+                p1.Image = bmp; ;
+            }
+            catch { }
+            }
 
         private void button1_Click(object sender, EventArgs e)
         {
