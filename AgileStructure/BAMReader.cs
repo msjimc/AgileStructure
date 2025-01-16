@@ -28,9 +28,7 @@ namespace AgileStructure
 		private string seq;
 		private string qual;
 		private string tags;
-		//private string chr;
-		//private string otherChr;
-
+		
 		public BAMReader()
 		{ pos = int.MaxValue; }
 
@@ -454,7 +452,7 @@ namespace AgileStructure
 				{
 					string v_type_local = getString(c, startIndex, 1);
 					startIndex += 1;
-					int count = getInt32(c, startIndex);//461
+					int count = getInt32(c, startIndex);
 					startIndex += 4;
 					answer += currentTag + ":f:" + v_type_local;
 					switch (v_type_local[0])
@@ -502,7 +500,6 @@ namespace AgileStructure
 				}
 				else
 				{
-					//quit in confusion but safely
 					startIndex = length;
 
 				}

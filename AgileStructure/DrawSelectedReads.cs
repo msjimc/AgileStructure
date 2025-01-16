@@ -320,7 +320,6 @@ namespace AgileStructure
             }
         }
 
-
         private void blankImage()
         {
             try
@@ -332,7 +331,7 @@ namespace AgileStructure
                 p1.Image = bmp; ;
             }
             catch { }
-            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
