@@ -674,7 +674,9 @@ namespace AgileStructure
 
         private void makeBaseImage()
         {
-            if (selectEnd == 0 || selectStart == 0 || selectEnd - selectStart < 10 || WindowState == FormWindowState.Minimized)
+            if (WindowState == FormWindowState.Minimized )
+            { return; }
+            else if (selectEnd == 0 || selectStart == 0 || selectEnd - selectStart < 10|| p1.Height < 20)
             {
                 makeBlankImage();
                 makeBlankSecondaryBase();
@@ -707,7 +709,7 @@ namespace AgileStructure
 
         private void makeBlankImage()
         {
-            if (WindowState == FormWindowState.Minimized)
+            if (WindowState == FormWindowState.Minimized || p1.Height < 20)
             { return; }
             bmp = new Bitmap(p1.Width, p1.Height, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
             g = Graphics.FromImage(bmp);
@@ -722,7 +724,7 @@ namespace AgileStructure
 
         private void makeSecondaryBase()
         {
-            if (selectSecondaryStart == 00 || selectedSecondaryRefLength < 10 || selectEnd - selectStart < 10 || selectSecondaryStart == 0 || WindowState == FormWindowState.Minimized)
+            if (selectSecondaryStart == 00 || selectedSecondaryRefLength < 10 || selectEnd - selectStart < 10 || selectSecondaryStart == 0 || WindowState == FormWindowState.Minimized || p2.Height < 20)
             { return; }
             bmp_soft = new Bitmap(p2.Width, p2.Height, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
             g_soft = Graphics.FromImage(bmp_soft);

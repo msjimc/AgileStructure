@@ -1,6 +1,6 @@
 # Identifying a Duplication
 
-This case study involves the ___Agmo___ knockout mouse that is also discussed in in the ["Annotation of insertions"](insertion.md) read me file.
+This case study involves the ___Agmo___ knockout mouse that is also discussed in the ["Annotation of insertions"](insertion.md) readme file.
 
 This transgenic mouse is described here:
 
@@ -13,8 +13,6 @@ A transgenic Agmo knockout mouse was engineered by inserting a lacZ-neoR cassett
 The data for this experiment is hosted on the NCBI SRA site as [SRR12783028](https://www.ncbi.nlm.nih.gov/sra/?term=SRR12783028).  
 
 Reads that mapped to the start of the ___Agmo___ gene and contained extended unaligned sequence were used to search the NCBI BLAST database to obtain sequences homologous to the lacZ-NeoR cassette. This identified the sequence [JN960306.1](https://www.ncbi.nlm.nih.gov/nucleotide/JN960306.1?report=genbank&log$=nuclalign&blast_rank=3&RID=TWZMA063013) from which the sequence for the lacZ-NeoR cassette was extracted (15041 to 22164 bp) and added to the mm10 mouse genome reference sequence as a separate reference sequence called transgene. The long-read sequencing data was then aligned to this extended reference sequence and used in this guide.
-
-While the detection of the cassette is separate from the detection of the duplication, its identification is shown below and in the [insertion walkthrough](insertion.md).  
 
 The RefSeq gene data for the mm10 genome reference was downloaded from the Genome Browser's Table Browser as described [here](downloadingOptionalFiles.md).
 

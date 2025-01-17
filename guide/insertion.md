@@ -2,7 +2,7 @@
 
 # Case 1: Identification of the lacZ-NeoR cassette
 
-The case study involves the Agmo knockout mouse discussed in the [Annotation of duplications](duplication.md) read me file. 
+The case study involves the Agmo knockout mouse discussed in the [Annotation of duplications](duplication.md) readme file. 
 
 This transgenic mouse was first described here:
 
@@ -14,7 +14,7 @@ A transgenic ___Agmo___ knockout mouse was created by inserting a lacZ-neoR cass
 
 The data for this experiment is hosted on the NCBI SRA site as [SRR12783028](https://www.ncbi.nlm.nih.gov/sra/?term=SRR12783028).  
 
-Reads that mapped to the start of the ___Agmo___ gene and contained extended unaligned data were used to search the NCBI blast database to identify sequences homologous to the lacZ-NeoR cassette. This identified the [JN960306.1](https://www.ncbi.nlm.nih.gov/nucleotide/JN960306.1?report=genbank&log$=nuclalign&blast_rank=3&RID=TWZMA063013) sequence, from which the sequence for the lacZ-NeoR cassette (15041 to 22164 bp) was extracted and added to the mm10 mouse genome reference sequence as a separate reference sequence called transgene. The long-read sequencing data was then aligned to this extended reference genome and used in this guide.  
+Reads that mapped to the start of the ___Agmo___ gene and contained extended unaligned data were used to search the NCBI Blast database to identify sequences homologous to the lacZ-NeoR cassette. This identified the [JN960306.1](https://www.ncbi.nlm.nih.gov/nucleotide/JN960306.1?report=genbank&log$=nuclalign&blast_rank=3&RID=TWZMA063013) sequence, from which the sequence for the lacZ-NeoR cassette (15041 to 22164 bp) was extracted and added to the mm10 mouse genome reference sequence as a separate reference sequence called transgene. The long-read sequencing data was then aligned to this extended reference genome and used in this guide.  
 
 The detection of the transgene is discussed in the [duplication walkthrough](duplication.md).
 

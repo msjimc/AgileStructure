@@ -3,12 +3,12 @@
 The patient was originally described in: 
 > Watson CM, Crinnion LA, Tzika A, Mills A, Coates A, Pendlebury M, Hewitt S, Harrison SM, Daly C, Roberts P, Carr IM, Sheridan EG, Bonthron DT. (2014) Diagnostic whole genome sequencing and split-read mapping for nucleotide resolution breakpoint identification in CNTNAP2 deficiency syndrome. Am J Med Genet A. 164A:2649-55. doi: 10.1002/ajmg.a.36679.
 
-Sanger sequencing of the individual identified the variant as __chr7:146,534,699_146,611,541del__  with reference to the hg19 human reference sequence 
+Sanger sequencing of the individual identified the variant as __chr7:146,534,699_146,611,541del__  with reference to the hg19 human reference sequence. 
 
 __Prior information__  
-Using clinical phenotypic data an individual was thought to have a mutation in the CNTNAP2 gene.  
+Using clinical phenotypic data, an individual was thought to have a mutation in the CNTNAP2 gene.  
 
-Import the alignment data by pressing the ```BAM file``` button and selecting the ```BAM``` file. While it's possible to determine the location of the CNTNAP2 gene from a number of sources, in this example we'll get ```AgileStructure``` to identify the region using the RefSeq gene data set. To do this, first download the data set as described [here](downloadingOptionalFiles.md), then select the ```Annotation``` > ```Gene annotation file``` menu option and select the file (Figure 1).   
+Import the alignment data by pressing the ```BAM file``` button and selecting the ```BAM``` file. While it's possible to determine the location of the CNTNAP2 gene from a number of sources, in this example, we'll get ```AgileStructure``` to identify the region using the RefSeq gene data set. To do this, first download the data set as described [here](downloadingOptionalFiles.md), then select the ```Annotation``` > ```Gene annotation file``` menu option and select the file (Figure 1).   
 
 ***Note***:
 * The annotation file must be for the same reference genome build as the read data was aligned to. 
@@ -59,7 +59,7 @@ Figure 7
 
 Figure 8
 
-As stated above, the variant had perviously been identified as:  
+As stated above, the variant had previously been identified as:  
  __chr7:146,534,699_146,611,541del__   
  in the hg19 reference build, and the annotation can be seen to closely match this result:
 
