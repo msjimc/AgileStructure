@@ -5,6 +5,8 @@ The data described in the section "Insertion and deletion identification using g
 
 The human data (deletion, inversion and translocation) was aligned to hg19, while the mouse data (duplication) was aligned to mm10. The regions to select for each variant are described in the table below.
 
+## Split read data
+
 |Variant|Chromosome|Region start|Region end|Comment|
 |-|-|-|-|-|
 |Deletion|chr7|146400000|146800000|Whole region|
@@ -14,7 +16,7 @@ The human data (deletion, inversion and translocation) was aligned to hg19, whil
 |Translocation|chr8|113,670,000|113,730,000|Chromosome 8 breakpoint|
 |Duplication|chr12|37,100,000|37,400,000|Whole region|
 
-CIGAR gapped read data
+## CIGAR gapped read data
 |Variant|Chromosome|Region start|Region end|Comment|
 |-|-|-|-|-|
 |Delection|chr1|1,430,000|1,600,000|Whole region|
