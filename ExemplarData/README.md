@@ -17,5 +17,6 @@ The human data (deletion, inversion and translocation) was aligned to hg19, whil
 CIGAR gapped read data
 |Variant|Chromosome|Region start|Region end|Comment|
 |-|-|-|-|-|
-|Delection|
+|Delection|chr1|1,430,000|1,600,000|Whole region|
+|Insertion|chr1|1,430,000|1,600,000|Whole region|
 
