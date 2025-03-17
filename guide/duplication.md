@@ -1,5 +1,7 @@
 # Identifying a Duplication
 
+### The aligned data for this variant is [here](../ExemplarData/) 
+
 This case study involves the ___Agmo___ knockout mouse that is also discussed in the ["Annotation of insertions"](insertion.md) readme file.
 
 This transgenic mouse is described here:

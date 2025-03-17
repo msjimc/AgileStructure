@@ -1,5 +1,7 @@
 # Annotating an Inversion
 
+### The aligned data for this variant is [here](../ExemplarData/) 
+
 The patient was first described in:   
 > Watson CM, Crinnion LA, Harrison SM, Lascelles C, Antanaviciute A, Carr IM, Bonthron DT, Sheridan E.   
 A Chromosome 7 Pericentric Inversion Defined at Single-Nucleotide Resolution Using Diagnostic Whole Genome Sequencing in a Patient with Hand-Foot-Genital Syndrome.   

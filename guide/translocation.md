@@ -1,59 +1,7 @@
 # Annotation of Translocations
-## Case 1
-__Prior information__  
-Using standard cytogenetics tests, an individual was found to have a translocation of the tip of chromosome 4 with the tip of chromosome 22. The breakpoint was narrowed down to around 6 to 7 Mb on chromosome 4 and 50 to 51 Mb on chromosome 22 using MLPA probe sets. 
 
+### The aligned data for this variant is [here](../ExemplarData/) 
 
-Import the data by pressing the ```BAM file``` button and then selecting chromosome 4 from the upper dropdown list box and enter the coordinates flanking the approximate position of the breakpoint in the two text boxes to the right of the dropdown list and import the data by selecting the ```Analysis``` > ```Only show reads with secondary alignments``` menu option (Figure 1).
-
-![Figure 1](images/examples/figure1tran.jpg)
-
-Figure 1
-
-This will populate the upper panel with reads that have unaligned sequences that may span the breakpoint. The lower panel's dropdown list box will now contain a list of regions to which more than two unaligned sequences have been mapped. In the list, there is a position at 50.28 Mb on chromosome 22, which is close to the suggested site of the second breakpoint. Select this region to visualise the secondary alignments (Figure 2).
-
-![Figure 2](images/examples/figure2tran.jpg)
-
-Figure 2
-
-Once displayed, you can select the reads by clicking on them in the lower panel to see where they are located on chromosome 4. The three reads can be seen to map to approximately 6.7 Mb on chromosome 4. Select this region by moving the cursor to about 6.675 Mb, pressing the right mouse button, and moving the mouse to about 6.725 Mb before releasing the button. This will expand the region in the upper panel, showing the reads in greater detail. Since the data has been re-read from the BAM alignment file, it is necessary to select the reads again and the region in the lower dropdown list (Figure 3).  
-
-![Figure 3](images/examples/figure3tran.jpg)
-
-Figure 3
-
-While other reads with secondary alignments have mapped near the breakpoint, it is now evident that they do not span the translocation breakpoint. Selecting the ```Variant determination``` > ```Use soft clip data``` > ```Translocation``` menu option prompts ```AgileStructure``` to analyse the selected reads and annotate the breakpoint, which it states as:  
- __t(chr4;chr22)g.6,713,999:g.50,283,263__ (Figure 4).  
-
-Analysis of the alignments of reads spanning the breakpoint suggests that the translocation is not balanced and that the derivative chromosomes have either two p telomeres or two q telomeres. Pressing the ```Yes``` button will save the data to a text file.
-
-![Figure 4](images/examples/figure4tran.jpg)
-
-Figure 4
-
-To test the analysis, select the ```Variant determination``` > ```Switch region``` menu option (Figure 5).  
-
-![Figure 5](images/examples/figure5tran.jpg)
-
-Figure 5
-
-The coordinates used in the lower panel will now define the region viewed in the upper panel. Since data is re-read from the BAM alignment file, it is necessary to select the region in the lower panel and any reads that span the translocation (Figure 6), before selecting the ```Variant determination``` > ```Use soft clip data``` > ```Translocation``` menu option (Figure 7). 
-
-![Figure 6](images/examples/figure6tran.jpg)
-
-Figure 6
-
-![Figure 7](images/examples/figure7tran.jpg)
-
-Figure 7
-
-The breakpoint identified in the 2nd analysis was  
-__t(chr4;chr22)(g.6,713,998:g.50,283,262)__  
-This is derived from a different set of reads and so could be considered an independent test. While the base pair positions of the two breakpoints are slightly different, it should be close enough to design a diagnostic PCR test. As before, AgileStructure reports that the translocation is not balanced and that the resultant chromosomes have either two q telomeres or two p telomeres.
-
-[Return user guide](README.md#translocation) 
-
-  
 This patient was first described in:
 > Hu L, Liang F, Cheng D, Zhang Z, Yu G, Zha J, Wang Y, Xia Q, Yuan D, Tan Y, Wang D, Liang Y, Lin G. Location of Balanced Chromosome-Translocation Breakpoints by Long-Read Sequencing on the Oxford Nanopore Platform. Front Genet. 2020 Jan 14;10:1313. doi: 10.3389/fgene.2019.01313. PMID: 32010185; PMCID: PMC6972507.
 
