@@ -3,7 +3,7 @@
 #### Contents
 - [Introduction](#Introduction)
 - [Guide](guide)
-    * [Running on Linux, BSD or macOS](#running-on-linux-bsd-or-macos)
+- [Running on Linux, BSD or macOS](#running-on-linux-bsd-or-macos)
 - [Download](program)
 
 
