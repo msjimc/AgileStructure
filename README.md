@@ -23,11 +23,11 @@ AgileStructure can be run on most POSIX like systems via WINE whose installation
 
 ## Download
 
-The compiled program can be downloaded from [here:](program/README.md)
+The compiled program can be downloaded from [here](program/README.md)
 
 ### Zenodo release
 
-A static release linked to the Bioinformatics paper [is here](https://doi.org/10.5281/zenodo.18610110). 
+A static release linked to the Bioinformatics paper is [here](https://doi.org/10.5281/zenodo.18610110). 
 
 
 
