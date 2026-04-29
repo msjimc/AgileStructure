@@ -19,7 +19,7 @@ Once generated, the data is typically aligned to the appropriate genome using a 
 The AgileStructure guide is [here:](guide/README.md)
 
 ### Running on Linux, BSD or macOS
-AgileStructure can be run on most POSIX like systems using Intel or AMP CPUs via WINE whose installation is covered [here](https://github.com/msjimc/RunningWindowsProgramsOnLinux)
+AgileStructure can be run on most POSIX like systems using Intel or AMD CPUs via WINE whose installation is covered [here](https://github.com/msjimc/RunningWindowsProgramsOnLinux)
 
 ## Download
 
