@@ -5,7 +5,7 @@
 - [Guide](guide)
 - [Running on Linux, BSD or macOS](#running-on-linux-bsd-or-macos)
 - [Download](program)
-
+- [Citation](Citation)
 
 ## Introduction
 
@@ -24,3 +24,11 @@ AgileStructure can be run on most POSIX like systems via WINE whose installation
 ## Download
 
 The compiled program can be downloaded from [here:](program/README.md)
+
+## Citation
+Lascelles, C., Raynor, M., Crinnion, L.A., Rose, A.M., Diggle, C.P., Poulter, J.A., Watson, C.M. and Carr, I.M., 2026. Utilization of long-read sequencing for the detection of structural rearrangements with AgileStructure. Bioinformatics, 42(5), p.btag294.
+
+### Links to the paper
+- [Bioinformatics journal webpage](https://academic.oup.com/bioinformatics/article/42/5/btag294/8674705?searchresult=1)  
+- [PubMed](https://pubmed.ncbi.nlm.nih.gov/42104046/)  
+- [PubMed Central](https://pmc.ncbi.nlm.nih.gov/articles/PMC13218792/)
