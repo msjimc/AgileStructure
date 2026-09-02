@@ -19,11 +19,15 @@ Once generated, the data is typically aligned to the appropriate genome using a 
 The AgileStructure guide is [here:](guide/README.md)
 
 ### Running on Linux, BSD or macOS
-AgileStructure can be run on most POSIX like systems via WINE whose installation is covered [here](https://github.com/msjimc/RunningWindowsProgramsOnLinux)
+AgileStructure can be run on most POSIX like systems using Intel or AMD CPUs via WINE whose installation is covered [here](https://github.com/msjimc/RunningWindowsProgramsOnLinux)
 
 ## Download
 
-The compiled program can be downloaded from [here:](program/README.md)
+The compiled program can be downloaded from [here](program/README.md)
+
+### Zenodo release
+
+A static release linked to the Bioinformatics paper is [here](https://doi.org/10.5281/zenodo.18610110).
 
 ## Citation
 Lascelles, C., Raynor, M., Crinnion, L.A., Rose, A.M., Diggle, C.P., Poulter, J.A., Watson, C.M. and Carr, I.M., 2026. Utilization of long-read sequencing for the detection of structural rearrangements with AgileStructure. Bioinformatics, 42(5), p.btag294.
