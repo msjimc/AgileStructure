@@ -5,7 +5,7 @@
 - [Guide](guide)
 - [Running on Linux, BSD or macOS](#running-on-linux-bsd-or-macos)
 - [Download](program)
-- [Citation](Citation)
+- [Citation](#citation))
 
 ## Introduction
 
