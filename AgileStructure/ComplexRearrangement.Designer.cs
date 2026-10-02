@@ -35,7 +35,6 @@
             label2 = new System.Windows.Forms.Label();
             btnDrawBP = new System.Windows.Forms.Button();
             txtAnswer = new System.Windows.Forms.TextBox();
-            lblAnswer = new System.Windows.Forms.Label();
             btnFind = new System.Windows.Forms.Button();
             btnAccept2 = new System.Windows.Forms.Button();
             lblSecondary2 = new System.Windows.Forms.Label();
@@ -57,7 +56,6 @@
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(btnDrawBP);
             groupBox1.Controls.Add(txtAnswer);
-            groupBox1.Controls.Add(lblAnswer);
             groupBox1.Controls.Add(btnFind);
             groupBox1.Controls.Add(btnAccept2);
             groupBox1.Controls.Add(lblSecondary2);
@@ -76,6 +74,7 @@
             // 
             // btnDraw
             // 
+            btnDraw.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             btnDraw.Enabled = false;
             btnDraw.Location = new System.Drawing.Point(687, 184);
             btnDraw.Name = "btnDraw";
@@ -129,15 +128,6 @@
             txtAnswer.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             txtAnswer.Size = new System.Drawing.Size(675, 96);
             txtAnswer.TabIndex = 10;
-            // 
-            // lblAnswer
-            // 
-            lblAnswer.AutoSize = true;
-            lblAnswer.Location = new System.Drawing.Point(6, 122);
-            lblAnswer.Name = "lblAnswer";
-            lblAnswer.Size = new System.Drawing.Size(250, 15);
-            lblAnswer.TabIndex = 9;
-            lblAnswer.Text = "Press 'Annotate' to identify the rearrangement";
             // 
             // btnFind
             // 
@@ -268,7 +258,6 @@
         private System.Windows.Forms.Label lblPrimary1;
         private System.Windows.Forms.Button btnFind;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Label lblAnswer;
         private System.Windows.Forms.TextBox txtAnswer;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnDrawBP;
