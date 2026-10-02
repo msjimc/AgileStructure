@@ -1,0 +1,1 @@
+# These binaries were compiled to run using the .NET 6.0 framework which has come to the end of its life cycle. It is preferable to use those in the parent folder designed to run with the .NET 10 framework if possible
